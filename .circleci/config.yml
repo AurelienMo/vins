@@ -1,0 +1,45 @@
+version: 2
+jobs:
+    build:
+        docker:
+            - image: circleci/php:7.2-fpm
+            - image: circleci/ruby:2.4.2-jessie-node
+        parallelism: 4
+        steps:
+            - checkout
+            - setup_remote_docker:
+                  docker_layer_caching: true
+            -   run:
+                    name: "Update Node.js and npm"
+                    command: |
+                        curl -sSL "https://nodejs.org/dist/v11.10.0/node-v11.10.0-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v11.10.0-linux-x64/bin/node
+                        curl https://www.npmjs.com/install.sh | sudo bash
+            - run: sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            - run: sudo php composer-setup.php
+            - run: sudo php -r "unlink('composer-setup.php');"
+            - run: sudo composer self-update
+            - restore_cache:
+                  keys:
+                      - composer-v1-{{ checksum "composer.lock" }}
+                      - composer-v1-
+            - run: sudo php -d memory_limit=-1 composer.phar install -n
+            - save_cache:
+                  key: composer-v1-{{ checksum "composer.lock" }}
+                  paths:
+                      - vendor
+            - run: npm install
+            - run: npm run dev
+            - run:
+                  name: Install PHP libzip-dev
+                  command: sudo apt-get install -y libzip-dev
+            - run:
+                  name: Install PHP zip
+                  command: sudo docker-php-ext-install zip
+            - run:
+                  name: Check PHPStan
+                  command: vendor/bin/phpstan analyze src
+workflows:
+    version: 2
+    build:
+        jobs:
+            - build

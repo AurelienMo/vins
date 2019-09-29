@@ -1,0 +1,31 @@
+default:
+    suites:
+        default:
+            contexts:
+                - DoctrineContext:
+                    doctrine: '@doctrine'
+                    kernel: '@kernel'
+                    encoderFactory: '@security.encoder_factory'
+                    nativeLoader: '@App\Domain\Common\Helpers\LoaderNelmioAliceHelper'
+                - CustomMinkContext
+                - CommandContext:
+                    encoderFactory: '@security.encoder_factory'
+                    entityManager: '@doctrine.orm.entity_manager'
+                - CustomRestContext
+                - behatch:context:json
+                #- MailContext:
+                #    kernel: '@kernel'
+                #- RemoteWebserviceContext:
+                #    httpClient: '@httplug.client.mock'
+
+
+    extensions:
+        Behat\Symfony2Extension:
+            kernel:
+                bootstrap: features/bootstrap/bootstrap.php
+                class: App\Kernel
+        Behat\MinkExtension:
+                sessions:
+                    default:
+                        symfony2: ~
+        Behatch\Extension: ~

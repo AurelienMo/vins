@@ -1,0 +1,101 @@
+// Mixins IS & Variables
+
+$gutter: rem-calc(map-get($grid-margin-gutters, medium));
+$gutter_small: rem-calc(map-get($grid-margin-gutters, small));
+$color1: $primary-color;
+$color2: $secondary-color;
+$box-shadow: rem-calc(0 0 20 0) rgba($black, 0.04);
+@mixin headings {
+  h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    @content;
+  }
+}
+@function alt-color($color){
+  $altcolor : adjust-hue($color, -5%);
+  @return $altcolor;
+}
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    @each $key in $keys {
+      $map: map-get($map, $key);
+    }
+    @return $map;
+  }
+}
+@mixin loadfont($file, $name: $file, $w: normal, $s: normal) {
+  // exemple : @include loadfont(comicsansms-webfont, ComicSans);
+  @font-face {
+    font-family: $name;
+    //src: url('../fonts/' + $file + '.woff2') format('woff2'),
+    src: url('../fonts/' + $file + '.ttf') format('woff'),
+    url('../fonts/' + $file + '.ttf') format('truetype');
+    font-weight: $w;
+    font-style: $s;
+  }
+}
+@mixin pseudoBasics(){
+  display: block;
+  content: '';
+  position: absolute;
+}
+
+@mixin anim($elt: all, $speed: 0.45s, $delay: 0s, $ease: ease-out){
+  transition: $elt $speed $delay $ease;
+}
+@mixin appear(){
+  transform: translate3d(0, rem-calc(20), 0);
+  opacity: 0;
+}
+
+@mixin keyprefix($name){
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+// Gradients - @include gradient();  $start : top, bottom, left, right, -45deg ...
+@mixin gradient($c1: $color1, $c2: $color2, $start: top, $type: 0){
+  $end : bottom;
+  @if 		$start == top 	{ $end: bottom; $type: 0 }
+  @else if $start == left 	{ $end: right; $type: 1 }
+  @else if $start == -45deg 	{ $end: 135deg; 	$type : 1 } // A améliorer avec un calcul +180
+
+  background: $c1;
+  background: -moz-linear-gradient($start,  $c1 0%, $c2 100%);
+  background: -webkit-linear-gradient($start,  $c1 0%,$c2 100%);
+  background: linear-gradient(to $end,  $c1 0%,$c2 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$c1', endColorstr='$c2',GradientType=$type );
+}
+@mixin bloc_photo() {
+  position: relative;
+  overflow: hidden;
+  img {
+    @include absolute-center;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+
+//@mixin themes($slug, $color) {}
+$themes : (
+                ('nutrition', get-color('secondary')),
+                ('lifestyle', get-color('secondary'))
+);
+@mixin liste_themes () {
+  @each $i in $themes {
+    .#{nth($i, 1)} {
+      .themecolor {
+        color: #{nth($i, 2)};
+      }
+    }
+  }
+}
+@mixin item-rounded($color) {
+  border: 1px solid $color;
+  border-radius: 50%;
+  padding: 5px;
+}
