@@ -23,5 +23,9 @@
         "dev": "encore dev",
         "dev_watch": "encore dev --watch",
         "build": "encore production --progress"
+    },
+    "dependencies": {
+        "export-loader": "^1.0.52",
+        "tarteaucitronjs": "^1.2.0"
     }
 }
