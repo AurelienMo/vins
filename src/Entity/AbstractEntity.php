@@ -28,6 +28,7 @@ abstract class AbstractEntity
     /**
      * @var string|null
      *
+     * @ORM\Id()
      * @ORM\Column(type="string")
      */
     protected $id;
