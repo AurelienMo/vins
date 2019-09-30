@@ -38,5 +38,9 @@
         {% block body %}{% endblock %}
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
+        <script type="text/javascript">
+            tarteaucitron.user.googletagmanagerId = 'GTM-KEY';
+            (tarteaucitron.job = tarteaucitron.job || []).push('googletagmanager');
+        </script>
     </body>
 </html>
