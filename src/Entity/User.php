@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Domain\Common\Helpers\SlugifyHelper;
+use App\Domain\User\Create\NewUserDTO;
 use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -108,7 +109,7 @@ class User extends AbstractEntity implements UserInterface
         $this->password = $password;
         $this->status = self::STATUS_ENABLED;
         $this->slug = SlugifyHelper::slugify(
-            sprintf('%s %s %s', $this->firstname, $this->lastname, $this->email)
+            sprintf('%s %s %s', $this->firstname, $this->lastname, uniqid())
         );
         $this->roles[] = $role;
         parent::__construct();
@@ -188,5 +189,16 @@ class User extends AbstractEntity implements UserInterface
     public function eraseCredentials()
     {
         return;
+    }
+
+    public static function create(NewUserDTO $dto): User
+    {
+        return new self(
+            (string) $dto->getFirstname(),
+            (string) $dto->getLastname(),
+            (string) $dto->getEmail(),
+            (string) $dto->getPassword(),
+            (string) $dto->getRole()
+        );
     }
 }
