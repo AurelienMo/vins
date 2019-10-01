@@ -4,7 +4,6 @@
         <script type="text/javascript" src="/tarteaucitronjs/tarteaucitron.js"></script>
 
         <script type="text/javascript">
-            console.log('gfsjklgjlk');
             tarteaucitron.init({
                 "privacyUrl": "http://www.google.fr", /* Privacy policy url */
 
@@ -30,14 +29,38 @@
             });
         </script>
         <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <!-- Insert this within your head tag and after foundation.css -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-ui@1.2.3/dist/motion-ui.min.css" />
+
         {{encore_entry_link_tags('app')}}
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <header id="header">
+            <div class="title-bar" data-responsive-toggle="example-animated-menu" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle></button>
+                <div class="title-bar-title">Menu</div>
+            </div>
+
+            <div class="top-bar" id="example-animated-menu" data-animate="hinge-in-from-top spin-out">
+                <div class="top-bar-right">
+                    <ul class="menu">
+                        <li><a href="#"><i class="fas fa-home"></i></a></li>
+                        <li><a id="connect" href="{{ path('security_login') }}">Connect</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
         {% block body %}{% endblock %}
+        <div id="loading-overlay">
+            <div class="loader"></div>
+        </div>
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
+        {% include 'parts/_modals.html.twig' %}
         <script type="text/javascript">
             tarteaucitron.user.googletagmanagerId = 'GTM-KEY';
             (tarteaucitron.job = tarteaucitron.job || []).push('googletagmanager');
