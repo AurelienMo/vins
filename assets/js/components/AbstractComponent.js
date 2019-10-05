@@ -1,10 +1,9 @@
 import $ from "jquery";
 import Loader from "./Loader";
+import APIResolver from "./APIResolver";
 
 export default class AbstractComponent {
-    loader;
     constructor() {
         $(document).foundation();
-        this.loader = new Loader();
     };
 }

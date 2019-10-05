@@ -19,6 +19,6 @@ export default class Header extends AbstractComponent {
     }
 
     initAllEvents() {
-        initLoginEvent(this.loader);
+        initLoginEvent();
     }
 }
