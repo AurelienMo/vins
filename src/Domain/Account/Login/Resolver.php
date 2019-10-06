@@ -1,4 +1,4 @@
-<?php
+<?php /** @noinspection ClassNameCollisionInspection */
 
 declare(strict_types=1);
 
@@ -13,12 +13,11 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\Login;
 
-use App\Entity\User;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Twig\Environment;
 
@@ -72,9 +71,9 @@ final class Resolver
         return 'security/login.html.twig';
     }
 
-    public function validatePassword(User $user, string $password): bool
+    public function validatePassword(UserInterface $user, string $password): bool
     {
-        return $this->passwordEncoder->isPasswordValid($user,$password);
+        return $this->passwordEncoder->isPasswordValid($user, $password);
     }
     /**
      * @return AuthenticationException|null
@@ -83,5 +82,4 @@ final class Resolver
     {
         return $this->authUtils->getLastAuthenticationError();
     }
-
 }
