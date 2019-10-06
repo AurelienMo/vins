@@ -1,6 +1,4 @@
-import Modal from "./Modal";
 import AbstractComponent from "./AbstractComponent";
-import {initLoginEvent} from "./Login";
 
 export default class Header extends AbstractComponent {
     headerEl = null;
@@ -19,6 +17,5 @@ export default class Header extends AbstractComponent {
     }
 
     initAllEvents() {
-        initLoginEvent();
     }
 }

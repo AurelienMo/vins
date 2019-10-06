@@ -201,4 +201,9 @@ class User extends AbstractEntity implements UserInterface
             (string) $dto->getRole()
         );
     }
+
+    public function getFullName(): string
+    {
+        return sprintf('%s %s', $this->firstname, $this->lastname);
+    }
 }

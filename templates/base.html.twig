@@ -39,21 +39,23 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <header id="header">
-            <div class="title-bar" data-responsive-toggle="example-animated-menu" data-hide-for="medium">
-                <button class="menu-icon" type="button" data-toggle></button>
-                <div class="title-bar-title">Menu</div>
-            </div>
-
-            <div class="top-bar" id="example-animated-menu" data-animate="hinge-in-from-top spin-out">
-                <div class="top-bar-right">
-                    <ul class="menu">
-                        <li><a href="#"><i class="fas fa-home"></i></a></li>
-                        <li><a id="connect" href="{{ path('security_login') }}">Connect</a></li>
-                    </ul>
+        {% block header %}
+            <header id="header">
+                <div class="title-bar" data-responsive-toggle="example-animated-menu" data-hide-for="medium">
+                    <button class="menu-icon" type="button" data-toggle></button>
+                    <div class="title-bar-title">Menu</div>
                 </div>
-            </div>
-        </header>
+
+                <div class="top-bar" id="example-animated-menu" data-animate="hinge-in-from-top spin-out">
+                    <div class="top-bar-right">
+                        <ul class="menu">
+                            <li><a href="#"><i class="fas fa-home"></i></a></li>
+                            <li><a id="connect" href="{{ path('security_login') }}">Connect</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+        {% endblock %}
         {% block body %}{% endblock %}
         <div id="loading-overlay">
             <div class="loader"></div>

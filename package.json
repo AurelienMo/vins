@@ -28,6 +28,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@hapi/joi": "^16.1.7",
         "export-loader": "^1.0.52",
         "tarteaucitronjs": "^1.2.0"
     }

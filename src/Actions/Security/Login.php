@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Actions\Security;
 
+use App\Domain\Account\Login\Resolver;
+use App\Responders\JsonResponder;
 use App\Responders\ViewResponder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,34 +27,29 @@ use Twig\Environment;
  */
 final class Login
 {
-    /** @var Environment */
-    protected $templating;
+    /** @var Resolver */
+    protected $resolver;
 
     /**
      * Login constructor.
      *
-     * @param Environment $templating
+     * @param Resolver $resolver
      */
     public function __construct(
-        Environment $templating
+        Resolver $resolver
     ) {
-        $this->templating = $templating;
+        $this->resolver = $resolver;
     }
 
-    public function __invoke()
+    public function __invoke(ViewResponder $responder)
     {
-        $statusCode = 400;
-        if ($statusCode !== 200) {
-            return new JsonResponse(
-                [
-                    'html' => $this->templating->render('security/error.html.twig'),
-                ],
-                400
-            );
-        }
-        return new JsonResponse(
+        $form = $this->resolver->getFormType();
+
+        return $responder(
+            $this->resolver->getTemplate(),
             [
-                'html' => $this->templating->render('security/login.html.twig'),
+                'form' => $form->createView(),
+                'error' => $this->resolver->getLastAuthErrors(),
             ]
         );
     }

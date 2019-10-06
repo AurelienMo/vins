@@ -60,3 +60,9 @@
     animation: spin 1.4s linear infinite;
   }
 }
+label.required::after {
+  content: " *"
+}
+.wrong {
+  border: 1px solid red;
+}

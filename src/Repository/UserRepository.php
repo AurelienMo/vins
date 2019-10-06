@@ -14,14 +14,25 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Class UserRepository
  */
-final class UserRepository extends AbstractServiceRepository
+final class UserRepository extends AbstractServiceRepository implements UserLoaderInterface
 {
     protected function getClassEntityName(): string
     {
         return User::class;
+    }
+
+    public function loadUserByUsername($identifier)
+    {
+        return $this->createQueryBuilder('u')
+                    ->where('u.email = :identifier')
+                    ->setParameter('identifier', $identifier)
+                    ->getQuery()
+                    ->getOneOrNullResult();
     }
 }
