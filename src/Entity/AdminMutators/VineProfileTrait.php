@@ -13,15 +13,18 @@ declare(strict_types=1);
 
 namespace App\Entity\AdminMutators;
 
-use DateTime;
-
 /**
- * Trait GeneralTrait
+ * Trait VineProfileTrait
  */
-trait GeneralTrait
+trait VineProfileTrait
 {
-    protected function setCreatedAt(?DateTime $createdAt): void
+    public function setName(string $name): void
     {
-        $this->createdAt = $createdAt;
+        $this->name = $name;
+    }
+
+    public function setColor(string $color): void
+    {
+        $this->color = $color;
     }
 }

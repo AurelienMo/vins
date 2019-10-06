@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="VineProfile">
+                <source>VineProfile</source>
+                <target>Profil de vin</target>
+            </trans-unit>
+            <trans-unit id="Liste des profils de vins">
+                <source>Liste des profils de vins</source>
+                <target>Liste des profils de vins</target>
+            </trans-unit>
+            <trans-unit id="Gestion des vins">
+                <source>Gestion des vins</source>
+                <target>Gestion des vins</target>
+            </trans-unit>
+            <trans-unit id="Profils">
+                <source>Profils</source>
+                <target>Profils</target>
+            </trans-unit>
+            <trans-unit id="Identifiant">
+                <source>Identifiant</source>
+                <target>Identifiant</target>
+            </trans-unit>
+            <trans-unit id="Nom">
+                <source>Nom</source>
+                <target>Nom</target>
+            </trans-unit>
+            <trans-unit id="Couleur du profil">
+                <source>Couleur du profil</source>
+                <target>Couleur du profil</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

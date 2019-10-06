@@ -23,8 +23,6 @@ use Ramsey\Uuid\Uuid;
  */
 abstract class AbstractEntity
 {
-    use GeneralTrait;
-
     /**
      * @var string|null
      *

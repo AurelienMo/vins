@@ -1,8 +1,12 @@
+imports:
+    - { resource: easyadmin/ }
+
 easy_admin:
     user:
         name_property_path: 'fullName'
-    entities:
-#        # List the entity class name you want to manage
-        - App\Entity\User
-#        - App\Entity\Category
-#        - App\Entity\User
+    design:
+        menu:
+            - label : 'Gestion des vins'
+            - entity: 'VineProfile'
+              label: 'Profils'
+    site_name: 'Mon Premier Sommelier'

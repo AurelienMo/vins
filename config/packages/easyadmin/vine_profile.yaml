@@ -1,0 +1,23 @@
+easy_admin:
+    entities:
+        VineProfile:
+            class: App\Entity\VineProfile
+            templates:
+                list: 'admin/VineProfile/list.html.twig'
+            list:
+                title: 'Liste des profils de vins'
+                fields:
+                    - property: id
+                      label: 'Identifiant'
+                    - property: name
+                      label: 'Nom'
+                    - property: color
+                      label: 'Couleur du profil'
+            form:
+                fields:
+                    - property: 'name'
+                      type: 'text'
+                      label: 'Nom'
+                    - property: 'color'
+                      type: 'color'
+                      label: 'Couleur du profil'
