@@ -23,7 +23,7 @@ trait NameTrait
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $name;
 
@@ -33,5 +33,13 @@ trait NameTrait
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 }

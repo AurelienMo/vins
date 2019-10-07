@@ -13,13 +13,15 @@ declare(strict_types=1);
 
 namespace App\Entity\AdminMutators;
 
+use App\Entity\TypePromotion;
+
 /**
- * Trait VineProfileTrait
+ * Trait TypePromotionTrait
  */
-trait VineProfileTrait
+trait TypePromotionTrait
 {
-    public function setColor(string $color): void
+    public function setLabel(?string $label): void
     {
-        $this->color = $color;
+        $this->label = $label;
     }
 }

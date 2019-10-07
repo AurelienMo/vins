@@ -11,15 +11,17 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace App\Entity\AdminMutators;
+namespace App\Repository;
+
+use App\Entity\TypePromotion;
 
 /**
- * Trait VineProfileTrait
+ * Class TypePromotionRepository
  */
-trait VineProfileTrait
+class TypePromotionRepository extends AbstractServiceRepository
 {
-    public function setColor(string $color): void
+    protected function getClassEntityName(): string
     {
-        $this->color = $color;
+        return TypePromotion::class;
     }
 }
