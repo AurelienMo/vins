@@ -14,11 +14,8 @@ declare(strict_types=1);
 namespace App\Actions\Security;
 
 use App\Domain\Account\Login\Resolver;
-use App\Responders\JsonResponder;
 use App\Responders\ViewResponder;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Twig\Environment;
 
 /**
  * Class Login
@@ -43,13 +40,11 @@ final class Login
 
     public function __invoke(ViewResponder $responder)
     {
-        $form = $this->resolver->getFormType();
-
         return $responder(
             $this->resolver->getTemplate(),
             [
-                'form' => $form->createView(),
                 'error' => $this->resolver->getLastAuthErrors(),
+                'last_username' => $this->resolver->getLastUsername()
             ]
         );
     }

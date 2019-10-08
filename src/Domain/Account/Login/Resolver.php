@@ -15,8 +15,6 @@ declare(strict_types=1);
 
 namespace App\Domain\Account\Login;
 
-use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -28,9 +26,6 @@ use Twig\Environment;
  */
 final class Resolver
 {
-    /** @var FormFactoryInterface */
-    protected $formFactory;
-
     /** @var AuthenticationUtils */
     protected $authUtils;
 
@@ -43,34 +38,23 @@ final class Resolver
     /**
      * Resolver constructor.
      *
-     * @param FormFactoryInterface         $formFactory
      * @param AuthenticationUtils          $authUtils
      * @param Environment                  $templating
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
     public function __construct(
-        FormFactoryInterface $formFactory,
         AuthenticationUtils $authUtils,
         Environment $templating,
         UserPasswordEncoderInterface $passwordEncoder
     ) {
-        $this->formFactory = $formFactory;
         $this->authUtils = $authUtils;
         $this->templating = $templating;
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    /**
-     * @return FormInterface
-     */
-    public function getFormType(): FormInterface
-    {
-        return $this->formFactory->create(LoginType::class);
-    }
-
     public function getTemplate(): string
     {
-        return 'security/login.html.twig';
+        return '@EasyAdmin/page/login.html.twig';
     }
 
     public function validatePassword(UserInterface $user, string $password): bool
@@ -83,5 +67,10 @@ final class Resolver
     public function getLastAuthErrors(): ?AuthenticationException
     {
         return $this->authUtils->getLastAuthenticationError();
+    }
+
+    public function getLastUsername()
+    {
+        return $this->authUtils->getLastUsername();
     }
 }

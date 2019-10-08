@@ -1,0 +1,12 @@
+easy_admin:
+    entities:
+        Product:
+            class: App\Entity\Product
+            list:
+                title: 'Liste des produits'
+                fields:
+                    - property: id
+                      label: 'Identifiant'
+                    - property: name
+                      label: 'Nom'
+

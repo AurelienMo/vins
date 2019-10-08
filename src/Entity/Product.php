@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Traits\NameTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -60,6 +59,14 @@ class Product extends AbstractEntity
      * @ORM\OneToMany(targetEntity="App\Entity\Promotion", mappedBy="product", cascade={"persist", "remove"})
      */
     protected $promotions;
+
+    /**
+     * @var TypeProduct|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\TypeProduct", inversedBy="products")
+     * @ORM\JoinColumn(name="amo_type_product_id", referencedColumnName="id")
+     */
+    protected $typeProduct;
 
     public function __construct()
     {
@@ -149,5 +156,21 @@ class Product extends AbstractEntity
     public function setAppellation(?string $appellation): void
     {
         $this->appellation = $appellation;
+    }
+
+    /**
+     * @return TypeProduct|null
+     */
+    public function getTypeProduct(): ?TypeProduct
+    {
+        return $this->typeProduct;
+    }
+
+    /**
+     * @param TypeProduct|null $typeProduct
+     */
+    public function setTypeProduct(?TypeProduct $typeProduct): void
+    {
+        $this->typeProduct = $typeProduct;
     }
 }

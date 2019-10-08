@@ -1,0 +1,18 @@
+easy_admin:
+    entities:
+        TypeProduct:
+            class: App\Entity\TypeProduct
+            list:
+                title: 'Liste des catégories de vins'
+                fields:
+                    - property: id
+                      label: 'Identifiant'
+                    - property: name
+                      label: 'Nom'
+                    - property: slug
+                      label: 'Label court'
+            form:
+                fields:
+                    - property: 'name'
+                      type: 'text'
+                      label: 'Nom de la catégorie'

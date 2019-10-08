@@ -30,6 +30,10 @@
                 <source>Couleur du profil</source>
                 <target>Couleur du profil</target>
             </trans-unit>
+            <trans-unit id="TypeProduct">
+                <source>TypeProduct</source>
+                <target>catégorie de vins</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
