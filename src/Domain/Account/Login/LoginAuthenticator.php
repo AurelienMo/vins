@@ -16,6 +16,7 @@ namespace App\Domain\Account\Login;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -67,10 +68,12 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
             'password' => $request->request->get('_password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
-        $request->getSession()->set(
-            Security::LAST_USERNAME,
-            $credentials['username']
-        );
+        if ($request->getSession() instanceof SessionInterface) {
+            $request->getSession()->set(
+                Security::LAST_USERNAME,
+                $credentials['username']
+            );
+        }
 
         return $credentials;
     }

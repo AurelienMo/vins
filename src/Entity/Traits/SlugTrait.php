@@ -41,6 +41,6 @@ trait SlugTrait
      */
     public function setSlug(?string $slug): void
     {
-        $this->slug = SlugifyHelper::slugify($slug);
+        $this->slug = SlugifyHelper::slugify((string) $slug);
     }
 }
