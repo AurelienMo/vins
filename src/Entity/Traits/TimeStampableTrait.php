@@ -35,4 +35,12 @@ trait TimeStampableTrait
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @param DateTime $updatedAt
+     */
+    public function setUpdatedAt(DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
 }

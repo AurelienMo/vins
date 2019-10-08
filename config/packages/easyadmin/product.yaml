@@ -3,10 +3,25 @@ easy_admin:
         Product:
             class: App\Entity\Product
             list:
+                form_filters:
+                    - typeProduct
                 title: 'Liste des produits'
                 fields:
                     - property: id
                       label: 'Identifiant'
-                    - property: name
-                      label: 'Nom'
+                    - property: appellation
+                      label: 'Appellation'
 
+            form:
+                fields:
+                    - property: domain
+                      label: 'Domaine'
+                      type: 'text'
+                    - property: vintageName
+                      label: 'Nom de la cuvée'
+                      type: 'text'
+                    - property: year
+                      type: 'text'
+                    - property: appellation
+                      type: 'text'
+                    - { property: 'typeProduct', type: 'easyadmin_autocomplete', type_options: { attr: { create: true } } }
