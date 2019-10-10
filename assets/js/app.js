@@ -6,7 +6,6 @@ import Header from "./components/Header";
 $(document).foundation();
 
 let header = new Header();
-blank();
 
 document.querySelector('body').addEventListener('submit', function (e) {
     e.preventDefault()
@@ -14,6 +13,5 @@ document.querySelector('body').addEventListener('submit', function (e) {
 
 [].forEach.call(document.querySelectorAll('input'), function(el) {
     el.addEventListener('focus', function() {
-        console.log('dfddd');
     })
 });
