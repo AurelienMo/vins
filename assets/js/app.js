@@ -2,7 +2,6 @@ import $ from 'jquery';
 import 'foundation-sites/dist/js/foundation';
 import '../scss/app.scss'
 import Header from "./components/Header";
-import {blank} from "./components/Validators";
 
 $(document).foundation();
 
