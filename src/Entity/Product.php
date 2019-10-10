@@ -30,9 +30,10 @@ class Product extends AbstractEntity implements UpdatableInterface
     use TimeStampableTrait;
 
     /**
-     * @var string|null
+     * @var WineDomain|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="App\Entity\WineDomain", inversedBy="wines")
+     * @ORM\JoinColumn(name="amo_wine_domain_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $domain;
 
@@ -99,17 +100,17 @@ class Product extends AbstractEntity implements UpdatableInterface
     }
 
     /**
-     * @return string|null
+     * @return WineDomain|null
      */
-    public function getDomain(): ?string
+    public function getDomain(): ?WineDomain
     {
         return $this->domain;
     }
 
     /**
-     * @param string|null $domain
+     * @param WineDomain|null $domain
      */
-    public function setDomain(?string $domain): void
+    public function setDomain(?WineDomain $domain): void
     {
         $this->domain = $domain;
     }

@@ -16,4 +16,5 @@ easy_admin:
             - entity: 'VineProfile'
               label: 'Profils'
               icon: 'wine-glass'
+        assets:
     site_name: 'Mon Premier Sommelier'

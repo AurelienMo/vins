@@ -1,0 +1,18 @@
+easy_admin:
+    entities:
+        WineDomain:
+            class: App\Entity\WineDomain
+            list:
+                title: 'Liste des catégories de vins'
+                fields:
+                    - property: id
+                      label: 'Identifiant'
+                    - property: name
+                      label: 'Nom'
+                    - property: slug
+                      label: 'Label court'
+            form:
+                fields:
+                    - property: 'name'
+                      type: 'text'
+                      label: 'Nom du domaine'

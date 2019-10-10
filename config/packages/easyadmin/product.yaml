@@ -16,7 +16,10 @@ easy_admin:
                 fields:
                     - property: domain
                       label: 'Domaine'
-                      type: 'text'
+                      type: 'easyadmin_autocomplete'
+                      type_options:
+                          attr:
+                              create: true
                     - property: vintageName
                       label: 'Nom de la cuvée'
                       type: 'text'
