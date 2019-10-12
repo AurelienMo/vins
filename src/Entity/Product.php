@@ -89,6 +89,14 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $wineService;
 
+    /**
+     * @var VineProfile|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\VineProfile", inversedBy="wines")
+     * @ORM\JoinColumn(name="amo_profile_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    protected $profile;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -227,5 +235,21 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setWineService(WineService $wineService): void
     {
         $this->wineService = $wineService;
+    }
+
+    /**
+     * @return VineProfile|null
+     */
+    public function getProfile(): ?VineProfile
+    {
+        return $this->profile;
+    }
+
+    /**
+     * @param VineProfile|null $profile
+     */
+    public function setProfile(?VineProfile $profile): void
+    {
+        $this->profile = $profile;
     }
 }

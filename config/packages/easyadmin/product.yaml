@@ -32,6 +32,11 @@ easy_admin:
                       type: 'text'
                       label: 'Appellation'
                     - { property: 'typeProduct', type: 'easyadmin_autocomplete', type_options: { attr: { create: true } } }
+                    - property: profile
+                      type: 'easyadmin_autocomplete'
+                      type_options:
+                          attr:
+                              create: true
                     - type: 'tab'
                       label: 'Informations vin'
                     - property: wineCaract.powerful
