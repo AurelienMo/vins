@@ -14,6 +14,8 @@ easy_admin:
 
             form:
                 fields:
+                    - type: 'tab'
+                      label: 'Informations générales'
                     - property: domain
                       label: 'Domaine'
                       type: 'easyadmin_autocomplete'
@@ -25,6 +27,55 @@ easy_admin:
                       type: 'text'
                     - property: year
                       type: 'text'
+                      label: 'Année'
                     - property: appellation
                       type: 'text'
+                      label: 'Appellation'
                     - { property: 'typeProduct', type: 'easyadmin_autocomplete', type_options: { attr: { create: true } } }
+                    - type: 'tab'
+                      label: 'Informations vin'
+                    - property: wineCaract.powerful
+                      type: 'integer'
+                      label: 'Puissant'
+                    - property: wineCaract.complex
+                      type: 'integer'
+                      label: 'Complexe'
+                    - property: wineCaract.spice
+                      type: 'integer'
+                      label: 'Epicé'
+                    - property: wineCaract.fruity
+                      type: 'integer'
+                      label: 'Fruité'
+                    - property: wineCaract.wooded
+                      type: 'integer'
+                      label: 'Boisé'
+                    - property: wineCaract.tannic
+                      type: 'integer'
+                      label: 'Tannique'
+                    - type: 'tab'
+                      label: 'Service'
+                    - property: wineService.temp
+                      type: 'integer'
+                      label: 'Température de service'
+
+                    - property: wineService.decanting
+                      type: 'text'
+                      label: 'Carafage'
+                    - property: wineService.meat
+                      type: 'textarea'
+                      label: 'Viandes associés'
+                      attr:
+                          rows: 1
+                    - property: wineService.cheese
+                      type: 'textarea'
+                      label: 'Fromages associés'
+                    - property: wineService.fish
+                      type: 'textarea'
+                      label: 'Poissons associés'
+                    - property: wineService.vegetable
+                      type: 'textarea'
+                      label: 'Légumes associés'
+                    - property: wineService.dessert
+                      type: 'textarea'
+                      label: 'Desserts associés'
+

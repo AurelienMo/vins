@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Embedded\WineCaract;
+use App\Entity\Embedded\WineService;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -73,9 +75,25 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $typeProduct;
 
+    /**
+     * @var WineCaract
+     *
+     * @ORM\Embedded(class="App\Entity\Embedded\WineCaract")
+     */
+    protected $wineCaract;
+
+    /**
+     * @var WineService
+     *
+     * @ORM\Embedded(class="App\Entity\Embedded\WineService")
+     */
+    protected $wineService;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
+        $this->wineCaract = new WineCaract();
+        $this->wineService = new WineService();
         parent::__construct();
     }
 
@@ -177,5 +195,37 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setTypeProduct(?TypeProduct $typeProduct): void
     {
         $this->typeProduct = $typeProduct;
+    }
+
+    /**
+     * @return WineCaract
+     */
+    public function getWineCaract(): WineCaract
+    {
+        return $this->wineCaract;
+    }
+
+    /**
+     * @param WineCaract $wineCaract
+     */
+    public function setWineCaract(WineCaract $wineCaract): void
+    {
+        $this->wineCaract = $wineCaract;
+    }
+
+    /**
+     * @return WineService
+     */
+    public function getWineService(): WineService
+    {
+        return $this->wineService;
+    }
+
+    /**
+     * @param WineService $wineService
+     */
+    public function setWineService(WineService $wineService): void
+    {
+        $this->wineService = $wineService;
     }
 }
