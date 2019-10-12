@@ -97,6 +97,13 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $profile;
 
+    /**
+     * @var float|null
+     *
+     * @ORM\Column(type="float")
+     */
+    protected $price;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -251,5 +258,30 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setProfile(?VineProfile $profile): void
     {
         $this->profile = $profile;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    /**
+     * @param float|null $price
+     */
+    public function setPrice(?float $price): void
+    {
+        $this->price = $price;
+    }
+
+    public function __toString()
+    {
+        return sprintf(
+            '%s - %s',
+            $this->domain,
+            $this->appellation
+        );
     }
 }

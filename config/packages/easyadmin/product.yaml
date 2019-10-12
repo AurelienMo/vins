@@ -4,13 +4,28 @@ easy_admin:
             class: App\Entity\Product
             list:
                 form_filters:
-                    - typeProduct
+                    - property: typeProduct
+                      label: 'Type'
+                    - property: domain
+                      label: 'Domaine'
+                    - property: profile
+                      label: 'Profil'
                 title: 'Liste des produits'
                 fields:
-                    - property: id
-                      label: 'Identifiant'
+                    - property: domain
+                      label: 'Domaine'
+                    - property: vintageName
+                      label: 'Nom de la cuvée'
                     - property: appellation
                       label: 'Appellation'
+                    - property: year
+                      label: 'Année'
+                    - property: typeProduct
+                      label: 'Type de vin'
+                    - property: profile
+                      label: 'Profil'
+                    - property: price
+                      label: 'Prix unitaire'
 
             form:
                 fields:
@@ -37,6 +52,9 @@ easy_admin:
                       type_options:
                           attr:
                               create: true
+                    - property: price
+                      type: number
+                      label: 'Prix unitaire'
                     - type: 'tab'
                       label: 'Informations vin'
                     - property: wineCaract.powerful

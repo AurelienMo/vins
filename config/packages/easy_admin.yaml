@@ -18,3 +18,5 @@ easy_admin:
               icon: 'wine-glass'
         assets:
     site_name: 'Mon Premier Sommelier'
+    formats:
+        number: '%0.2f'
