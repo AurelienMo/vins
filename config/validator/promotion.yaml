@@ -10,5 +10,12 @@ App\Entity\Promotion:
             - NotBlank: ~
         startAt:
             - NotBlank: ~
+            - Expression:
+                  expression: "this.getStartAt() < this.getEndAt()"
+                  message: 'La date de début ne peut être supérieur à la date de fin'
         endAt:
             - NotBlank: ~
+            - Expression:
+                  expression: "this.getEndAt() > this.getStartAt()"
+                  message: "La date de fin ne peut être antérieur à la date de début"
+
