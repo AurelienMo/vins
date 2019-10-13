@@ -18,8 +18,6 @@ easy_admin:
                       label: 'Valeur'
                     - property: status
                       label: 'Statut'
-                    - property: countOrderWithPromotion
-                      label: 'Commandes'
                     - property: startAt
                       label: 'Débute le'
                       format: 'd/m/Y'

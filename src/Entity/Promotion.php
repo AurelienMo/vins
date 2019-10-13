@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="amo_promotion")
  * @ORM\Entity(repositoryClass="App\Repository\PromotionRepository")
  */
-class Promotion extends AbstractEntity implements ObjectManagerAware
+class Promotion extends AbstractEntity
 {
     use NameTrait;
 
@@ -166,17 +166,5 @@ class Promotion extends AbstractEntity implements ObjectManagerAware
         if ($dateNow < $this->startAt) {
             return 'Non démarrée';
         }
-    }
-
-    public function injectObjectManager(
-        ObjectManager $objectManager,
-        ClassMetadata $classMetadata
-    ) {
-        $this->em = $objectManager;
-    }
-
-    public function countOrderWithPromotion()
-    {
-        return $this->em->getRepository(OrderProductLine::class)->countOrderWithProductAndPromotionEnabled($this);
     }
 }
