@@ -17,8 +17,10 @@ easy_admin:
                       label: 'Commandes'
                     - property: startAt
                       label: 'Débute le'
+                      format: 'd/m/Y'
                     - property: endAt
                       label: 'Termine le'
+                      format: 'd/m/Y'
 
             form:
                 fields:
