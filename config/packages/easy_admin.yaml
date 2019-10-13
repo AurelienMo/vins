@@ -16,7 +16,12 @@ easy_admin:
             - entity: 'VineProfile'
               label: 'Profils'
               icon: 'wine-glass'
+            - label: 'Gestion logistique'
+            - entity: 'Promotion'
+              label: 'Promotions'
+              icon: 'percent'
         assets:
     site_name: 'Mon Premier Sommelier'
     formats:
         number: '%0.2f'
+        datetime: 'd/m/Y'

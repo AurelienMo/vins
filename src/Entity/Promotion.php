@@ -15,6 +15,9 @@ namespace App\Entity;
 
 use App\Entity\Traits\NameTrait;
 use DateTime;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\Persistence\ObjectManagerAware;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,7 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="amo_promotion")
  * @ORM\Entity(repositoryClass="App\Repository\PromotionRepository")
  */
-class Promotion extends AbstractEntity
+class Promotion extends AbstractEntity implements ObjectManagerAware
 {
     use NameTrait;
 
@@ -63,6 +66,11 @@ class Promotion extends AbstractEntity
      * @ORM\Column(type="datetime")
      */
     protected $endAt;
+
+    /**
+     * @var ObjectManager
+     */
+    private $em;
 
     /**
      * @return Product|null
@@ -142,5 +150,31 @@ class Promotion extends AbstractEntity
     public function setEndAt(?DateTime $endAt): void
     {
         $this->endAt = $endAt;
+    }
+
+    public function getStatus()
+    {
+        $dateNow = new DateTime();
+        if ($dateNow >= $this->startAt && $dateNow <= $this->endAt) {
+            return 'En cours';
+        }
+        if ($dateNow > $this->endAt) {
+            return 'Terminée';
+        }
+        if ($dateNow < $this->startAt) {
+            return 'Non démarrée';
+        }
+    }
+
+    public function injectObjectManager(
+        ObjectManager $objectManager,
+        ClassMetadata $classMetadata
+    ) {
+        $this->em = $objectManager;
+    }
+
+    public function countOrderWithPromotion()
+    {
+        return $this->em->getRepository(OrderProductLine::class)->countOrderWithProductAndPromotionEnabled($this);
     }
 }

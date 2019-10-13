@@ -42,4 +42,9 @@ class TypePromotion extends AbstractEntity
     {
         return $this->label;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

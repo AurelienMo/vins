@@ -7,8 +7,6 @@ easy_admin:
             list:
                 title: 'Liste des profils de vins'
                 fields:
-                    - property: id
-                      label: 'Identifiant'
                     - property: name
                       label: 'Nom'
                     - property: color

@@ -5,8 +5,6 @@ easy_admin:
             list:
                 title: 'Liste des catégories de vins'
                 fields:
-                    - property: id
-                      label: 'Identifiant'
                     - property: name
                       label: 'Nom'
                     - property: slug

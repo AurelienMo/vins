@@ -93,7 +93,7 @@ class Product extends AbstractEntity implements UpdatableInterface
      * @var VineProfile|null
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\VineProfile", inversedBy="wines")
-     * @ORM\JoinColumn(name="amo_profile_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * @ORM\JoinColumn(name="amo_profile_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected $profile;
 

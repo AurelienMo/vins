@@ -2,6 +2,8 @@ easy_admin:
     entities:
         Product:
             class: App\Entity\Product
+            templates:
+                edit: 'admin/Product/edit.html.twig'
             list:
                 form_filters:
                     - property: typeProduct
@@ -26,11 +28,11 @@ easy_admin:
                       label: 'Profil'
                     - property: price
                       label: 'Prix unitaire'
-
             form:
                 fields:
-                    - type: 'tab'
+                    - type: 'group'
                       label: 'Informations générales'
+                      columns: 4
                     - property: domain
                       label: 'Domaine'
                       type: 'easyadmin_autocomplete'
@@ -46,17 +48,19 @@ easy_admin:
                     - property: appellation
                       type: 'text'
                       label: 'Appellation'
-                    - { property: 'typeProduct', type: 'easyadmin_autocomplete', type_options: { attr: { create: true } } }
+                    - { property: 'typeProduct', label: 'Type de vin', type: 'easyadmin_autocomplete', type_options: { attr: { create: true } } }
                     - property: profile
                       type: 'easyadmin_autocomplete'
                       type_options:
                           attr:
                               create: true
+                      label: 'Profil'
                     - property: price
                       type: number
                       label: 'Prix unitaire'
-                    - type: 'tab'
+                    - type: 'group'
                       label: 'Informations vin'
+                      columns: 4
                     - property: wineCaract.powerful
                       type: 'integer'
                       label: 'Puissant'
@@ -75,30 +79,52 @@ easy_admin:
                     - property: wineCaract.tannic
                       type: 'integer'
                       label: 'Tannique'
-                    - type: 'tab'
+                    - type: 'group'
                       label: 'Service'
+                      columns: 4
                     - property: wineService.temp
                       type: 'integer'
                       label: 'Température de service'
-
                     - property: wineService.decanting
                       type: 'text'
                       label: 'Carafage'
                     - property: wineService.meat
                       type: 'textarea'
-                      label: 'Viandes associés'
-                      attr:
-                          rows: 1
+                      label: 'Viandes'
+                      type_options:
+                          attr:
+                              rows: 2
                     - property: wineService.cheese
                       type: 'textarea'
-                      label: 'Fromages associés'
+                      label: 'Fromages'
+                      type_options:
+                          attr:
+                              rows: 2
                     - property: wineService.fish
                       type: 'textarea'
-                      label: 'Poissons associés'
+                      label: 'Poissons'
+                      type_options:
+                          attr:
+                              rows: 2
                     - property: wineService.vegetable
                       type: 'textarea'
-                      label: 'Légumes associés'
+                      label: 'Légumes'
+                      type_options:
+                          attr:
+                              rows: 2
                     - property: wineService.dessert
                       type: 'textarea'
-                      label: 'Desserts associés'
-
+                      label: 'Desserts'
+                      type_options:
+                          attr:
+                              rows: 2
+                    - type: 'group'
+                      label: 'Promotions'
+                      columns: 12
+                    - property: promotions
+                      label: ''
+                      type: embedded_list
+                      type_options:
+                        entity: Promotion
+                        filters:
+                            'entity.promotions': 'form:parent.data.id'
