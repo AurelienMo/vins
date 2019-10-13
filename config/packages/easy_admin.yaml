@@ -24,4 +24,4 @@ easy_admin:
     site_name: 'Mon Premier Sommelier'
     formats:
         number: '%0.2f'
-        datetime: 'd/m/Y'
+        datetime: 'd/m/Y H:i'
