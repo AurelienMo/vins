@@ -1,0 +1,14 @@
+App\Entity\Promotion:
+    properties:
+        name:
+            - NotBlank: ~
+        product:
+            - NotBlank: ~
+        typePromotion:
+            - NotBlank: ~
+        value:
+            - NotBlank: ~
+        startAt:
+            - NotBlank: ~
+        endAt:
+            - NotBlank: ~

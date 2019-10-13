@@ -19,6 +19,7 @@ use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectManagerAware;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Promotion
@@ -155,6 +156,7 @@ class Promotion extends AbstractEntity implements ObjectManagerAware
     public function getStatus()
     {
         $dateNow = new DateTime();
+        $this->status = null;
         if ($dateNow >= $this->startAt && $dateNow <= $this->endAt) {
             return 'En cours';
         }

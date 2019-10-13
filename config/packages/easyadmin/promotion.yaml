@@ -3,6 +3,11 @@ easy_admin:
         Promotion:
             class: App\Entity\Promotion
             list:
+                form_filters:
+                    - property: product
+                      label: 'Vins'
+                sort: ['startAt', 'DESC']
+                max_results: 20
                 title: 'Liste des catégories de vins'
                 fields:
                     - property: product
