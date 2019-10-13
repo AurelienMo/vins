@@ -1,4 +1,6 @@
 App\Entity\Promotion:
+    constraints:
+        - App\Domain\Promotion\Validators\UniquePromotionAsPeriodConstraint: ~
     properties:
         name:
             - NotBlank: ~
@@ -18,4 +20,3 @@ App\Entity\Promotion:
             - Expression:
                   expression: "this.getEndAt() > this.getStartAt()"
                   message: "La date de fin ne peut être antérieur à la date de début"
-
