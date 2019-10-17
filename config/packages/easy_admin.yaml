@@ -20,6 +20,9 @@ easy_admin:
             - entity: 'Promotion'
               label: 'Promotions'
               icon: 'percent'
+            - entity: 'Stock'
+              label: 'Stock'
+              icon: 'pallet'
         assets:
     site_name: 'Mon Premier Sommelier'
     formats:

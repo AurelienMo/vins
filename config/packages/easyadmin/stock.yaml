@@ -1,0 +1,31 @@
+easy_admin:
+    entities:
+        Stock:
+            class: App\Entity\Stock
+            disabled_actions: ['new', 'remove']
+            list:
+                title: 'Liste des stocks produits'
+                fields:
+                    - property: wine
+                      label: 'Vin'
+                    - property: quantity
+                      label: 'Quantité restante'
+                      type: integer
+                    - property: updatedAt
+                      label: 'Date de mise à jour'
+            form:
+                fields:
+                    - type: 'group'
+                      label: 'Ajouter stock'
+                      columns: 12
+                    - property: stockEntries
+                      label: 'Mouvements stock'
+                      type: 'collection'
+                      type_options:
+                          entry_type: App\Admin\Forms\AddStockEntryType
+                          allow_delete: true
+                          allow_add: true
+                          by_reference: false
+                          attr:
+                              class: 'col-12'
+

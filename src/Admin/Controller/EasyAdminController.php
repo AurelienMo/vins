@@ -16,6 +16,8 @@ namespace App\Admin\Controller;
 use AlterPHP\EasyAdminExtensionBundle\Controller\EasyAdminController as AdminController;
 use App\Entity\Interfaces\Sluggable;
 use App\Entity\Interfaces\UpdatableInterface;
+use App\Entity\Product;
+use App\Entity\Stock;
 use DateTime;
 use ReflectionClass;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -37,6 +39,9 @@ class EasyAdminController extends AdminController
                         break;
                 }
             }
+        }
+        if ($entity instanceof Product) {
+            $entity->setStock(new Stock());
         }
 
         parent::persistEntity($entity);

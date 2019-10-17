@@ -14,6 +14,8 @@ easy_admin:
                       label: 'Profil'
                 title: 'Liste des produits'
                 fields:
+                    - property: profile
+                      label: 'Profil'
                     - property: domain
                       label: 'Domaine'
                     - property: vintageName
@@ -24,10 +26,10 @@ easy_admin:
                       label: 'Année'
                     - property: typeProduct
                       label: 'Type de vin'
-                    - property: profile
-                      label: 'Profil'
                     - property: price
                       label: 'Prix unitaire'
+                    - property: stock.quantity
+                      label: 'Stock'
             form:
                 fields:
                     - type: 'group'

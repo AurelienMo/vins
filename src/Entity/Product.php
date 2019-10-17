@@ -104,6 +104,14 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $price;
 
+    /**
+     * @var Stock
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Stock", mappedBy="wine", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="amo_stock_id", referencedColumnName="id")
+     */
+    protected $stock;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -274,6 +282,23 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setPrice(?float $price): void
     {
         $this->price = $price;
+    }
+
+    /**
+     * @return Stock
+     */
+    public function getStock(): Stock
+    {
+        return $this->stock;
+    }
+
+    /**
+     * @param Stock $stock
+     */
+    public function setStock(Stock $stock): void
+    {
+        $this->stock = $stock;
+        $stock->setWine($this);
     }
 
     public function __toString()
