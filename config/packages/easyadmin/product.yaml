@@ -3,7 +3,7 @@ easy_admin:
         Product:
             class: App\Entity\Product
             templates:
-                edit: 'admin/Product/edit.html.twig'
+                edit: 'bundles/EasyAdminBundle/Product/edit.html.twig'
             list:
                 form_filters:
                     - property: typeProduct

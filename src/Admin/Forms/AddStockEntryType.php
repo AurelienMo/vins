@@ -39,8 +39,14 @@ class AddStockEntryType extends AbstractType
                 'quantity',
                 IntegerType::class,
                 [
-                    'label' => false,
+                    'label' => 'Quantité',
                     'disabled' => !is_null($data) ? true : false,
+                    'attr' => [
+                        'class' => 'col-6',
+                    ],
+                    'label_attr' => [
+                        'class' => 'col-6',
+                    ]
                 ]
             );
             if (!is_null($data)) {
@@ -52,7 +58,13 @@ class AddStockEntryType extends AbstractType
                             'widget' => 'single_text',
                             'format' => 'dd-MM-yyyy',
                             'disabled' => true,
-                            'label' => 'Date opération'
+                            'label' => 'Date opération',
+                            'attr' => [
+                                'class' => 'col-6',
+                            ],
+                            'label_attr' => [
+                                'class' => 'col-6',
+                            ]
                         ]
                     )
                 ;

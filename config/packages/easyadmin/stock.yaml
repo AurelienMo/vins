@@ -1,6 +1,8 @@
 easy_admin:
     entities:
         Stock:
+            templates:
+                edit: 'bundles/EasyAdminBundle/Stock/edit.html.twig'
             class: App\Entity\Stock
             disabled_actions: ['new', 'remove']
             list:
@@ -17,15 +19,12 @@ easy_admin:
                 fields:
                     - type: 'group'
                       label: 'Ajouter stock'
-                      columns: 12
                     - property: stockEntries
-                      label: 'Mouvements stock'
+                      label: 'Mouvements'
                       type: 'collection'
                       type_options:
                           entry_type: App\Admin\Forms\AddStockEntryType
                           allow_delete: true
                           allow_add: true
                           by_reference: false
-                          attr:
-                              class: 'col-12'
 

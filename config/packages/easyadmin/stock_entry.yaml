@@ -1,0 +1,29 @@
+easy_admin:
+    entities:
+        StockEntry:
+            templates:
+                edit: 'bundles/EasyAdminBundle/Stock/edit.html.twig'
+            class: App\Entity\Stock
+            disabled_actions: ['edit']
+            list:
+#                title: 'Liste des stocks produits'
+                fields:
+                    - property: wine
+                      label: 'Vin'
+                    - property: quantity
+                      label: 'Quantité sur le mouvement'
+                      type: integer
+                    - property: createdAt
+                      label: 'Mouvement réalisé le'
+#            form:
+#                fields:
+#                    - type: 'group'
+#                      label: 'Ajouter stock'
+#                    -   property: stockEntries
+#                        label: ''
+#                        type: embedded_list
+#                        type_options:
+#                            entity: StockEntry
+#                            filters:
+#                                'entity.promotions': 'form:parent.data.id'
+
