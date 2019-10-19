@@ -34,7 +34,7 @@ class DeliveryPoint extends AbstractEntity implements UpdatableInterface, Slugga
     use NameTrait;
 
     /**
-     * @var Address
+     * @var Address|null
      *
      * @ORM\Embedded(class="App\Entity\Embedded\Address")
      */
@@ -47,17 +47,17 @@ class DeliveryPoint extends AbstractEntity implements UpdatableInterface, Slugga
     }
 
     /**
-     * @return Address
+     * @return Address|null
      */
-    public function getAddress(): Address
+    public function getAddress(): ?Address
     {
         return $this->address;
     }
 
     /**
-     * @param Address $address
+     * @param Address|null $address
      */
-    public function setAddress(Address $address): void
+    public function setAddress(?Address $address): void
     {
         $this->address = $address;
     }

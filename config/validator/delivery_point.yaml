@@ -1,0 +1,21 @@
+App\Entity\DeliveryPoint:
+    properties:
+        name:
+            - NotBlank: ~
+        address:
+            - Valid: ~
+
+App\Entity\Embedded\Address:
+    properties:
+        streetName:
+            - NotBlank: ~
+        zipCode:
+            - NotBlank: ~
+            - Length:
+                  min: 5
+                  max: 5
+        city:
+            - NotBlank: ~
+        country:
+            - NotBlank: ~
+

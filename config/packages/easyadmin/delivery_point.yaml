@@ -30,22 +30,36 @@ easy_admin:
                     - property: name
                       label: 'Nom du point de livraison'
                       type: 'text'
+                      type_options:
+                          required: false
                     - property: address.streetNumber
                       label: 'Numéro de rue'
                       type: 'text'
+                      type_options:
+                          required: false
                     - property: address.streetName
                       label: 'Nom de la rue'
                       type: 'text'
+                      type_options:
+                          required: false
                     - property: address.complement
                       label: "Complément d'adresse"
                       type: 'text'
+                      type_options:
+                          required: false
                     - property: address.zipCode
                       label: 'Code postal'
                       type: 'text'
+                      type_options:
+                          required: false
                     - property: address.city
                       label: 'Ville'
                       type: 'text'
+                      type_options:
+                          required: false
                     - property: address.country
                       label: 'Pays'
-                      type: 'text'
+                      type: 'country'
+                      type_options:
+                          required: false
 
