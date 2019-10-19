@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\NameTrait;
+use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -22,9 +24,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="amo_delivery_type")
  * @ORM\Entity()
  */
-class DeliveryType extends AbstractEntity
+class DeliveryType extends AbstractEntity implements UpdatableInterface
 {
     use NameTrait;
+    use TimeStampableTrait;
 
     /**
      * @var float|null

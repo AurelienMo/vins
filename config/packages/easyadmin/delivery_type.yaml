@@ -12,6 +12,9 @@ easy_admin:
                       label: 'Type'
                     - property: price
                       label: 'Numéro de rue'
+                    - property: updatedAt
+                      label: 'Mise à jour le'
+
             form:
                 title: 'Nouveau type de livraison'
                 fields:
