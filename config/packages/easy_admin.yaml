@@ -2,6 +2,18 @@ imports:
     - { resource: easyadmin/ }
 
 easy_admin:
+    list:
+        batch_actions: ['delete']
+        actions:
+            - name: 'new'
+              icon: 'plus-circle'
+              label: false
+            - name: 'edit'
+              icon: 'edit'
+              label: false
+            - name: 'delete'
+              icon: 'trash'
+              label: false
     user:
         name_property_path: 'fullName'
     design:

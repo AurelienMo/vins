@@ -1,0 +1,19 @@
+{% extends 'bundles/EasyAdminBundle/edit.html.twig' %}
+
+{% block content_title %}
+    {% apply spaceless %}
+        <div class="card">
+            <div class="card-header text-center">
+                Edition <span class="font-weight-bold">{{ entity.name}}</span>.
+            </div>
+        </div>
+    {% endapply %}
+{% endblock %}
+
+{% block main %}
+    {% block entity_form %}
+        {% form_theme form 'bundles/forms/_delivery_point.html.twig' %}
+        {{ form(form) }}
+    {% endblock entity_form %}
+{% endblock %}
+
