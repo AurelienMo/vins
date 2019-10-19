@@ -1,0 +1,29 @@
+easy_admin:
+    entities:
+        DeliveryType:
+            templates:
+                edit: 'bundles/EasyAdminBundle/DeliveryPoint/edit.html.twig'
+                new: 'bundles/EasyAdminBundle/new.html.twig'
+            class: App\Entity\DeliveryType
+            list:
+                title: 'Liste des points de livraisons'
+                fields:
+                    - property: name
+                      label: 'Type'
+                    - property: price
+                      label: 'Numéro de rue'
+            form:
+                title: 'Nouveau type de livraison'
+                fields:
+                    - property: name
+                      columns: 6
+                      label: 'Nom du type'
+                      type: 'text'
+                      type_options:
+                          required: false
+                    - property: price
+                      columns: 6
+                      label: 'Prix'
+                      type: 'money'
+                      type_options:
+                          required: false

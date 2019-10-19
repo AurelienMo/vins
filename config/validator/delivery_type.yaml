@@ -1,0 +1,10 @@
+App\Entity\DeliveryType:
+    properties:
+        name:
+            - NotBlank: ~
+        price:
+            - NotBlank: ~
+            - Range:
+                  min: 0
+                  minMessage: 'La valeur minimum est de 0€'
+

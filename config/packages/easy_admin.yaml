@@ -43,6 +43,9 @@ easy_admin:
             - entity: 'DeliveryPoint'
               label: 'Points de livraison'
               icon: 'truck'
+            - entity: 'DeliveryType'
+              label: 'Type de livraisons'
+              icon: 'euro-sign'
         form_theme:
             - 'bundles/EasyAdminBundle/layout.html.twig'
     site_name: 'Mon Premier Sommelier'
