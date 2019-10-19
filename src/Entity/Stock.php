@@ -47,7 +47,7 @@ class Stock extends AbstractEntity implements UpdatableInterface
     /**
      * @var StockEntry[]|Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\StockEntry", mappedBy="stock", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\StockEntry", mappedBy="stock", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $stockEntries;
 
@@ -81,9 +81,16 @@ class Stock extends AbstractEntity implements UpdatableInterface
         return $this->quantity;
     }
 
-    public function updateQuantity(StockEntry $entry): void
+    public function updateQuantity(StockEntry $entry, string $type): void
     {
-        $this->quantity += $entry->getQuantity();
+        switch ($type) {
+            case 'add':
+                $this->quantity += $entry->getQuantity();
+                break;
+            case 'remove':
+                $this->quantity -= $entry->getQuantity();
+                break;
+        }
     }
 
     public function __toString()
@@ -103,14 +110,14 @@ class Stock extends AbstractEntity implements UpdatableInterface
     {
         $this->stockEntries->add($entry);
         $entry->setStock($this);
-        $this->updateQuantity($entry);
+        $this->updateQuantity($entry, 'add');
 
         return $this;
     }
 
     public function removeStockEntry(StockEntry $entry)
     {
-        $this->updateQuantity($entry);
+        $this->updateQuantity($entry, 'remove');
         $this->stockEntries->removeElement($entry);
     }
 }

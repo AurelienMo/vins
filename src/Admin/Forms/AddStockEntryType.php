@@ -33,38 +33,32 @@ class AddStockEntryType extends AbstractType
         FormBuilderInterface $builder,
         array $options
     ) {
-        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            $form = $event->getForm();
-            $data = $event->getData();
-            $form->add(
-                'quantity',
-                IntegerType::class,
-                [
-                    'label' => 'Quantité',
-                    'disabled' => !is_null($data) ? true : false,
-                    'attr' => [
-                        'class' => 'col-6 mt-1',
-                    ],
-                ]
-            );
-            if (!is_null($data)) {
-                $form
-                    ->add(
-                        'createdAt',
-                        DateTimeType::class,
-                        [
-                            'widget' => 'single_text',
-                            'format' => 'dd-MM-yyyy',
-                            'disabled' => true,
-                            'label' => 'Date opération',
-                            'attr' => [
-                                'class' => 'col-6 mt-1',
-                            ],
-                        ]
-                    )
-                ;
-            }
-        });
+        $builder->add(
+            'quantity',
+            IntegerType::class,
+            [
+                'label' => 'Quantité',
+//                'disabled' => !is_null($data) ? true : false,
+                'attr' => [
+                    'class' => 'col-6 mt-1',
+                ],
+            ]
+        );
+//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+//            $form = $event->getForm();
+//            $data = $event->getData();
+//            $form->add(
+//                'quantity',
+//                IntegerType::class,
+//                [
+//                    'label' => 'Quantité',
+//                    'disabled' => !is_null($data) ? true : false,
+//                    'attr' => [
+//                        'class' => 'col-6 mt-1',
+//                    ],
+//                ]
+//            );
+//        });
 //
     }
 

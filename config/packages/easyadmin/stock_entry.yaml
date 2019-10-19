@@ -15,15 +15,3 @@ easy_admin:
                       type: integer
                     - property: createdAt
                       label: 'Mouvement réalisé le'
-#            form:
-#                fields:
-#                    - type: 'group'
-#                      label: 'Ajouter stock'
-#                    -   property: stockEntries
-#                        label: ''
-#                        type: embedded_list
-#                        type_options:
-#                            entity: StockEntry
-#                            filters:
-#                                'entity.promotions': 'form:parent.data.id'
-

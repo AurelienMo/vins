@@ -2,6 +2,16 @@
 
 {% block content_title %}
     {% apply spaceless %}
-        Editer - <strong>{{ entity }}</strong>
+        <div class="d-flex flex-row justify-content-between">
+            <div>
+                Editer - <span class="font-weight-bold">{{ entity }}</span>
+            </div>
+            <div>
+                {% set stockOk = entity.stock.quantity > 0 %}
+                <span class="alert alert-{{stockOk ? 'success' : 'warning'}} text-center" role="alert">
+                    <i class="fas fa-{{ stockOk ? 'check' : 'exclamation-triangle' }}"></i> {{ entity.stock.quantity }} bouteilles en stock
+                </span>
+            </div>
+        </div>
     {% endapply %}
 {% endblock %}
