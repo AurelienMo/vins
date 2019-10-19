@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Domain\Common\Helpers\UuidGenerator;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
 use DateTime;
@@ -29,6 +30,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Order extends AbstractEntity implements UpdatableInterface
 {
     use TimeStampableTrait;
+
+    const STATUS_IN_PROGRESS = 'En préparation';
+    const STATUS_DELIVERY_AT_PONT = 'Livré en point relais';
+    CONST STATUS_DELIVERED = 'Livré';
 
     /**
      * @var \DateTime|null
@@ -54,14 +59,23 @@ class Order extends AbstractEntity implements UpdatableInterface
     /**
      * @var OrderProductLine[]|Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderProductLine", mappedBy="order", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\OrderProductLine", mappedBy="order", cascade={"persist", "remove"}, orphanRemoval=TRUE)
      */
     protected $lines;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $orderNumber;
 
     public function __construct()
     {
         $this->orderAt = new DateTime();
         $this->lines = new ArrayCollection();
+        $this->orderNumber = UuidGenerator::generate();
+        $this->status = self::STATUS_IN_PROGRESS;
         parent::__construct();
     }
 
@@ -132,5 +146,33 @@ class Order extends AbstractEntity implements UpdatableInterface
     public function removeLine(OrderProductLine $line): void
     {
         $this->lines->removeElement($line);
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderNumber(): string
+    {
+        return $this->orderNumber;
+    }
+
+    public function countProducts(): int
+    {
+        $cpt = 0;
+        foreach ($this->lines as $line) {
+            $cpt += $line->getQuantity();
+        }
+
+        return $cpt;
+    }
+
+    public function countAmountOrder()
+    {
+        $amount = 0;
+        foreach ($this->lines as $line) {
+            $amount += $line->getTvaRate() > 0 ? $line->getTvaRate() * $line->getAmount() : $line->getAmount();
+        }
+
+        return sprintf('%s €', $amount);
     }
 }

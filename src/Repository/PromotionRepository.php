@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
+use App\Domain\Common\Helpers\DateGenerator;
+use App\Entity\Product;
 use App\Entity\Promotion;
 
 /**
@@ -44,6 +46,23 @@ class PromotionRepository extends AbstractServiceRepository
         }
 
         return false;
+    }
+
+    public function findActivePromoByProduct(Product $product)
+    {
+        return $this->createQueryBuilder('p')
+                   ->join('p.typePromotion', 'tp')
+                   ->where('p.startAt >= :now')
+                   ->andWhere('p.endAt <= :now')
+                   ->andWhere('p.product = :product')
+                   ->setParameters(
+                       [
+                           'now' => DateGenerator::generateCurrentDate(),
+                           'product' => $product,
+                       ]
+                   )
+                   ->getQuery()
+                   ->getOneOrNullResult();
     }
 
     protected function getClassEntityName(): string

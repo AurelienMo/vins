@@ -38,28 +38,11 @@ class AddStockEntryType extends AbstractType
             IntegerType::class,
             [
                 'label' => 'Quantité',
-//                'disabled' => !is_null($data) ? true : false,
                 'attr' => [
                     'class' => 'col-6 mt-1',
                 ],
             ]
         );
-//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-//            $form = $event->getForm();
-//            $data = $event->getData();
-//            $form->add(
-//                'quantity',
-//                IntegerType::class,
-//                [
-//                    'label' => 'Quantité',
-//                    'disabled' => !is_null($data) ? true : false,
-//                    'attr' => [
-//                        'class' => 'col-6 mt-1',
-//                    ],
-//                ]
-//            );
-//        });
-//
     }
 
     public function configureOptions(OptionsResolver $resolver)

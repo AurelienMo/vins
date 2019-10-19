@@ -58,6 +58,13 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
     protected $amount;
 
     /**
+     * @var float|null
+     *
+     * @ORM\Column(type="float")
+     */
+    protected $tvaRate;
+
+    /**
      * @return int|null
      */
     public function getQuantity(): ?int
@@ -119,5 +126,21 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
     public function setAmount(?float $amount): void
     {
         $this->amount = $amount;
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getTvaRate(): ?float
+    {
+        return $this->tvaRate;
+    }
+
+    /**
+     * @param float|null $tvaRate
+     */
+    public function setTvaRate(?float $tvaRate): void
+    {
+        $this->tvaRate = $tvaRate;
     }
 }

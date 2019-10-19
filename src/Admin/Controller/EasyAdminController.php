@@ -14,8 +14,11 @@ declare(strict_types=1);
 namespace App\Admin\Controller;
 
 use AlterPHP\EasyAdminExtensionBundle\Controller\EasyAdminController as AdminController;
+use App\Domain\Common\Helpers\BillGenerator;
+use App\Domain\Common\Helpers\PromotionCalculate;
 use App\Entity\Interfaces\Sluggable;
 use App\Entity\Interfaces\UpdatableInterface;
+use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\Stock;
 use DateTime;
@@ -27,6 +30,20 @@ use Symfony\Component\PropertyAccess\PropertyAccessor;
  */
 class EasyAdminController extends AdminController
 {
+    /** @var BillGenerator */
+    protected $billGenerator;
+
+    /** @var PromotionCalculate */
+    protected $promotionCalculate;
+
+    public function __construct(
+        BillGenerator $billGenerator,
+        PromotionCalculate $promotionCalculate
+    ) {
+        $this->billGenerator = $billGenerator;
+        $this->promotionCalculate = $promotionCalculate;
+    }
+
     public function persistEntity($entity)
     {
         $reflectClass = new ReflectionClass($entity);
@@ -42,6 +59,10 @@ class EasyAdminController extends AdminController
         }
         if ($entity instanceof Product) {
             $entity->setStock(new Stock());
+        }
+
+        if ($entity instanceof Order) {
+            $this->processOrder($entity);
         }
 
         parent::persistEntity($entity);
@@ -63,7 +84,25 @@ class EasyAdminController extends AdminController
         if ($entity instanceof UpdatableInterface) {
             $entity->setUpdatedAt(new DateTime());
         }
+        if ($entity instanceof Order) {
+            $this->processOrder($entity);
+        }
 
         parent::updateEntity($entity);
+    }
+
+    private function processOrder(Order $entity)
+    {
+        if (is_null($entity->getBillNumber())) {
+            $entity->setBillNumber($this->billGenerator->generateBillNumber($entity));
+        }
+        foreach ($entity->getLines() as $line) {
+            //TODO Obtenir Taux TVA sur le produit
+            $line->setTvaRate(0.0);
+            $line->setAmount(
+                $this->promotionCalculate->calculatePricePromotion($line->getWine()) * $line->getQuantity()
+            );
+            $line->setUpdatedAt(new DateTime());
+        }
     }
 }
