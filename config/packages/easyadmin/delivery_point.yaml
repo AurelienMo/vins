@@ -1,0 +1,51 @@
+easy_admin:
+    entities:
+        DeliveryPoint:
+            templates:
+                edit: 'bundles/EasyAdminBundle/edit.html.twig'
+                new: 'bundles/EasyAdminBundle/new.html.twig'
+            class: App\Entity\DeliveryPoint
+            list:
+                title: 'Liste des points de livraisons'
+                fields:
+                    - property: name
+                      label: 'Nom du point de livraison'
+                    - property: address.streetNumber
+                      label: 'Numéro de rue'
+                    - property: address.streetName
+                      label: 'Nom de la rue'
+                    - property: address.complement
+                      label: "Complément d'adresse"
+                    - property: address.zipCode
+                      label: 'Code postal'
+                    - property: address.city
+                      label: 'Ville'
+                    - property: address.country
+                      label: 'Pays'
+            form:
+                title: 'Nouveau point de livraison'
+                fields:
+#                    - type: 'group'
+#                      label: 'Informations'
+                    - property: name
+                      label: 'Nom du point de livraison'
+                      type: 'text'
+                    - property: address.streetNumber
+                      label: 'Numéro de rue'
+                      type: 'text'
+                    - property: address.streetName
+                      label: 'Nom de la rue'
+                      type: 'text'
+                    - property: address.complement
+                      label: "Complément d'adresse"
+                      type: 'text'
+                    - property: address.zipCode
+                      label: 'Code postal'
+                      type: 'text'
+                    - property: address.city
+                      label: 'Ville'
+                      type: 'text'
+                    - property: address.country
+                      label: 'Pays'
+                      type: 'text'
+

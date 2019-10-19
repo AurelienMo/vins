@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Admin\Forms;
 
 use App\Entity\StockEntry;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\EasyAdminFormType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -42,11 +43,8 @@ class AddStockEntryType extends AbstractType
                     'label' => 'Quantité',
                     'disabled' => !is_null($data) ? true : false,
                     'attr' => [
-                        'class' => 'col-6',
+                        'class' => 'col-6 mt-1',
                     ],
-                    'label_attr' => [
-                        'class' => 'col-6',
-                    ]
                 ]
             );
             if (!is_null($data)) {
@@ -60,11 +58,8 @@ class AddStockEntryType extends AbstractType
                             'disabled' => true,
                             'label' => 'Date opération',
                             'attr' => [
-                                'class' => 'col-6',
+                                'class' => 'col-6 mt-1',
                             ],
-                            'label_attr' => [
-                                'class' => 'col-6',
-                            ]
                         ]
                     )
                 ;

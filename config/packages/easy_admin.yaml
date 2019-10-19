@@ -23,7 +23,11 @@ easy_admin:
             - entity: 'Stock'
               label: 'Stock'
               icon: 'pallet'
-        assets:
+            - entity: 'DeliveryPoint'
+              label: 'Points de livraison'
+              icon: 'truck'
+        form_theme:
+            - 'bundles/EasyAdminBundle/layout.html.twig'
     site_name: 'Mon Premier Sommelier'
     formats:
         number: '%0.2f'

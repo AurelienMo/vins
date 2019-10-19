@@ -1,0 +1,81 @@
+{% extends 'bundles/EasyAdminBundle/layout.html.twig' %}
+
+{% block easyadmin_widget_groups %}
+    {% for group_name, group_config in easyadmin_form_groups|filter(group_config => not group_config.form_tab or group_config.form_tab == tab_name) %}
+        <div class="field-group col-{{ group_config.columns|default('6') }} {{ group_config.css_class|default('') }}  justify-content-center">
+            <fieldset>
+                {% if group_config.label|default(false) or group_config.icon|default(false) or group_config.collapsible|default(false) %}
+                    <legend class="{{ group_config.icon|default(false) ? 'with-icon' }}">
+                        {% if group_config.icon|default(false) %}
+                            <i class="fa fa-fw fa-{{ group_config.icon }}"></i>
+                        {% endif %}
+                        {{ group_config.label|trans(domain = _translation_domain)|raw }}
+                    </legend>
+
+                    {% if group_config.help|default(false) %}
+                        <div class="legend-help">{{ group_config.help|trans(domain = _translation_domain)|raw }}</div>
+                    {% endif %}
+                {% endif %}
+
+                <div class="row">
+                    {% for field in form|filter(field => 'hidden' not in field.vars.block_prefixes and field.vars.easyadmin.form_group == group_name) %}
+                        {% if not field.vars.easyadmin.form_tab or field.vars.easyadmin.form_tab == tab_name %}
+                            <div class="col-{{ field.vars.easyadmin.field.columns|default('6') }} {{ field.vars.easyadmin.field.css_class|default('') }} justify-content-center">
+                                {{ form_row(field) }}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </fieldset>
+        </div>
+    {% else %}
+        {% for field in form|filter(field => 'hidden' not in field.vars.block_prefixes and (not field.vars.easyadmin.form_tab or field.vars.easyadmin.form_tab == tab_name)) %}
+            <div class="col-{{ field.vars.easyadmin.field.columns|default('6') }} {{ field.vars.easyadmin.field.css_class|default('') }} justify-content-center">
+                {{ form_row(field) }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock easyadmin_widget_groups %}
+
+{% block form_row -%}
+    {% set _field_type = easyadmin.field.fieldType|default('default') %}
+    <div class="form-group align-items-stretch d-flex flex-column {% if (not compound or force_error|default(false)) and not valid %}has-error{% endif %} field-{{ block_prefixes|slice(-2)|first }}">
+        {{- form_label(form) -}}
+        <div class="mt-2 p-0 form-widget">
+            {% set has_prepend_html = easyadmin.field.prepend_html|default(null) is not null %}
+            {% set has_append_html = easyadmin.field.append_html|default(null) is not null %}
+            {% set has_input_groups = has_prepend_html or has_append_html %}
+
+            {% if has_input_groups %}<div class="input-group">{% endif %}
+                {% if has_prepend_html %}
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">{{ easyadmin.field.prepend_html|raw }}</span>
+                    </div>
+                {% endif %}
+
+                {{- form_widget(form) -}}
+
+                {% if has_append_html %}
+                    <div class="input-group-append">
+                        <span class="input-group-text">{{ easyadmin.field.append_html|raw }}</span>
+                    </div>
+                {% endif %}
+                {% if has_input_groups %}</div>{% endif %}
+
+            {% if _field_type in ['datetime', 'datetime_immutable', 'date', 'date_immutable', 'dateinterval', 'time', 'time_immutable', 'birthday'] and easyadmin.field.nullable|default(false) %}
+                <div class="nullable-control">
+                    <label>
+                        <input type="checkbox" {% if data is null %}checked="checked"{% endif %}>
+                        {{ 'label.nullable_field'|trans({}, 'EasyAdminBundle')}}
+                    </label>
+                </div>
+            {% endif %}
+
+            {% if easyadmin.field.help|default(form.vars.help) != '' %}
+                <small class="form-help">{{ easyadmin.field.help|default(form.vars.help)|trans(domain = form.vars.translation_domain)|raw }}</small>
+            {% endif %}
+
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock form_row %}

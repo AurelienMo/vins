@@ -4,7 +4,7 @@ easy_admin:
             templates:
                 edit: 'bundles/EasyAdminBundle/Stock/edit.html.twig'
             class: App\Entity\Stock
-            disabled_actions: ['new', 'remove']
+            disabled_actions: ['new', 'delete']
             list:
                 title: 'Liste des stocks produits'
                 fields:
@@ -17,11 +17,10 @@ easy_admin:
                       label: 'Date de mise à jour'
             form:
                 fields:
-                    - type: 'group'
-                      label: 'Ajouter stock'
                     - property: stockEntries
-                      label: 'Mouvements'
+                      label: false
                       type: 'collection'
+                      css_class: 'col-12'
                       type_options:
                           entry_type: App\Admin\Forms\AddStockEntryType
                           allow_delete: true
