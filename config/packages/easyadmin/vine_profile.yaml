@@ -3,7 +3,7 @@ easy_admin:
         VineProfile:
             class: App\Entity\VineProfile
             templates:
-                list: 'admin/VineProfile/list.html.twig'
+                list: 'bundles/EasyAdminBundle/VineProfile/list.html.twig'
             list:
                 title: 'Liste des profils de vins'
                 fields:
@@ -11,7 +11,7 @@ easy_admin:
                       label: 'Nom'
                     - property: color
                       label: 'Couleur du profil'
-            form:
+            new:
                 fields:
                     - property: 'name'
                       type: 'text'
@@ -19,3 +19,14 @@ easy_admin:
                     - property: 'color'
                       type: 'color'
                       label: 'Couleur du profil'
+                      type_options:
+                          data: '#ffffff'
+            edit:
+                fields:
+                    - property: 'name'
+                      type: 'text'
+                      label: 'Nom'
+                    - property: 'color'
+                      type: 'color'
+                      label: 'Couleur du profil'
+
