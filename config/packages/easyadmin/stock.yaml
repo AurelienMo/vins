@@ -7,6 +7,11 @@ easy_admin:
             disabled_actions: ['new', 'delete']
             list:
                 title: 'Liste des stocks produits'
+                form_filters:
+                    - property: wine
+                      label: 'Vins'
+                    - { name: lowerThan, property: quantity, label: 'Stock <', operator: lt }
+                    - { name: greaterOrEqualThan, property: quantity, label: 'Stock >=', operator: gte }
                 fields:
                     - property: wine
                       label: 'Vin'

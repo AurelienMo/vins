@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Admin\Traits\ValueListTrait;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,6 +29,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Stock extends AbstractEntity implements UpdatableInterface
 {
     use TimeStampableTrait;
+    use ValueListTrait;
 
     /**
      * @var int
@@ -119,5 +121,10 @@ class Stock extends AbstractEntity implements UpdatableInterface
     {
         $this->updateQuantity($entry, 'remove');
         $this->stockEntries->removeElement($entry);
+    }
+
+    public function getDomain(): WineDomain
+    {
+        return $this->wine->getDomain();
     }
 }

@@ -17,6 +17,11 @@ easy_admin:
     user:
         name_property_path: 'fullName'
     design:
+        assets:
+            css:
+                - 'bundles/easyadmin/bootstrap-all.css'
+            js:
+                - 'bundles/easyadmin/bootstrap-all.js'
         menu:
             - label: 'Gestion des vins'
             - entity: 'Product'
