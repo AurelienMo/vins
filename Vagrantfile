@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
   #config.vm.synced_folder "/Volumes/Stockage/PersonalProject/vins", "/var/www/html/config", type: 'sshfs', reverse: true
   config.vm.hostname = "vins"
   config.vm.provider "virtualbox" do |vb|
-    vb.memory = "3072"
+    vb.memory = "4096"
     vb.cpus = "2"
   end
   config.ssh.forward_agent = true

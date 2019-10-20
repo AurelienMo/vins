@@ -52,8 +52,8 @@ class PromotionRepository extends AbstractServiceRepository
     {
         return $this->createQueryBuilder('p')
                    ->join('p.typePromotion', 'tp')
-                   ->where('p.startAt >= :now')
-                   ->andWhere('p.endAt <= :now')
+                   ->where('p.startAt <= :now')
+                   ->andWhere('p.endAt >= :now')
                    ->andWhere('p.product = :product')
                    ->setParameters(
                        [

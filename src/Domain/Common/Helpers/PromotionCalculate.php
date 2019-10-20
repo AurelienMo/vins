@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Common\Helpers;
 
+use App\Entity\OrderProductLine;
 use App\Entity\Product;
 use App\Entity\Promotion;
 use App\Entity\TypePromotion;
@@ -37,17 +38,27 @@ class PromotionCalculate
         $this->promoRepo = $promoRepo;
     }
 
-    public function calculatePricePromotion(Product $product): float
+    public function calculatePricePromotion(OrderProductLine $line): float
     {
         /** @var Promotion|null $promo */
-        $promo = $this->promoRepo->findActivePromoByProduct($product);
+        $promo = $this->promoRepo->findActivePromoByProduct($line->getWine());
 
         if (is_null($promo)) {
-            return $product->getPrice();
+            return $line->getWine()->getPrice() * $line->getQuantity();
         }
 
-        return (float) $promo->getTypePromotion()->getName() === TypePromotion::TYPE_AMOUNT ?
-            $product->getPrice() - $promo->getValue() :
-            $product->getPrice() - ($product->getPrice() * $promo->getValue() / 100);
+        $promoName = $promo->getTypePromotion()->getName();
+        $product = $line->getWine();
+
+        $amount = 0;
+        for ($i = 0; $i < $line->getQuantity(); $i++) {
+            $result = $promoName === TypePromotion::TYPE_AMOUNT ?
+                $product->getPrice() - $promo->getValue() :
+                $product->getPrice() - ($product->getPrice() * $promo->getValue() / 100);
+
+            $amount += $result;
+        }
+
+        return $amount;
     }
 }

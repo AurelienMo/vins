@@ -6,6 +6,8 @@ easy_admin:
                 edit: 'bundles/EasyAdminBundle/Product/edit.html.twig'
             list:
                 form_filters:
+                    - property: active
+                      label: 'Produit actif'
                     - property: typeProduct
                       label: 'Type'
                     - property: domain
@@ -14,6 +16,8 @@ easy_admin:
                       label: 'Profil'
                 title: 'Liste des produits'
                 fields:
+                    - property: active
+                      label: 'Actif ?'
                     - property: profile
                       label: 'Profil'
                     - property: domain
@@ -60,6 +64,9 @@ easy_admin:
                     - property: price
                       type: number
                       label: 'Prix unitaire'
+                    - property: tvaRate
+                      type: number
+                      label: '% TVA'
                     - type: 'group'
                       label: 'Informations vin'
                       columns: 4

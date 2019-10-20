@@ -41,8 +41,8 @@ class Stock extends AbstractEntity implements UpdatableInterface
     /**
      * @var Product
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Product", inversedBy="stock")
-     * @ORM\JoinColumn(name="amo_wine_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="App\Entity\Product", inversedBy="stock", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(name="amo_wine_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $wine;
 
@@ -93,6 +93,11 @@ class Stock extends AbstractEntity implements UpdatableInterface
                 $this->quantity -= $entry->getQuantity();
                 break;
         }
+    }
+
+    public function updateQuantityAfterOrder(int $quantity)
+    {
+        $this->quantity -= $quantity;
     }
 
     public function __toString()

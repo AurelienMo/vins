@@ -61,4 +61,9 @@ class DeliveryPoint extends AbstractEntity implements UpdatableInterface, Slugga
     {
         $this->address = $address;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }

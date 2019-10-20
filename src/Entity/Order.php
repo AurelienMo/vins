@@ -70,12 +70,21 @@ class Order extends AbstractEntity implements UpdatableInterface
      */
     protected $orderNumber;
 
+    /**
+     * @var Delivery|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Delivery", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="amo_delivery_id", referencedColumnName="id", nullable=true)
+     */
+    protected $delivery;
+
     public function __construct()
     {
         $this->orderAt = new DateTime();
         $this->lines = new ArrayCollection();
         $this->orderNumber = UuidGenerator::generate();
         $this->status = self::STATUS_IN_PROGRESS;
+        $this->delivery = new Delivery();
         parent::__construct();
     }
 
@@ -174,5 +183,21 @@ class Order extends AbstractEntity implements UpdatableInterface
         }
 
         return sprintf('%s €', $amount);
+    }
+
+    /**
+     * @return Delivery|null
+     */
+    public function getDelivery(): ?Delivery
+    {
+        return $this->delivery;
+    }
+
+    /**
+     * @param Delivery|null $delivery
+     */
+    public function setDelivery(?Delivery $delivery): void
+    {
+        $this->delivery = $delivery;
     }
 }

@@ -107,16 +107,31 @@ class Product extends AbstractEntity implements UpdatableInterface
     /**
      * @var Stock
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Stock", mappedBy="wine", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="amo_stock_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="App\Entity\Stock", mappedBy="wine", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(name="amo_stock_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $stock;
+
+    /**
+     * @var float|null
+     *
+     * @ORM\Column(type="float")
+     */
+    protected $tvaRate;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $active;
 
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
         $this->wineCaract = new WineCaract();
         $this->wineService = new WineService();
+        $this->active = false;
         parent::__construct();
     }
 
@@ -299,6 +314,38 @@ class Product extends AbstractEntity implements UpdatableInterface
     {
         $this->stock = $stock;
         $stock->setWine($this);
+    }
+
+    /**
+     * @return float|null
+     */
+    public function getTvaRate(): ?float
+    {
+        return $this->tvaRate;
+    }
+
+    /**
+     * @param float|null $tvaRate
+     */
+    public function setTvaRate(?float $tvaRate): void
+    {
+        $this->tvaRate = $tvaRate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     */
+    public function setActive(bool $active): void
+    {
+        $this->active = $active;
     }
 
     public function __toString()

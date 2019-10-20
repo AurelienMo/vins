@@ -30,6 +30,16 @@ easy_admin:
                           allow_delete: true
                           allow_add: true
                           by_reference: false
+                    - property: delivery.deliveryType
+                      label: 'Type de livraison'
+                      type: entity
+                      type_options:
+                          class: App\Entity\DeliveryType
+                    - property: delivery.deliveryPoint
+                      type: entity
+                      label: 'Point relais'
+                      type_options:
+                          class: App\Entity\DeliveryPoint
 #                    - property: domain
 #                      label: 'Domaine'
 #                      type: 'easyadmin_autocomplete'

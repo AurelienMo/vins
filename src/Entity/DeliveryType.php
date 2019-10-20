@@ -51,4 +51,9 @@ class DeliveryType extends AbstractEntity implements UpdatableInterface
     {
         $this->price = $price;
     }
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
