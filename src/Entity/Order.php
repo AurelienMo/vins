@@ -31,23 +31,12 @@ class Order extends AbstractEntity implements UpdatableInterface
 {
     use TimeStampableTrait;
 
-    const STATUS_IN_PROGRESS = 'En préparation';
-    const STATUS_DELIVERY_AT_PONT = 'Livré en point relais';
-    CONST STATUS_DELIVERED = 'Livré';
-
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(type="datetime")
      */
     protected $orderAt;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string")
-     */
-    protected $status;
 
     /**
      * @var string|null
@@ -102,22 +91,6 @@ class Order extends AbstractEntity implements UpdatableInterface
     public function setOrderAt(?DateTime $orderAt): void
     {
         $this->orderAt = $orderAt;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getStatus(): ?string
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param string|null $status
-     */
-    public function setStatus(?string $status): void
-    {
-        $this->status = $status;
     }
 
     /**
@@ -199,5 +172,10 @@ class Order extends AbstractEntity implements UpdatableInterface
     public function setDelivery(?Delivery $delivery): void
     {
         $this->delivery = $delivery;
+    }
+
+    public function getStatus(): string
+    {
+        return $this->delivery->getStatus();
     }
 }

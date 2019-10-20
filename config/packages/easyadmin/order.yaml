@@ -30,6 +30,11 @@ easy_admin:
                           allow_delete: true
                           allow_add: true
                           by_reference: false
+                    - property: delivery.status
+                      label: 'Status'
+                      type: choice
+                      type_options:
+                          choices: {'Livraison en cours': 'Livraison en cours', 'Livré en point relais': 'Livré en point relais', "Livré à l'adresse": "Livré à l'adresse"}
                     - property: delivery.deliveryType
                       label: 'Type de livraison'
                       type: entity
