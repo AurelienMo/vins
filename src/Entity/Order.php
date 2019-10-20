@@ -67,6 +67,14 @@ class Order extends AbstractEntity implements UpdatableInterface
      */
     protected $delivery;
 
+    /**
+     * @var Customer|null
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Customer", inversedBy="order", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="amo_customer_id", referencedColumnName="id")
+     */
+    protected $customer;
+
     public function __construct()
     {
         $this->orderAt = new DateTime();
@@ -176,5 +184,22 @@ class Order extends AbstractEntity implements UpdatableInterface
     public function getStatus(): string
     {
         return $this->delivery->getStatus();
+    }
+
+    /**
+     * @return Customer|null
+     */
+    public function getCustomer(): ?Customer
+    {
+        return $this->customer;
+    }
+
+    /**
+     * @param Customer|null $customer
+     */
+    public function setCustomer(?Customer $customer): void
+    {
+        $this->customer = $customer;
+        $customer->setOrder($this);
     }
 }
