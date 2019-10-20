@@ -1,0 +1,12 @@
+{% extends 'bundles/EasyAdminBundle/new.html.twig'%}
+
+{% block main %}
+    {% block entity_form %}
+        {% form_theme form 'bundles/forms/_order.html.twig' %}
+        {{ form(form) }}
+    {% endblock entity_form %}
+{% endblock %}
+
+{% block body_javascript %}
+{{ encore_entry_script_tags('order_admin') }}
+{% endblock %}

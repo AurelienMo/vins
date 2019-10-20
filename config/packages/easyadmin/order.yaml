@@ -1,6 +1,9 @@
 easy_admin:
     entities:
         Order:
+            templates:
+                new: 'bundles/EasyAdminBundle/Order/new.html.twig'
+                edit: 'bundles/EasyAdminBundle/Order/new.html.twig'
             class: App\Entity\Order
             list:
                 title: 'Liste des commandes'
@@ -20,8 +23,11 @@ easy_admin:
                       label: 'Nbre de bouteilles'
                     - property: orderAt
                       label: 'Date commande'
-            form:
+            new:
                 fields:
+                    - type: 'group'
+                      label: 'Produits'
+                      columns: 6
                     - property: lines
                       label: false
                       type: 'collection'
@@ -30,6 +36,10 @@ easy_admin:
                           allow_delete: true
                           allow_add: true
                           by_reference: false
+                      columns: 12
+                    - type: 'group'
+                      label: 'Livraison'
+                      columns: 6
                     - property: delivery.status
                       label: 'Status'
                       type: choice
@@ -43,100 +53,56 @@ easy_admin:
                     - property: delivery.deliveryPoint
                       type: entity
                       label: 'Point relais'
+                      attr:
+                          class: 'delivery-point hidden'
                       type_options:
                           class: App\Entity\DeliveryPoint
-#                    - property: domain
-#                      label: 'Domaine'
-#                      type: 'easyadmin_autocomplete'
-#                      type_options:
-#                          attr:
-#                              create: true
-#                    - property: vintageName
-#                      label: 'Nom de la cuvée'
-#                      type: 'text'
-#                    - property: year
-#                      type: 'text'
-#                      label: 'Année'
-#                    - property: appellation
-#                      type: 'text'
-#                      label: 'Appellation'
-#                    - { property: 'typeProduct', label: 'Type de vin', type: 'easyadmin_autocomplete', type_options: { attr: { create: true } } }
-#                    - property: profile
-#                      type: 'easyadmin_autocomplete'
-#                      type_options:
-#                          attr:
-#                              create: true
-#                      label: 'Profil'
-#                    - property: price
-#                      type: number
-#                      label: 'Prix unitaire'
-#                    - type: 'group'
-#                      label: 'Informations vin'
-#                      columns: 4
-#                    - property: wineCaract.powerful
-#                      type: 'integer'
-#                      label: 'Puissant'
-#                    - property: wineCaract.complex
-#                      type: 'integer'
-#                      label: 'Complexe'
-#                    - property: wineCaract.spice
-#                      type: 'integer'
-#                      label: 'Epicé'
-#                    - property: wineCaract.fruity
-#                      type: 'integer'
-#                      label: 'Fruité'
-#                    - property: wineCaract.wooded
-#                      type: 'integer'
-#                      label: 'Boisé'
-#                    - property: wineCaract.tannic
-#                      type: 'integer'
-#                      label: 'Tannique'
-#                    - type: 'group'
-#                      label: 'Service'
-#                      columns: 4
-#                    - property: wineService.temp
-#                      type: 'integer'
-#                      label: 'Température de service'
-#                    - property: wineService.decanting
-#                      type: 'text'
-#                      label: 'Carafage'
-#                    - property: wineService.meat
-#                      type: 'textarea'
-#                      label: 'Viandes'
-#                      type_options:
-#                          attr:
-#                              rows: 2
-#                    - property: wineService.cheese
-#                      type: 'textarea'
-#                      label: 'Fromages'
-#                      type_options:
-#                          attr:
-#                              rows: 2
-#                    - property: wineService.fish
-#                      type: 'textarea'
-#                      label: 'Poissons'
-#                      type_options:
-#                          attr:
-#                              rows: 2
-#                    - property: wineService.vegetable
-#                      type: 'textarea'
-#                      label: 'Légumes'
-#                      type_options:
-#                          attr:
-#                              rows: 2
-#                    - property: wineService.dessert
-#                      type: 'textarea'
-#                      label: 'Desserts'
-#                      type_options:
-#                          attr:
-#                              rows: 2
-#                    - type: 'group'
-#                      label: 'Promotions'
-#                      columns: 12
-#                    - property: promotions
-#                      label: ''
-#                      type: embedded_list
-#                      type_options:
-#                        entity: Promotion
-#                        filters:
-#                            'entity.promotions': 'form:parent.data.id'
+                    - property: delivery.niche
+                      type: entity
+                      label: 'Créneau de livraison'
+                      css_class: 'niche-delivery hidden'
+                      type_options:
+                          class: App\Entity\NicheOfDelivery
+                          query_builder: 'App\Repository\NicheOfDeliveryRepository::listFreeNiche'
+            edit:
+                title: Modification %%entity_label%%
+                fields:
+                    -   type: 'group'
+                        label: 'Produits'
+                        columns: 6
+                    -   property: lines
+                        label: false
+                        type: 'collection'
+                        type_options:
+                            entry_type: App\Admin\Forms\AddOrderLineType
+                            allow_delete: true
+                            allow_add: true
+                            by_reference: false
+                        columns: 12
+                    -   type: 'group'
+                        label: 'Livraison'
+                        columns: 6
+                    -   property: delivery.status
+                        label: 'Status'
+                        type: choice
+                        type_options:
+                            choices: {'Livraison en cours': 'Livraison en cours', 'Livré en point relais': 'Livré en point relais', "Livré à l'adresse": "Livré à l'adresse"}
+                    -   property: delivery.deliveryType
+                        label: 'Type de livraison'
+                        type: entity
+                        type_options:
+                            class: App\Entity\DeliveryType
+                    -   property: delivery.deliveryPoint
+                        type: entity
+                        label: 'Point relais'
+                        attr:
+                            class: 'delivery-point hidden'
+                        type_options:
+                            class: App\Entity\DeliveryPoint
+                    -   property: delivery.niche
+                        type: entity
+                        label: 'Créneau de livraison'
+                        css_class: 'niche-delivery hidden'
+                        type_options:
+                            class: App\Entity\NicheOfDelivery
+                            query_builder: 'App\Repository\NicheOfDeliveryRepository::listFreeNiche'

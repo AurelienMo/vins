@@ -17,7 +17,7 @@ easy_admin:
                       label: 'Vin'
                     - property: quantity
                       label: 'Quantité restante'
-                      type: integer
+                      format: '%d'
                     - property: updatedAt
                       label: 'Date de mise à jour'
             form:

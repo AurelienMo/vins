@@ -72,7 +72,6 @@ class Order extends AbstractEntity implements UpdatableInterface
         $this->orderAt = new DateTime();
         $this->lines = new ArrayCollection();
         $this->orderNumber = UuidGenerator::generate();
-        $this->status = self::STATUS_IN_PROGRESS;
         $this->delivery = new Delivery();
         parent::__construct();
     }

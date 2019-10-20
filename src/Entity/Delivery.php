@@ -62,6 +62,14 @@ class Delivery extends AbstractEntity implements UpdatableInterface
      */
     protected $statusDate;
 
+    /**
+     * @var NicheOfDelivery|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\NicheOfDelivery", inversedBy="deliveries")
+     * @ORM\JoinColumn(name="amo_niche_of_delivery_id", referencedColumnName="id", nullable=true)
+     */
+    protected $niche;
+
     public function __construct()
     {
         $this->status = self::DELIVERY_IN_PROGRESS;
@@ -131,5 +139,21 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public function setStatusDate(DateTime $statusDate): void
     {
         $this->statusDate = $statusDate;
+    }
+
+    /**
+     * @return NicheOfDelivery|null
+     */
+    public function getNiche(): ?NicheOfDelivery
+    {
+        return $this->niche;
+    }
+
+    /**
+     * @param NicheOfDelivery|null $niche
+     */
+    public function setNiche(?NicheOfDelivery $niche): void
+    {
+        $this->niche = $niche;
     }
 }

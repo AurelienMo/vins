@@ -18,10 +18,6 @@ easy_admin:
         name_property_path: 'fullName'
     design:
         assets:
-            css:
-                - 'bundles/easyadmin/bootstrap-all.css'
-            js:
-                - 'bundles/easyadmin/bootstrap-all.js'
         menu:
             - label: 'Gestion des vins'
             - entity: 'Product'
@@ -50,6 +46,9 @@ easy_admin:
             - entity: 'DeliveryType'
               label: 'Type de livraisons'
               icon: 'euro-sign'
+            - entity: 'NicheOfDelivery'
+              label: 'Créneaux de livraison'
+              icon: 'clock'
         form_theme:
             - 'bundles/EasyAdminBundle/layout.html.twig'
     site_name: 'Mon Premier Sommelier'

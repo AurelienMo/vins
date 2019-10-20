@@ -3,7 +3,7 @@ easy_admin:
         DeliveryPoint:
             templates:
                 edit: 'bundles/EasyAdminBundle/DeliveryPoint/edit.html.twig'
-                new: 'bundles/EasyAdminBundle/new.html.twig'
+                new: 'bundles/EasyAdminBundle/DeliveryPoint/new.html.twig'
             class: App\Entity\DeliveryPoint
             list:
                 title: 'Liste des points de livraisons'

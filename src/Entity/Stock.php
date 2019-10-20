@@ -97,7 +97,7 @@ class Stock extends AbstractEntity implements UpdatableInterface
 
     public function updateQuantityAfterOrder(int $quantity)
     {
-        $this->quantity -= $quantity;
+        $this->quantity += $quantity;
     }
 
     public function __toString()

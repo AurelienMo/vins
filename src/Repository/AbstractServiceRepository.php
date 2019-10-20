@@ -46,4 +46,9 @@ abstract class AbstractServiceRepository extends ServiceEntityRepository
     {
         $this->_em->remove($entity);
     }
+
+    public function getEm()
+    {
+        return $this->_em;
+    }
 }
