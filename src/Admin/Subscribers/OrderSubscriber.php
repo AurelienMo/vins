@@ -78,6 +78,7 @@ class OrderSubscriber implements EventSubscriberInterface
 
         if (is_null($entity->getBillNumber())) {
             $entity->setBillNumber($this->billGenerator->generateBillNumber($entity));
+            $entity->getCustomer()->setRgpdAcceptedAt(new DateTime());
         }
         foreach ($entity->getLines() as $line) {
             $product = $line->getWine();

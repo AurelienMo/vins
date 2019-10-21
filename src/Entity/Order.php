@@ -70,7 +70,7 @@ class Order extends AbstractEntity implements UpdatableInterface
     /**
      * @var Customer|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Customer", inversedBy="order", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="amo_customer_id", referencedColumnName="id")
      */
     protected $customer;
@@ -81,6 +81,7 @@ class Order extends AbstractEntity implements UpdatableInterface
         $this->lines = new ArrayCollection();
         $this->orderNumber = UuidGenerator::generate();
         $this->delivery = new Delivery();
+        $this->customer = new Customer();
         parent::__construct();
     }
 
@@ -200,6 +201,5 @@ class Order extends AbstractEntity implements UpdatableInterface
     public function setCustomer(?Customer $customer): void
     {
         $this->customer = $customer;
-        $customer->setOrder($this);
     }
 }

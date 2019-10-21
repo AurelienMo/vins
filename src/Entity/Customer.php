@@ -57,19 +57,18 @@ class Customer extends AbstractEntity implements UpdatableInterface
     protected $address;
 
     /**
+     * @var bool|null
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $rgpdOk;
+
+    /**
      * @var \DateTime|null
      *
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $rgpdAcceptedAt;
-
-    /**
-     * @var Order|null
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Order", mappedBy="customer", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="amo_order_id", referencedColumnName="id")
-     */
-    protected $order;
 
     public function __construct()
     {
@@ -158,18 +157,18 @@ class Customer extends AbstractEntity implements UpdatableInterface
     }
 
     /**
-     * @return Order|null
+     * @return bool|null
      */
-    public function getOrder(): ?Order
+    public function getRgpdOk(): ?bool
     {
-        return $this->order;
+        return $this->rgpdOk;
     }
 
     /**
-     * @param Order|null $order
+     * @param bool|null $rgpdOk
      */
-    public function setOrder(?Order $order): void
+    public function setRgpdOk(?bool $rgpdOk): void
     {
-        $this->order = $order;
+        $this->rgpdOk = $rgpdOk;
     }
 }

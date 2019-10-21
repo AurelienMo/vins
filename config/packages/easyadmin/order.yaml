@@ -27,7 +27,7 @@ easy_admin:
                 fields:
                     - type: 'group'
                       label: 'Produits'
-                      columns: 6
+                      columns: 4
                     - property: lines
                       label: false
                       type: 'collection'
@@ -38,14 +38,62 @@ easy_admin:
                           by_reference: false
                       columns: 12
                     - type: 'group'
+                      label: 'Acheteur'
+                      columns: 4
+                    - type: 'section'
+                      label: 'Civilité'
+                    - property: customer.civility
+                      type: choice
+                      label: null
+                      type_options:
+                          choices: {'Mr': 'Monsieur', 'Mme': 'Madame'}
+                          expanded: true
+                          multiple: false
+                          placeholder: false
+                          attr: { class: 'js-genus-scientists-field' }
+                    - property: customer.firstname
+                      type: text
+                      label: 'Prénom'
+                    - property: customer.lastname
+                      type: text
+                      label: 'Nom'
+                      columns: "6"
+                    - type: 'section'
+                      label: 'Adresse'
+                    - property: customer.address.streetNumber
+                      type: text
+                      label: 'N°'
+                    - property: customer.address.streetName
+                      type: text
+                      label: 'Nom de la rue'
+                    - property: customer.address.complement
+                      type: text
+                      label: "Complément"
+                    - property: customer.address.zipCode
+                      type: text
+                      label: 'CP'
+                    - property: customer.address.city
+                      type: text
+                      label: 'Ville'
+                    - property: customer.address.country
+                      type: country
+                      label: 'Pays'
+                    - property: customer.rgpdOK
+                      label: 'Politique de confidentialité'
+                      type: checkbox
+                      type_options:
+                          required: true
+                    - type: 'group'
                       label: 'Livraison'
-                      columns: 6
+                      columns: 4
                     - property: delivery.status
                       label: 'Status'
                       type: choice
+                      columns: '12'
                       type_options:
                           choices: {'Livraison en cours': 'Livraison en cours', 'Livré en point relais': 'Livré en point relais', "Livré à l'adresse": "Livré à l'adresse"}
                     - property: delivery.deliveryType
+                      columns: '12'
                       label: 'Type de livraison'
                       type: entity
                       type_options:
@@ -53,12 +101,14 @@ easy_admin:
                     - property: delivery.deliveryPoint
                       type: entity
                       label: 'Point relais'
+                      columns: '12'
                       attr:
                           class: 'delivery-point hidden'
                       type_options:
                           class: App\Entity\DeliveryPoint
                     - property: delivery.niche
                       type: entity
+                      columns: '12'
                       label: 'Créneau de livraison'
                       css_class: 'niche-delivery hidden'
                       type_options:
@@ -69,7 +119,7 @@ easy_admin:
                 fields:
                     -   type: 'group'
                         label: 'Produits'
-                        columns: 6
+                        columns: 4
                     -   property: lines
                         label: false
                         type: 'collection'
@@ -80,8 +130,49 @@ easy_admin:
                             by_reference: false
                         columns: 12
                     -   type: 'group'
+                        label: 'Acheteur'
+                        columns: 4
+                    -   type: 'section'
+                        label: 'Civilité'
+                    -   property: customer.civility
+                        type: choice
+                        label: null
+                        type_options:
+                            choices: {'Mr': 'Monsieur', 'Mme': 'Madame'}
+                            expanded: true
+                            multiple: false
+                            placeholder: false
+                            attr: { class: 'js-genus-scientists-field' }
+                    -   property: customer.firstname
+                        type: text
+                        label: 'Prénom'
+                    -   property: customer.lastname
+                        type: text
+                        label: 'Nom'
+                        columns: "6"
+                    -   type: 'section'
+                        label: 'Adresse'
+                    -   property: customer.address.streetNumber
+                        type: text
+                        label: 'N°'
+                    -   property: customer.address.streetName
+                        type: text
+                        label: 'Nom de la rue'
+                    -   property: customer.address.complement
+                        type: text
+                        label: "Complément"
+                    -   property: customer.address.zipCode
+                        type: text
+                        label: 'CP'
+                    -   property: customer.address.city
+                        type: text
+                        label: 'Ville'
+                    -   property: customer.address.country
+                        type: country
+                        label: 'Pays'
+                    -   type: 'group'
                         label: 'Livraison'
-                        columns: 6
+                        columns: 4
                     -   property: delivery.status
                         label: 'Status'
                         type: choice
