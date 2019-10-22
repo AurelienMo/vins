@@ -1,7 +1,7 @@
-export const show = () => {
+export const showLoader = () => {
     document.getElementById('loading-overlay').classList.add('is-active');
 };
 
-export const hide = () => {
+export const hideLoader = () => {
     document.getElementById('loading-overlay').classList.remove('is-active');
 };

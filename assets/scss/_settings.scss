@@ -73,7 +73,7 @@ $foundation-palette: (
         secondary: #767676,
         success: #3adb76,
         warning: #ffae00,
-        alert: #cc4b37,
+        alert: #cc4b37
 );
 $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
@@ -446,7 +446,7 @@ $input-shadow-focus: 0 0 5px $medium-gray;
 $input-cursor-disabled: not-allowed;
 $input-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
 $input-number-spinners: true;
-$input-radius: $global-radius;
+$input-radius: 50px 0px 0px 50px;
 $form-button-radius: $global-radius;
 
 // 21. Label

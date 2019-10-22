@@ -13,7 +13,9 @@ declare(strict_types=1);
 
 namespace App\Actions;
 
+use App\Domain\Search\Resolver;
 use App\Responders\ViewResponder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -23,8 +25,30 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class Homepage
 {
-    public function __invoke(ViewResponder $responder)
+    /** @var Resolver */
+    protected $searchResolver;
+
+    /**
+     * Homepage constructor.
+     *
+     * @param Resolver $searchResolver
+     */
+    public function __construct(
+        Resolver $searchResolver
+    ) {
+        $this->searchResolver = $searchResolver;
+    }
+
+    public function __invoke(Request $request, ViewResponder $responder)
     {
-        return $responder('home/index.html.twig');
+        $formSearch = $this->searchResolver->getSearchType();
+
+
+        return $responder(
+            'home/index.html.twig',
+            [
+                'formSearch' => $formSearch->createView(),
+            ]
+        );
     }
 }

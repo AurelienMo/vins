@@ -29,7 +29,7 @@
             });
         </script>
         <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
         <!-- Insert this within your head tag and after foundation.css -->
@@ -39,33 +39,42 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block header %}
-            <header id="header">
-                <div class="title-bar" data-responsive-toggle="example-animated-menu" data-hide-for="medium">
-                    <button class="menu-icon" type="button" data-toggle></button>
-                    <div class="title-bar-title">Menu</div>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div id="nav-left" class="medium-2" data-sticky-container>
+                    <img src="http://via.placeholder.com/195x100" alt="logo"/>
+                    <ul class="vertical menu text-center margin-top-2">
+                        <li  {% if app.request.attributes.get('_route') == 'homepage' %}class="is-active"{% endif %}>
+                            <a href="{{ path('homepage') }}"><i class="fa fa-home"></i> Accueil</a>
+                        </li>
+                        <li>
+                            <a href="#">Profiles</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-user"></i></a>
+                        </li>
+                    </ul>
                 </div>
-
-                <div class="top-bar" id="example-animated-menu" data-animate="hinge-in-from-top spin-out">
-                    <div class="top-bar-right">
-                        <ul class="menu">
-                            <li><a href="#"><i class="fas fa-home"></i></a></li>
-                            <li><a id="connect" href="{{ path('security_login') }}">Connect</a></li>
-                        </ul>
+                <div id="container-content" class=" cell medium-10">
+                    <div id="breadcrumb" class="grid-x grid-padding-x">
+                        {% block breadcrumb %}
+                        {% endblock %}
+                    </div>
+                    <div id="content">
+                        {% block body %}{% endblock %}
                     </div>
                 </div>
-            </header>
-        {% endblock %}
-        {% block body %}{% endblock %}
+            </div>
+        </div>
         <div id="loading-overlay">
             <div class="loader"></div>
         </div>
         {{ encore_entry_script_tags('app') }}
         {% block javascripts %}{% endblock %}
         {% include 'parts/_modals.html.twig' %}
-        <script type="text/javascript">
-            tarteaucitron.user.googletagmanagerId = 'GTM-KEY';
-            (tarteaucitron.job = tarteaucitron.job || []).push('googletagmanager');
-        </script>
+{#        <script type="text/javascript">#}
+{#            tarteaucitron.user.googletagmanagerId = 'GTM-KEY';#}
+{#            (tarteaucitron.job = tarteaucitron.job || []).push('googletagmanager');#}
+{#        </script>#}
     </body>
 </html>

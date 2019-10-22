@@ -1,9 +1,9 @@
 @import 'settings';
 @import 'mixins';
 @import '~foundation-sites/scss/foundation';
-//@include loadfont('SourceSansPro-Regular', 'Source', 400);
+@import 'colors';
 
-@include foundation-everything;
+@include foundation-everything(true, true);
 
 .logo {
   max-height: 40px;
@@ -65,4 +65,34 @@ label.required::after {
 }
 .wrong {
   border: 1px solid red;
+}
+
+#nav-left {
+  background-color: $white;
+  box-shadow: 13px 0 12px -5px #848484;
+  a:hover {
+    background-color: $redLight;
+  }
+}
+#container-content {
+  display: flex;
+  flex-direction: column;
+  #breadcrumb {
+    height: 80px;
+    background-color: #e1e1e1;
+  }
+  #content {
+    height: calc(100vh - 80px);
+  }
+}
+.w-100 {
+  width: 100%;
+}
+.radius-right-50 {
+  border-radius: 0 50px 50px 0;
+}
+.justify-content-center {
+  //display: flex;
+  //justify-content: center;
+  @include flexDisplay(row, center, center);
 }
