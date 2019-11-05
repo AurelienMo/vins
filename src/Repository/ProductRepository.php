@@ -20,6 +20,16 @@ use App\Entity\Product;
  */
 class ProductRepository extends AbstractServiceRepository
 {
+    public function findPromote(int $limit = 4)
+    {
+        return $this->createQueryBuilder('p')
+                    ->where('p.isPromote = true')
+                    ->andWhere('p.active = true')
+                    ->setMaxResults($limit)
+                    ->getQuery()
+                    ->getResult();
+    }
+
     protected function getClassEntityName(): string
     {
         return Product::class;

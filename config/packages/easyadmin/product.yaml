@@ -18,6 +18,8 @@ easy_admin:
                 fields:
                     - property: active
                       label: 'Actif ?'
+                    - property: isPromote
+                      label: 'Mis en avant'
                     - property: profile
                       label: 'Profil'
                     - property: domain

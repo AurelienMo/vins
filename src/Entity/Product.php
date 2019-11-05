@@ -126,12 +126,20 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $active;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(type="boolean")
+     */
+    protected $isPromote;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
         $this->wineCaract = new WineCaract();
         $this->wineService = new WineService();
         $this->active = false;
+        $this->isPromote = false;
         parent::__construct();
     }
 
@@ -346,6 +354,22 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setActive(bool $active): void
     {
         $this->active = $active;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isPromote(): bool
+    {
+        return $this->isPromote;
+    }
+
+    /**
+     * @param bool $isPromote
+     */
+    public function setIsPromote(bool $isPromote): void
+    {
+        $this->isPromote = $isPromote;
     }
 
     public function __toString()
