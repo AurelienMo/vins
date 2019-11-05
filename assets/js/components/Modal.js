@@ -1,8 +1,10 @@
 import $ from "jquery";
 import AbstractComponent from "./AbstractComponent";
 
+export const BOTTOM_MODAL = 'bottom-modal';
+
 export default class Modal extends AbstractComponent {
-    basicModal;
+    bottomModal;
 
     constructor() {
         super();
@@ -10,21 +12,21 @@ export default class Modal extends AbstractComponent {
     }
 
     onLoad() {
-        this.basicModal = document.getElementById('basic-modal');
+        this.bottomModal = document.getElementById('bottom-modal');
     }
 
     toggle = (id) => {
         switch (id) {
-            case 'basic-modal':
-                $(this.basicModal).foundation('toggle');
+            case 'bottom-modal':
+                $(this.bottomModal).modal('show');
                 break;
         }
-    }
+    };
 
     html = (id, html) => {
         switch (id) {
-            case 'basic-modal':
-                $(this.basicModal).find('.content-modal').html(html);
+            case 'bottom-modal':
+                $(this.bottomModal).find('.modal-content').html(html);
                 break
         }
     }

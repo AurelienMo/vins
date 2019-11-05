@@ -1,98 +1,13 @@
-@import 'settings';
+@import 'custom';
 @import 'mixins';
-@import '~foundation-sites/scss/foundation';
-@import 'colors';
-
-@include foundation-everything(true, true);
+@import "~bootstrap/scss/bootstrap";
+@import "./components/loader";
+@import './components/_modal';
 
 .logo {
   max-height: 40px;
 }
-@-webkit-keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-@-moz-keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-@-o-keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-#loading-overlay {
-  transition: background-color 0.5s 0s ease-out;
-  background: rgba($medium-gray, 0);
-  @include flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999;
-  opacity: 0;
-  pointer-events: none;
 
-  &.is-active {
-    background-color: rgba($medium-gray, 0.55);
-    pointer-events: auto;
-    opacity: 1;
-  }
-
-  .loader {
-    border: 4px solid rgba(255, 255, 255, 0.7);
-    border-top: 4px solid get-color(primary);
-    border-radius: 50%;
-    width: 55px;
-    height: 55px;
-    -webkit-animation: spin 1.4s linear infinite;
-    -moz-animation: spin 1.4s linear infinite;
-    -ms-animation: spin 1.4s linear infinite;
-    -o-animation: spin 1.4s linear infinite;
-    animation: spin 1.4s linear infinite;
-  }
-}
 label.required::after {
   content: " *"
-}
-.wrong {
-  border: 1px solid red;
-}
-
-#nav-left {
-  background-color: $white;
-  box-shadow: 13px 0 12px -5px #848484;
-  a:hover {
-    background-color: $redLight;
-  }
-}
-#container-content {
-  display: flex;
-  flex-direction: column;
-  #breadcrumb {
-    height: 80px;
-    background-color: #e1e1e1;
-  }
-  #content {
-    height: calc(100vh - 80px);
-  }
-}
-.w-100 {
-  width: 100%;
-}
-.radius-right-50 {
-  border-radius: 0 50px 50px 0;
-}
-.justify-content-center {
-  //display: flex;
-  //justify-content: center;
-  @include flexDisplay(row, center, center);
 }

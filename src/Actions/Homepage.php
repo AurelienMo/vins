@@ -17,6 +17,7 @@ use App\Domain\Search\Resolver;
 use App\Responders\ViewResponder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Domain\Wine\Resolver as WineResolver;
 
 /**
  * Class Homepage
@@ -28,26 +29,33 @@ class Homepage
     /** @var Resolver */
     protected $searchResolver;
 
+    /** @var WineResolver */
+    protected $wineResolver;
+
     /**
      * Homepage constructor.
      *
-     * @param Resolver $searchResolver
+     * @param Resolver     $searchResolver
+     * @param WineResolver $wineResolver
      */
     public function __construct(
-        Resolver $searchResolver
+        Resolver $searchResolver,
+        WineResolver $wineResolver
     ) {
         $this->searchResolver = $searchResolver;
+        $this->wineResolver = $wineResolver;
     }
 
     public function __invoke(Request $request, ViewResponder $responder)
     {
         $formSearch = $this->searchResolver->getSearchType();
 
-
         return $responder(
             'home/index.html.twig',
             [
                 'formSearch' => $formSearch->createView(),
+                'promotes' => $this->wineResolver->findPromote(),
+                'wines' => $this->wineResolver->findAllProducts(),
             ]
         );
     }

@@ -1,9 +1,9 @@
-import $ from "jquery";
-import Loader from "./Loader";
-import APIResolver from "./APIResolver";
+import Modal from "./Modal";
 
 export default class AbstractComponent {
+    modal: Modal;
+
     constructor() {
-        $(document).foundation();
-    };
+        this.modal = new Modal();
+    }
 }

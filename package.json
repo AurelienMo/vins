@@ -29,7 +29,9 @@
     },
     "dependencies": {
         "@hapi/joi": "^16.1.7",
+        "bootstrap": "^4.3.1",
         "export-loader": "^1.0.52",
+        "popper.js": "^1.16.0",
         "tarteaucitronjs": "^1.2.0"
     }
 }

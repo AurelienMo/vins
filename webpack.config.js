@@ -60,7 +60,7 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader(function(options) {
-        options.includePaths = [path.resolve(__dirname, "node_modules/foundation-sites/scss")]
+        options.includePaths = [path.resolve(__dirname, "node_modules/bootstrap/scss")]
     })
 
     // uncomment if you use TypeScript
