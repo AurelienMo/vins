@@ -120,6 +120,11 @@ class OrderSubscriber implements EventSubscriberInterface
             return;
         }
 
+//        $delivery = $entity->getDelivery();
+//        $entity->getDelivery()->setOrder(null);
+//        $this->orderProductLineRepo->remove()
+//        $this->orderProductLineRepo->flush($);
+
         foreach ($entity->getLines() as $line) {
             StockUpdater::updateStockAfterOrder($line->getWine(), $line->getQuantity());
         }
@@ -141,21 +146,18 @@ class OrderSubscriber implements EventSubscriberInterface
         $delivery = $entity->getDelivery();
         switch ($delivery->getDeliveryType()) {
             case "A l'adresse":
-                if ($type === 'update') {
-                    if (!is_null($delivery->getDeliveryPoint())) {
-                        $delivery->getNiche()->setNumberNiche($delivery->getNiche()->getNumberNiche() - 1);
-                        $delivery->setDeliveryPoint(null);
-                    }
+                if (!is_null($delivery->getDeliveryPoint())) {
+                    $delivery->getNiche()->setNumberNiche($delivery->getNiche()->getNumberNiche() - 1);
+                    $delivery->setDeliveryPoint(null);
                 }
                 break;
             case "Point relais":
-                if ($type === 'update') {
-                    if (!is_null($delivery->getNiche())) {
-                        $delivery->getNiche()->setNumberNiche($delivery->getNiche()->getNumberNiche() + 1);
-                        $delivery->setNiche(null);
-                    }
+                if (!is_null($delivery->getNiche())) {
+                    $delivery->getNiche()->setNumberNiche($delivery->getNiche()->getNumberNiche() + 1);
+                    $delivery->setNiche(null);
                 }
                 break;
         }
+        $delivery->setOrder($entity);
     }
 }

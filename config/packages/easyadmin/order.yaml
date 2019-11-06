@@ -1,6 +1,7 @@
 easy_admin:
     entities:
         Order:
+            disabled_actions: ['show']
             templates:
                 new: 'bundles/EasyAdminBundle/Order/new.html.twig'
                 edit: 'bundles/EasyAdminBundle/Order/new.html.twig'

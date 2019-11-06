@@ -62,8 +62,8 @@ class Order extends AbstractEntity implements UpdatableInterface
     /**
      * @var Delivery|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Delivery", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="amo_delivery_id", referencedColumnName="id", nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Delivery", cascade={"persist", "remove"}, mappedBy="order")
+     * @ORM\JoinColumn(name="amo_delivery_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $delivery;
 
@@ -83,6 +83,15 @@ class Order extends AbstractEntity implements UpdatableInterface
         $this->delivery = new Delivery();
         $this->customer = new Customer();
         parent::__construct();
+    }
+
+    public function __toString()
+    {
+        return sprintf(
+            '%s - %s',
+            $this->customer->getFullName(),
+            $this->orderAt->format('d/m/Y')
+        );
     }
 
     /**
@@ -179,6 +188,7 @@ class Order extends AbstractEntity implements UpdatableInterface
      */
     public function setDelivery(?Delivery $delivery): void
     {
+        $delivery->setOrder($this);
         $this->delivery = $delivery;
     }
 

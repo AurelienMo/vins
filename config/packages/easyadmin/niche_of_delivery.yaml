@@ -1,6 +1,7 @@
 easy_admin:
     entities:
         NicheOfDelivery:
+            disabled_actions: ['show']
             class: App\Entity\NicheOfDelivery
             list:
                 title: "Liste des créneaux de livraison à l'adresse"

@@ -64,6 +64,11 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
      */
     protected $tvaRate;
 
+    public function __toString()
+    {
+        return sprintf('%s - %s bouteilles', $this->wine, $this->quantity);
+    }
+
     /**
      * @return int|null
      */

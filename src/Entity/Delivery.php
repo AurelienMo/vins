@@ -70,6 +70,14 @@ class Delivery extends AbstractEntity implements UpdatableInterface
      */
     protected $niche;
 
+    /**
+     * @var Order
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Order", cascade={"remove"}, inversedBy="delivery")
+     * @ORM\JoinColumn(name="amo_order_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     */
+    protected $order;
+
     public function __construct()
     {
         $this->status = self::DELIVERY_IN_PROGRESS;
@@ -155,5 +163,21 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public function setNiche(?NicheOfDelivery $niche): void
     {
         $this->niche = $niche;
+    }
+
+    /**
+     * @return Order
+     */
+    public function getOrder(): ?Order
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param Order $order
+     */
+    public function setOrder(?Order $order): void
+    {
+        $this->order = $order;
     }
 }

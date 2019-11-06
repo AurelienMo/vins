@@ -76,6 +76,11 @@ class Customer extends AbstractEntity implements UpdatableInterface
         parent::__construct();
     }
 
+    public function getFullName()
+    {
+        return sprintf('%s %s', $this->firstname, $this->lastname);
+    }
+
     /**
      * @return string|null
      */

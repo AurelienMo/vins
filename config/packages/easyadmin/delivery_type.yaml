@@ -1,6 +1,7 @@
 easy_admin:
     entities:
         DeliveryType:
+            disabled_actions: ['show']
             templates:
                 edit: 'bundles/EasyAdminBundle/DeliveryPoint/edit.html.twig'
                 new: 'bundles/EasyAdminBundle/new.html.twig'
