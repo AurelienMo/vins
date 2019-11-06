@@ -1,0 +1,42 @@
+easy_admin:
+    entities:
+        Opinion:
+            class: App\Entity\Opinion
+            disabled_actions: ["new", "delete"]
+            list:
+                actions: ["show", "-edit"]
+                title: 'Liste des avis'
+                fields:
+                    - property: id
+                      label: 'Identifiant'
+                    - property: wine
+                      label: 'Vin'
+                    - property: isValid
+                      label: 'Valide ?'
+                    - property: name
+                      label: 'Auteur'
+                    - property: rate
+                      label: 'Note'
+                    - property: content
+                      label: "Commentaire"
+            show:
+                actions: ["-edit"]
+                fields:
+                    -   property: wine
+                        label: 'Vin'
+                    -   property: isValid
+                        label: 'Valide ?'
+                    -   property: name
+                        label: 'Auteur'
+                    -   property: rate
+                        label: 'Note'
+                    -   property: content
+                        label: "Commentaire"
+#            form:
+#                title: 'Nouveau point de livraison'
+#                fields:
+#                    -   property: status
+#                        label: 'Status livraison'
+#                        type: 'choice'
+#                        type_options:
+#                            choices: {'Livraison en cours': 'Livraison en cours', 'Livré en point relais': 'Livré en point relais', "Livré à l'adresse": "Livré à l'adresse"}

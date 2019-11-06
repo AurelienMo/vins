@@ -52,6 +52,10 @@ easy_admin:
             - entity: 'NicheOfDelivery'
               label: 'Créneaux de livraison'
               icon: 'clock'
+            - label: 'Communautaire'
+            - entity: 'Opinion'
+              label: 'Modération des avis'
+              icon: 'comments'
         form_theme:
             - 'bundles/EasyAdminBundle/layout.html.twig'
     site_name: 'Mon Premier Sommelier'

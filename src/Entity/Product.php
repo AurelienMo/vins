@@ -133,6 +133,13 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $isPromote;
 
+    /**
+     * @var Opinion[]|Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Opinion", mappedBy="wine", cascade={"persist", "remove"})
+     */
+    protected $opinions;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -140,6 +147,7 @@ class Product extends AbstractEntity implements UpdatableInterface
         $this->wineService = new WineService();
         $this->active = false;
         $this->isPromote = false;
+        $this->opinions = new ArrayCollection();
         parent::__construct();
     }
 
@@ -370,6 +378,14 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setIsPromote(bool $isPromote): void
     {
         $this->isPromote = $isPromote;
+    }
+
+    /**
+     * @return Opinion[]|Collection
+     */
+    public function getOpinions()
+    {
+        return $this->opinions;
     }
 
     public function __toString()
