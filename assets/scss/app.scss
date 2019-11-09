@@ -4,10 +4,22 @@
 @import "./components/loader";
 @import './components/_modal';
 
-.logo {
-  max-height: 40px;
-}
-
 label.required::after {
   content: " *"
+}
+.header-count {
+  position: absolute;
+  right: 22px;
+  bottom: 13px;
+  width: 20px;
+  height: 20px;
+  line-height: 22px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  background-color: #ed3436;
+  display: inline-block;
+  vertical-align: middle;
 }
