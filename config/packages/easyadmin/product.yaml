@@ -32,8 +32,6 @@ easy_admin:
                       label: 'Année'
                     - property: typeProduct
                       label: 'Type de vin'
-                    - property: stock.quantity
-                      label: 'Stock'
             form:
                 fields:
                     - type: 'group'

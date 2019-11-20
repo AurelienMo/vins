@@ -26,7 +26,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="amo_stock")
  * @ORM\Entity(repositoryClass="App\Repository\StockRepository")
  */
-class Stock extends AbstractEntity implements UpdatableInterface
+class Stock extends
+    AbstractEntity implements
+    UpdatableInterface
 {
     use TimeStampableTrait;
     use ValueListTrait;
@@ -39,40 +41,24 @@ class Stock extends AbstractEntity implements UpdatableInterface
     protected $quantity = 0;
 
     /**
-     * @var Product
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Product", inversedBy="stock", cascade={"remove"}, orphanRemoval=true)
-     * @ORM\JoinColumn(name="amo_wine_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    protected $wine;
-
-    /**
      * @var StockEntry[]|Collection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\StockEntry", mappedBy="stock", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected $stockEntries;
 
+    /**
+     * @var Capacity
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Capacity", inversedBy="stock", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(name="amo_capacity_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $capacity;
+
     public function __construct()
     {
-        $this->stockEntries = new ArrayCollection();
+        $this->stockEntries = new ArrayCollection;
         parent::__construct();
-    }
-
-    /**
-     * @return Product
-     */
-    public function getWine(): Product
-    {
-        return $this->wine;
-    }
-
-    /**
-     * @param Product $wine
-     */
-    public function setWine(Product $wine): void
-    {
-        $this->wine = $wine;
     }
 
     /**
@@ -83,18 +69,6 @@ class Stock extends AbstractEntity implements UpdatableInterface
         return $this->quantity;
     }
 
-    public function updateQuantity(StockEntry $entry, string $type): void
-    {
-        switch ($type) {
-            case 'add':
-                $this->quantity += $entry->getQuantity();
-                break;
-            case 'remove':
-                $this->quantity -= $entry->getQuantity();
-                break;
-        }
-    }
-
     public function updateQuantityAfterOrder(int $quantity)
     {
         $this->quantity += $quantity;
@@ -102,7 +76,12 @@ class Stock extends AbstractEntity implements UpdatableInterface
 
     public function __toString()
     {
-        return sprintf('%s', $this->wine);
+        return sprintf(
+            '%s - %s - %s',
+            $this->capacity->getWine(),
+            $this->capacity->getType(),
+            $this->capacity->getQuantity()
+        );
     }
 
     /**
@@ -117,19 +96,55 @@ class Stock extends AbstractEntity implements UpdatableInterface
     {
         $this->stockEntries->add($entry);
         $entry->setStock($this);
-        $this->updateQuantity($entry, 'add');
+        $this->updateQuantity(
+            $entry,
+            'add'
+        );
 
         return $this;
     }
 
+    public function updateQuantity(
+        StockEntry $entry,
+        string $type
+    ): void {
+        switch ($type) {
+            case 'add':
+                $this->quantity += $entry->getQuantity();
+                break;
+            case 'remove':
+                $this->quantity -= $entry->getQuantity();
+                break;
+        }
+    }
+
     public function removeStockEntry(StockEntry $entry)
     {
-        $this->updateQuantity($entry, 'remove');
+        $this->updateQuantity(
+            $entry,
+            'remove'
+        );
         $this->stockEntries->removeElement($entry);
     }
 
     public function getDomain(): WineDomain
     {
-        return $this->wine->getDomain();
+        return $this->capacity->getWine()->getDomain();
+    }
+
+    /**
+     * @return Capacity
+     */
+    public function getCapacity(): Capacity
+    {
+        return $this->capacity;
+    }
+
+    /**
+     * @param Capacity $capacity
+     */
+    public function setCapacity(Capacity $capacity): void
+    {
+        $this->capacity = $capacity;
     }
 }

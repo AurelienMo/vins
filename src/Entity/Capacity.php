@@ -58,6 +58,14 @@ class Capacity extends AbstractEntity
     protected $unitPrice;
 
     /**
+     * @var Stock
+     *
+     * @ORM\OneToOne(targetEntity="App\Entity\Stock", mappedBy="capacity", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\JoinColumn(name="amo_stock_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $stock;
+
+    /**
      * @return Product|null
      */
     public function getWine(): ?Product
@@ -119,5 +127,27 @@ class Capacity extends AbstractEntity
     public function setUnitPrice(?float $unitPrice): void
     {
         $this->unitPrice = $unitPrice;
+    }
+
+    /**
+     * @return Stock
+     */
+    public function getStock(): Stock
+    {
+        return $this->stock;
+    }
+
+    /**
+     * @param Stock $stock
+     */
+    public function setStock(Stock $stock): void
+    {
+        $this->stock = $stock;
+        $stock->setCapacity($this);
+    }
+
+    public function getCapacityFullname()
+    {
+        return sprintf('%s %s', $this->type, $this->getQuantity());
     }
 }

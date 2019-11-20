@@ -8,13 +8,13 @@ easy_admin:
             list:
                 title: 'Liste des stocks produits'
                 form_filters:
-                    - property: wine
-                      label: 'Vins'
                     - { name: lowerThan, property: quantity, label: 'Stock <', operator: lt }
                     - { name: greaterOrEqualThan, property: quantity, label: 'Stock >=', operator: gte }
                 fields:
-                    - property: wine
+                    - property: capacity.wine
                       label: 'Vin'
+                    - property: capacity.getCapacityFullname
+                      label: 'Contenance'
                     - property: quantity
                       label: 'Quantité restante'
                       format: '%d'

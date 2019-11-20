@@ -98,14 +98,6 @@ class Product extends AbstractEntity implements UpdatableInterface
     protected $profile;
 
     /**
-     * @var Stock
-     *
-     * @ORM\OneToOne(targetEntity="App\Entity\Stock", mappedBy="wine", cascade={"persist", "remove"}, orphanRemoval=true)
-     * @ORM\JoinColumn(name="amo_stock_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    protected $stock;
-
-    /**
      * @var float|null
      *
      * @ORM\Column(type="float")
@@ -298,23 +290,6 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setProfile(?VineProfile $profile): void
     {
         $this->profile = $profile;
-    }
-
-    /**
-     * @return Stock
-     */
-    public function getStock(): Stock
-    {
-        return $this->stock;
-    }
-
-    /**
-     * @param Stock $stock
-     */
-    public function setStock(Stock $stock): void
-    {
-        $this->stock = $stock;
-        $stock->setWine($this);
     }
 
     /**
