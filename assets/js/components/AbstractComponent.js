@@ -1,7 +1,7 @@
 import Modal from "./Modal";
 
 export default class AbstractComponent {
-    modal: Modal;
+    modal;
 
     constructor() {
         this.modal = new Modal();
