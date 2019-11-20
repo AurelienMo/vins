@@ -32,8 +32,6 @@ easy_admin:
                       label: 'Année'
                     - property: typeProduct
                       label: 'Type de vin'
-                    - property: price
-                      label: 'Prix unitaire'
                     - property: stock.quantity
                       label: 'Stock'
             form:
@@ -63,9 +61,6 @@ easy_admin:
                           attr:
                               create: true
                       label: 'Profil'
-                    - property: price
-                      type: number
-                      label: 'Prix unitaire'
                     - property: tvaRate
                       type: number
                       label: '% TVA'
@@ -129,6 +124,12 @@ easy_admin:
                       type_options:
                           attr:
                               rows: 2
+                    - type: 'group'
+                      label: 'Contenance'
+                      columns: 12
+                    - property: capacities
+                      label: ''
+                      type: embedded_list
                     - type: 'group'
                       label: 'Promotions'
                       columns: 12

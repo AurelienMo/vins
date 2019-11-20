@@ -8,7 +8,7 @@ easy_admin:
                       label: 'Vins'
                 sort: ['startAt', 'DESC']
                 max_results: 20
-                title: 'Liste des catégories de vins'
+                title: 'Liste des promotions'
                 fields:
                     - property: product
                       label: 'Produit'

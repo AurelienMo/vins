@@ -1,0 +1,57 @@
+easy_admin:
+    entities:
+        Capacity:
+            class: App\Entity\Capacity
+            list:
+                form_filters:
+                    - property: product
+                      label: 'Vins'
+                max_results: 20
+                title: 'Liste des contenances'
+                fields:
+                    - property: wine
+                      label: 'Vin'
+                    - property: type
+                      label: 'Type Contenance'
+                    - property: quantity
+                      label: 'Litrage'
+                    - property: unitPrice
+                      label: 'Prix unitaire'
+
+            form:
+                fields:
+                    - property: wine
+                      type: 'easyadmin_autocomplete'
+                      label: 'Vin'
+                    - property: type
+                      type: 'choice'
+                      type_options:
+                          choices: {'Bouteille': 'Bouteille', 'Cubis': 'Cubis'}
+                          placeholder: 'Merci de choisir un type de contenance'
+                    - property: quantity
+                      type: 'text'
+                      label: 'Litrage'
+                    - property: unitPrice
+                      label: 'Prix unitaire'
+                      type: 'number'
+#                    - property: product
+#                      type: 'easyadmin_autocomplete'
+#                      label: 'Nom du produit'
+
+#                    - property: product
+#                      type: 'easyadmin_autocomplete'
+#                      label: 'Vin'
+#                    - property: typePromotion
+#                      type: 'entity'
+#                      type_options:
+#                          class: 'App\Entity\TypePromotion'
+#                      label: 'Type de promotion'
+#                    - property: value
+#                      type: number
+#                      label: 'Valeur'
+#                    - property: startAt
+#                      type: date
+#                      label: 'Date de début'
+#                    - property: endAt
+#                      type: date
+#                      label: 'Date de fin'

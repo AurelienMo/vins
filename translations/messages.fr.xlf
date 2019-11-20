@@ -38,6 +38,10 @@
                 <source>DeliveryPoint</source>
                 <target>Point de livraison</target>
             </trans-unit>
+            <trans-unit id="Capacity">
+                <source>Capacity</source>
+                <target>Contenance</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

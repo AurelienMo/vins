@@ -20,4 +20,5 @@ use AlterPHP\EasyAdminExtensionBundle\Controller\EasyAdminController as AdminCon
  */
 class EasyAdminController extends AdminController
 {
+
 }

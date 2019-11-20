@@ -98,13 +98,6 @@ class Product extends AbstractEntity implements UpdatableInterface
     protected $profile;
 
     /**
-     * @var float|null
-     *
-     * @ORM\Column(type="float")
-     */
-    protected $price;
-
-    /**
      * @var Stock
      *
      * @ORM\OneToOne(targetEntity="App\Entity\Stock", mappedBy="wine", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -140,6 +133,13 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $opinions;
 
+    /**
+     * @var Capacity[]|Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Capacity", mappedBy="wine", cascade={"persist", "remove"})
+     */
+    protected $capacities;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -148,6 +148,7 @@ class Product extends AbstractEntity implements UpdatableInterface
         $this->active = false;
         $this->isPromote = false;
         $this->opinions = new ArrayCollection();
+        $this->capacities = new ArrayCollection();
         parent::__construct();
     }
 
@@ -300,22 +301,6 @@ class Product extends AbstractEntity implements UpdatableInterface
     }
 
     /**
-     * @return float|null
-     */
-    public function getPrice(): ?float
-    {
-        return $this->price;
-    }
-
-    /**
-     * @param float|null $price
-     */
-    public function setPrice(?float $price): void
-    {
-        $this->price = $price;
-    }
-
-    /**
      * @return Stock
      */
     public function getStock(): Stock
@@ -386,6 +371,35 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function getOpinions()
     {
         return $this->opinions;
+    }
+
+    /**
+     * @return Capacity[]|Collection
+     */
+    public function getCapacities()
+    {
+        return $this->capacities;
+    }
+
+    /**
+     * @param Capacity[]|Collection $capacities
+     */
+    public function setCapacities($capacities): void
+    {
+        $this->capacities = $capacities;
+    }
+
+    public function addCapacity(Capacity $capacity)
+    {
+        $this->capacities->add($capacity);
+        $capacity->setWine($this);
+
+        return $this;
+    }
+
+    public function removeCapacity(Capacity $capacity)
+    {
+        $this->capacities->removeElement($capacity);
     }
 
     public function __toString()
