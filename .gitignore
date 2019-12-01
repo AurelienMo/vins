@@ -31,3 +31,8 @@ public/.htaccess
 /docker/nginx/logs/error.log
 /docker/nginx/logs/vins_prod_access.log
 /docker/nginx/logs/vins_prod_error.log
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
+public/upload

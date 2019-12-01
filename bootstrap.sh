@@ -48,22 +48,22 @@ mysql_go() {
 }
 
 php_go() {
-    sudo apt-get -y install php7.2
-    sudo apt-get -y install libapache2-mod-php7.2
-    sudo apt-get -y install php7.2-curl
-    sudo apt-get -y install php7.2-gd
-    sudo apt-get -y install php7.2-mysql
-    sudo apt-get -y install php7.2-sqlite
-    sudo apt-get -y install php7.2-mbstring
-    sudo apt-get install -y php7.2-intl
-    sudo apt-get install -y php7.2-xsl
-    sudo apt-get install -y php7.2-xdebug
-    sudo apt-get -y install php7.2-zip
-    sudo apt-get -y install php7.2-opcache
+    sudo apt-get -y install php7.3
+    sudo apt-get -y install libapache2-mod-php7.3
+    sudo apt-get -y install php7.3-curl
+    sudo apt-get -y install php7.3-gd
+    sudo apt-get -y install php7.-mysql
+    sudo apt-get -y install php7.3-sqlite
+    sudo apt-get -y install php7.3-mbstring
+    sudo apt-get install -y php7.3-intl
+    sudo apt-get install -y php7.3-xsl
+    sudo apt-get install -y php7.3-xdebug
+    sudo apt-get -y install php7.3-zip
+    sudo apt-get -y install php7.3-opcache
     sudo apt-get -y install php-imagick
     sudo apt-get -y install jpegoptim
     sudo apt-get -y install ruby-sass
-    cat <<EOT > /etc/php/7.2/apache2/conf.d/30-xdebug.ini
+    cat <<EOT > /etc/php/7.3/apache2/conf.d/30-xdebug.ini
 xdebug.remote_enable = 1
 xdebug.remote_connect_back = 1
 xdebug.remote_port = 9001
@@ -71,7 +71,7 @@ xdebug.scream=0
 xdebug.cli_color=1
 xdebug.show_local_vars=1
 EOT
-    cat <<EOT > /etc/php/7.2/cli/conf.d/30-xdebug.ini
+    cat <<EOT > /etc/php/7.3/cli/conf.d/30-xdebug.ini
 xdebug.remote_enable = 1
 xdebug.remote_connect_back = 1
 xdebug.remote_port = 9001
@@ -87,7 +87,7 @@ nodenpm_go() {
 }
 
 tools_go() {
-    sudo apt-get -y install curl php7.2-cli acl unzip
+    sudo apt-get -y install curl php7.3-cli acl unzip
     curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
     curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 }

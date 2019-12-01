@@ -35,7 +35,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=190)
      */
     protected $status;
 

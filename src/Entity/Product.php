@@ -20,12 +20,17 @@ use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Class Product
  *
  * @ORM\Table(name="amo_product")
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ *
+ * @Vich\Uploadable()
  */
 class Product extends AbstractEntity implements UpdatableInterface
 {
@@ -42,21 +47,21 @@ class Product extends AbstractEntity implements UpdatableInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=190)
      */
     protected $vintageName;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=190)
      */
     protected $year;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=190)
      */
     protected $appellation;
 
@@ -131,6 +136,19 @@ class Product extends AbstractEntity implements UpdatableInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Capacity", mappedBy="wine", cascade={"persist", "remove"})
      */
     protected $capacities;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $imagePath;
+
+    /**
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="imagePath")
+     * @var File
+     */
+    private $imageFile;
 
     public function __construct()
     {
@@ -384,5 +402,34 @@ class Product extends AbstractEntity implements UpdatableInterface
             $this->domain,
             $this->appellation
         );
+    }
+
+    public function setImageFile($image = null)
+    {
+        $this->imageFile = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImagePath()
+    {
+        return $this->imagePath;
+    }
+
+    /**
+     * @param string $imagePath
+     */
+    public function setImagePath(?string $imagePath): void
+    {
+        $this->imagePath = $imagePath;
     }
 }

@@ -32,11 +32,15 @@ easy_admin:
                       label: 'Année'
                     - property: typeProduct
                       label: 'Type de vin'
+                    -   property: 'imagePath'
+                        type: 'image'
+                        base_path: '%app.path.product_images%'
             form:
                 fields:
                     - type: 'group'
                       label: 'Informations générales'
                       columns: 4
+                    - { property: 'imageFile', type: 'vich_image' }
                     - property: domain
                       label: 'Domaine'
                       type: 'easyadmin_autocomplete'

@@ -1,9 +1,9 @@
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
-  config.vm.network :forwarded_port, guest: 22, host: 2231, id: "ssh" #ssh
-  config.vm.network :forwarded_port, guest: 80, host: 8031 #web
-  config.vm.network :forwarded_port, guest: 3306, host: 33631 #mysql
-  config.vm.network :forwarded_port, guest: 1080, host: 10831 #maildev
+  config.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh" #ssh
+  config.vm.network :forwarded_port, guest: 80, host: 8001 #web
+  config.vm.network :forwarded_port, guest: 3306, host: 33601 #mysql
+  config.vm.network :forwarded_port, guest: 1080, host: 10801 #maildev
 
   config.vm.provision :shell, path: "bootstrap.sh"
 

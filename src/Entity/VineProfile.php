@@ -33,7 +33,7 @@ class VineProfile extends AbstractEntity
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=190)
      */
     protected $color;
 
