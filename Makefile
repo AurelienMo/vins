@@ -5,7 +5,14 @@ SYMFONY         = $(EXEC_PHP) bin/console
 COMPOSER        = composer
 NPM            = npm
 
-VAGRANT = vagrant
+DOCKER_COMPOSE = docker-compose
+DOCKER = docker
+COMPOSER = $(ENV_PHP) composer
+ENV_PHP = $(DOCKER) exec -it vins_php-fpm
+ENV_NODE = $(DOCKER) exec -it vins_nodejs
+ENV_VARNISH = $(DOCKER) exec -it vins_varnish
+ENV_BLACKFIRE = $(DOCKER) exec -it vins_blackfire
+
 
 ##
 ## ALIAS
@@ -39,13 +46,10 @@ help:
 
 .PHONY: help
 
-start: ## Start VM.
-start: Vagrantfile
-	$(VAGRANT) up
-
-stop: ## Stop VM.
-stop: Vagrantfile
-	$(VAGRANT) halt
+## General command
+start: ## Allow to create the project
+		$(DOCKER_COMPOSE) build --no-cache
+	    $(DOCKER_COMPOSE) up -d --build --remove-orphans --force-recreate
 
 ##
 ## Tools

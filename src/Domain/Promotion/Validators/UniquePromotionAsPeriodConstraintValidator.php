@@ -46,7 +46,8 @@ class UniquePromotionAsPeriodConstraintValidator extends ConstraintValidator
         Constraint $constraint
     ) {
         $otherPromotionInProgress = $this->promotionRepo->isOtherPromotionInProgressAsSamePeriod(
-            $value, $value->getProduct()->getId()
+            $value,
+            $value->getProduct()->getId()
         );
 
         if ($otherPromotionInProgress) {

@@ -1,24 +1,13 @@
 FROM composer
-FROM php:fpm-alpine3.7
+FROM php:7.3-fpm-alpine
 
 ENV WORKPATH "/var/www/vins"
 
-RUN set -xe \
-          	&& apk add --no-cache --virtual \
-          		$PHPIZE_DEPS \
-          		zlib-dev \
-          		gnupg \
-          		graphviz
-
-RUN apk add --no-cache --virtual build-dependencies icu-dev postgresql-dev icu-dev \
-                libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf \
-          	&& pecl install apcu mongodb xdebug \
-            && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-            && docker-php-ext-install pdo_mysql opcache json pdo_pgsql pgsql mysqli intl pdo_pgsql zip \
-            && docker-php-ext-enable apcu mysqli mongodb.so xdebug
-
-RUN apk add --no-cache --virtual git
-RUN apk add --no-cache --virtual openssh-client
+RUN apk add --no-cache $PHPIZE_DEPS \
+    libzip-dev icu-dev libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf \
+	&& pecl install apcu mongodb xdebug \
+    && docker-php-ext-install pdo_mysql opcache json mysqli intl zip \
+	&& docker-php-ext-enable apcu mysqli mongodb.so xdebug
 
 COPY docker/php/conf/php.ini /usr/local/etc/php/php.ini
 

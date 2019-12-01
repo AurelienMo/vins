@@ -40,17 +40,20 @@ trait ValueListTrait
      *
      * @return array
      */
-    public static function getValuesList(string $property, bool $withLabelsAsIndexes = false, array $filterValues = null)
-    {
+    public static function getValuesList(
+        string $property,
+        bool $withLabelsAsIndexes = false,
+        array $filterValues = null
+    ) {
         $propertyValues = array();
         $refClass = new \ReflectionClass(get_called_class());
         $classConstants = $refClass->getConstants();
         $className = $refClass->getShortName();
 
-        $constantPrefix = strtoupper($property).'_';
+        $constantPrefix = strtoupper($property) . '_';
         foreach ($classConstants as $key => $val) {
             if (substr($key, 0, strlen($constantPrefix)) === $constantPrefix) {
-                $propertyValues[$val] = static::getLowerCaseClassName().'.'.strtolower($property).'.'.$val;
+                $propertyValues[$val] = static::getLowerCaseClassName() . '.' . strtolower($property) . '.' . $val;
             }
         }
 

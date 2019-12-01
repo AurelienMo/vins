@@ -26,8 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="amo_stock")
  * @ORM\Entity(repositoryClass="App\Repository\StockRepository")
  */
-class Stock extends
-    AbstractEntity implements
+class Stock extends AbstractEntity implements
     UpdatableInterface
 {
     use TimeStampableTrait;
@@ -43,7 +42,9 @@ class Stock extends
     /**
      * @var StockEntry[]|Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\StockEntry", mappedBy="stock", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\StockEntry", mappedBy="stock", cascade={"persist", "remove"}, orphanRemoval=true
+     *     )
      */
     protected $stockEntries;
 
@@ -57,7 +58,7 @@ class Stock extends
 
     public function __construct()
     {
-        $this->stockEntries = new ArrayCollection;
+        $this->stockEntries = new ArrayCollection();
         parent::__construct();
     }
 

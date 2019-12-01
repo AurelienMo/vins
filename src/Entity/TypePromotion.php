@@ -28,8 +28,8 @@ class TypePromotion extends AbstractEntity
     use NameTrait;
     use TypePromotionTrait;
 
-    const TYPE_PERCENT = 'Pourcentage';
-    const TYPE_AMOUNT = 'Montant';
+    public const TYPE_PERCENT = 'Pourcentage';
+    public const TYPE_AMOUNT = 'Montant';
 
     /**
      * @var string|null

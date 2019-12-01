@@ -28,9 +28,9 @@ class Delivery extends AbstractEntity implements UpdatableInterface
 {
     use TimeStampableTrait;
 
-    const DELIVERY_IN_PROGRESS = 'Livraison en cours';
-    const DELIVERED_AT_RELAY_POINT = 'Livré en point relais';
-    const DELIVERED_AT_ADDRESS = 'Livré à l\'adresse';
+    public const DELIVERY_IN_PROGRESS = 'Livraison en cours';
+    public const DELIVERED_AT_RELAY_POINT = 'Livré en point relais';
+    public const DELIVERED_AT_ADDRESS = 'Livré à l\'adresse';
 
     /**
      * @var string
@@ -56,7 +56,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     protected $deliveryPoint;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(type="datetime")
      */
@@ -81,7 +81,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public function __construct()
     {
         $this->status = self::DELIVERY_IN_PROGRESS;
-        $this->statusDate = new \DateTime();
+        $this->statusDate = new DateTime();
         parent::__construct();
     }
 

@@ -41,11 +41,11 @@ class BillGenerator
         $resultsExploded = [];
         $billNumber = 1;
         if (count($orders) > 0) {
-            foreach ($orders as $order) {
+            foreach ($orders as $orderElt) {
                 $resultsExploded[] = explode(
-                                         '_',
-                                         $order->getBillNumber()
-                                     )[3];
+                    '_',
+                    $orderElt->getBillNumber()
+                )[3];
             }
             rsort($resultsExploded, SORT_NUMERIC);
             $current = current($resultsExploded);

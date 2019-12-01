@@ -23,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Capacity extends AbstractEntity
 {
-    const LIST_CAPACITIES = [
+    public const LIST_CAPACITIES = [
         'Bouteille' => 'Bouteille',
         'Cubis' => 'Cubis',
     ];
@@ -60,7 +60,9 @@ class Capacity extends AbstractEntity
     /**
      * @var Stock
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Stock", mappedBy="capacity", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @ORM\OneToOne(
+     *     targetEntity="App\Entity\Stock", mappedBy="capacity", cascade={"persist", "remove"}, orphanRemoval=true
+     * )
      * @ORM\JoinColumn(name="amo_stock_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $stock;

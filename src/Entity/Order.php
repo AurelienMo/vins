@@ -48,7 +48,12 @@ class Order extends AbstractEntity implements UpdatableInterface
     /**
      * @var OrderProductLine[]|Collection
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\OrderProductLine", mappedBy="order", cascade={"persist", "remove"}, orphanRemoval=TRUE)
+     * @ORM\OneToMany(
+     *     targetEntity="App\Entity\OrderProductLine",
+     *     mappedBy="order",
+     *     cascade={"persist", "remove"},
+     *     orphanRemoval=TRUE
+     * )
      */
     protected $lines;
 
