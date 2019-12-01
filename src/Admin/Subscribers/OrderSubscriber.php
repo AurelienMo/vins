@@ -120,11 +120,6 @@ class OrderSubscriber implements EventSubscriberInterface
             return;
         }
 
-//        $delivery = $entity->getDelivery();
-//        $entity->getDelivery()->setOrder(null);
-//        $this->orderProductLineRepo->remove()
-//        $this->orderProductLineRepo->flush($);
-
         foreach ($entity->getLines() as $line) {
             StockUpdater::updateStockAfterOrder($line->getWine(), $line->getQuantity());
         }
