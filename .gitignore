@@ -36,3 +36,4 @@ public/.htaccess
 /.web-server-pid
 ###< symfony/web-server-bundle ###
 public/upload
+/.env

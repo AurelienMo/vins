@@ -29,37 +29,37 @@ services:
             - './docker/nginx/logs/:/var/log/nginx'
         restart: always
 
-    # Frontend configuration
-    node:
-        container_name: ${CONTAINER_NAME}_nodejs
-        build: './docker/node'
-        links:
-            - php-fpm
-        volumes:
-            - './:${WORKPATH}:rw'
-        # command: bash -c "yarn && yarn build" -> Uncomment for production.
-        restart: always
-
-    # Server optimization
-    varnish:
-        container_name: ${CONTAINER_NAME}_varnish
-        build: './docker/varnish'
-        volumes:
-            - './docker/varnish/conf:/etc/varnish:rw'
-        ports:
-            - '${VARNISH_PORT}:80'
-        depends_on:
-            - nginx
-        restart: always
-
-    redis:
-        container_name: ${CONTAINER_NAME}_redis
-        image: redis:alpine
-        ports:
-            - '${REDIS_PORT}:6379'
-        links:
-            - php-fpm
-        restart: always
+#    # Frontend configuration
+#    node:
+#        container_name: ${CONTAINER_NAME}_nodejs
+#        build: './docker/node'
+#        links:
+#            - php-fpm
+#        volumes:
+#            - './:${WORKPATH}:rw'
+#        # command: bash -c "yarn && yarn build" -> Uncomment for production.
+#        restart: always
+#
+#    # Server optimization
+#    varnish:
+#        container_name: ${CONTAINER_NAME}_varnish
+#        build: './docker/varnish'
+#        volumes:
+#            - './docker/varnish/conf:/etc/varnish:rw'
+#        ports:
+#            - '${VARNISH_PORT}:80'
+#        depends_on:
+#            - nginx
+#        restart: always
+#
+#    redis:
+#        container_name: ${CONTAINER_NAME}_redis
+#        image: redis:alpine
+#        ports:
+#            - '${REDIS_PORT}:6379'
+#        links:
+#            - php-fpm
+#        restart: always
 
     # MariaDB Configuration
     mariadb:
@@ -75,20 +75,20 @@ services:
         volumes:
             - 'mariadb_vins:/var/lib/mysql:rw'
 
-    # Performances configuration
-    blackfire:
-        container_name: ${CONTAINER_NAME}_blackfire
-        image: blackfire/blackfire
-        environment:
-            BLACKFIRE_SERVER_ID: '${BLACKFIRE_SERVER_ID}'
-            BLACKFIRE_SERVER_TOKEN: '${BLACKFIRE_SERVER_TOKEN}'
-            BLACKFIRE_CLIENT_ID: '${BLACKFIRE_CLIENT_ID}'
-            BLACKFIRE_CLIENT_TOKEN: '${BLACKFIRE_CLIENT_TOKEN}'
-        links:
-            - php-fpm
-        volumes:
-            - './:${WORKPATH}:rw'
-        restart: always
+#    # Performances configuration
+#    blackfire:
+#        container_name: ${CONTAINER_NAME}_blackfire
+#        image: blackfire/blackfire
+#        environment:
+#            BLACKFIRE_SERVER_ID: '${BLACKFIRE_SERVER_ID}'
+#            BLACKFIRE_SERVER_TOKEN: '${BLACKFIRE_SERVER_TOKEN}'
+#            BLACKFIRE_CLIENT_ID: '${BLACKFIRE_CLIENT_ID}'
+#            BLACKFIRE_CLIENT_TOKEN: '${BLACKFIRE_CLIENT_TOKEN}'
+#        links:
+#            - php-fpm
+#        volumes:
+#            - './:${WORKPATH}:rw'
+#        restart: always
 
 volumes:
     mariadb_vins:

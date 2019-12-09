@@ -1,5 +1,5 @@
 FROM composer
-FROM php:7.3-fpm-alpine
+FROM php:7.4-fpm-alpine
 
 ENV WORKPATH "/var/www/vins"
 
@@ -18,15 +18,15 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 COPY --from=0 /usr/bin/composer /usr/bin/composer
 
 # Blackfire (Docker approach) & Blackfire Player
-RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
-    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$version \
-    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
-    && mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
-    && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini \
-    && mkdir -p /tmp/blackfire \
-    && curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux_static/amd64 | tar zxp -C /tmp/blackfire \
-    && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
-    && rm -Rf /tmp/blackfire
+#RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
+#    && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/alpine/amd64/$version \
+#    && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
+#    && mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
+#    && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini \
+#    && mkdir -p /tmp/blackfire \
+#    && curl -A "Docker" -L https://blackfire.io/api/v1/releases/client/linux_static/amd64 | tar zxp -C /tmp/blackfire \
+#    && mv /tmp/blackfire/blackfire /usr/bin/blackfire \
+#    && rm -Rf /tmp/blackfire
 
 # PHP-CS-FIXER & Deptrac
 RUN wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer \
@@ -49,6 +49,7 @@ RUN mkdir -p \
 	&& chown -R www-data /tmp/
 
 RUN chown www-data:www-data -R ${WORKPATH}
+RUN chmod 775 ${WORKPATH}
 
 WORKDIR ${WORKPATH}
 

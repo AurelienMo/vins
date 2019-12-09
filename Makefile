@@ -8,7 +8,7 @@ NPM            = npm
 DOCKER_COMPOSE = docker-compose
 DOCKER = docker
 COMPOSER = $(ENV_PHP) composer
-ENV_PHP = $(DOCKER) exec -it vins_php-fpm
+ENV_PHP = $(DOCKER) exec -u $(id -u ${USER}):$(id -g ${USER}) -it vins_php-fpm
 ENV_NODE = $(DOCKER) exec -it vins_nodejs
 ENV_VARNISH = $(DOCKER) exec -it vins_varnish
 ENV_BLACKFIRE = $(DOCKER) exec -it vins_blackfire
@@ -55,9 +55,8 @@ start: ## Allow to create the project
 ## Tools
 ## ------
 ##
-xdebug-enable: ## Enable Xdebug
-	sudo phpenmod xdebug
-	$(EXEC_APACHE) restart
+exec: ## Exec docker
+	$(ENV_PHP) sh -c "$(CMD)"
 
 xdebug-disable: ## Disable Xdebug
 	sudo phpdismod xdebug

@@ -23,6 +23,7 @@ easy_admin:
             - entity: 'Product'
               label: 'Vins'
               icon: 'wine-bottle'
+              default: true
             - entity: 'TypeProduct'
               label: 'Catégorie des vins'
               icon: 'tag'
