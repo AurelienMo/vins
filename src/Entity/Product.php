@@ -150,6 +150,13 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     private $imageFile;
 
+    /**
+     * @var Quizz[]|Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Quizz", mappedBy="wine", cascade={"persist", "remove"})
+     */
+    protected $quizzs;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -159,6 +166,7 @@ class Product extends AbstractEntity implements UpdatableInterface
         $this->isPromote = false;
         $this->opinions = new ArrayCollection();
         $this->capacities = new ArrayCollection();
+        $this->quizzs = new ArrayCollection();
         parent::__construct();
     }
 
@@ -431,5 +439,26 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setImagePath(?string $imagePath): void
     {
         $this->imagePath = $imagePath;
+    }
+
+    /**
+     * @return Quizz[]|Collection
+     */
+    public function getQuizzs()
+    {
+        return $this->quizzs;
+    }
+
+    public function addQuizz(Quizz $quizz)
+    {
+        $this->quizzs->add($quizz);
+        $quizz->setWine($this);
+
+        return $this;
+    }
+
+    public function removeQuizz(Quizz $quizz)
+    {
+        $this->quizzs->removeElement($quizz);
     }
 }
