@@ -41,7 +41,7 @@ class Order extends AbstractEntity implements UpdatableInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $billNumber;
 
@@ -60,7 +60,7 @@ class Order extends AbstractEntity implements UpdatableInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $orderNumber;
 

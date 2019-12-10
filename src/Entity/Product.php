@@ -47,21 +47,21 @@ class Product extends AbstractEntity implements UpdatableInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $vintageName;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $year;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $appellation;
 

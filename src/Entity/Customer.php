@@ -31,21 +31,21 @@ class Customer extends AbstractEntity implements UpdatableInterface
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $civility;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $firstname;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $lastname;
 

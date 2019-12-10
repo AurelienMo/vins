@@ -32,7 +32,7 @@ class WineService
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $decanting;
 

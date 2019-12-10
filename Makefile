@@ -1,17 +1,11 @@
-EXEC_APACHE        = sudo service apache2
-EXEC_PHP        = php
-
-SYMFONY         = $(EXEC_PHP) bin/console
-COMPOSER        = composer
-NPM            = npm
-
+CONTAINER_NAME = vins
+NETWORK_NAME = vins_default
 DOCKER_COMPOSE = docker-compose
 DOCKER = docker
-COMPOSER = $(ENV_PHP) composer
-ENV_PHP = $(DOCKER) exec -u $(id -u ${USER}):$(id -g ${USER}) -it vins_php-fpm
-ENV_NODE = $(DOCKER) exec -it vins_nodejs
-ENV_VARNISH = $(DOCKER) exec -it vins_varnish
-ENV_BLACKFIRE = $(DOCKER) exec -it vins_blackfire
+USER_DOCKER = $$(id -u $${USER}):$$(id -g $${USER})
+DOCKER_PHP = $(DOCKER) exec -u $(USER_DOCKER) -it $(CONTAINER_NAME)_php-fpm sh -c
+DOCKER_NPM = $(DOCKER) exec -u $(USER_DOCKER) -it $(CONTAINER_NAME)_nodejs sh -c
+SYMFONY = $(DOCKER_PHP) "php bin/console ${ARGS}"
 
 
 ##
@@ -27,10 +21,10 @@ cs: phpcs
 stan: phpstan
 cbf: phpcbf
 quality: phpcs phpcbf
-test: test-functional
-coverage: test-functional-coverage
-build: build
-watch: watch
+test: test-functional phpstan phpcs
+build-dev: dev
+build-watch: watch
+pp: vendor node_modules migrations-exec cache-clear cache-warmup
 
 
 ##
@@ -46,99 +40,117 @@ help:
 
 .PHONY: help
 
-## General command
-start: ## Allow to create the project
-		$(DOCKER_COMPOSE) build --no-cache
-	    $(DOCKER_COMPOSE) up -d --build --remove-orphans --force-recreate
+##
+## Docker
+## -------
+##
+start: ## Start environnement docker. Build docker env and init project (composer install)
+init: docker-compose.yml
+	$(DOCKER_COMPOSE) up -d --build
+	$(DOCKER_PHP) "composer install"
+
+stop: ## Stop environnement docker
+stop:
+	$(DOCKER_COMPOSE) down
+
+list-containers: ## List container docker
+list-containers:
+	$(DOCKER_COMPOSE) ps
+
+list-network: ## List all networks on host
+list-network:
+	$(DOCKER) network ls
+
+inspect-network: ## Inspect current network to list all container ips
+inspect-network:
+	$(DOCKER) network inspect $(NETWORK_NAME)
+
+erase-all: ## Careful, erase all container, all images
+erase-all:
+	$(DOCKER) stop $$(docker ps -a -q) && $(DOCKER) rm $$(docker ps -a -q) $(DOCKER) rmi $$(docker images -a -q) -f
+
+exec-php: ## Exec command inside container php. Use argument ARGS
+exec-php:
+	$(DOCKER_PHP) "${ARGS}"
+
+##
+## Manage dependencies
+## -------
+##
+
+vendor: ## Install composer dependencies
+vendor: composer.lock
+	$(DOCKER_PHP) "composer install"
+
+new-vendor: ## Add dependency or dev dependency. Use argument ARGS (Example : make new-vendor ARGS="security form" or make new-vendor ARGS="profiler --dev"
+new-vendor: composer.json
+	$(DOCKER_PHP) "composer require ${ARGS}"
+
+node_modules: ## Install npm dependencies
+node_modules: package-lock.json
+	$(USER_DOCKER) npm install
+
+new-node_modules: ## Add dependency or dev dependency for npm usage. Use argument ARGS (Example : make new-node_modules ARGS="bootstrap --save") or with --save-dev
+new-node_modules: package.json
+	$(USER_DOCKER) npm install ${ARGS}
+
+optimize-composer: ## Optimize autoloading and vendor
+optimize-composer: composer.lock
+	$(DOCKER_PHP) "composer dump-autoload -o -a"
+
+##
+## Symfony Command
+## -------
+##
+
+symfony-cmd: ## Exec command symfony inside php container. Use argument ARGS to define command
+symfony-cmd:
+	$(DOCKER_PHP) "php bin/console ${ARGS}"
+
+cache-clear: ## Clear the cache (by default, the dev env is used, use ARGS argument to change)
+cache-clear:
+	$(DOCKER_PHP) "php bin/console cache:clear --env=$(or $(ARGS), dev)"
+
+cache-warmup: ## Clear the cache warmup (by default, the dev env is used, use ARGS arguement to change)
+cache-warmup:
+	$(DOCKER_PHP) "php bin/console cache:warmup --env=$(or $(ARGS), dev)"
+
+migrations-diff: ## Generate diff migrations doctrine
+migrations-diff:
+	$(DOCKER_PHP) "php bin/console doctrine:migrations:diff"
+
+migrations-exec: ## Execute migrations
+migrations-exec:
+	$(DOCKER_PHP) "php bin/console doctrine:migrations:migrate"
 
 ##
 ## Tools
-## ------
+## -------
 ##
-exec: ## Exec docker
-	$(ENV_PHP) sh -c "$(CMD)"
-
-xdebug-disable: ## Disable Xdebug
-	sudo phpdismod xdebug
-	$(EXEC_APACHE) restart
-
-cache-clear: ## Clear the cache (by default, the dev env is used)
-cache-clear: var/cache
-	$(SYMFONY) cache:clear --env=$(or $(ENV), dev)
-
-cache-warmup: ## Cache warmup (by default, the dev env is used)
-	$(SYMFONY) cache:warmup --env=$(or $(ENV), dev)
 
 phpcs: ## Run phpcs
 phpcs: vendor/bin/phpcs
-	vendor/bin/phpcs
+	$(DOCKER_PHP) "vendor/bin/phpcs"
 
 phpstan: ## Run phpstan
 phpstan: vendor/bin/phpstan
-	vendor/bin/phpstan analyze src
+	$(DOCKER_PHP) "vendor/bin/phpstan analyze src"
 
 phpcbf: ## Run PHPCBF
 phpcbf: vendor/bin/phpcbf
-	vendor/bin/phpcbf
+	$(DOCKER_PHP) vendor/bin/phpcbf
 
-build: package.json
-	npm run prod
+prod: ## Build npm for production environment
+prod: package.json
+	$(USER_DOCKER) npm run prod
 
+watch: ## Build npm for watch
 watch: package.json
-	npm run dev_watch
+	$(USER_DOCKER) npm run watch
 
-##
-## Manage Dependencies
-## ------
-##
-
-vendor: ## Install composer dependecies
-vendor: composer.lock
-	$(COMPOSER) install -n --prefer-dist
-
-new-vendor: ## Require new dependency
-new-vendor: composer.json
-	$(COMPOSER) require $(DEP)
-
-new-dev-vendor: ## Require new dev dependency
-new-dev-vendor: composer.json
-	$(COMPOSER) require $(DEP) --dev
-
-remove-vendor: ## Remove dependency
-remove-vendor: composer.json
-	$(COMPOSER) require $(DEP) --dev
-
-npm-install: ## Install npm depencies
-npm-install: package.lock
-	$(NPM) install
-
-add-npm: ##  Add package to dependencies
-add-npm: package.json
-	$(NPM) install $(PACKAGE) --save
-
-dev-npm: ## Add package to dev dependencies
-dev-npm: package.json
-	$(NPM) install $(PACKAGE) --save-dev
-
-##
-## Database
-## ------
-##
-db-diff: ## Generate doctrine diff
-db-diff: src/Entity
-	$(SYMFONY) doctrine:migrations:diff
-
-db-migr: ## Execute migration
-db-migr: src/DoctrineMigrations
-	$(SYMFONY) doctrine:migrations:migrate -n
-
-db-down: ## Down migration
-db-down: src/DoctrineMigrations
-	$(SYMFONY) doctrine:migrations:exec --down $(VERSION) -n
-
-db-up: ## Up migration
-db-up: src/DoctrineMigrations
-	$(SYMFONY) doctrine:migrations:exec --up $(VERSION) -n
+dev: ## Build npm for dev environment
+dev:
+	$(USER_DOCKER) npm run dev
 
 ##
 ## TESTS

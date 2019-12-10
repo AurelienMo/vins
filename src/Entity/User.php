@@ -34,42 +34,42 @@ class User extends AbstractEntity implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $lastname;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $status;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $slug;
 

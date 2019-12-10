@@ -53,7 +53,7 @@ RUN chmod 775 ${WORKPATH}
 
 WORKDIR ${WORKPATH}
 
-COPY . ./
+COPY docker ./
 
 EXPOSE 9000
 

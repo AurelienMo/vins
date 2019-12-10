@@ -32,7 +32,7 @@ class Address
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $streetName;
 
@@ -46,21 +46,21 @@ class Address
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $zipCode;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $city;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="string", length=190)
+     * @ORM\Column(type="string")
      */
     protected $country;
 
