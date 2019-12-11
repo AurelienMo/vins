@@ -37,8 +37,7 @@ services:
             - php-fpm
         volumes:
             - './:${WORKPATH}:rw'
-        # command: bash -c "yarn && yarn build" -> Uncomment for production.
-        restart: always
+        working_dir: ${WORKPATH}
 
 
 

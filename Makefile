@@ -25,6 +25,7 @@ test: test-functional phpstan phpcs
 build-dev: dev
 build-watch: watch
 pp: vendor node_modules migrations-exec cache-clear cache-warmup
+sf-cmd: symfony-cmd
 
 
 ##
@@ -48,6 +49,7 @@ start: ## Start environnement docker. Build docker env and init project (compose
 init: docker-compose.yml
 	$(DOCKER_COMPOSE) up -d --build
 	$(DOCKER_PHP) "composer install"
+	$(SYMFONY ARGS="assets:install")
 
 stop: ## Stop environnement docker
 stop:
@@ -88,11 +90,11 @@ new-vendor: composer.json
 
 node_modules: ## Install npm dependencies
 node_modules: package-lock.json
-	$(USER_DOCKER) npm install
+	$(DOCKER_NPM) "yarn install"
 
 new-node_modules: ## Add dependency or dev dependency for npm usage. Use argument ARGS (Example : make new-node_modules ARGS="bootstrap --save") or with --save-dev
 new-node_modules: package.json
-	$(USER_DOCKER) npm install ${ARGS}
+	$(DOCKER_NPM) "yarn install ${ARGS}"
 
 optimize-composer: ## Optimize autoloading and vendor
 optimize-composer: composer.lock
@@ -103,9 +105,9 @@ optimize-composer: composer.lock
 ## -------
 ##
 
-symfony-cmd: ## Exec command symfony inside php container. Use argument ARGS to define command
+symfony-cmd: ## Exec command symfony inside php container. Use argument ARGS to define command. Example : make symfony-cmd "assets:install"
 symfony-cmd:
-	$(DOCKER_PHP) "php bin/console ${ARGS}"
+	$(SYMFONY)
 
 cache-clear: ## Clear the cache (by default, the dev env is used, use ARGS argument to change)
 cache-clear:
@@ -142,15 +144,15 @@ phpcbf: vendor/bin/phpcbf
 
 prod: ## Build npm for production environment
 prod: package.json
-	$(USER_DOCKER) npm run prod
+	$(DOCKER_NPM) yarn run prod
 
 watch: ## Build npm for watch
 watch: package.json
-	$(USER_DOCKER) npm run watch
+	$(DOCKER_NPM) yarn run watch
 
 dev: ## Build npm for dev environment
 dev:
-	$(USER_DOCKER) npm run dev
+	$(DOCKER_NPM) yarn run dev
 
 ##
 ## TESTS
