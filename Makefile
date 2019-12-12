@@ -22,9 +22,10 @@ stan: phpstan
 cbf: phpcbf
 quality: phpcs phpcbf
 test: test-functional phpstan phpcs
-build-dev: dev
-build-watch: watch
-pp: vendor node_modules migrations-exec cache-clear cache-warmup
+dev: yarn-dev
+watch: yarn-watch
+prod: yarn-prod
+pp: vendor node_modules migrations-exec cache-clear cache-warmup #Post pull command
 sf-cmd: symfony-cmd
 
 
@@ -96,16 +97,16 @@ new-node_modules: ## Add dependency or dev dependency for npm usage. Use argumen
 new-node_modules: package.json
 	$(DOCKER_NPM) "yarn install ${ARGS}"
 
-optimize-composer: ## Optimize autoloading and vendor
-optimize-composer: composer.lock
-	$(DOCKER_PHP) "composer dump-autoload -o -a"
+dump-autoload: ## Optimize autoloading and vendor
+dump-autoload: composer.lock
+	$(DOCKER_PHP) "composer dump-autoload"
 
 ##
 ## Symfony Command
 ## -------
 ##
 
-symfony-cmd: ## Exec command symfony inside php container. Use argument ARGS to define command. Example : make symfony-cmd "assets:install"
+symfony-cmd: ## Exec command symfony inside php container. Use argument ARGS to define command. Example : make symfony-cmd ARGS="assets:install"
 symfony-cmd:
 	$(SYMFONY)
 
@@ -122,13 +123,28 @@ migrations-diff:
 	$(DOCKER_PHP) "php bin/console doctrine:migrations:diff"
 
 migrations-exec: ## Execute migrations
-migrations-exec:
+migrations-migrate:
 	$(DOCKER_PHP) "php bin/console doctrine:migrations:migrate"
 
 ##
 ## Tools
 ## -------
 ##
+
+xdebug-enable: ## Enable Xdebug
+xdebug-enable:
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini_old /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/xdebug.ini_old /usr/local/etc/php/conf.d/xdebug.ini"
+	$(DOCKER) restart $(CONTAINER_NAME)_php-fpm
+	$(DOCKER) restart $(CONTAINER_NAME)_nginx
+
+xdebug-disable: ## Disable Xdebug
+xdebug-disable:
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini_old"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini_old"
+	$(DOCKER) restart $(CONTAINER_NAME)_php-fpm
+	$(DOCKER) restart $(CONTAINER_NAME)_nginx
+
 
 phpcs: ## Run phpcs
 phpcs: vendor/bin/phpcs
@@ -142,16 +158,16 @@ phpcbf: ## Run PHPCBF
 phpcbf: vendor/bin/phpcbf
 	$(DOCKER_PHP) vendor/bin/phpcbf
 
-prod: ## Build npm for production environment
-prod: package.json
+yarn-prod: ## Build npm for production environment
+yarn-prod: package.json
 	$(DOCKER_NPM) yarn run prod
 
-watch: ## Build npm for watch
-watch: package.json
+yarn-watch: ## Build npm for watch
+yarn-watch: package.json
 	$(DOCKER_NPM) yarn run watch
 
-dev: ## Build npm for dev environment
-dev:
+yarn-dev: ## Build npm for dev environment
+yarn-dev:
 	$(DOCKER_NPM) yarn run dev
 
 ##

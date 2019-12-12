@@ -1,7 +1,7 @@
 FROM composer
-FROM php:7.4-fpm-alpine
+FROM php:7.3-fpm-alpine
 
-ENV WORKPATH "/var/www/vins"
+ENV WORKPATH "/var/www/app"
 
 RUN apk add --no-cache $PHPIZE_DEPS \
     libzip-dev icu-dev libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf \
@@ -10,6 +10,7 @@ RUN apk add --no-cache $PHPIZE_DEPS \
 	&& docker-php-ext-enable apcu mysqli mongodb.so xdebug
 
 COPY docker/php/conf/php.ini /usr/local/etc/php/php.ini
+COPY docker/php/conf/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 # COPY conf/production/php.ini /usr/local/etc/php/php.ini -> Only for production usage.
 
@@ -29,12 +30,12 @@ COPY --from=0 /usr/bin/composer /usr/bin/composer
 #    && rm -Rf /tmp/blackfire
 
 # PHP-CS-FIXER & Deptrac
-RUN wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer \
-    && chmod a+x php-cs-fixer \
-    && mv php-cs-fixer /usr/local/bin/php-cs-fixer \
-    && curl -LS http://get.sensiolabs.de/deptrac.phar -o deptrac.phar \
-    && chmod +x deptrac.phar \
-    && mv deptrac.phar /usr/local/bin/deptrac
+#RUN wget http://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -O php-cs-fixer \
+#    && chmod a+x php-cs-fixer \
+#    && mv php-cs-fixer /usr/local/bin/php-cs-fixer \
+#    && curl -LS http://get.sensiolabs.de/deptrac.phar -o deptrac.phar \
+#    && chmod +x deptrac.phar \
+#    && mv deptrac.phar /usr/local/bin/deptrac
 
 RUN mkdir -p ${WORKPATH}
 
