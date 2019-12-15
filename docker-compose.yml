@@ -66,7 +66,6 @@ services:
     blackfire:
         container_name: ${CONTAINER_NAME}_blackfire
         image: blackfire/blackfire
-        env_file: .env.docker
         environment:
             BLACKFIRE_SERVER_ID: '${BLACKFIRE_SERVER_ID}'
             BLACKFIRE_SERVER_TOKEN: '${BLACKFIRE_SERVER_TOKEN}'
@@ -77,6 +76,16 @@ services:
         volumes:
             - './:${WORKPATH}:rw'
         restart: always
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        links:
+            - mysql
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+        ports:
+            - '8080:80'
 
 volumes:
     mysqlproject:

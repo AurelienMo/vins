@@ -22,10 +22,10 @@ stan: phpstan
 cbf: phpcbf
 quality: phpcs phpcbf
 test: test-functional phpstan phpcs
-dev: yarn-dev
-watch: yarn-watch
-prod: yarn-prod
-pp: vendor node_modules migrations-exec cache-clear cache-warmup #Post pull command
+dev: npm-dev
+watch: npm-watch
+prod: npm-prod
+pp: vendor node_modules migrations-migrate cache-clear cache-warmup #Post pull command
 sf-cmd: symfony-cmd
 
 
@@ -46,15 +46,34 @@ help:
 ## Docker
 ## -------
 ##
-start: ## Start environnement docker. Build docker env and init project (composer install)
-init: docker-compose.yml
+start: ## Start environnement docker.
+start: docker-compose.yml
 	$(DOCKER_COMPOSE) up -d --build
-	$(DOCKER_PHP) "composer install"
-	$(SYMFONY ARGS="assets:install")
+	make xdebug-disable
 
-stop: ## Stop environnement docker
-stop:
+chown-npm: ## Chown folder /.npm if access denied
+chown-npm:
+	$(DOCKER) exec -it $(CONTAINER_NAME)_nodejs sh -c "mkdir /.npm"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_nodejs sh -c "chown -R $(USER_DOCKER) /.npm"
+
+init: ## Initialize project
+init:
+	make start
+	make vendor
+	make chown-npm
+	$(SYMFONY)assets:install
+	make cache-clear
+	rm -rf node_modules
+	$(DOCKER_NPM) "npm install"
+	make dev
+
+destroy: ## Destroy all containers & network
+destroy:
 	$(DOCKER_COMPOSE) down
+
+stop: ## Stop all containers
+stop:
+	$(DOCKER_COMPOSE) stop
 
 list-containers: ## List container docker
 list-containers:
@@ -76,6 +95,18 @@ exec-php: ## Exec command inside container php. Use argument ARGS
 exec-php:
 	$(DOCKER_PHP) "${ARGS}"
 
+exec-node: ## Exec command inside container nodejs. Use argument ARGS
+exec-node:
+	$(DOCKER_NPM) "${ARGS}"
+
+connect-php: ## Connect sh to container php
+connect-php:
+	$(DOCKER) exec -u $(USER_DOCKER) -it $(CONTAINER_NAME)_php-fpm sh
+
+connect-node: ## Connect sh to container nodejs
+connect-node:
+	$(DOCKER) exec -u $(USER_DOCKER) -it $(CONTAINER_NAME)_nodejs sh
+
 ##
 ## Manage dependencies
 ## -------
@@ -91,11 +122,11 @@ new-vendor: composer.json
 
 node_modules: ## Install npm dependencies
 node_modules: package-lock.json
-	$(DOCKER_NPM) "yarn install"
+	$(DOCKER_NPM) "npm install --ignore-scripts"
 
 new-node_modules: ## Add dependency or dev dependency for npm usage. Use argument ARGS (Example : make new-node_modules ARGS="bootstrap --save") or with --save-dev
 new-node_modules: package.json
-	$(DOCKER_NPM) "yarn install ${ARGS}"
+	$(DOCKER_NPM) "npm install ${ARGS}"
 
 dump-autoload: ## Optimize autoloading and vendor
 dump-autoload: composer.lock
@@ -124,7 +155,7 @@ migrations-diff:
 
 migrations-exec: ## Execute migrations
 migrations-migrate:
-	$(DOCKER_PHP) "php bin/console doctrine:migrations:migrate"
+	$(DOCKER_PHP) "php bin/console doctrine:migrations:migrate -n"
 
 ##
 ## Tools
@@ -133,15 +164,15 @@ migrations-migrate:
 
 xdebug-enable: ## Enable Xdebug
 xdebug-enable:
-	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini_old /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
-	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/xdebug.ini_old /usr/local/etc/php/conf.d/xdebug.ini"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini_disable /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/xdebug.ini_disable /usr/local/etc/php/conf.d/xdebug.ini"
 	$(DOCKER) restart $(CONTAINER_NAME)_php-fpm
 	$(DOCKER) restart $(CONTAINER_NAME)_nginx
 
 xdebug-disable: ## Disable Xdebug
 xdebug-disable:
-	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini_old"
-	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini_old"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini_disable"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "mv /usr/local/etc/php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini_disable"
 	$(DOCKER) restart $(CONTAINER_NAME)_php-fpm
 	$(DOCKER) restart $(CONTAINER_NAME)_nginx
 
@@ -158,17 +189,20 @@ phpcbf: ## Run PHPCBF
 phpcbf: vendor/bin/phpcbf
 	$(DOCKER_PHP) vendor/bin/phpcbf
 
-yarn-prod: ## Build npm for production environment
-yarn-prod: package.json
-	$(DOCKER_NPM) yarn run prod
+npm-prod: ## Build npm for production environment
+npm-prod: package.json
+	sudo chown -R $(USER_DOCKER) public
+	$(DOCKER_NPM) "npm run prod"
 
-yarn-watch: ## Build npm for watch
-yarn-watch: package.json
-	$(DOCKER_NPM) yarn run watch
+npm-watch: ## Build npm for watch
+npm-watch: package.json
+	sudo chown -R $(USER_DOCKER) public
+	$(DOCKER_NPM) "npm run watch"
 
-yarn-dev: ## Build npm for dev environment
-yarn-dev:
-	$(DOCKER_NPM) yarn run dev
+npm-dev: ## Build npm for dev environment
+npm-dev:
+	sudo chown -R $(USER_DOCKER) public
+	$(DOCKER_NPM) "npm run dev"
 
 ##
 ## TESTS
@@ -176,7 +210,7 @@ yarn-dev:
 ##
 test-unit: ## Run phpunit
 test-unit: tests
-	vendor/bin/phpunit
+	$(DOCKER_PHP) "vendor/bin/phpunit"
 test-functional: ## Run behat
 test-functional: features
-	vendor/bin/behat
+	$(DOCKER_PHP) "vendor/bin/behat"
