@@ -37,5 +37,6 @@ public/.htaccess
 ###< symfony/web-server-bundle ###
 public/upload
 /.env
-/docker/nginx/logs/app_log_dev_access.log
-/docker/nginx/logs/app_log_dev_error.log
+/docker/apache/logs/app_access.log
+/docker/apache/logs/app_error.log
+

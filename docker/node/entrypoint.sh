@@ -15,5 +15,5 @@ chown foo /home
 if [ $# -eq 0 ]; then
     sleep 9999d
 else
-    exec su-exec foo "$@"
+    exec foo "$@"
 fi
