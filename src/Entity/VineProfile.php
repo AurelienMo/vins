@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Entity;
 
 use App\Entity\AdminMutators\VineProfileTrait;
+use App\Entity\Traits\DescriptionTrait;
 use App\Entity\Traits\NameTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -29,6 +30,7 @@ class VineProfile extends AbstractEntity
 {
     use VineProfileTrait;
     use NameTrait;
+    use DescriptionTrait;
 
     /**
      * @var string|null

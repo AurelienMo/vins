@@ -9,6 +9,8 @@ easy_admin:
                 fields:
                     - property: name
                       label: 'Nom'
+                    - property: description
+                      label: 'Description'
                     - property: color
                       label: 'Couleur du profil'
             new:
@@ -16,6 +18,9 @@ easy_admin:
                     - property: 'name'
                       type: 'text'
                       label: 'Nom'
+                    - property: description
+                      type: 'text'
+                      label: 'Description'
                     - property: 'color'
                       type: 'color'
                       label: 'Couleur du profil'
@@ -26,6 +31,9 @@ easy_admin:
                     - property: 'name'
                       type: 'text'
                       label: 'Nom'
+                    - property: description
+                      type: 'text'
+                      label: 'Description'
                     - property: 'color'
                       type: 'color'
                       label: 'Couleur du profil'
