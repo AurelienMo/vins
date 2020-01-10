@@ -152,4 +152,9 @@ class Capacity extends AbstractEntity
     {
         return sprintf('%s %s', $this->type, $this->getQuantity());
     }
+
+    public function __toString()
+    {
+        return sprintf('%s - %s - %s', $this->wine, $this->getType(), $this->getQuantity());
+    }
 }

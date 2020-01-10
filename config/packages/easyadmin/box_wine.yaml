@@ -1,0 +1,22 @@
+easy_admin:
+    entities:
+        BoxWine:
+            class: App\Entity\BoxWine
+            templates:
+                list: 'bundles/EasyAdminBundle/BoxWine/list.html.twig'
+            list:
+                title: 'Liste des boxs'
+                fields:
+                    - property: createdAt
+                      label: 'Crée le'
+                    - property: isActive
+                      label: 'Box active ?'
+                      css_class: 'is-active'
+                    - property: wines
+                      label: 'Nombre de vins dans la box'
+            form:
+                fields:
+                    - property: isActive
+                      label: 'Box active ?'
+                    - property: wines
+                      label: 'Vins'

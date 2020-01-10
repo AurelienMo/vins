@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class BoxWine
  *
  * @ORM\Table(name="amo_box_wine")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\BoxWineRepository")
  */
 class BoxWine extends AbstractEntity
 {
