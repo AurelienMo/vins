@@ -30,46 +30,25 @@ class WineService
     protected $temp;
 
     /**
-     * @var string|null
+     * @var bool|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="boolean")
      */
     protected $decanting;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
-    protected $meat;
+    protected $opportunity;
 
     /**
      * @var string|null
      *
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string")
      */
-    protected $cheese;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="text")
-     */
-    protected $fish;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="text")
-     */
-    protected $vegetable;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="text")
-     */
-    protected $dessert;
+    protected $grape;
 
     /**
      * @return int|null
@@ -88,17 +67,17 @@ class WineService
     }
 
     /**
-     * @return string|null
+     * @return bool|null
      */
-    public function getDecanting(): ?string
+    public function getDecanting(): ?bool
     {
         return $this->decanting;
     }
 
     /**
-     * @param string|null $decanting
+     * @param bool|null $decanting
      */
-    public function setDecanting(?string $decanting): void
+    public function setDecanting(?bool $decanting): void
     {
         $this->decanting = $decanting;
     }
@@ -106,80 +85,32 @@ class WineService
     /**
      * @return string|null
      */
-    public function getMeat(): ?string
+    public function getOpportunity(): ?string
     {
-        return $this->meat;
+        return $this->opportunity;
     }
 
     /**
-     * @param string|null $meat
+     * @param string|null $opportunity
      */
-    public function setMeat(?string $meat): void
+    public function setOpportunity(?string $opportunity): void
     {
-        $this->meat = $meat;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getCheese(): ?string
-    {
-        return $this->cheese;
-    }
-
-    /**
-     * @param string|null $cheese
-     */
-    public function setCheese(?string $cheese): void
-    {
-        $this->cheese = $cheese;
+        $this->opportunity = $opportunity;
     }
 
     /**
      * @return string|null
      */
-    public function getFish(): ?string
+    public function getGrape(): ?string
     {
-        return $this->fish;
+        return $this->grape;
     }
 
     /**
-     * @param string|null $fish
+     * @param string|null $grape
      */
-    public function setFish(?string $fish): void
+    public function setGrape(?string $grape): void
     {
-        $this->fish = $fish;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getVegetable(): ?string
-    {
-        return $this->vegetable;
-    }
-
-    /**
-     * @param string|null $vegetable
-     */
-    public function setVegetable(?string $vegetable): void
-    {
-        $this->vegetable = $vegetable;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDessert(): ?string
-    {
-        return $this->dessert;
-    }
-
-    /**
-     * @param string|null $dessert
-     */
-    public function setDessert(?string $dessert): void
-    {
-        $this->dessert = $dessert;
+        $this->grape = $grape;
     }
 }

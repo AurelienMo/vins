@@ -69,24 +69,19 @@ easy_admin:
                     - type: 'group'
                       label: 'Informations vin'
                       columns: 4
-                    - property: wineCaract.powerful
-                      type: 'integer'
-                      label: 'Puissant'
-                    - property: wineCaract.complex
-                      type: 'integer'
-                      label: 'Complexe'
-                    - property: wineCaract.spice
-                      type: 'integer'
-                      label: 'Epicé'
                     - property: wineCaract.fruity
                       type: 'integer'
                       label: 'Fruité'
-                    - property: wineCaract.wooded
-                      type: 'integer'
-                      label: 'Boisé'
-                    - property: wineCaract.tannic
-                      type: 'integer'
-                      label: 'Tannique'
+                    - property: wineCaract.taste
+                      type: 'choice'
+                      label: 'Goût'
+                      type_options:
+                          choices: {'Tannique': 'Tannique', 'Onctueux': 'Onctueux', "Frais": "Frais"}
+                    - property: wineCaract.robustness
+                      type: 'choice'
+                      label: 'Robustesse'
+                      type_options:
+                          choices: {'Mince': 'Mince', 'Charnu': 'Charnu', "Musclé": "Musclé"}
                     - type: 'group'
                       label: 'Service'
                       columns: 4
@@ -94,38 +89,13 @@ easy_admin:
                       type: 'integer'
                       label: 'Température de service'
                     - property: wineService.decanting
-                      type: 'text'
                       label: 'Carafage'
-                    - property: wineService.meat
-                      type: 'textarea'
-                      label: 'Viandes'
-                      type_options:
-                          attr:
-                              rows: 2
-                    - property: wineService.cheese
-                      type: 'textarea'
-                      label: 'Fromages'
-                      type_options:
-                          attr:
-                              rows: 2
-                    - property: wineService.fish
-                      type: 'textarea'
-                      label: 'Poissons'
-                      type_options:
-                          attr:
-                              rows: 2
-                    - property: wineService.vegetable
-                      type: 'textarea'
-                      label: 'Légumes'
-                      type_options:
-                          attr:
-                              rows: 2
-                    - property: wineService.dessert
-                      type: 'textarea'
-                      label: 'Desserts'
-                      type_options:
-                          attr:
-                              rows: 2
+                    - property: wineService.opportunity
+                      label: 'Occasion'
+                      type: 'text'
+                    - property: wineService.grape
+                      label: 'Cépage'
+                      type: 'text'
                     - type: 'group'
                       label: 'Contenance'
                       columns: 12
