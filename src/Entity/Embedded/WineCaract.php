@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Entity\Embedded;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class WineCaract
@@ -25,92 +26,31 @@ class WineCaract
     /**
      * @var int|null
      *
-     * @ORM\Column(type="integer")
-     */
-    protected $powerful;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $complex;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(type="integer")
-     */
-    protected $spice;
-
-    /**
-     * @var int|null
-     *
-     * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
+     * @Assert\Range(
+     *     min=0,
+     *     max=100
+     * )
      */
     protected $fruity;
 
     /**
-     * @var int|null
+     * @var string|null
      *
-     * @ORM\Column(type="integer")
-     */
-    protected $wooded;
-
-    /**
-     * @var int|null
+     * @ORM\Column(type="string")
      *
-     * @ORM\Column(type="integer")
+     * @Assert\NotBlank()
      */
-    protected $tannic;
+    protected $taste;
 
     /**
-     * @return int|null
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank()
      */
-    public function getPowerful(): ?int
-    {
-        return $this->powerful;
-    }
-
-    /**
-     * @param int|null $powerful
-     */
-    public function setPowerful(?int $powerful): void
-    {
-        $this->powerful = $powerful;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getComplex(): ?int
-    {
-        return $this->complex;
-    }
-
-    /**
-     * @param int|null $complex
-     */
-    public function setComplex(?int $complex): void
-    {
-        $this->complex = $complex;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getSpice(): ?int
-    {
-        return $this->spice;
-    }
-
-    /**
-     * @param int|null $spice
-     */
-    public function setSpice(?int $spice): void
-    {
-        $this->spice = $spice;
-    }
+    protected $robustness;
 
     /**
      * @return int|null
@@ -129,34 +69,34 @@ class WineCaract
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getWooded(): ?int
+    public function getTaste(): ?string
     {
-        return $this->wooded;
+        return $this->taste;
     }
 
     /**
-     * @param int|null $wooded
+     * @param string|null $taste
      */
-    public function setWooded(?int $wooded): void
+    public function setTaste(?string $taste): void
     {
-        $this->wooded = $wooded;
+        $this->taste = $taste;
     }
 
     /**
-     * @return int|null
+     * @return string|null
      */
-    public function getTannic(): ?int
+    public function getRobustness(): ?string
     {
-        return $this->tannic;
+        return $this->robustness;
     }
 
     /**
-     * @param int|null $tannic
+     * @param string|null $robustness
      */
-    public function setTannic(?int $tannic): void
+    public function setRobustness(?string $robustness): void
     {
-        $this->tannic = $tannic;
+        $this->robustness = $robustness;
     }
 }
