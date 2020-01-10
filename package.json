@@ -9,7 +9,6 @@
         "eslint": "^5.13.0",
         "eslint-config-prettier": "^4.0.0",
         "eslint-loader": "^2.1.2",
-        "foundation-sites": "^6.5.3",
         "jquery": "^3.3.1",
         "motion-ui": "^2.0.3",
         "node-sass": "^4.11.0",

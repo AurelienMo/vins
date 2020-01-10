@@ -16,8 +16,8 @@
 }
 #loading-overlay {
   transition: background-color 0.5s 0s ease-out;
-  background: rgba($medium-gray, 0);
-  @include flex;
+  background: rgba($gray-400, 0);
+  display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -32,7 +32,7 @@
   pointer-events: none;
 
   &.is-active {
-    background-color: rgba($medium-gray, 0.55);
+    background-color: rgba($gray-400, 0.55);
     pointer-events: auto;
     opacity: 1;
   }

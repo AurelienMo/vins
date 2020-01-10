@@ -1,8 +1,5 @@
-import AbstractComponent from "./AbstractComponent";
-
-export default class Homepage extends AbstractComponent {
+export default class Homepage  {
     constructor() {
-        super();
         // this.initSearchTextEvent();
     }
 

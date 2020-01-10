@@ -1,13 +1,11 @@
 import $ from "jquery";
-import AbstractComponent from "./AbstractComponent";
 
 export const BOTTOM_MODAL = 'bottom-modal';
 
-export default class Modal extends AbstractComponent {
+export default class Modal {
     bottomModal;
 
     constructor() {
-        super();
         this.onLoad();
     }
 
