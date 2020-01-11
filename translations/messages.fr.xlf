@@ -42,6 +42,14 @@
                 <source>Capacity</source>
                 <target>Contenance</target>
             </trans-unit>
+            <trans-unit id="BoxWine">
+                <source>BoxWine</source>
+                <target>Box du moment</target>
+            </trans-unit>
+            <trans-unit id="WineDomain">
+                <source>WineDomain</source>
+                <target>Domaine</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

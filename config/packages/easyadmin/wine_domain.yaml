@@ -3,7 +3,7 @@ easy_admin:
         WineDomain:
             class: App\Entity\WineDomain
             list:
-                title: 'Liste des catégories de vins'
+                title: 'Liste des domaines'
                 fields:
                     - property: name
                       label: 'Nom'
