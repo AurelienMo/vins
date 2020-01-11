@@ -25,8 +25,6 @@ behat.yml
 ###< behat/symfony2-extension ###
 ubuntu-xenial-16.04-cloudimg-console.log
 .idea/
-public/.htaccess
-.vagrant
 /docker/nginx/logs/access.log
 /docker/nginx/logs/error.log
 /docker/nginx/logs/vins_prod_access.log
