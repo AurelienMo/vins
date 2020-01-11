@@ -44,9 +44,6 @@ easy_admin:
                     - property: domain
                       label: 'Domaine'
                       type: 'easyadmin_autocomplete'
-                      type_options:
-                          attr:
-                              create: true
                     - property: vintageName
                       label: 'Nom de la cuvée'
                       type: 'text'

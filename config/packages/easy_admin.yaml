@@ -20,10 +20,12 @@ easy_admin:
         assets:
         menu:
             - label: 'Gestion des vins'
+            - entity: 'WineDomain'
+              label: 'Domaines'
+              default: true
             - entity: 'Product'
               label: 'Vins'
               icon: 'wine-bottle'
-              default: true
             - entity: 'TypeProduct'
               label: 'Catégorie des vins'
               icon: 'tag'

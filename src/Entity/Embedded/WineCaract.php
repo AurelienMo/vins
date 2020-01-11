@@ -26,6 +26,8 @@ class WineCaract
     /**
      * @var int|null
      *
+     * @ORM\Column(type="integer")
+     *
      * @Assert\NotBlank()
      * @Assert\Range(
      *     min=0,

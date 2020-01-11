@@ -9,8 +9,25 @@ easy_admin:
                       label: 'Nom'
                     - property: slug
                       label: 'Label court'
+                    - property: winegrowerName
+                      label: 'Vigneron'
+                    - property: winegrowerPicture
+                      type: 'image'
+                      base_path: '%app.path.domain_images%'
+                    - property: terroir
+                      label: 'Terroir'
             form:
                 fields:
+                    - { property: 'winegrowerPictureFile', type: 'vich_image', label: 'Photo du vigneron' }
+                    - property: winegrowerName
+                      type: 'text'
+                      label: 'Nom du vigneron'
                     - property: 'name'
                       type: 'text'
                       label: 'Nom du domaine'
+                    - property: terroir
+                      label: 'Terroir'
+                      type: 'text'
+                    - property: description
+                      label: 'Description'
+                      type: 'fos_ckeditor'

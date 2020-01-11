@@ -15,4 +15,5 @@ return [
     Symfony\Bundle\DebugBundle\DebugBundle::class => ['dev' => true, 'test' => true],
     Vich\UploaderBundle\VichUploaderBundle::class => ['all' => true],
     Symfony\Bundle\WebServerBundle\WebServerBundle::class => ['dev' => true],
+    FOS\CKEditorBundle\FOSCKEditorBundle::class => ['all' => true],
 ];
