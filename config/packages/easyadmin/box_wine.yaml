@@ -5,7 +5,7 @@ easy_admin:
             templates:
                 list: 'bundles/EasyAdminBundle/BoxWine/list.html.twig'
             list:
-                title: 'Liste des boxs'
+                title: 'Liste des boxs du moment'
                 fields:
                     - property: createdAt
                       label: 'Crée le'

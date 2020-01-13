@@ -33,7 +33,7 @@ easy_admin:
               label: 'Profils'
               icon: 'wine-glass'
             - entity: 'BoxWine'
-              label: 'Box'
+              label: 'Box du moment'
               icon: 'boxes'
             - label: 'Gestion Commandes'
 #            - entity: 'Order'
