@@ -44,9 +44,9 @@ class WineService
     protected $opportunity;
 
     /**
-     * @var string|null
+     * @var array|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="array")
      */
     protected $grape;
 
@@ -99,17 +99,17 @@ class WineService
     }
 
     /**
-     * @return string|null
+     * @return array|null
      */
-    public function getGrape(): ?string
+    public function getGrape(): ?array
     {
         return $this->grape;
     }
 
     /**
-     * @param string|null $grape
+     * @param array|null $grape
      */
-    public function setGrape(?string $grape): void
+    public function setGrape(?array $grape): void
     {
         $this->grape = $grape;
     }

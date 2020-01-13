@@ -91,8 +91,14 @@ easy_admin:
                       label: 'Occasion'
                       type: 'text'
                     - property: wineService.grape
+                      type: 'collection'
+                      type_options:
+                          entry_type: 'Symfony\Component\Form\Extension\Core\Type\TextType'
+                          allow_add: true
+                          allow_delete: true
+                          prototype: true
+                          prototype_data: 'Nouveau cépage'
                       label: 'Cépage'
-                      type: 'text'
                     - type: 'group'
                       label: 'Contenance'
                       columns: 12
