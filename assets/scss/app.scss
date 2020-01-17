@@ -12,3 +12,21 @@ label.required::after {
     background-color: $primary-color;
   }
 }
+
+@media all and (min-width: 992px){
+  nav {
+    height: 120px;
+    .logo {
+      height: 80px;
+    }
+  }
+}
+@media all and (max-width: 991px){
+  nav {
+    height: 60px;
+    .logo {
+      height: 40px;
+    }
+  }
+}
+

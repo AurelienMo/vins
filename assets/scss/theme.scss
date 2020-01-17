@@ -1,0 +1,14 @@
+$enable-rounded: true;
+
+//@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+@import '~font-awesome/scss/font-awesome.scss';
+
+
+@import '~mdbootstrap/css/mdb.min.css';
+
+// Display standard bootstrap dropdowns
+select.form-control {
+  &:not(.md-form) { display: block !important; }
+}

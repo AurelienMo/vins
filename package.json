@@ -1,23 +1,5 @@
 {
-    "devDependencies": {
-        "@babel/plugin-proposal-class-properties": "^7.5.5",
-        "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
-        "@babel/preset-react": "^7.0.0",
-        "@symfony/webpack-encore": "^0.28.0",
-        "autoprefixer": "^9.4.7",
-        "core-js": "^3.0.0",
-        "eslint": "^5.13.0",
-        "eslint-config-prettier": "^4.0.0",
-        "eslint-loader": "^2.1.2",
-        "jquery": "^3.3.1",
-        "motion-ui": "^2.0.3",
-        "node-sass": "^4.11.0",
-        "path": "^0.12.7",
-        "regenerator-runtime": "^0.13.2",
-        "sass": "^1.17.0",
-        "sass-loader": "^7.0.1",
-        "webpack-notifier": "^1.6.0"
-    },
+    "devDependencies": {},
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
@@ -27,10 +9,31 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@babel/plugin-proposal-class-properties": "^7.5.5",
+        "@babel/plugin-proposal-object-rest-spread": "^7.6.2",
+        "@babel/preset-react": "^7.0.0",
         "@hapi/joi": "^16.1.7",
+        "@symfony/webpack-encore": "^0.28.0",
+        "autoprefixer": "^9.4.7",
         "bootstrap": "^4.3.1",
+        "bootswatch": "^4.3.1",
+        "chart.js": "^2.9.3",
+        "core-js": "^3.0.0",
+        "eslint": "^5.13.0",
+        "eslint-config-prettier": "^4.0.0",
+        "eslint-loader": "^2.1.2",
         "export-loader": "^1.0.52",
-        "popper.js": "^1.16.0",
-        "tarteaucitronjs": "^1.2.0"
+        "font-awesome": "^4.7.0",
+        "jquery": "^3.4.1",
+        "mdbootstrap": "^4.8.7",
+        "motion-ui": "^2.0.3",
+        "node-sass": "^4.11.0",
+        "path": "^0.12.7",
+        "popper.js": "^1.15.0",
+        "regenerator-runtime": "^0.13.2",
+        "sass": "^1.17.0",
+        "sass-loader": "^7.0.1",
+        "tarteaucitronjs": "^1.2.0",
+        "webpack-notifier": "^1.6.0"
     }
 }

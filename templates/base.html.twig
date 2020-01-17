@@ -31,10 +31,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/css/mdb.min.css" rel="stylesheet">
-
         {{encore_entry_link_tags('app')}}
         {% block stylesheets %}{% endblock %}
     </head>
@@ -49,18 +45,51 @@
         <header>
             <nav class="navbar fixed-top navbar-expand-lg navbar-light scrolling-navbar white mt-4">
                 <div class="container">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            jkljkl
-                        </div>
-                        <div>
+                    <div class="row w-100 d-flex justify-content-between align-items-center">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Les vins
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Les Boxs</a>
+                            </li>
+                        </ul>
+                        <div class="d-flex flex-column justify-content-center align-items-center">
                             <a class="navbar-brand" href="#">
-                                <img src="{{asset('build/images/logo.png')}}" height="50" alt="logo mon premier sommelier">
+                                <img class="logo" src="{{asset('build/images/logo.png')}}" height="80" alt="logo mon premier sommelier">
                             </a>
+                            <span class="font-italic">Votre sommelier de proximité</span>
                         </div>
-                        <div>
-                            jklsdfjk
-                        </div>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="learn_wine" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    J'apprends le vin
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                                     aria-labelledby="learn_wine">
+                                    <a class="dropdown-item" href="#">MPDM</a>
+                                    <a class="dropdown-item" href="#">Les Tastuces</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="about" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    A propos
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                                     aria-labelledby="about">
+                                    <a class="dropdown-item" href="#">Le Concept</a>
+                                    <a class="dropdown-item" href="#">Les profils</a>
+                                    <a class="dropdown-item" href="#">Les daygust</a>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
 
                 </div>
@@ -72,10 +101,6 @@
         </div>
         {% include 'parts/_modals.html.twig' %}
         {{ encore_entry_script_tags('app') }}
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
