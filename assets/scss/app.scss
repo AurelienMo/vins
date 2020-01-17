@@ -14,6 +14,9 @@ label.required::after {
 }
 
 @media all and (min-width: 992px){
+  #mobile {
+    display: none;
+  }
   nav {
     height: 120px;
     .logo {
@@ -22,6 +25,9 @@ label.required::after {
   }
 }
 @media all and (max-width: 991px){
+  #desktop {
+    display: none;
+  }
   nav {
     height: 60px;
     .logo {
