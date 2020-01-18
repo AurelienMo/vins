@@ -55,6 +55,8 @@ DirectoryIndex index.php
 
     # Rewrite all other queries to the front controller.
     RewriteRule ^ %{ENV:BASE}/index.php [L]
+    #MODE MAINTENANCE
+    #RewriteRule .? %{ENV:BASE}/maintenance.php [L]
 </IfModule>
 
 <IfModule !mod_rewrite.c>

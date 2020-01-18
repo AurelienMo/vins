@@ -1,5 +1,6 @@
 @import "mixins";
 @import "colors";
+@import "theme";
 @import "~bootstrap/scss/bootstrap";
 @import "./components/loader";
 @import './components/_modal';
@@ -14,20 +15,34 @@ label.required::after {
 }
 
 @media all and (min-width: 992px){
-  #mobile {
-    display: none;
-  }
   nav {
-    height: 120px;
+    .nav-link {
+      transition: color 500ms ease-in-out;
+    }
+    .nav-link:hover {
+      color: $primary-color!important;
+    }
+    li.nav-item {
+      transition: transform 10ms
+    }
+    li.nav-item:hover {
+      transform: scale(1.1);
+    }
+    li.nav-item:after {
+      display:block;
+      content: '';
+      border-bottom: solid 2px $primary-color;
+      transform: scaleX(0);
+      transition: transform 500ms ease-in-out;
+    }
+    li.nav-item:hover:after { transform: scaleX(1)}
+    height: 100px;
     .logo {
       height: 80px;
     }
   }
 }
 @media all and (max-width: 991px){
-  #desktop {
-    display: none;
-  }
   nav {
     height: 60px;
     .logo {
