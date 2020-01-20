@@ -16,6 +16,8 @@ export default class Modal {
     toggle = (id) => {
         switch (id) {
             case 'bottom-modal':
+                console.log('bottom');
+                console.log()
                 $(this.bottomModal).modal('show');
                 break;
         }
