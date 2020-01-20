@@ -43,3 +43,12 @@
   }
 }
 
+@mixin link($color) {
+  a {
+    color: $color;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+

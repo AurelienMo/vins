@@ -1,5 +1,5 @@
-@import "mixins";
 @import "colors";
+@import "mixins";
 @import "theme";
 @import "~bootstrap/scss/bootstrap";
 @import "./components/loader";
@@ -21,6 +21,16 @@ label.required::after {
 }
 
 @media all and (min-width: 992px){
+  footer#desktop {
+    background-color: $grey-dark;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: $white;
+    @include link($white);
+  }
+  #main-container {
+    margin-top: 135px
+  }
   nav {
     .nav-link {
       transition: color 500ms ease-in-out;
