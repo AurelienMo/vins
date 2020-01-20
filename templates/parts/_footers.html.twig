@@ -1,6 +1,6 @@
 <footer id="desktop">
     <div class="container">
-        <div class="row d-flex justify-content-around">
+        <div class="row d-flex justify-content-around mb-2">
             <div>
                 <h3>A propos</h3>
                 <ul class="nav flex-column">
@@ -25,7 +25,7 @@
                         <a href="#">Livraison</a>
                     </li>
                     <li class="nav-item">
-                        <a class="static-call" data-url="/static/cfv" href="#">Mentions légales & CGV</a>
+                        <a class="static-call" data-url="{{ path('static_page', {'page': 'cgv'}) }}" href="#">Mentions légales & CGV</a>
                     </li>
                     <li class="nav-item">
                         <a href="#">Plan du site</a>

@@ -1,5 +1,6 @@
 import Modal from "./Modal";
-import {send} from './APIResolver'
+import {showLoader, hideLoader} from "./Loader";
+
 const modal = new Modal();
 
 export default class Global {
@@ -12,8 +13,22 @@ export default class Global {
         $('.static-call').on('click', function (e) {
             e.preventDefault();
             let modal = new Modal();
-            console.log(modal);
-            modal.toggle('bottom-modal');
+            showLoader();
+            $.ajax({
+                url: $(this).data('url'),
+                method: 'GET',
+                dataType: 'json',
+                success: function (response) {
+                    modal.html('bottom-modal', response.html);
+                    hideLoader();
+                    modal.toggle('bottom-modal');
+                }
+            });
+
+            // console.log(modal);
+            //
+            // modal
+            // modal.toggle('bottom-modal');
             // let response = send($(this).data('url'));
             // console.log(response);
         });

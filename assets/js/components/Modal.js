@@ -16,8 +16,6 @@ export default class Modal {
     toggle = (id) => {
         switch (id) {
             case 'bottom-modal':
-                console.log('bottom');
-                console.log()
                 $(this.bottomModal).modal('show');
                 break;
         }
@@ -26,7 +24,7 @@ export default class Modal {
     html = (id, html) => {
         switch (id) {
             case 'bottom-modal':
-                $(this.bottomModal).find('.modal-content').html(html);
+                $(this.bottomModal).find('.modal-body').html(html);
                 break
         }
     }

@@ -9,7 +9,7 @@
   left: auto;
   right: auto;
   bottom: 0;
-  .modal-content {
-    height: 90vh !important;
+  .modal-body, .modal-content {
+    min-height: 90vh;
   }
 }
