@@ -37,7 +37,8 @@ label.required::after {
   nav {
     .nav-link {
       transition: color 500ms ease-in-out;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      letter-spacing: 0.2rem;
     }
     .nav-link:hover {
       color: $primary-color!important;
