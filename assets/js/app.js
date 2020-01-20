@@ -8,7 +8,7 @@ import 'mdbootstrap/js/bootstrap.min.js';
 
 //import 'mdbootstrap-pro/css/mdb.min.css';
 
-//global.bsCustomFileInput = require('mdbootstrap/js/modules/vendor/bs-custom-file-input');
-// import 'mdbootstrap/js/mdb.min.js';
+global.bsCustomFileInput = require('mdbootstrap/js/modules/bs-custom-file-input');
 import Global from "./components/Global";
 new Global();
+import 'mdbootstrap/js/mdb.min.js';
