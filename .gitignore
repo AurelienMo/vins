@@ -37,4 +37,4 @@ public/upload
 /.env
 /docker/apache/logs/app_access.log
 /docker/apache/logs/app_error.log
-
+docker/mysql/mysql/*

@@ -1,71 +1,66 @@
 version: "3.2"
 services:
-  php-fpm:
-    build:
-      context: './docker/php/'
-      args:
-        PHP_VERSION: ${PHP_VERSION}
-    links:
-      - redis
-    volumes:
-      - './:${WORKPATH}:rw'
-    container_name: ${CONTAINER_NAME}_php-fpm
-  apache:
-    build:
-      context: './docker/apache/'
-      args:
-        APACHE_VERSION: ${APACHE_VERSION}
-    links:
-      - php-fpm
-    depends_on:
-      - php-fpm
-      - mysql
-    ports:
-      - "${APACHE_PORT}:80"
-    volumes:
-      - './:${WORKPATH}:rw'
-      - './docker/apache/logs/:/var/log/apache2'
-    container_name: ${CONTAINER_NAME}_apache
-  node:
-    container_name: ${CONTAINER_NAME}_nodejs
-    build: './docker/node'
-    links:
-      - php-fpm
-    volumes:
-      - './:${WORKPATH}:rw'
-    working_dir: ${WORKPATH}
+    php-fpm:
+        build:
+            context: './docker/php/'
+            args:
+                PHP_VERSION: ${PHP_VERSION}
+        volumes:
+            - './:${WORKPATH}:rw'
+        container_name: ${CONTAINER_NAME}_php-fpm
+        environment:
+            PHP_IDE_CONFIG: "serverName=app"
+    apache:
+        build:
+            context: './docker/apache/'
+            args:
+                APACHE_VERSION: ${APACHE_VERSION}
+        links:
+            - php-fpm
+        depends_on:
+            - php-fpm
+            - mysql
+        ports:
+            - "${APACHE_PORT}:80"
+        volumes:
+            - './:${WORKPATH}:rw'
+            - './docker/apache/logs/:/var/log/apache2'
+        container_name: ${CONTAINER_NAME}_apache
+    node:
+        container_name: ${CONTAINER_NAME}_nodejs
+        build: './docker/node'
+        links:
+            - php-fpm
+        volumes:
+            - './:${WORKPATH}:rw'
+        working_dir: ${WORKPATH}
 
-  mysql:
-    image: mysql:5.7.28
-    restart: always
-    ports:
-      - '${MYSQL_PORT}:3306'
-    volumes:
-      - mysql:/var/lib/mysql:rw
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_NAME}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-    container_name: ${CONTAINER_NAME}_mysql
+    mysql:
+        image: mysql:5.7.28
+        restart: always
+        ports:
+            - '${MYSQL_PORT}:3306'
+        volumes:
+            - ./docker/mysql/mysql:/var/lib/mysql:rw
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_NAME}
+            MYSQL_USER: ${MYSQL_USER}
+            MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+        container_name: ${CONTAINER_NAME}_mysql
 
-  adminer:
-    image: adminer
-    ports:
-      - '${ADMINER_PORT}:8080'
-    restart: always
-    container_name: ${CONTAINER_NAME}_adminer
+    adminer:
+        image: adminer
+        ports:
+            - '${ADMINER_PORT}:80'
+        restart: always
+        container_name: ${CONTAINER_NAME}_adminer
 
-  maildev:
-    image: djfarrelly/maildev
-    ports:
-      - '${MAILDEV_PORT}:80'
-    container_name: ${CONTAINER_NAME}_maildev
-
-  redis:
-    image: redis:alpine
-    ports:
-      - '${REDIS_PORT}:6379'
+    maildev:
+        image: djfarrelly/maildev
+        ports:
+            - '${MAILDEV_PORT}:80'
+        container_name: ${CONTAINER_NAME}_maildev
 
 volumes:
     mysql:

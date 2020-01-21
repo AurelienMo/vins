@@ -3,7 +3,7 @@ NETWORK_NAME = vins_default
 DOCKER_COMPOSE = docker-compose
 DOCKER = docker
 USER_DOCKER = $$(id -u $${USER}):$$(id -g $${USER})
-DOCKER_PHP = $(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c
+DOCKER_PHP = $(DOCKER) exec -u $(USER_DOCKER) -it $(CONTAINER_NAME)_php-fpm sh -c
 DOCKER_NPM = $(DOCKER) exec -it $(CONTAINER_NAME)_nodejs sh -c
 SYMFONY = $(DOCKER_PHP) "php bin/console ${ARGS}"
 
@@ -49,6 +49,7 @@ help:
 start: ## Start environnement docker.
 start: docker-compose.yml
 	$(DOCKER_COMPOSE) up -d --build
+	make dx
 
 
 chown-npm: ## Chown folder /.npm if access denied
@@ -166,15 +167,15 @@ fixtures-load:
 
 xdebug-enable: ## Enable Xdebug
 xdebug-enable:
-	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "sed -i "s/#zend_extension=\/usr\/local\/lib\/php\/extensions\/no-debug-non-zts-20180731\/xdebug.so/zend_extension =\/usr\/local\/lib\/php\/extensions\/no-debug-non-zts-20180731\/xdebug.so/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "sed -i 's#;zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so#zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so#g' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
 	$(DOCKER) restart $(CONTAINER_NAME)_php-fpm
-	$(DOCKER) restart $(CONTAINER_NAME)_nginx
+	$(DOCKER) restart $(CONTAINER_NAME)_apache
 
 xdebug-disable: ## Disable Xdebug
 xdebug-disable:
-	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "sed -i "s/zend_extension=\/usr\/local\/lib\/php\/extensions\/no-debug-non-zts-20180731\/xdebug.so/#zend_extension=\/usr\/local\/lib\/php\/extensions\/no-debug-non-zts-20180731\/xdebug.so/g" /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "sed -i 's#zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so#;zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so#g' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
 	$(DOCKER) restart $(CONTAINER_NAME)_php-fpm
-	$(DOCKER) restart $(CONTAINER_NAME)_nginx
+	$(DOCKER) restart $(CONTAINER_NAME)_apache
 
 
 phpcs: ## Run phpcs
