@@ -175,6 +175,14 @@ final class Contact extends AbstractEntity
     }
 
     /**
+     * @param bool $isAnswered
+     */
+    public function setIsAnswered(bool $isAnswered): void
+    {
+        $this->isAnswered = $isAnswered;
+    }
+
+    /**
      * @return DateTime|null
      */
     public function getAnwseredOn(): ?DateTime

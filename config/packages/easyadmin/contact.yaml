@@ -1,0 +1,49 @@
+easy_admin:
+    entities:
+        Contact:
+            class: App\Entity\Contact
+            disabled_actions: ["new", "delete"]
+            templates:
+                list: 'bundles/EasyAdminBundle/Contact/list.html.twig'
+            list:
+                actions: ["show", "-edit"]
+                title: 'Liste des demandes de contact'
+                fields:
+                    - property: isAnswered
+                      label: 'Traité ?'
+                    - property: anwseredOn
+                      label: 'Traité le'
+                    - property: createdAt
+                      label: 'Reçu le'
+                    - property: subject
+                      label: 'Sujet'
+                    - property: name
+                      label: 'Auteur'
+                    - property: email
+                      label: 'Adresse email'
+                    - property: phoneNumber
+                      label: 'N° Tél'
+                    - property: orderNumber
+                      label: "N° Commande"
+            show:
+                actions: ["-edit"]
+                fields:
+                    -   property: isAnswered
+                        label: 'Traité ?'
+                    -   property: anwseredOn
+                        label: 'Traité le'
+                    -   property: createdAt
+                        label: 'Reçu le'
+                    -   property: subject
+                        label: 'Sujet'
+                    -   property: name
+                        label: 'Auteur'
+                    -   property: email
+                        label: 'Adresse email'
+                    -   property: phoneNumber
+                        label: 'N° Tél'
+                    -   property: orderNumber
+                        label: "N° Commande"
+                    - property: message
+                      label: 'Contenu de la demande'
+
