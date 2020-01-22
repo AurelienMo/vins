@@ -3,13 +3,14 @@
   margin-left: 0;
   margin-right: 0;
   margin-bottom: 0;
-  min-height: 90vh;
   position: fixed;
   top: auto;
   left: auto;
   right: auto;
   bottom: 0;
-  .modal-body, .modal-content {
-    min-height: 90vh;
-  }
+
+}
+.modal-body, .modal-content, .modal-bottom {
+  max-height: 90vh;
+  height: auto;
 }

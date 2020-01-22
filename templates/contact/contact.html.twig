@@ -1,0 +1,114 @@
+<div class="container my-5">
+    <section class="contact-section dark-grey-text">
+
+        <style>
+            .contact-section .form .btn-floating {
+                left: 3px;
+            }
+        </style>
+        <div class="card">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card-body form">
+                        <h3 class="font-weight-bold dark-grey-text mt-4"><i class="fa fa-envelope pr-2 mr-1"></i>Contactez-nous:</h3>
+                        {% form_theme form 'forms/_contact.html.twig' %}
+                        {{ form_start(form, {'attr':}) }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="md-form mb-0">
+                                    {{ form_widget(form.name) }}
+                                    {{ form_label(form.name) }}
+{#                                    <input type="text" id="form-contact-name" class="form-control">#}
+{#                                    <label for="form-contact-name" class="">Nom</label>#}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="md-form mb-0">
+                                    {{ form_widget(form.email) }}
+                                    {{ form_label(form.email) }}
+{#                                    <input type="text" id="form-contact-email" class="form-control">#}
+{#                                    <label for="form-contact-email" class="">Email</label>#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="md-form mb-0">
+                                    {{ form_widget(form.phoneNumber) }}
+                                    {{ form_label(form.phoneNumber) }}
+{#                                    <input type="text" id="form-contact-phone" class="form-control">#}
+{#                                    <label for="form-contact-phone" class="">N° Téléphone</label>#}
+                                </div>
+                            </div>
+                            <div id="ordernumberinput" class="col-md-6">
+                                <div class="md-form mb-0">
+                                    {{ form_widget(form.orderNumber) }}
+                                    {{ form_label(form.orderNumber) }}
+{#                                    <input type="text" id="form-contact-ordernumber d-none" class="form-control">#}
+{#                                    <label for="form-contact-ordernumber" class="">N° Commande</label>#}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="md-form mb-0">
+                                    {{ form_widget(form.subject) }}
+{#                                    <select id=subject" class="browser-default custom-select">#}
+{#                                        <option selected>Sujet</option>#}
+{#                                        <option value="Demande information">Demande information</option>#}
+{#                                        <option value="Le concept">Le concept</option>#}
+{#                                        <option value="Suivi de commande">Suivi de commande</option>#}
+{#                                    </select>#}
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="md-form mb-0">
+                                    {{ form_widget(form.message) }}
+                                    {{ form_label(form.message) }}
+{#                                    <textarea id="form-contact-message" class="form-control md-textarea mb-3" rows="3"></textarea>#}
+{#                                    <label for="form-contact-message">Votre message</label>#}
+                                    <button type="submit" class="btn-floating float-right btn-lg primary-bkg text-white">
+                                        <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        {{ form_end(form) }}
+                    </div>
+
+                </div>
+                <div class="col-lg-4">
+
+                    <div class="card-body contact text-center h-100 white-text primary-bkg">
+
+                        <h3 class="font-weight-bold my-4 pb-2">Information</h3>
+                        <ul class="text-lg-left list-unstyled">
+                            <li>
+                                <p><i class="fa fa-map-marker-alt pr-1"></i>Marseille, 13014, France</p>
+                            </li>
+                            <li>
+                                <p><i class="fa fa-phone pr-1"></i>+33 6 12 34 56 78</p>
+                            </li>
+                            <li>
+                                <p><i class="fa fa-envelope pr-1"></i>monpremiersasu@gmail.com</p>
+                            </li>
+                        </ul>
+                        <hr class="hr-light my-4">
+                        <ul class="list-inline text-center list-unstyled">
+                            <li class="list-inline-item">
+                                <a class="p-2 fa-lg li-ic">
+                                    <i class="fa fa-facebook"> </i>
+                                </a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a class="p-2 fa-lg ins-ic">
+                                    <i class="fa fa-instagram"> </i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

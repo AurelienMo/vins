@@ -18,6 +18,9 @@ label.required::after {
   &bkg {
     background-color: $primary-color;
   }
+  &text {
+    color: $primary-color;
+  }
 }
 
 @media all and (min-width: 992px){
