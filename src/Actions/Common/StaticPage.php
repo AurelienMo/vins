@@ -45,6 +45,11 @@ final class StaticPage
         $typePage = $request->attributes->get('page');
         $datas = $this->resolver->getContentPage($typePage);
 
-        return $responder($datas);
+        $response = $responder($datas);
+        $response->setPublic();
+        $response->setMaxAge(3600);
+        $response->setSharedMaxAge(3600);
+
+        return $response;
     }
 }
