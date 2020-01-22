@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Domain\Contact\Forms\ContactDTO;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -85,9 +86,9 @@ final class Contact extends AbstractEntity
     /**
      * @var DateTime|null
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="datetime", nullable=true)
      */
-    protected $answeredAt;
+    protected $anwseredOn;
 
     /**
      * Contact constructor.
@@ -114,6 +115,7 @@ final class Contact extends AbstractEntity
         $this->message = $message;
         $this->orderNumber = $orderNumber;
         $this->isAnswered = false;
+        parent::__construct();
     }
 
     /**
@@ -175,9 +177,9 @@ final class Contact extends AbstractEntity
     /**
      * @return DateTime|null
      */
-    public function getAnsweredAt(): ?DateTime
+    public function getAnwseredOn(): ?DateTime
     {
-        return $this->answeredAt;
+        return $this->anwseredOn;
     }
 
     /**
@@ -185,6 +187,18 @@ final class Contact extends AbstractEntity
      */
     public function answer(): void
     {
-        $this->answeredAt = new DateTime();
+        $this->anwseredOn = new DateTime();
+    }
+
+    public static function create(ContactDTO $dto): Contact
+    {
+        return new self(
+            $dto->getSubject(),
+            $dto->getName(),
+            $dto->getEmail(),
+            $dto->getMessage(),
+            $dto->getPhoneNumber(),
+            $dto->getOrderNumber()
+        );
     }
 }

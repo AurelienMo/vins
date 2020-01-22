@@ -6,9 +6,19 @@
         {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
     {%- endif -%}
     <div {% with {attr: row_attr|default({})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_widget(form, widget_attr) -}}
         {{- form_label(form) -}}
         {{- form_errors(form) -}}
-        {{- form_widget(form, widget_attr) -}}
         {{- form_help(form) -}}
     </div>
 {%- endblock form_row -%}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="list-unstyled text-danger">
+                <i class="fa fa-warning"></i> {{ error.message }}
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}

@@ -1,73 +1,46 @@
 <div class="container my-5">
     <section class="contact-section dark-grey-text">
-
-        <style>
-            .contact-section .form .btn-floating {
-                left: 3px;
-            }
-        </style>
         <div class="card">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card-body form">
                         <h3 class="font-weight-bold dark-grey-text mt-4"><i class="fa fa-envelope pr-2 mr-1"></i>Contactez-nous:</h3>
                         {% form_theme form 'forms/_contact.html.twig' %}
-                        {{ form_start(form, {'attr':}) }}
+                        {{ form_start(form, {'attr': {'action': path('contact_page'), 'method': 'POST'}}) }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
-                                    {{ form_widget(form.name) }}
-                                    {{ form_label(form.name) }}
-{#                                    <input type="text" id="form-contact-name" class="form-control">#}
-{#                                    <label for="form-contact-name" class="">Nom</label>#}
+                                    {{ form_row(form.name) }}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
-                                    {{ form_widget(form.email) }}
-                                    {{ form_label(form.email) }}
-{#                                    <input type="text" id="form-contact-email" class="form-control">#}
-{#                                    <label for="form-contact-email" class="">Email</label>#}
+                                    {{ form_row(form.email) }}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="md-form mb-0">
-                                    {{ form_widget(form.phoneNumber) }}
-                                    {{ form_label(form.phoneNumber) }}
-{#                                    <input type="text" id="form-contact-phone" class="form-control">#}
-{#                                    <label for="form-contact-phone" class="">N° Téléphone</label>#}
+                                    {{ form_row(form.phoneNumber) }}
                                 </div>
                             </div>
                             <div id="ordernumberinput" class="col-md-6">
                                 <div class="md-form mb-0">
-                                    {{ form_widget(form.orderNumber) }}
-                                    {{ form_label(form.orderNumber) }}
-{#                                    <input type="text" id="form-contact-ordernumber d-none" class="form-control">#}
-{#                                    <label for="form-contact-ordernumber" class="">N° Commande</label>#}
+                                    {{ form_row(form.orderNumber) }}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="md-form mb-0">
-                                    {{ form_widget(form.subject) }}
-{#                                    <select id=subject" class="browser-default custom-select">#}
-{#                                        <option selected>Sujet</option>#}
-{#                                        <option value="Demande information">Demande information</option>#}
-{#                                        <option value="Le concept">Le concept</option>#}
-{#                                        <option value="Suivi de commande">Suivi de commande</option>#}
-{#                                    </select>#}
+                                    {{ form_row(form.subject) }}
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="md-form mb-0">
-                                    {{ form_widget(form.message) }}
-                                    {{ form_label(form.message) }}
-{#                                    <textarea id="form-contact-message" class="form-control md-textarea mb-3" rows="3"></textarea>#}
-{#                                    <label for="form-contact-message">Votre message</label>#}
-                                    <button type="submit" class="btn-floating float-right btn-lg primary-bkg text-white">
+                                    {{ form_row(form.message) }}
+                                    <button type="submit" class="btn-floating float-right btn primary-bkg text-white">
                                         <i class="fa fa-paper-plane"></i>
                                     </button>
                                 </div>

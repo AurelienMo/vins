@@ -35,7 +35,8 @@ final class ContactType extends AbstractType
                     'label' => 'Nom',
                     'attr' => [
                         'class' => 'form-control',
-                    ]
+                    ],
+                    'required' => false
                 ]
             )
             ->add(
@@ -45,7 +46,8 @@ final class ContactType extends AbstractType
                     'label' => 'Email',
                     'attr' => [
                         'class' => 'form-control',
-                    ]
+                    ],
+                    'required' => false
                 ]
             )
             ->add(
@@ -56,7 +58,7 @@ final class ContactType extends AbstractType
                     'required' => false,
                     'attr' => [
                         'class' => 'form-control',
-                    ]
+                    ],
                 ]
             )
             ->add(
@@ -67,7 +69,7 @@ final class ContactType extends AbstractType
                     'required' => false,
                     'attr' => [
                         'class' => 'form-control',
-                    ]
+                    ],
                 ]
             )
             ->add(
@@ -79,7 +81,8 @@ final class ContactType extends AbstractType
                     'placeholder' => 'Sujet',
                     'attr' => [
                         'class' => 'browser-default custom-select'
-                    ]
+                    ],
+                    'required' => false,
                 ]
             )
             ->add(
@@ -90,7 +93,8 @@ final class ContactType extends AbstractType
                     'attr' => [
                         'rows' => 3,
                         'class' => 'form-control md-textarea mb-3'
-                    ]
+                    ],
+                    'required' => false,
                 ]
             );
     }

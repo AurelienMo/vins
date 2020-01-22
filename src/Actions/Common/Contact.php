@@ -44,7 +44,7 @@ final class Contact
         $form = $this->resolver->getForm($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $datasReturned = $this->resolver->processSubmittingContact($form->getData());
+            $datasReturned = $this->resolver->processSubmittingContact($request, $form->getData());
 
             return $responder($datasReturned);
         }
