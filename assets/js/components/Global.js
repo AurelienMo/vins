@@ -64,5 +64,21 @@ export default class Global {
                 }
             });
         })
+        $('body').on('change', '#contact_subject', function (e) {
+            let orderField = $('#ordernumberinput');
+            if ($(this).val() === 'Suivi de commande') {
+                if (orderField.hasClass('d-none')) {
+                    console.log('has follow');
+                    orderField.removeClass('d-none')
+                }
+                console.log('not has follow')
+            } else {
+                if (!orderField.hasClass('d-none')) {
+                    console.log('not has');
+                    orderField.addClass('d-none');
+                }
+                console.log('has');
+            }
+        })
     }
 }
