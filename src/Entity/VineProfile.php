@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Class VineProfile
  *
  * @ORM\Table(name="mps_vine_profile")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\WineProfileRepository")
  */
 class VineProfile extends AbstractEntity
 {
