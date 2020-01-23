@@ -23,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="amo_contact")
  * @ORM\Entity()
  */
-final class Contact extends AbstractEntity
+class Contact extends AbstractEntity
 {
     public const LIST_SUBJECT = [
         'Demande information' => 'Demande information',
