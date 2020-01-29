@@ -4,27 +4,36 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./components/loader";
 @import './components/_modal';
+html, body {
+  height: 100%;
+}
 body {
   font-family: 'Raleway', sans-serif;
   font-size: 1rem;
   .nav-link, h1, h2, h3, h4 {
     font-family: 'Dekko', cursive;
   }
+  display: flex;
+  flex-direction: column;
+}
+#main-container {
+  flex: 1 0 auto;
 }
 label.required::after {
   content: " *"
 }
 .primary- {
   &bkg {
-    background-color: $primary-color;
+    background-color: $primary-color !important;
   }
   &text {
-    color: $primary-color;
+    color: $primary-color !important;
   }
 }
 
 @media all and (min-width: 992px){
   footer#desktop {
+    flex-shrink: 0;
     background-color: $grey-dark;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -74,48 +83,3 @@ label.required::after {
   }
 }
 
-
-/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
-.flip-card {
-  background-color: transparent;
-  width: 300px;
-  height: 200px;
-  border: 1px solid #f1f1f1;
-  perspective: 1000px; /* Remove this if you don't want the 3D effect */
-}
-
-/* This container is needed to position the front and back side */
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-/* Do an horizontal flip when you move the mouse over the flip box container */
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-/* Position the front and back side */
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-
-/* Style the front side (fallback if image is missing) */
-.flip-card-front {
-  background-color: #bbb;
-  color: black;
-}
-
-/* Style the back side */
-.flip-card-back {
-  background-color: dodgerblue;
-  color: white;
-  transform: rotateY(180deg);
-}

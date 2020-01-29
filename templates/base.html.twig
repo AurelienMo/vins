@@ -33,11 +33,14 @@
         <link href="https://fonts.googleapis.com/css?family=Audiowide|Raleway|Dekko&display=swap" rel="stylesheet">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {{encore_entry_link_tags('app')}}
+        <link rel="stylesheet" href="{{ asset('vendor/mdb/css/bootstrap.min.css') }}">
+        <link rel="stylesheet" href="{{asset('vendor/mdb/css/mdb.min.css')}}">
+        <link rel="stylesheet" href="{{asset('vendor/mdb/css/style.css')}}">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% include 'parts/_headers.html.twig' %}
         <div id="main-container">
+        {% include 'parts/_headers.html.twig' %}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert alert-{{label}} alert-dismissible fade show" role="alert">
@@ -79,6 +82,9 @@
         </div>
         {% include 'parts/_modals.html.twig' %}
         {{ encore_entry_script_tags('app') }}
+        <script type="text/javascript" src="{{ asset('vendor/mdb/js/popper.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('vendor/mdb/js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('vendor/mdb/js/mdb.min.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
