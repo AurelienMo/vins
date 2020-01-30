@@ -9,3 +9,7 @@ vich_uploader:
             namer: Vich\UploaderBundle\Naming\UniqidNamer
             uri_prefix: /upload/images/domain
             upload_destination: '%kernel.project_dir%/public/upload/images/domain'
+        wine_profile_images:
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            uri_prefix: /upload/images/wine_profile
+            upload_destination: '%kernel.project_dir%/public/upload/images/wine_profile'

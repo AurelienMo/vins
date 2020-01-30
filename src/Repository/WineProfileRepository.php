@@ -22,4 +22,12 @@ final class WineProfileRepository extends AbstractServiceRepository
     {
         return VineProfile::class;
     }
+
+    public function getListProfileGroupedByType()
+    {
+        return $this->createQueryBuilder('wp')
+                    ->groupBy('wp.type')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

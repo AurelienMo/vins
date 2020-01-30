@@ -70,7 +70,7 @@ destroy: ## Destroy all containers & network
 destroy:
 	$(DOCKER_COMPOSE) down
 
-stop: ## Stop all containers
+stop: ## Stop all containersv related project
 stop:
 	$(DOCKER_COMPOSE) stop
 
@@ -102,9 +102,17 @@ connect-php: ## Connect sh to container php
 connect-php:
 	$(DOCKER) exec -u $(USER_DOCKER) -it $(CONTAINER_NAME)_php-fpm sh
 
+connect-php-root: ## Connect sh to container as user root
+connect-php-root:
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh
+
 connect-node: ## Connect sh to container nodejs
 connect-node:
 	$(DOCKER) exec -u $(USER_DOCKER) -it $(CONTAINER_NAME)_nodejs sh
+
+stop-all: ## Stop all containers
+stop-all:
+	$(DOCKER) stop $$(docker ps -a -q)
 
 ##
 ## Manage dependencies

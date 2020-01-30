@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Actions\WineProfile;
 
 use App\Domain\WineProfile\Resolver;
+use App\Entity\VineProfile;
 use App\Responders\ViewResponder;
 use Symfony\Component\Routing\Annotation\Route;
 
