@@ -15,6 +15,11 @@ easy_admin:
                       label: 'Couleur du profil'
             new:
                 fields:
+                    - property: type
+                      label: 'Type de profil'
+                      type: 'choice'
+                      type_options:
+                        choices: {'Les rouges': 'Les rouges', 'Les rosés': 'Les rosés', "Les blancs": "Les blancs"}
                     - property: 'name'
                       type: 'text'
                       label: 'Nom'
@@ -28,6 +33,11 @@ easy_admin:
                           data: '#ffffff'
             edit:
                 fields:
+                    - property: type
+                      label: 'Type de profil'
+                      type: 'choice'
+                      type_options:
+                        choices: {'Les rouges': 'Les rouges', 'Les rosés': 'Les rosés', "Les blancs": "Les blancs"}
                     - property: 'name'
                       type: 'text'
                       label: 'Nom'

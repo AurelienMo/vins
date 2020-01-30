@@ -46,6 +46,13 @@ class VineProfile extends AbstractEntity
      */
     protected $wines;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $type;
+
     public function __construct()
     {
         $this->wines = new ArrayCollection();
@@ -79,6 +86,22 @@ class VineProfile extends AbstractEntity
     public function removeWine(Product $product): void
     {
         $this->wines->removeElement($product);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string|null $type
+     */
+    public function setType(?string $type): void
+    {
+        $this->type = $type;
     }
 
     public function __toString()
