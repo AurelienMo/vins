@@ -35,14 +35,6 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
     protected $quantity;
 
     /**
-     * @var Product|null
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Product")
-     * @ORM\JoinColumn(name="amo_wine_id", referencedColumnName="id")
-     */
-    protected $wine;
-
-    /**
      * @var Order|null
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="lines")
@@ -64,10 +56,32 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
      */
     protected $tvaRate;
 
-    public function __toString()
-    {
-        return sprintf('%s - %s bouteilles', $this->wine, $this->quantity);
-    }
+    /**
+     * @var Capacity|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Capacity")
+     * @ORM\JoinColumn(name="amo_capacity_wine_id", referencedColumnName="id", nullable=true)
+     */
+    protected $capacityWine;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $wineName;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $typeCapacity;
+
+    /**
+     * @var string|null
+     */
+    protected $quantityCapacity;
 
     /**
      * @return int|null
@@ -83,22 +97,6 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
     public function setQuantity(?int $quantity): void
     {
         $this->quantity = $quantity;
-    }
-
-    /**
-     * @return Product|null
-     */
-    public function getWine(): ?Product
-    {
-        return $this->wine;
-    }
-
-    /**
-     * @param Product|null $wine
-     */
-    public function setWine(?Product $wine): void
-    {
-        $this->wine = $wine;
     }
 
     /**
@@ -147,5 +145,69 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
     public function setTvaRate(?float $tvaRate): void
     {
         $this->tvaRate = $tvaRate;
+    }
+
+    /**
+     * @return Capacity|null
+     */
+    public function getCapacityWine(): ?Capacity
+    {
+        return $this->capacityWine;
+    }
+
+    /**
+     * @param Capacity|null $capacityWine
+     */
+    public function setCapacityWine(?Capacity $capacityWine): void
+    {
+        $this->capacityWine = $capacityWine;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getWineName(): ?string
+    {
+        return $this->wineName;
+    }
+
+    /**
+     * @param string|null $wineName
+     */
+    public function setWineName(?string $wineName): void
+    {
+        $this->wineName = $wineName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTypeCapacity(): ?string
+    {
+        return $this->typeCapacity;
+    }
+
+    /**
+     * @param string|null $typeCapacity
+     */
+    public function setTypeCapacity(?string $typeCapacity): void
+    {
+        $this->typeCapacity = $typeCapacity;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getQuantityCapacity(): ?string
+    {
+        return $this->quantityCapacity;
+    }
+
+    /**
+     * @param string|null $quantityCapacity
+     */
+    public function setQuantityCapacity(?string $quantityCapacity): void
+    {
+        $this->quantityCapacity = $quantityCapacity;
     }
 }
