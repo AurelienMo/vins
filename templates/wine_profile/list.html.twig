@@ -8,6 +8,16 @@
             border-bottom: solid 1px red;
             opacity: 0.1;
         }
+        .avatar img {
+            height: 120px;
+        }
+        .custom-card-up {
+            height: 100px;
+            overflow: hidden;
+        }
+        .card-wrapper {
+            height: 300px !important;
+        }
     </style>
 {% endblock %}
 
@@ -20,6 +30,43 @@
                 </h2>
             </div>
             {% for profile in profiles %}
+                {% if profile.type == constant('App\\Entity\\VineProfile::WHITE_TYPE_PROFILE') %}
+                    <div class="col-sm-12 col-md-4 col-lg-3">
+                        <div class="card-wrapper">
+                            <div id="card-{{ profile.id }}" class="card card-rotating text-center">
+                                <div class="face front">
+                                    <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">
+                                        <h3 class="h3 card-img-top p-1" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>
+                                    </div>
+                                    {% if profile.imagePath %}
+                                        <div class="avatar mx-auto white">
+                                            <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-0">
+                                        </div>
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <p class="font-weight-bold primary-text">{{ profile.description }}</p>
+                                        <a class="rotate-btn" data-card="card-{{ profile.id }}"><i class="fas fa-wine-bottle"></i> Découvrir les vins</a>
+                                    </div>
+                                </div>
+                                <div class="face back">
+                                    <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">
+                                        <h3 class="h3 card-img-top p-1" style="color: {{ profile.colorText }}">Les vins</h3>
+                                    </div>
+                                    {% if profile.imagePath %}
+                                        <div class="avatar mx-auto white">
+                                            <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-0">
+                                        </div>
+                                    {% endif %}
+                                    <div class="card-body">
+
+                                        <p class="font-weight-bold primary-text">{{ profile.description }}</p>
+                                        <a class="rotate-btn" data-card="card-{{ profile.id }}"><i class="fas fa-angle-double-left"></i> La description</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
         <div class="row">
