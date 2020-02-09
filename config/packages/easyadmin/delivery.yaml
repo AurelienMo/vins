@@ -2,7 +2,7 @@ easy_admin:
     entities:
         Delivery:
             class: App\Entity\Delivery
-            disabled_actions: ["new", "delete"]
+            disabled_actions: ["new", "delete", 'edit']
             list:
                 title: 'Liste des livraisons'
                 fields:
@@ -10,17 +10,5 @@ easy_admin:
                       label: 'Commande'
                     - property: status
                       label: 'Statut livraison'
-                    - property: deliveryType
-                      label: 'Type de livraison'
-                    - property: deliveryPoint
-                      label: 'Point relais'
                     - property: niche
                       label: "Date livraison à l'adresse"
-            form:
-                title: 'Nouveau point de livraison'
-                fields:
-                    -   property: status
-                        label: 'Status livraison'
-                        type: 'choice'
-                        type_options:
-                            choices: {'Livraison en cours': 'Livraison en cours', 'Livré en point relais': 'Livré en point relais', "Livré à l'adresse": "Livré à l'adresse"}

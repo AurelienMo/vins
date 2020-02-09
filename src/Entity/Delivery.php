@@ -40,22 +40,6 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     protected $status;
 
     /**
-     * @var DeliveryType|null
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\DeliveryType")
-     * @ORM\JoinColumn(name="amo_delivery_type_id", referencedColumnName="id")
-     */
-    protected $deliveryType;
-
-    /**
-     * @var DeliveryPoint|null
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\DeliveryPoint")
-     * @ORM\JoinColumn(name="amo_delivery_point_id", referencedColumnName="id", nullable=true)
-     */
-    protected $deliveryPoint;
-
-    /**
      * @var DateTime
      *
      * @ORM\Column(type="datetime")
@@ -99,38 +83,6 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public function setStatus(string $status): void
     {
         $this->status = $status;
-    }
-
-    /**
-     * @return DeliveryType|null
-     */
-    public function getDeliveryType(): ?DeliveryType
-    {
-        return $this->deliveryType;
-    }
-
-    /**
-     * @param DeliveryType|null $deliveryType
-     */
-    public function setDeliveryType(?DeliveryType $deliveryType): void
-    {
-        $this->deliveryType = $deliveryType;
-    }
-
-    /**
-     * @return DeliveryPoint|null
-     */
-    public function getDeliveryPoint(): ?DeliveryPoint
-    {
-        return $this->deliveryPoint;
-    }
-
-    /**
-     * @param DeliveryPoint|null $deliveryPoint
-     */
-    public function setDeliveryPoint(?DeliveryPoint $deliveryPoint): void
-    {
-        $this->deliveryPoint = $deliveryPoint;
     }
 
     /**
