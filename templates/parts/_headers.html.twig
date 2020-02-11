@@ -8,27 +8,37 @@
     </div>
     <nav class="navbar navbar-expand-lg navbar-light scrolling-navbar white">
         <div class="container d-flex justify-content-center">
-            <div class="row w-75">
-                <ul class="col navbar-nav">
+            <div class="row w-100">
+                <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center">
                         <a class="nav-link" href="#">Les boxs
                         </a>
                     </li>
                 </ul>
-                <ul class="col navbar-nav">
+                <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center">
                         <a class="nav-link" href="#">Les vins</a>
+                    </li>
+                </ul>
+                <ul class="col navbar-nav d-flex justify-content-center">
+                    <li class="nav-item d-flex flex-column justify-content-center w-100">
+                        <a class="nav-link d-flex justify-content-center" href="#">
+                            <img class="basket" src="{{asset('build/images/cart.png')}}" height="30" alt="cart">
+{#                            {% if app.session.get('itemsCart')|length %}#}
+                                <span class="badge badge-pill primary-bkg">{{ app.session.get('itemsCart')|default(0) }}</span>
+{#                            {% endif %}#}
+                        </a>
                     </li>
                 </ul>
                 <a class="col navbar-brand" href="{{ path('homepage') }}">
                     <img class="logo" src="{{asset('build/images/logo.png')}}" height="80" alt="logo mon premier sommelier">
                 </a>
-                <ul class="col navbar-nav">
+                <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center">
                         <a class="nav-link" href="{{ path('list_profiles') }}">Les profils</a>
                     </li>
                 </ul>
-                <ul class="col navbar-nav">
+                <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center dropdown">
                         <a class="nav-link dropdown-toggle" id="learn_wine" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
@@ -41,7 +51,7 @@
                         </div>
                     </li>
                 </ul>
-                <ul class="col navbar-nav">
+                <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center dropdown">
                         <a class="nav-link dropdown-toggle" id="about" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">

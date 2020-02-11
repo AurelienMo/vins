@@ -50,6 +50,11 @@ label.required::after {
     background-color: $primary-color!important;
   }
   nav {
+    .badge {
+      position: absolute;
+      right: 20px;
+      top: 0px;
+    }
     .nav-link {
       transition: color 500ms ease-in-out;
       font-size: 1.1rem;
@@ -66,7 +71,6 @@ label.required::after {
     li.nav-item:after {
       display:block;
       content: '';
-      border-bottom: solid 2px $primary-color;
       transform: scaleX(0);
       transition: transform 500ms ease-in-out;
     }
