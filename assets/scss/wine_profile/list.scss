@@ -1,0 +1,12 @@
+.title-type:after {
+  display:block;
+  content: '';
+  border-bottom: solid 1px red;
+  opacity: 0.1;
+}
+.avatar img {
+  height: 120px;
+}
+.card-wrapper {
+  height: 300px !important;
+}

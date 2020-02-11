@@ -1,0 +1,1 @@
+import '../../../scss/wine_profile/list.scss'

@@ -1,125 +1,136 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <style>
-        .title-type:after {
-            display:block;
-            content: '';
-            border-bottom: solid 1px red;
-            opacity: 0.1;
-        }
-        .avatar img {
-            height: 120px;
-        }
-        .card-wrapper {
-            height: 300px !important;
-        }
-    </style>
+    {{ encore_entry_link_tags('wine_profile_list') }}
+{#    <style>#}
+{#        .title-type:after {#}
+{#            display:block;#}
+{#            content: '';#}
+{#            border-bottom: solid 1px red;#}
+{#            opacity: 0.1;#}
+{#        }#}
+{#        .avatar img {#}
+{#            height: 120px;#}
+{#        }#}
+{#        .card-wrapper {#}
+{#            height: 300px !important;#}
+{#        }#}
+{#    </style>#}
 {% endblock %}
 
 {% block body %}
+    {% set profilesName = [
+        constant('App\\Entity\\VineProfile::WHITE_TYPE_PROFILE'),
+        constant('App\\Entity\\VineProfile::RED_TYPE_PROFILE'),
+        constant('App\\Entity\\VineProfile::PINK_TYPE_PROFILE')
+    ]
+    %}
     <div class="container mt-3 mb-3">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="h2 title-type p-2">
-                    {{ constant('App\\Entity\\VineProfile::WHITE_TYPE_PROFILE') }}
-                </h2>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center">
-            {% for profile in profiles %}
-                {% if profile.type == constant('App\\Entity\\VineProfile::WHITE_TYPE_PROFILE') %}
-                    <div class="col-sm-12 col-md-4 col-lg-3">
-                        <div class="card-wrapper">
-                            <div id="card-{{ profile.id }}" class="card card-rotating text-center">
-                                <div class="face front">
-                                    <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">
-                                        <h3 class="h3 card-img-top p-1" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>
-                                    </div>
-                                    {% if profile.imagePath %}
-                                        <div class="avatar mx-auto white">
-                                            <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-0">
-                                        </div>
-                                    {% endif %}
-                                    <div class="card-body">
-                                        <p class="font-weight-bold primary-text">{{ profile.description }}</p>
-                                        <a href="#"><i class="fas fa-wine-bottle"></i> Découvrir les vins</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <h2 class="h2 title-type p-2">
-                    {{ constant('App\\Entity\\VineProfile::PINK_TYPE_PROFILE') }}
-                </h2>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center">
-            {% for profile in profiles %}
-                {% if profile.type == constant('App\\Entity\\VineProfile::PINK_TYPE_PROFILE') %}
-                    <div class="col-sm-12 col-md-4 col-lg-3">
-                        <div class="card-wrapper">
-                            <div id="card-{{ profile.id }}" class="card card-rotating text-center">
-                                <div class="face front">
-                                    <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">
-                                        <h3 class="h3 card-img-top p-1" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>
-                                    </div>
-                                    {% if profile.imagePath %}
-                                        <div class="avatar mx-auto white">
-                                            <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-0">
-                                        </div>
-                                    {% endif %}
-                                    <div class="card-body">
-                                        <p class="font-weight-bold primary-text">{{ profile.description }}</p>
-                                        <a href="#"><i class="fas fa-wine-bottle"></i> Découvrir les vins</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <h2 class="h2 title-type p-2">
-                    {{ constant('App\\Entity\\VineProfile::RED_TYPE_PROFILE') }}
-                </h2>
-            </div>
-        </div>
-        <div class="row d-flex justify-content-center">
-            {% for profile in profiles %}
-                {% if profile.type == constant('App\\Entity\\VineProfile::RED_TYPE_PROFILE') %}
-                    <div class="col-sm-12 col-md-4 col-lg-3">
-                        <div class="card-wrapper">
-                            <div id="card-{{ profile.id }}" class="card card-rotating text-center">
-                                <div class="face front">
-                                    <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">
-                                        <h3 class="h3 card-img-top p-1" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>
-                                    </div>
-                                    {% if profile.imagePath %}
-                                        <div class="avatar mx-auto white">
-                                            <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-0">
-                                        </div>
-                                    {% endif %}
-                                    <div class="card-body">
-                                        <p class="font-weight-bold primary-text">{{ profile.description }}</p>
-                                        <a href="#"><i class="fas fa-wine-bottle"></i> Découvrir les vins</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
+        {% for name in profilesName %}
+            {% include 'parts/wine_profile/_build_list.html.twig' with {'profiles': profiles, 'name':name} %}
+        {% endfor %}
+{#        <div class="row">#}
+{#            <div class="col-12">#}
+{#                <h2 class="h2 title-type p-2">#}
+{#                    {{ constant('App\\Entity\\VineProfile::WHITE_TYPE_PROFILE') }}#}
+{#                </h2>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row d-flex justify-content-center">#}
+{#            {% for profile in profiles %}#}
+{#                {% if profile.type == constant('App\\Entity\\VineProfile::WHITE_TYPE_PROFILE') %}#}
+{#                    <div class="col-sm-12 col-md-4 col-lg-3">#}
+{#                        <div class="card-wrapper">#}
+{#                            <div id="card-{{ profile.id }}" class="card card-rotating text-center">#}
+{#                                <div class="face front">#}
+{#                                    <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">#}
+{#                                        <h3 class="h3 card-img-top p-1" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>#}
+{#                                    </div>#}
+{#                                    {% if profile.imagePath %}#}
+{#                                        <div class="avatar mx-auto white">#}
+{#                                            <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-0">#}
+{#                                        </div>#}
+{#                                    {% endif %}#}
+{#                                    <div class="card-body">#}
+{#                                        <p class="font-weight-bold primary-text">{{ profile.description }}</p>#}
+{#                                        <a href="#"><i class="fas fa-wine-bottle"></i> Découvrir les vins</a>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="col-12">#}
+{#                <h2 class="h2 title-type p-2">#}
+{#                    {{ constant('App\\Entity\\VineProfile::PINK_TYPE_PROFILE') }}#}
+{#                </h2>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row d-flex justify-content-center">#}
+{#            {% for profile in profiles %}#}
+{#                {% if profile.type == constant('App\\Entity\\VineProfile::PINK_TYPE_PROFILE') %}#}
+{#                    <div class="col-sm-12 col-md-4 col-lg-3">#}
+{#                        <div class="card-wrapper">#}
+{#                            <div id="card-{{ profile.id }}" class="card card-rotating text-center">#}
+{#                                <div class="face front">#}
+{#                                    <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">#}
+{#                                        <h3 class="h3 card-img-top p-1" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>#}
+{#                                    </div>#}
+{#                                    {% if profile.imagePath %}#}
+{#                                        <div class="avatar mx-auto white">#}
+{#                                            <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-0">#}
+{#                                        </div>#}
+{#                                    {% endif %}#}
+{#                                    <div class="card-body">#}
+{#                                        <p class="font-weight-bold primary-text">{{ profile.description }}</p>#}
+{#                                        <a href="#"><i class="fas fa-wine-bottle"></i> Découvrir les vins</a>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#        <div class="row">#}
+{#            <div class="col-12">#}
+{#                <h2 class="h2 title-type p-2">#}
+{#                    {{ constant('App\\Entity\\VineProfile::RED_TYPE_PROFILE') }}#}
+{#                </h2>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="row d-flex justify-content-center">#}
+{#            {% for profile in profiles %}#}
+{#                {% if profile.type == constant('App\\Entity\\VineProfile::RED_TYPE_PROFILE') %}#}
+{#                    <div class="col-sm-12 col-md-4 col-lg-3">#}
+{#                        <div class="card-wrapper">#}
+{#                            <div id="card-{{ profile.id }}" class="card card-rotating text-center">#}
+{#                                <div class="face front">#}
+{#                                    <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">#}
+{#                                        <h3 class="h3 card-img-top p-1" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>#}
+{#                                    </div>#}
+{#                                    {% if profile.imagePath %}#}
+{#                                        <div class="avatar mx-auto white">#}
+{#                                            <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-0">#}
+{#                                        </div>#}
+{#                                    {% endif %}#}
+{#                                    <div class="card-body">#}
+{#                                        <p class="font-weight-bold primary-text">{{ profile.description }}</p>#}
+{#                                        <a href="#"><i class="fas fa-wine-bottle"></i> Découvrir les vins</a>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#        </div>#}
     </div>
 {% endblock %}
 
 {% block javascripts %}
+    {{ encore_entry_script_tags('wine_profile_list') }}
 {% endblock %}
