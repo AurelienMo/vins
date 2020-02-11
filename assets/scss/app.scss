@@ -42,6 +42,13 @@ label.required::after {
     .footer-information {
       font-size: 0.8rem;
     }
+    .badge {
+      position: absolute;
+      right: 175px;
+      top: 10px;
+      padding: 5px;
+      font-size: 20px;
+    }
   }
   #main-container {
     margin-top: 135px
@@ -50,11 +57,6 @@ label.required::after {
     background-color: $primary-color!important;
   }
   nav {
-    .badge {
-      position: absolute;
-      right: 20px;
-      top: 0px;
-    }
     .nav-link {
       transition: color 500ms ease-in-out;
       font-size: 1.1rem;
