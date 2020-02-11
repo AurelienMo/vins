@@ -4,13 +4,17 @@
   border-bottom: solid 1px red;
   opacity: 0.1;
 }
-.avatar img {
-  height: 120px;
-}
 .custom-card-up {
   height: 100px;
   overflow: hidden;
 }
 .card-wrapper {
-  height: 300px !important;
+  height: 275px !important;
+  .avatar {
+    width: 80px;
+    margin-top: -40px;
+    img {
+      height: 80px;
+    }
+  }
 }

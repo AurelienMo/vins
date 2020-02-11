@@ -13,11 +13,11 @@
                     <div id="card-{{ profile.id }}" class="card card-rotating text-center">
                         <div class="face front">
                             <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">
-                                <h3 class="h3 card-img-top p-1" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>
+                                <h3 class="h3 card-img-top p-3" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>
                             </div>
                             {% if profile.imagePath %}
-                                <div class="avatar mx-auto white">
-                                    <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-0">
+                                <div class="avatar mx-auto">
+                                    <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-1">
                                 </div>
                             {% endif %}
                             <div class="card-body">
