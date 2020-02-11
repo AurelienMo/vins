@@ -4,12 +4,6 @@
             <div class="col-12 text-center font-italic text-white pt-1 pb-1">
                 <span class="small">Tous les vins sont livrés en main propre par notre équipe pour 4€ seulement !</span>
             </div>
-            <a href="#" class="float-right">
-                <img class="basket" src="{{asset('build/images/cart.png')}}" height="10" alt="cart">
-                {% if app.session.get('itemsCart')|length %}
-                    <span class="badge badge-pill primary-bkg">{{ app.session.get('itemsCart')|default(0) }}</span>
-                {% endif %}
-            </a>
         </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light scrolling-navbar white">
