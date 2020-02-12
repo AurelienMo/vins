@@ -30,6 +30,11 @@ label.required::after {
     color: $primary-color !important;
   }
 }
+.secondary- {
+  &bkg {
+    background-color: $grey-dark !important;
+  }
+}
 
 @media all and (min-width: 992px){
   footer#desktop {
