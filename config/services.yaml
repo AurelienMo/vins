@@ -7,6 +7,7 @@ parameters:
     app.path.product_images: /upload/images/products
     app.path.domain_images: /upload/images/domain
     app.path.wine_profile_images: /upload/images/wine_profile
+    app.path.slider_home_images: /upload/images/slider_home
 
 services:
     # default configuration for services in *this* file
