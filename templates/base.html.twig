@@ -1,45 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <script type="text/javascript" src="/tarteaucitronjs/tarteaucitron.js"></script>
+<head>
+    <script type="text/javascript" src="/tarteaucitronjs/tarteaucitron.js"></script>
 
-        <script type="text/javascript">
-            tarteaucitron.init({
-                "privacyUrl": "http://www.google.fr", /* Privacy policy url */
+    <script type="text/javascript">
+        tarteaucitron.init({
+            "privacyUrl": "http://www.google.fr", /* Privacy policy url */
 
-                "hashtag": "#vins", /* Open the panel with this hashtag */
-                "cookieName": "amazingtarteaucitron", /* Cookie name */
+            "hashtag": "#vins", /* Open the panel with this hashtag */
+            "cookieName": "amazingtarteaucitron", /* Cookie name */
 
-                "orientation": "bottom", /* Banner position (top - bottom) */
-                "showAlertSmall": true, /* Show the small banner on bottom right */
-                "cookieslist": true, /* Show the cookie list */
+            "orientation": "bottom", /* Banner position (top - bottom) */
+            "showAlertSmall": true, /* Show the small banner on bottom right */
+            "cookieslist": true, /* Show the cookie list */
 
-                "adblocker": false, /* Show a Warning if an adblocker is detected */
-                "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
-                "highPrivacy": true, /* Disable auto consent */
-                "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+            "adblocker": false, /* Show a Warning if an adblocker is detected */
+            "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
+            "highPrivacy": true, /* Disable auto consent */
+            "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
 
-                "removeCredit": false, /* Remove credit link */
-                "moreInfoLink": true, /* Show more info link */
-                "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+            "removeCredit": false, /* Remove credit link */
+            "moreInfoLink": true, /* Show more info link */
+            "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
 
-                //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+            //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
 
-                "readmoreLink": "/cookiespolicy" /* Change the default readmore link */
-            });
-        </script>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="https://fonts.googleapis.com/css?family=Audiowide|Raleway|Dekko&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {{encore_entry_link_tags('app')}}
-        <link rel="stylesheet" href="{{ asset('vendor/mdb/css/bootstrap.min.css') }}">
-        <link rel="stylesheet" href="{{asset('vendor/mdb/css/mdb.min.css')}}">
-        <link rel="stylesheet" href="{{asset('vendor/mdb/css/style.css')}}">
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
+            "readmoreLink": "/cookiespolicy" /* Change the default readmore link */
+        });
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Raleway|Dekko&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('vendor/mdb/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{asset('vendor/mdb/css/mdb.min.css')}}">
+    <link rel="stylesheet" href="{{asset('vendor/mdb/css/style.css')}}">
+    {{encore_entry_link_tags('app')}}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
         <div id="main-container">
         {% include 'parts/_headers.html.twig' %}
             {% for label, messages in app.flashes %}
@@ -52,30 +52,32 @@
                     </div>
                 {% endfor %}
             {% endfor %}
-            {% if app.request.attributes.get('_route') == 'homepage' %}
-                <div class="container">
-                    <h1 class="h1">Un titre de 1er niveau</h1>
-                    <h2 class="h2">Un titre de 2ème niveau</h2>
-                    <h3 class="h3">Un titre de 3ème niveau</h3>
-                    <div class="nav-link">Un lien</div>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
-                    </p>
-                </div>
+            <div class="mt-5">
+                {% if app.request.attributes.get('_route') == 'homepage' %}
+                    <div class="container">
+                        <h1 class="h1">Un titre de 1er niveau</h1>
+                        <h2 class="h2">Un titre de 2ème niveau</h2>
+                        <h3 class="h3">Un titre de 3ème niveau</h3>
+                        <div class="nav-link">Un lien</div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
+                        </p>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam feugiat sodales tortor, sed facilisis purus sodales vitae. Praesent dictum ornare volutpat. Sed hendrerit dolor vel imperdiet mollis. Mauris viverra, ligula non pretium sollicitudin, leo erat vulputate leo, id dapibus arcu arcu nec ipsum. Mauris malesuada rutrum lectus nec tempor. Aenean velit sem, dignissim ut tellus vel, maximus mollis magna. Pellentesque ullamcorper, nunc pretium venenatis eleifend, tellus est molestie tellus, id bibendum lacus enim sit amet sapien. Sed venenatis nisl ut nisi maximus, quis finibus eros pretium. Etiam laoreet fringilla lacus a congue. Nullam dapibus blandit ligula eget sollicitudin. Etiam in ex a lorem commodo finibus. Nullam laoreet congue neque, eu auctor metus blandit sed. Etiam ac semper nunc. Donec enim risus, molestie vitae ullamcorper eu, lobortis id leo. Ut sed elit ut lacus vestibulum volutpat eget in nunc.
+                        </p>
+                    </div>
                 {% endif %}
-            {% block body %}{% endblock %}
+                {% block body %}{% endblock %}
+            </div>
         </div>
         {% include 'parts/_footers.html.twig' %}
         <div id="loading-overlay">

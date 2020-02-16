@@ -1,14 +1,22 @@
-<header id="desktop" class="fixed-top pr-0">
-    <div class="container-fluid">
-        <div class="row primary-bkg">
-            <div class="col-12 text-center font-italic text-white pt-1 pb-1">
-                <span class="small">Tous les vins sont livrés en main propre par notre équipe pour 4€ seulement !</span>
+<header id="desktop" class="fixed-top">
+    <div class="container pt-2 pb-2">
+        <div class="row">
+            <div class="col-6 text-center">
+                <span class="small">Marseille uniquement</span>
+            </div>
+            <div class="col-6 text-center">
+                <span class="small">La livraison est garantie sans casse pour 4€ seulement !</span>
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light scrolling-navbar white">
-        <div class="container d-flex justify-content-center">
-            <div class="row w-100">
+    <nav class="d-flex align-items-end">
+        <div class="container">
+            <div class="row">
+                <ul class="col navbar-nav d-flex justify-content-center">
+                    <li class="nav-item d-flex flex-column justify-content-center">
+                        <div></div>
+                    </li>
+                </ul>
                 <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center">
                         <a class="nav-link" href="#">Les boxs
@@ -25,19 +33,6 @@
                         <div></div>
                     </li>
                 </ul>
-{#                <ul class="col navbar-nav d-flex justify-content-center">#}
-{#                    <li class="nav-item d-flex flex-column justify-content-center w-100">#}
-{#                        <a class="nav-link d-flex justify-content-center" href="#">#}
-{#                            <img class="basket" src="{{asset('build/images/cart.png')}}" height="30" alt="cart">#}
-{#                            {% if app.session.get('itemsCart')|length %}#}
-{#                                <span class="badge badge-pill primary-bkg">{{ app.session.get('itemsCart')|default(0) }}</span>#}
-{#                            {% endif %}#}
-{#                        </a>#}
-{#                    </li>#}
-{#                </ul>#}
-                <a class="col navbar-brand" href="{{ path('homepage') }}">
-                    <img class="logo" src="{{asset('build/images/logo.png')}}" height="80" alt="logo mon premier sommelier">
-                </a>
                 <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center">
                         <a class="nav-link" href="{{ path('list_profiles') }}">Les profils</a>
@@ -45,7 +40,7 @@
                 </ul>
                 <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center dropdown">
-                        <a class="nav-link dropdown-toggle" id="learn_wine" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle text-white" id="learn_wine" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             J'apprends le vin
                         </a>
@@ -58,7 +53,7 @@
                 </ul>
                 <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center dropdown">
-                        <a class="nav-link dropdown-toggle" id="about" data-toggle="dropdown"
+                        <a class="nav-link dropdown-toggle text-white" id="about" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             Et plus encore...
                         </a>
@@ -69,8 +64,46 @@
                     </li>
                 </ul>
             </div>
-
         </div>
     </nav>
+    <div class="container-logo d-flex justify-content-center">
+        <a href="{{ path('homepage') }}">
+            <div class="header_logo_circle-first">
+                <div class="header_logo_circle-second d-flex align-items-center justify-content-center">
+
+                        <img class="logo" src="{{ asset('build/images/logo.png') }}" alt="logo"/>
+
+                </div>
+            </div>
+        </a>
+    </div>
 </header>
+
+{#<header id="desktop" class="fixed-top pr-0">#}
+{#    <div class="container-fluid">#}
+{#        <div class="row primary-bkg">#}
+{#            <div class="col-12 text-center font-italic text-white pt-1 pb-1">#}
+{#                <span class="small">Tous les vins sont livrés en main propre par notre équipe pour 4€ seulement !</span>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <nav class="navbar navbar-expand-lg navbar-light scrolling-navbar white">#}
+{#        <div class="container d-flex justify-content-center">#}
+{#            <div class="row w-100">#}
+
+{#                <ul class="col navbar-nav d-flex justify-content-center">#}
+{#                    <li class="nav-item d-flex flex-column justify-content-center w-100">#}
+{#                        <a class="nav-link d-flex justify-content-center" href="#">#}
+{#                            <img class="basket" src="{{asset('build/images/cart.png')}}" height="30" alt="cart">#}
+{#                            {% if app.session.get('itemsCart')|length %}#}
+{#                                <span class="badge badge-pill primary-bkg">{{ app.session.get('itemsCart')|default(0) }}</span>#}
+{#                            {% endif %}#}
+{#                        </a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+
+{#        </div>#}
+{#    </nav>#}
+{#</header>#}
 
