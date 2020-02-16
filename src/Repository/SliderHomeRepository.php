@@ -23,4 +23,12 @@ class SliderHomeRepository extends ServiceEntityRepository
                     ->getQuery()
                     ->getOneOrNullResult();
     }
+
+    public function findAllOrderedByOrder()
+    {
+        return $this->createQueryBuilder('sh')
+                    ->orderBy('sh.order')
+                    ->getQuery()
+                    ->getResult();
+    }
 }
