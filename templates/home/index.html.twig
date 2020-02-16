@@ -16,9 +16,6 @@
             {% for index, slider in sliders %}
                 <li data-target="#carousel-slider-homepage" {% if index == 0 %}class="active"{% endif %} data-slide-to="{{ index }}"></li>
             {% endfor %}
-{#            <li data-target="#carousel-slider-homepage" data-slide-to="0" class="active"></li>#}
-{#            <li data-target="#carousel-slider-homepage" data-slide-to="1"></li>#}
-{#            <li data-target="#carousel-slider-homepage" data-slide-to="2"></li>#}
         </ol>
         <div class="carousel-inner" role="listbox">
             {% for index, slider in sliders %}
@@ -35,7 +32,4 @@
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block breadcrumb %}
 {% endblock %}
