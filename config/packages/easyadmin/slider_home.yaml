@@ -1,0 +1,41 @@
+easy_admin:
+    entities:
+        SliderHome:
+            class: App\Entity\SliderHome
+#            templates:
+#                list: 'bundles/EasyAdminBundle/BoxWine/list.html.twig'
+            list:
+                title: 'Liste des sliders'
+                fields:
+                    - property: order
+                      label: 'N°'
+                      type: 'integer'
+                      format: '%0.0f'
+                    - property: link
+                      label: 'Lien associé'
+                    - property: image
+                      type: 'image'
+                      base_path: '%app.path.slider_home_images%'
+            new:
+                fields:
+                    - property: 'imageFile'
+                      type: 'vich_image'
+                      label: 'Image'
+                      required: true
+                    - property: 'link'
+                      label: 'Lien externe'
+                      type: 'text'
+                      requied: false
+            edit:
+                fields:
+                    - property: order
+                      type: integer
+                      label: 'N°'
+                    -   property: 'imageFile'
+                        type: 'vich_image'
+                        label: 'Image'
+                        required: true
+                    -   property: 'link'
+                        label: 'Lien externe'
+                        type: 'text'
+                        requied: false

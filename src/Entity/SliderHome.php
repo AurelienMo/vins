@@ -13,7 +13,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Table(name="amo_slider_home")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\SliderHomeRepository")
  *
  * @Vich\Uploadable()
  */
@@ -32,11 +32,6 @@ class SliderHome extends AbstractEntity implements UpdatableInterface
      * @var File
      *
      * @Vich\UploadableField(mapping="slider_home_images", fileNameProperty="image")
-     *
-     * @Assert\Image(
-     *     minHeight="300px",
-     *     maxHeight="420px"
-     * )
      */
     protected $imageFile;
 
@@ -50,7 +45,7 @@ class SliderHome extends AbstractEntity implements UpdatableInterface
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="order_number")
      */
     protected $order;
 

@@ -19,6 +19,9 @@ easy_admin:
     design:
         assets:
         menu:
+            - label: 'Configuration'
+            - label: 'Slider Accueil'
+              entity: 'SliderHome'
             - label: 'Gestion des vins'
             - entity: 'WineDomain'
               label: 'Domaines'
