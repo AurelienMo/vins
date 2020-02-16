@@ -9,14 +9,14 @@
 {% endblock %}
 
 {% block body %}
+    {% set informations = [
+        {'icon': 'fas fa-map-marker-alt', 'title': 'Proximité', 'description': 'Des conseils'},
+        {'icon': 'fas fa-euro-sign', 'title': 'Prix', 'description': 'Pour tous les budgets'},
+        {'icon': 'fas fa-certificate', 'title': 'Qualité', 'description': 'La meilleure sélection'},
+        {'icon': 'fas fa-exchange-alt', 'title': 'Livraison', 'description': 'Un défaut ? nous remplaçons'}
+    ] %}
 <div class="container-fluid pr-0 pl-0">
     <div id="carousel-slider-homepage" class="carousel slide carousel-fade" data-ride="carousel">
-        <!--Indicators-->
-        <ol class="carousel-indicators">
-            {% for index, slider in sliders %}
-                <li data-target="#carousel-slider-homepage" {% if index == 0 %}class="active"{% endif %} data-slide-to="{{ index }}"></li>
-            {% endfor %}
-        </ol>
         <div class="carousel-inner" role="listbox">
             {% for index, slider in sliders %}
                 {% if slider.link %}
@@ -29,6 +29,21 @@
                     </a>
                 {% endif %}
             {% endfor %}
+        </div>
+    </div>
+    <div class="page-homepage">
+        <div class="page-homepage--banner">
+            <div class="container d-flex justify-content-around">
+                {% for icon in informations %}
+                    <div class="d-flex align-items-center">
+                        <i class="{{ icon.icon }} fa-lg mr-3 p-2"></i>
+                        <p class="page-homepage--banner__text d-flex flex-column justify-content-center m-0">
+                            <strong>{{ icon.title }}</strong>
+                            <span>{{ icon.description }}</span>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
