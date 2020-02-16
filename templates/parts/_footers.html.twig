@@ -16,14 +16,6 @@
                 <div class="text-center">
                     <a href="#">Inscription à la newsletter Mon premier Sommelier</a>
                 </div>
-{#                <div>#}
-{#                    <a class="nav-link d-flex justify-content-center" href="#">#}
-{#                        <img class="basket" src="{{asset('build/images/cart.png')}}" height="30" alt="cart">#}
-{#    #}{#                    {% if app.session.get('itemsCart')|length %}#}
-{#                            <span class="badge badge-pill primary-bkg">{{ app.session.get('itemsCart')|default(0) }}</span>#}
-{#    #}{#                    {% endif %}#}
-{#                    </a>#}
-{#                </div>#}
             </div>
             <div class="col d-flex flex-column justify-content-center align-items-center">
                 <h3>Besoin d'aide ?</h3>
@@ -46,3 +38,6 @@
         </div>
     </div>
 </footer>
+<div class="container-fluid legal-minor d-flex justify-content-center pt-3 pb-3">
+    <img src="{{ asset('build/images/bandeau_informatif_alcool_mineurs.png') }}" alt="information legal mineur"/>
+</div>
