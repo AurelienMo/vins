@@ -1,0 +1,41 @@
+easy_admin:
+    entities:
+        TastuceTheme:
+            class: App\Entity\TastuceTheme
+            templates:
+                list: 'bundles/EasyAdminBundle/TastuceTheme/list.html.twig'
+            list:
+                title: 'Liste des thèmes'
+                fields:
+                    - property: name
+                      label: 'Nom'
+                    - property: color
+                      label: 'Couleur du thème'
+                    - property: colorText
+                      label: 'Couleur du texte'
+                    - property: image
+                      type: 'image'
+                      base_path: '%app.path.tastuce_theme_images%'
+            form:
+                fields:
+                    - property: name
+                      type: text
+                      label: 'Nom'
+                    - property: color
+                      type: color
+                      label: 'Couleur de fond'
+                    - property: colortext
+                      type: color
+                      label: 'Couleur du texte'
+                    - property: imageFile
+                      type: vich_image
+                      label: 'Image du thème'
+                    - property: tastuces
+                      type: collection
+                      type_options:
+                          entry_type: 'App\Admin\Forms\TastuceType'
+                          allow_add: true
+                          allow_delete: true
+                          prototype: true
+                          by_reference: false
+                      label: 'Tastuces associées'

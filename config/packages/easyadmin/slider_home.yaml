@@ -2,8 +2,6 @@ easy_admin:
     entities:
         SliderHome:
             class: App\Entity\SliderHome
-#            templates:
-#                list: 'bundles/EasyAdminBundle/BoxWine/list.html.twig'
             list:
                 title: 'Liste des sliders'
                 fields:
