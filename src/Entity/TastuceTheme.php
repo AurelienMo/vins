@@ -36,8 +36,6 @@ class TastuceTheme extends AbstractEntity implements UpdatableInterface
      * @var string
      *
      * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank()
      */
     protected $image;
 
