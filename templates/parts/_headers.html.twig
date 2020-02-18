@@ -49,7 +49,7 @@
                         <div class="dropdown-menu dropdown-mps dropdown-menu-lg-right"
                              aria-labelledby="learn_wine">
                             <a class="dropdown-item" href="#">MPDM</a>
-                            <a class="dropdown-item" href="#">Les Tastuces</a>
+                            <a class="dropdown-item" href="{{ path('tastuces_list') }}">Les Tastuces</a>
                         </div>
                     </li>
                 </ul>
@@ -80,32 +80,3 @@
         </a>
     </div>
 </header>
-
-{#<header id="desktop" class="fixed-top pr-0">#}
-{#    <div class="container-fluid">#}
-{#        <div class="row primary-bkg">#}
-{#            <div class="col-12 text-center font-italic text-white pt-1 pb-1">#}
-{#                <span class="small">Tous les vins sont livrés en main propre par notre équipe pour 4€ seulement !</span>#}
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    <nav class="navbar navbar-expand-lg navbar-light scrolling-navbar white">#}
-{#        <div class="container d-flex justify-content-center">#}
-{#            <div class="row w-100">#}
-
-{#                <ul class="col navbar-nav d-flex justify-content-center">#}
-{#                    <li class="nav-item d-flex flex-column justify-content-center w-100">#}
-{#                        <a class="nav-link d-flex justify-content-center" href="#">#}
-{#                            <img class="basket" src="{{asset('build/images/cart.png')}}" height="30" alt="cart">#}
-{#                            {% if app.session.get('itemsCart')|length %}#}
-{#                                <span class="badge badge-pill primary-bkg">{{ app.session.get('itemsCart')|default(0) }}</span>#}
-{#                            {% endif %}#}
-{#                        </a>#}
-{#                    </li>#}
-{#                </ul>#}
-{#            </div>#}
-
-{#        </div>#}
-{#    </nav>#}
-{#</header>#}
-

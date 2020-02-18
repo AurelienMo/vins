@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('tastuce_list') }}
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+        {% for theme in themes %}
+            <div class="col-sm-12 col-md-4 mb-5">
+                <div class="card-lateral d-flex flex-1">
+                    <div class="card-lateral_layout" style="background-color: {{ theme.color }}">
+
+                    </div>
+                    <div class="card-lateral_image">
+                        <div class="card-lateral_image_circle-first">
+                            <div class="card-lateral_image_circle-second d-flex align-items-center justify-content-center" style="border: 2px solid {{ theme.color }}">
+                                <img src="{{ vich_uploader_asset(theme, 'imageFile') }}"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-lateral_content">
+                        <div class="card-lateral_content-title p-2">
+                            <h3 class="h3 text-center" style="color: {{ theme.colorText }}">
+                                {{ theme.name }}
+                            </h3>
+                        </div>
+                        <div class="card-lateral_content-links d-flex align-items-center h-75">
+                            <ul class="list-group list-unstyled">
+                                {% for tastuce in theme.tastuces %}
+                                    <li>
+                                        <a class="list-group-item list-group-item-action" href="{{ vich_uploader_asset(tastuce, 'pdfFile') }}" target="_blank">{{ tastuce.textLink }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+{{ encore_entry_script_tags('tastuce_list') }}
+{% endblock %}
