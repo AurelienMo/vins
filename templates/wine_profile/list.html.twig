@@ -13,7 +13,37 @@
     %}
     <div class="container mt-3 mb-3">
         {% for name in profilesName %}
-            {% include 'parts/wine_profile/_build_list.html.twig' with {'profiles': profiles, 'name':name} %}
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="h2 title-type p-2">
+                        {{name}}
+                    </h2>
+                </div>
+            </div>
+            <div class="row d-flex">
+                {% for profile in profiles %}
+                    {% if profile.type == name %}
+                        <div class="card-profile col-sm-12 col-md-4 col-lg-3">
+                            <div class="card-wrapper">
+                                <div id="card-{{ profile.id }}" class="card card-rotating text-center">
+                                    <div class="face front">
+                                        <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">
+                                            <h3 class="h3 card-img-top p-3" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>
+                                        </div>
+                                            <div class="avatar mx-auto">
+                                                <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-1" style="border: 2px solid {{ profile.color }}">
+                                            </div>
+                                        <div class="card-body">
+                                            <p class="font-weight-bold primary-text">{{ profile.description }}</p>
+                                            <a href="#"><i class="fas fa-wine-bottle"></i> Découvrir les vins</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
