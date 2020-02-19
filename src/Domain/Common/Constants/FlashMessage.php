@@ -19,4 +19,5 @@ namespace App\Domain\Common\Constants;
 final class FlashMessage
 {
     public const SUCCESS_CONTACT = 'Votre demande a bien été prise en compte. Nous vous répondrons dans les plus brefs délais.';
+    public const SUCCESS_REGISTRATION_NEWSLETTER = 'Votre inscription à la newsletter a bien été prise en compte.';
 }

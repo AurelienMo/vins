@@ -25,7 +25,7 @@ export default class Global {
                 }
             });
         });
-        $('.contact').on('click', function (e) {
+        $('.contact, .registration').on('click', function (e) {
             e.preventDefault();
             let modal = new Modal();
             showLoader();
