@@ -23,20 +23,27 @@
             <div class="row d-flex">
                 {% for profile in profiles %}
                     {% if profile.type == name %}
-                        <div class="card-profile col-sm-12 col-md-4 col-lg-3">
-                            <div class="card-wrapper">
-                                <div id="card-{{ profile.id }}" class="card card-rotating text-center">
-                                    <div class="face front">
-                                        <div class="custom-card-up{% if not profile.imagePath %} d-flex justify-content-center align-items-center{% endif %}" style="background-color: {{ profile.color }}">
-                                            <h3 class="h3 card-img-top p-3" style="color: {{ profile.colorText }}">{{ profile.name }}</h3>
+                        <div class="col-sm-12 col-md-4 col-lg-3">
+                            <div class="card-profile">
+                                <div class="card-profile_layout d-flex justify-content-center" style="background-color: {{ profile.color }}">
+                                    <h2 class="h5 pt-3 font-weight-bold" style="color: {{ profile.colorText }}">{{ profile.name }}</h2>
+                                </div>
+                                <div class="card-profile_image d-flex justify-content-center">
+                                    <div class="card-profile_image_circle-first">
+                                        <div class="card-profile_image_circle-second d-flex align-items-center justify-content-center" style="border: 4px solid {{ profile.color }}">
+                                            <img src="{{ vich_uploader_asset(profile, 'imageFile') }}">
                                         </div>
-                                            <div class="avatar mx-auto">
-                                                <img src="{{vich_uploader_asset(profile, 'imageFile')}}" class="rounded-circle border-1" style="border: 2px solid {{ profile.color }}">
-                                            </div>
-                                        <div class="card-body">
-                                            <p class="font-weight-bold primary-text">{{ profile.description }}</p>
-                                            <a href="#"><i class="fas fa-wine-bottle"></i> Découvrir les vins</a>
-                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-profile_content d-flex">
+                                    <div class="card-profile_content-text d-flex flex-column align-items-center justify-content-between pb-2">
+                                        <h3 class="h6 font-weight-bold">{{ profile.description }}</h3>
+                                        <p class="pl-2 pr-2">
+                                            {{ profile.longDescription }}
+                                        </p>
+                                        <a href="#">
+                                            <a href="#"><i class="fas fa-wine-bottle fa-sm"></i> Découvrir les vins</a>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

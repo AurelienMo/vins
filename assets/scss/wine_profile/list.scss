@@ -7,6 +7,63 @@
 .card-profile {
   border-radius: 5px 5px 0 0;
 }
+.card-profile, .card-profile_layout {
+  border-top-left-radius: 20px 20px;
+  border-top-right-radius: 20px 20px;
+}
+.card-profile {
+  max-height: 400px;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  box-shadow: 5px 5px 10px rgba(0,0,0,.1);
+  overflow: hidden;
+  &_layout {
+    min-height: 100px;
+  }
+  &_image {
+    z-index: 999;
+    img {
+      max-height: 70px;
+      max-width: 70px;
+    }
+    &_circle-first {
+      width: 110px;
+      height: 110px;
+      border-radius: 55px;
+      border: 5px white solid;
+      z-index: 999;
+      margin-top: -55px;
+    }
+    &_circle-second {
+      width: 100%;
+      height:100%;
+      border-radius: 50%;
+      background-color: white;
+    }
+  }
+  &_content {
+    flex: 1;
+    margin-top: -55px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    &-text {
+      margin-top: 70px;
+    }
+    a {
+      color: #000000;
+    }
+    a:hover {
+      text-decoration: none;
+      color: #000000;
+      font-weight: bold;
+    }
+    p {
+      max-height: 150px;
+      overflow: auto;
+    }
+  }
+}
 .custom-card-up {
   height: 100px;
   overflow: hidden;
