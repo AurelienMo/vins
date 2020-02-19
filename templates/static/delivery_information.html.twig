@@ -2,11 +2,11 @@
 
 {% block stylesheets %}
     <style>
-        .information {
-            border-bottom: 1px solid #cfd8dc;
+        #storage {
+            border-top: 1px solid #cfd8dc;
         }
         #storage .description {
-            background-color: #eeeeee;
+            background-color: #f7f7f7;
             height: 100px;
         }
         #storage img {
@@ -18,24 +18,24 @@
     </style
 {% endblock %}
 {% block body %}
-    <div class="pt-2 pb-2">
-        <div class="information pb-2">
-            <div class="row">
-                <div class="col-12">
-                    <h3 class="h3 text-center font-weight-bold">
-                        Nous ne faisons pas que vous conseiller, nous vous livrons jusqu'à votre porte.
-                    </h3>
-                </div>
-                <div class="col-12 d-flex justify-content-center w-50">
-                    <a href="#storage" class="btn primary-bkg btn-rounded text-white"><i class="fas fa-warehouse"></i> Où sont stockés nos bouteilles</a>
-                    <a class="btn secondary-bkg btn-rounded">
-                        <img src="{{ asset('build/images/follow_order.png') }}" alt="Suivre la commande"/> Le suivi de votre commande
-                    </a>
-                </div>
+    <div class="container mt-5">
+        <div class="row information">
+            <div class="col-12">
+                <h3 class="h3 text-center font-weight-bold">
+                    Nous ne faisons pas que vous conseiller, nous vous livrons jusqu'à votre porte.
+                </h3>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <a href="#storage" class="btn primary-bkg btn-rounded text-white"><i class="fas fa-warehouse"></i> Où sont stockés nos bouteilles</a>
+                <a class="btn secondary-bkg btn-rounded">
+                    <img src="{{ asset('build/images/follow_order.png') }}" alt="Suivre la commande"/> Le suivi de votre commande
+                </a>
             </div>
         </div>
-        <section id="storage">
-            <div class="description d-flex justify-content-center align-items-center">
+    </div>
+    <div id="storage" class="container-fluid mt-4">
+        <section class="row">
+            <div class="col-12 description d-flex justify-content-center align-items-center">
                 <img src="{{ asset('build/images/liserai_fleur.png') }}" alt="liseraie"/>
                 <h4 class="h4">Où sont stockés nos bouteilles</h4>
                 <img src="{{ asset('build/images/liserai_fleur.png') }}" alt="liseraie"/>
