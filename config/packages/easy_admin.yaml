@@ -71,6 +71,9 @@ easy_admin:
             - entity: 'Contact'
               label: 'Gestion des contacts'
               icon: 'envelope'
+            - entity: 'Newsletter'
+              label: 'Inscription newsletter'
+              icon: 'newspaper'
         form_theme:
             - 'bundles/EasyAdminBundle/layout.html.twig'
     site_name: 'Mon Premier Sommelier'

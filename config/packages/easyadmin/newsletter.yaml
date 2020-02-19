@@ -1,0 +1,13 @@
+easy_admin:
+    entities:
+        Newsletter:
+            class: App\Entity\Newsletter
+            disabled_actions: ['new', 'show', 'delete', 'edit']
+            list:
+                title: 'Liste des inscriptions'
+                fields:
+                    - property: email
+                      label: 'Adresse email'
+                    - property: createdAt
+                      label: "Date d'inscription"
+                      format: "d/m/Y"
