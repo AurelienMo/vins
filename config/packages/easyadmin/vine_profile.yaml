@@ -10,7 +10,7 @@ easy_admin:
                     - property: name
                       label: 'Nom'
                     - property: description
-                      label: 'Description'
+                      label: 'Résumé'
                     - property: color
                       label: 'Couleur du profil'
                     - property: colorText
@@ -32,6 +32,9 @@ easy_admin:
                       label: 'Nom'
                     - property: description
                       type: 'text'
+                      label: 'Résumé'
+                    - property: longDescription
+                      type: textarea
                       label: 'Description'
                     - property: 'color'
                       type: 'color'
@@ -56,6 +59,9 @@ easy_admin:
                       label: 'Nom'
                     - property: description
                       type: 'text'
+                      label: 'Résumé'
+                    - property: longDescription
+                      type: textarea
                       label: 'Description'
                     - property: 'color'
                       type: 'color'

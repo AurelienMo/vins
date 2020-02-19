@@ -85,6 +85,13 @@ class VineProfile extends AbstractEntity implements UpdatableInterface
      */
     protected $imageFile;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $longDescription;
+
     public function __construct()
     {
         $this->wines = new ArrayCollection();
@@ -185,5 +192,15 @@ class VineProfile extends AbstractEntity implements UpdatableInterface
         if ($imageFile) {
             $this->updatedAt = new \DateTime();
         }
+    }
+
+    public function getLongDescription(): ?string
+    {
+        return $this->longDescription;
+    }
+
+    public function setLongDescription(?string $longDescription): void
+    {
+        $this->longDescription = $longDescription;
     }
 }
