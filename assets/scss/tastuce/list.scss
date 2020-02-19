@@ -2,7 +2,7 @@
   height: 350px;
   box-shadow: 5px 5px 10px rgba(0,0,0,.1);
   &_layout {
-    flex: 0.5;
+    flex: 0.3;
     border-top-left-radius: 20px 20px;
     border-bottom-left-radius: 20px 20px;
   }
@@ -13,12 +13,12 @@
       max-width: 70px;
     }
     &_circle-first {
-      width: 130px;
-      height: 130px;
-      border-radius: 65px;
+      width: 110px;
+      height: 110px;
+      border-radius: 55px;
       border: 5px white solid;
       margin-top: 40px;
-      margin-left: -118px;
+      margin-left: -90px;
       z-index: 999;
     }
     &_circle-second {
