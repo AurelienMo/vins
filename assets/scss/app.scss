@@ -18,6 +18,7 @@ body {
 }
 #main-container {
   flex: 1 0 auto;
+  background-color: #f8f9fb;
 }
 label.required::after {
   content: " *"
