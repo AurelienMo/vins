@@ -156,6 +156,20 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $quizzs;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $shortPhrase;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $alcoholDegree;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -459,5 +473,25 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function removeQuizz(Quizz $quizz)
     {
         $this->quizzs->removeElement($quizz);
+    }
+
+    public function getShortPhrase(): ?string
+    {
+        return $this->shortPhrase;
+    }
+
+    public function setShortPhrase(?string $shortPhrase): void
+    {
+        $this->shortPhrase = $shortPhrase;
+    }
+
+    public function getAlcoholDegree(): ?string
+    {
+        return $this->alcoholDegree;
+    }
+
+    public function setAlcoholDegree(?string $alcoholDegree): void
+    {
+        $this->alcoholDegree = $alcoholDegree;
     }
 }

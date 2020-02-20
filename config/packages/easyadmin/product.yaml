@@ -53,6 +53,12 @@ easy_admin:
                     - property: appellation
                       type: 'text'
                       label: 'Appellation'
+                    - property: shortPhrase
+                      type: 'text'
+                      label: 'Description courte'
+                    - property: alcoholDegree
+                      type: 'text'
+                      label: "Degré d'alcool"
                     - { property: 'typeProduct', label: 'Type de vin', type: 'easyadmin_autocomplete', type_options: { attr: { create: true } } }
                     - property: profile
                       type: 'easyadmin_autocomplete'

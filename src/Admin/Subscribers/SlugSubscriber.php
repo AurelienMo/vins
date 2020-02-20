@@ -35,7 +35,7 @@ class SlugSubscriber implements EventSubscriberInterface
     public function defineSlug(GenericEvent $event)
     {
         $entity = $event->getSubject();
-        if (!$entity instanceof Sluggable) {
+        if (!$entity instanceof Sluggable || is_null($entity->getName())) {
             return;
         }
 
