@@ -23,12 +23,12 @@
                 </div>
                 <div class="card-wine_content d-flex flex-column">
                     <div class="card-wine_content-product d-flex flex-column justify-content-around">
-                        <div class="container-fluid">
+                        <div class="card-wine_content-product_general container-fluid">
                             <div class="card-wine_content-product_image row">
-                                <figure class="col-12 d-flex justify-content-center">
-                                    <div class="badges d-flex flex-column justify-content-around">
+                                <figure class="col-12 d-flex justify-content-center align-items-center">
+                                    <div class="badges d-flex flex-column">
                                         {% if wine.firstBadge %}
-                                            <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="50" width="50"/>
+                                            <img class="rounded-circle mb-3" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="50" width="50"/>
                                         {% endif %}
                                         {% if wine.secondBadge %}
                                             <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'secondBadgeFile') }}" height="50" width="50"/>
@@ -37,9 +37,6 @@
                                     <img class="wine" src="{{ vich_uploader_asset(wine, 'imageFile') }}"/>
                                     <img class="vigneron float-right rounded-circle" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}"/>
                                 </figure>
-                                <div class="col-3">
-                                </div>
-
                             </div>
                         </div>
                         <div class="card-wine_content-product_content d-flex flex-column justify-content-around align-items-center">
