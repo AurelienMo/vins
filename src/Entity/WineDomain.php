@@ -16,7 +16,6 @@ namespace App\Entity;
 use App\Entity\Interfaces\Sluggable;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\DescriptionTrait;
-use App\Entity\Traits\NameTrait;
 use App\Entity\Traits\SlugTrait;
 use App\Entity\Traits\TimeStampableTrait;
 use DateTime;
@@ -37,7 +36,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class WineDomain extends AbstractEntity implements Sluggable, UpdatableInterface
 {
-    use NameTrait;
     use SlugTrait;
     use TimeStampableTrait;
     use DescriptionTrait;
@@ -48,15 +46,6 @@ class WineDomain extends AbstractEntity implements Sluggable, UpdatableInterface
      * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="domain", cascade={"persist"})
      */
     protected $wines;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank()
-     */
-    protected $winegrowerName;
 
     /**
      * @var string|null
@@ -81,10 +70,35 @@ class WineDomain extends AbstractEntity implements Sluggable, UpdatableInterface
      */
     protected $terroir;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @Assert\NotBlank()
+     */
+    protected $name;
+
     public function __construct()
     {
         $this->wines = new ArrayCollection();
         parent::__construct();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string|null $name
+     */
+    public function setName(?string $name): void
+    {
+        $this->name = $name;
     }
 
     /**
