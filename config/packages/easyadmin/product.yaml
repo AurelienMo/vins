@@ -40,7 +40,9 @@ easy_admin:
                     - type: 'group'
                       label: 'Informations générales'
                       columns: 4
-                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'imageFile', type: 'vich_image', label: 'Photo produit' }
+                    - { property: 'firstBadgeFile', type: 'vich_image', label: '1er Badge' }
+                    - { property: 'secondBadgeFile', type: 'vich_image', label: '2ème badge' }
                     - property: domain
                       label: 'Domaine'
                       type: 'easyadmin_autocomplete'

@@ -21,6 +21,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use File;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -169,6 +170,32 @@ class Product extends AbstractEntity implements UpdatableInterface
      * @ORM\Column(type="string", nullable=true)
      */
     protected $alcoholDegree;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $firstBadge;
+
+    /**
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="firstBadge")
+     * @var File
+     */
+    private $firstBadgeFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @var string
+     */
+    private $secondBadge;
+
+    /**
+     * @Vich\UploadableField(mapping="product_images", fileNameProperty="secondBadge")
+     * @var File
+     */
+    private $secondBadgeFile;
 
     public function __construct()
     {
@@ -517,5 +544,63 @@ class Product extends AbstractEntity implements UpdatableInterface
     private function compareCapacityPrice(Capacity $a, Capacity $b)
     {
         return $a->getUnitPrice() <=> $b->getUnitPrice();
+    }
+
+    public function setFirstBadgeFile($image = null)
+    {
+        $this->firstBadgeFile = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getFirstBadgeFile()
+    {
+        return $this->firstBadgeFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstBadge()
+    {
+        return $this->firstBadge;
+    }
+
+    /**
+     * @param string $imagePath
+     */
+    public function setFirstBadge(?string $imagePath): void
+    {
+        $this->firstBadge = $imagePath;
+    }
+
+    public function setSecondBadgeFile($image = null)
+    {
+        $this->secondBadgeFile = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getSecondBadgeFile()
+    {
+        return $this->secondBadgeFile;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSecondBadge()
+    {
+        return $this->secondBadge;
+    }
+
+    /**
+     * @param string $imagePath
+     */
+    public function setSecondBadge(?string $imagePath): void
+    {
+        $this->secondBadge = $imagePath;
     }
 }

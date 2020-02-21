@@ -27,8 +27,12 @@
                             <div class="card-wine_content-product_image row">
                                 <figure class="col-12 d-flex justify-content-center">
                                     <div class="badges d-flex flex-column justify-content-around">
-                                        <img class="rounded-circle" src="https://via.placeholder.com/50"/>
-                                        <img class="rounded-circle" src="https://via.placeholder.com/50"/>
+                                        {% if wine.firstBadge %}
+                                            <img src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="50" width="50"/>
+                                        {% endif %}
+                                        {% if wine.secondBadge %}
+                                            <img src="{{ vich_uploader_asset(wine, 'secondBadgeFile') }}" height="50" width="50"/>
+                                        {% endif %}
                                     </div>
                                     <img class="wine" src="{{ vich_uploader_asset(wine, 'imageFile') }}"/>
                                     <img class="vigneron float-right rounded-circle" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}"/>
