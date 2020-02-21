@@ -22,6 +22,8 @@ easy_admin:
             - label: 'Configuration'
             - label: 'Slider Accueil'
               entity: 'SliderHome'
+            - label: 'Slider MPMD'
+              entity: 'SliderMPMD'
             - label: 'Gestion des vins'
             - entity: 'WineDomain'
               label: 'Domaines'
