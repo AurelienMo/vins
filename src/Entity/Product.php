@@ -494,4 +494,28 @@ class Product extends AbstractEntity implements UpdatableInterface
     {
         $this->alcoholDegree = $alcoholDegree;
     }
+
+    public function averageRate()
+    {
+        $total = 0;
+        $opinions = $this->opinions->toArray();
+        foreach ($this->opinions as $opinion) {
+            $total += $opinion->getRate();
+        }
+
+        return $this->opinions->count() > 0 ? round($total / $this->opinions->count()) : 0;
+    }
+
+    public function getLowerCapacityPrice()
+    {
+        $capacities = $this->capacities->toArray();
+        usort($capacities, [$this, 'compareCapacityPrice']);
+
+        return count($capacities) === 0 ? 'N/A' : current($capacities)->getUnitPrice();
+    }
+
+    private function compareCapacityPrice(Capacity $a, Capacity $b)
+    {
+        return $a->getUnitPrice() <=> $b->getUnitPrice();
+    }
 }

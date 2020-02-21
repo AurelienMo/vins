@@ -21,7 +21,7 @@ yarn-error.log
 ###< squizlabs/php_codesniffer ###
 
 ###> behat/symfony2-extension ###
-behat.yml
+behat.yml.dist
 ###< behat/symfony2-extension ###
 ubuntu-xenial-16.04-cloudimg-console.log
 .idea/
