@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('mpmd') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid pr-0 pl-0">
+        <div id="carousel-slider-homepage" class="carousel slide carousel-fade" data-ride="carousel">
+            <ol class="carousel-indicators">
+                {% for i, slider in sliders %}
+                    <li data-target="#carousel-slider-homepage" data-slide-to="{{ loop.index0 }}" {% if loop.index0 == 0 %} class="active" {% endif %}></li>
+                {% endfor %}
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                {% for index, slider in sliders %}
+
+
+                    <div class="carousel-item {% if loop.index0 == 0 %} active {% endif %}">
+                        {% if slider.pdf %}
+                            <a href="{{ vich_uploader_asset(slider, 'pdfFile') }}" target="_blank">
+                        {% endif %}
+                                <img class="d-block w-100" src="{{vich_uploader_asset(slider, 'imageFile')}}"/>
+                        {% if slider.pdf %}
+                            </a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('mpmd') }}
+{% endblock %}

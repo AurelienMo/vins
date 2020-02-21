@@ -38,6 +38,7 @@ Encore
     .addEntry('wine_profile_list', './assets/js/pages/wine_profile/list.js')
     .addEntry('tastuce_list', './assets/js/pages/tastuce/list.js')
     .addEntry('list_wine', './assets/js/pages/wine/list.js')
+    .addEntry('mpmd', './assets/js/pages/mpmd.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
