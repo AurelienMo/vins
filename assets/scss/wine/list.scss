@@ -17,14 +17,14 @@
       background-color: #ffffff;
       flex: 1;
       .wine {
-        height: 260px;
+        height: 270px;
       }
       .vigneron {
         position: absolute;
         right: 20px;
         top: 0;
-        height: 90px;
-        width: 90px;
+        height: 110px;
+        width: 110px;
       }
       .badges {
         position: absolute;
@@ -32,8 +32,8 @@
         height: 100%;
         top: 0;
         img {
-          height: 50px;
-          width: 50px;
+          height: 80px;
+          width: 80px;
         }
       }
       &_general {
