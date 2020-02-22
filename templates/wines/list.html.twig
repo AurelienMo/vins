@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-wine_header-image">
                     <div class="card-wine_header-image_circle-first">
-                        <div class="card-wine_header-image_circle-second d-flex align-items-center justify-content-center" style="border: 2px solid {{ wine.profile.color }}">
+                        <div class="card-wine_header-image_circle-second d-flex align-items-center justify-content-center" style="border: 3px solid {{ wine.profile.color }}">
                             <img src="{{ vich_uploader_asset(wine.profile, 'imageFile') }}"/>
                         </div>
                     </div>
@@ -24,9 +24,9 @@
                 <div class="card-wine_content d-flex flex-column">
                     <div class="card-wine_content-product d-flex flex-column justify-content-around">
                         <div class="card-wine_content-product_general container-fluid">
-                            <div class="card-wine_content-product_image row">
-                                <figure class="col-12 d-flex justify-content-center align-items-center">
-                                    <div class="badges d-flex flex-column">
+                            <div class="card-wine_content-product_image row h-100">
+                                <figure class="col-12 d-flex justify-content-center align-items-center m-0">
+                                    <div class="badges d-flex flex-column justify-content-end">
                                         {% if wine.firstBadge %}
                                             <img class="rounded-circle mb-3" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="50" width="50"/>
                                         {% endif %}
@@ -47,15 +47,14 @@
                         </div>
                     </div>
                     <div class="card-wine_content-price container-fluid">
-                        <div class="row">
-                            <div class="col">
+                        <div class="row pt-2 pb-2 d-flex justify-content-center align-items-center">
+                            <div class="col d-flex justify-content-center align-items-center">
                                 <div class="d-flex flex-column justify-content-center align-items-center">
-                                    <span>A partir de</span>
-                                    <strong class="font-weight-bold">{{ wine.getLowerCapacityPrice }} €</strong>
+                                    <h3 class="h5 font-weight-bold m-0">{{ wine.getLowerCapacityPrice }} €</h3>
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="d-flex justify-content-around align-items-center h-100">
+                            <div class="col d-flex justify-content-center align-items-center">
+                                <div class="d-flex justify-content-around align-items-center h-100 w-100">
                                     <i class="fas fa-2x fa-eye"></i>
                                     <i class="fab fa-2x fa-opencart"></i>
                                 </div>
