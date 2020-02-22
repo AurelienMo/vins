@@ -39,38 +39,64 @@ easy_admin:
                 fields:
                     - type: 'group'
                       label: 'Informations générales'
+                      columns: 12
+                    - { property: 'imageFile', type: 'vich_image', label: 'Photo produit', columns: 4 }
+                    - { property: 'firstBadgeFile', type: 'vich_image', label: '1er Badge', columns: 4 }
+                    - { property: 'secondBadgeFile', type: 'vich_image', label: '2ème badge', columns: 4 }
+                    - property: region
+                      label: 'Région'
+                      type: 'choice'
+                      type_options:
+                          choices:
+                              Alsace: Alsace
+                              Beaujolais: Beaujolais
+                              Bordeaux: Bordeaux
+                              Bourgogne: Bourgogne
+                              Champagne: Champagne
+                              Languedoc: Languedoc
+                              Provence: Provence
+                              Roussilon: Roussilon
+                              Savoie: Savoie
+                              Sud-ouest: Sud-ouest
+                              Val de loire: Val de loire
+                              Vallée du Rhône: Vallée du Rhône
                       columns: 4
-                    - { property: 'imageFile', type: 'vich_image', label: 'Photo produit' }
-                    - { property: 'firstBadgeFile', type: 'vich_image', label: '1er Badge' }
-                    - { property: 'secondBadgeFile', type: 'vich_image', label: '2ème badge' }
                     - property: domain
                       label: 'Domaine'
                       type: 'easyadmin_autocomplete'
+                      columns: 4
                     - property: vintageName
                       label: 'Nom de la cuvée'
                       type: 'text'
+                      columns: 4
                     - property: year
                       type: 'text'
                       label: 'Année'
+                      columns: 4
                     - property: appellation
                       type: 'text'
                       label: 'Appellation'
+                      columns: 4
                     - property: shortPhrase
                       type: 'text'
                       label: 'Description courte'
+                      columns: 4
                     - property: alcoholDegree
                       type: 'text'
                       label: "Degré d'alcool"
-                    - { property: 'typeProduct', label: 'Type de vin', type: 'easyadmin_autocomplete', type_options: { attr: { create: true } } }
+                      columns: 4
+                    - { property: 'typeProduct', label: 'Type de vin', type: 'easyadmin_autocomplete', type_options: { attr: { create: true } }, columns: 4 }
                     - property: profile
                       type: 'easyadmin_autocomplete'
                       type_options:
                           attr:
                               create: true
                       label: 'Profil'
+                      columns: 4
                     - property: tvaRate
                       type: number
                       label: '% TVA'
+                      columns: 4
                     - type: 'group'
                       label: 'Informations vin'
                       columns: 4

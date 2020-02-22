@@ -197,6 +197,13 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     private $secondBadgeFile;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $region;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -602,5 +609,15 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setSecondBadge(?string $imagePath): void
     {
         $this->secondBadge = $imagePath;
+    }
+
+    public function getRegion(): ?string
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?string $region): void
+    {
+        $this->region = $region;
     }
 }
