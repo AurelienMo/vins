@@ -105,12 +105,12 @@ easy_admin:
                       label: 'Fruité'
                     - property: wineCaract.taste
                       type: 'choice'
-                      label: 'Goût'
+                      label: 'Saveur'
                       type_options:
-                          choices: {'Tannique': 'Tannique', 'Onctueux': 'Onctueux', "Frais": "Frais"}
+                          choices: {'Tannique': 'Tannique', 'Onctueux': 'Onctueux', "Frais": "Frais", "Corsé": "Corsé"}
                     - property: wineCaract.robustness
                       type: 'choice'
-                      label: 'Robustesse'
+                      label: 'Corps'
                       type_options:
                           choices: {'Mince': 'Mince', 'Charnu': 'Charnu', "Musclé": "Musclé"}
                     - type: 'group'
