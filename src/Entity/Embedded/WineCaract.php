@@ -46,11 +46,15 @@ class WineCaract
     protected $taste;
 
     /**
-     * @var string|null
+     * @var integer|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      *
      * @Assert\NotBlank()
+     * @Assert\Range(
+     *     min=0,
+     *     max=100
+     * )
      */
     protected $robustness;
 
@@ -86,18 +90,12 @@ class WineCaract
         $this->taste = $taste;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRobustness(): ?string
+    public function getRobustness(): ?int
     {
         return $this->robustness;
     }
 
-    /**
-     * @param string|null $robustness
-     */
-    public function setRobustness(?string $robustness): void
+    public function setRobustness(?int $robustness): void
     {
         $this->robustness = $robustness;
     }

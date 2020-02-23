@@ -109,10 +109,8 @@ easy_admin:
                       type_options:
                           choices: {'Tannique': 'Tannique', 'Onctueux': 'Onctueux', "Frais": "Frais", "Corsé": "Corsé"}
                     - property: wineCaract.robustness
-                      type: 'choice'
+                      type: 'integer'
                       label: 'Corps'
-                      type_options:
-                          choices: {'Mince': 'Mince', 'Charnu': 'Charnu', "Musclé": "Musclé"}
                     - type: 'group'
                       label: 'Service'
                       columns: 4
@@ -133,6 +131,30 @@ easy_admin:
                           prototype: true
                           prototype_data: 'Nouveau cépage'
                       label: 'Cépage'
+                    - property: agreements
+                      label: 'Les accords'
+                      type: entity
+                      type_options:
+                          class: App\Entity\WineAgreement
+                          multiple: true
+#                          choices:
+#                              "Poisson maigre": "Poisson maigre"
+#                              "Crustacés": "Crustacés"
+#                              "Poisson gras": "Poisson gras"
+#                              "Légumes": "Légumes"
+#                              "Fromage frais": "Fromage frais"
+#                              "Fromage doux": "Fromage doux"
+#                              "Fromage fort": "Fromage fort"
+#                              "Charcuterie": "Charcuterie"
+#                              "Viande maigre": "Viande maigre"
+#                              "Viande grasse": "Viande grasse"
+#                              "Viande rouge": "Viande rouge"
+#                              "Gibiers": "Gibiers"
+#                              "Sauce rouge": "Sauce rouge"
+#                              "Sauce blanche": "Sauce blanche"
+#                              "Sauce piquante": "Sauce piquante"
+#                              "Sauce poivre": "Sauce poivre"
+#                              "Sauce huile": "Sauce huile"
                     - type: 'group'
                       label: 'Contenance'
                       columns: 12

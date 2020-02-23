@@ -204,6 +204,13 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $region;
 
+    /**
+     * @var WineAgreement[]|Collection
+     *
+     * @ORM\ManyToMany(targetEntity="App\Entity\WineAgreement")
+     */
+    protected $agreements;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -214,6 +221,7 @@ class Product extends AbstractEntity implements UpdatableInterface
         $this->opinions = new ArrayCollection();
         $this->capacities = new ArrayCollection();
         $this->quizzs = new ArrayCollection();
+        $this->agreements = new ArrayCollection();
         parent::__construct();
     }
 
@@ -619,5 +627,22 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function setRegion(?string $region): void
     {
         $this->region = $region;
+    }
+
+    public function getAgreements()
+    {
+        return $this->agreements;
+    }
+
+    public function addAgreement(WineAgreement $agreement)
+    {
+        $this->agreements->add($agreement);
+
+        return $this;
+    }
+
+    public function removeAgreement(WineAgreement $agreement)
+    {
+        $this->agreements->removeElement($agreement);
     }
 }
