@@ -19,6 +19,13 @@ class WineAgreement extends AbstractEntity
      */
     protected $name;
 
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer", name="order_value")
+     */
+    protected $order;
+
     public function getName(): ?string
     {
         return $this->name;
@@ -27,6 +34,16 @@ class WineAgreement extends AbstractEntity
     public function setName(?string $name): void
     {
         $this->name = $name;
+    }
+
+    public function getOrder(): ?int
+    {
+        return $this->order;
+    }
+
+    public function setOrder(?int $order): void
+    {
+        $this->order = $order;
     }
 
     public function __toString()

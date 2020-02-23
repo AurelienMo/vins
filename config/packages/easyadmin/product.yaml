@@ -137,6 +137,7 @@ easy_admin:
                       type_options:
                           class: App\Entity\WineAgreement
                           multiple: true
+                          query_builder: 'App\Repository\WineAgreementRepository::getOrderAgreement'
                     - type: 'group'
                       label: 'Contenance'
                       columns: 12
