@@ -137,24 +137,6 @@ easy_admin:
                       type_options:
                           class: App\Entity\WineAgreement
                           multiple: true
-#                          choices:
-#                              "Poisson maigre": "Poisson maigre"
-#                              "Crustacés": "Crustacés"
-#                              "Poisson gras": "Poisson gras"
-#                              "Légumes": "Légumes"
-#                              "Fromage frais": "Fromage frais"
-#                              "Fromage doux": "Fromage doux"
-#                              "Fromage fort": "Fromage fort"
-#                              "Charcuterie": "Charcuterie"
-#                              "Viande maigre": "Viande maigre"
-#                              "Viande grasse": "Viande grasse"
-#                              "Viande rouge": "Viande rouge"
-#                              "Gibiers": "Gibiers"
-#                              "Sauce rouge": "Sauce rouge"
-#                              "Sauce blanche": "Sauce blanche"
-#                              "Sauce piquante": "Sauce piquante"
-#                              "Sauce poivre": "Sauce poivre"
-#                              "Sauce huile": "Sauce huile"
                     - type: 'group'
                       label: 'Contenance'
                       columns: 12
