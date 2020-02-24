@@ -52,7 +52,6 @@ export default class Global {
                 cache: false,
                 success: function (response) {
                     if (response.url) {
-                        console.log('toto');
                         window.location.replace(response.url);
                     }
                     hideLoader();

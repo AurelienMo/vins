@@ -85,3 +85,14 @@
     border-radius: 0 0 10px 10px;
   }
 }
+.tab-content {
+  min-height: 50vh;
+}
+.modal-bottom {
+  height: 75vh;
+}
+#chartFruity, #chartRobustness {
+  width: 210px;
+  height: 210px;
+  margin: 0 auto;
+}
