@@ -30,6 +30,14 @@ class ProductRepository extends AbstractServiceRepository
                     ->getResult();
     }
 
+    public function findOnlyActive()
+    {
+        return $this->createQueryBuilder('p')
+                    ->where('p.active = true')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     protected function getClassEntityName(): string
     {
         return Product::class;

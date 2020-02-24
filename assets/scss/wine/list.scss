@@ -91,8 +91,27 @@
 .modal-bottom {
   height: 75vh;
 }
-#chartFruity, #chartRobustness {
-  width: 210px;
-  height: 210px;
-  margin: 0 auto;
+.detail-wine {
+  #chartFruity, #chartRobustness {
+    width: 210px;
+    height: 210px;
+    margin: 0 auto;
+  }
+  canvas {
+    min-height: 200px;
+    max-width: 200px;
+  }
+  #imgTaste {
+    background-size: 30%;
+    min-width: 180px;
+    min-height: 180px;
+  }
+  .item-caract {
+    background-color: #d7f1f1;
+    min-height: 150px;
+  }
+  .dishes {
+    background-color: #fdf4eb;
+
+  }
 }

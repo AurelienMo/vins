@@ -211,6 +211,13 @@ class Product extends AbstractEntity implements UpdatableInterface
      */
     protected $agreements;
 
+    /**
+     * @var WineDish[]|Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\WineDish", mappedBy="wine", cascade={"persist", "remove"})
+     */
+    protected $dishes;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -222,6 +229,7 @@ class Product extends AbstractEntity implements UpdatableInterface
         $this->capacities = new ArrayCollection();
         $this->quizzs = new ArrayCollection();
         $this->agreements = new ArrayCollection();
+        $this->dishes = new ArrayCollection();
         parent::__construct();
     }
 
@@ -644,5 +652,27 @@ class Product extends AbstractEntity implements UpdatableInterface
     public function removeAgreement(WineAgreement $agreement)
     {
         $this->agreements->removeElement($agreement);
+    }
+
+    public function getDishes()
+    {
+        return $this->dishes;
+    }
+
+    public function addDish(WineDish $dish)
+    {
+        if (!$this->dishes->contains($dish)) {
+            $this->dishes->add($dish);
+            $dish->setWine($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDish(WineDish $dish)
+    {
+        if ($this->dishes->contains($dish)) {
+            $this->dishes->removeElement($dish);
+        }
     }
 }

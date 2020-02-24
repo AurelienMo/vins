@@ -99,11 +99,11 @@ class WineService
     }
 
     /**
-     * @return array|null
+     * @return array|string|null
      */
-    public function getGrape(): ?array
+    public function getGrape(bool $implode = false)
     {
-        return $this->grape;
+        return $implode ? implode(' - ', $this->grape) : $this->grape;
     }
 
     /**

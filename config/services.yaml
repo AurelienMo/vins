@@ -11,6 +11,7 @@ parameters:
     app.path.tastuce_theme_images: /upload/images/tastuce_theme
     app.path.slider_mpmd_images: /upload/images/mpmd
     app.path.slider_mpmd_file: /upload/files/mpmd
+    app.path.dish_images: /upload/files/dish
 
 services:
     # default configuration for services in *this* file

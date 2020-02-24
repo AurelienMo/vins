@@ -138,6 +138,15 @@ easy_admin:
                           class: App\Entity\WineAgreement
                           multiple: true
                           query_builder: 'App\Repository\WineAgreementRepository::getOrderAgreement'
+                    - property: dishes
+                      label: 'Les mets'
+                      type: collection
+                      type_options:
+                          entry_type: 'App\Admin\Forms\DishType'
+                          allow_add: true
+                          allow_delete: true
+                          prototype: true
+                          by_reference: false
                     - type: 'group'
                       label: 'Contenance'
                       columns: 12

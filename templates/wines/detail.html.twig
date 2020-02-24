@@ -7,14 +7,9 @@
         background: transparent url('img/robustness.png') no-repeat center 70px;
         background-size: 30%;
     }
-    #imgTaste {
-        background-size: 30%;
-        min-width: 200px;
-        min-height: 200px;
-    }
 </style>
 
-<div class="container">
+<div class="container detail-wine">
     <ul class="nav nav-tabs nav-justified md-tabs primary-bkg" id="myTabJust" role="tablist">
         <li class="nav-item ml-2">
             <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#wine-domain" role="tab" aria-controls="home-just"
@@ -34,33 +29,62 @@
             </div>
         </div>
         <div class="tab-pane fade show active" id="wine-domain" role="tabpanel" aria-labelledby="home-tab-just">
-            <div class="d-flex justify-content-around align-items-center" style="background-color: #F5FAFA; min-height: 150px">
-                <canvas class="m-0" id="chartFruity" width="200" height="200" style="max-width: 200px; max-height: 200px"></canvas>
-{#                <canvas class="m-0" id="chartTaste" width="200" height="200" style="max-width: 200px; max-height: 200px"></canvas>#}
+            <div class="item-caract d-flex justify-content-around align-items-center">
+                <canvas class="m-0" id="chartFruity" width="200" height="200"></canvas>
                 <div id="imgTaste" style="background: transparent url('img/taste_tannique.png') no-repeat center; background-size: 100%"></div>
-                <canvas class="m-0" id="chartRobustness" width="200" height="200" style="max-width: 200px; max-height: 200px"></canvas>
+                <canvas class="m-0" id="chartRobustness" width="200" height="200"></canvas>
             </div>
-            <div class="d-flex" style="min-height: 200px; background-color: blue;">
-                jlk
-            </div>
-                <div class="d-flex flex-column w-75 justify-content-center align-items-center">
-                    <h2>Xavier Combe & la vallée du Rhône</h2>
-                    <p>
-                        Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1
-                        labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft
-                        beer twee. Qui photo booth letterpress,
-                    </p>
-                    <p>
-                        Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1
-                        labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft
-                        beer twee. Qui photo booth letterpress,
-                    </p>
-                    <p>
-                        Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1
-                        labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft
-                        beer twee. Qui photo booth letterpress,
-                    </p>
+            <div class="container">
+                <div class="row pt-3 pb-3">
+                    <div class="col text-center">
+                        <i class="fas fa-thermometer-quarter fa-3x"></i>
+                    </div>
+                    <div class="col text-center">
+                        <i class="fas fa-thermometer-quarter fa-3x"></i>
+                    </div>
+                    <div class="col text-center">
+                        <i class="fas fa-thermometer-quarter fa-3x"></i>
+                    </div>
+                    <div class="col text-center">
+                        <i class="fas fa-thermometer-quarter fa-3x"></i>
+                    </div>
                 </div>
+                <div class="row pt-1 pb-3 font-weight-bold">
+                    <div class="col text-center">
+                        <span class="text-center">{{ wine.wineService.temp }} °C</span>
+                    </div>
+                    <div class="col text-center">
+                        <span class="text-center">{{ wine.wineService.decanting ? 'Oui' : 'Non' }}</span>
+                    </div>
+                    <div class="col text-center">
+                        <span class="text-center">{{ wine.wineService.opportunity }}</span>
+                    </div>
+                    <div class="col text-center">
+                        <span class="text-center">{{ wine.wineService.getGrape(true) }}</span>
+                    </div>
+                </div>
+            </div>
+            {% if wine.dishes|length > 0 %}
+                <div class="container-fluid dishes p-0">
+                    <div class="row pt-3 pb-3">
+                        {% for dish in wine.dishes %}
+                            <div class="col text-center">
+                                <img src="{{ vich_uploader_asset(dish, 'imageFile') }}" />
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row pt-1 pb-3 font-weight-bold">
+                        {% for dish in wine.dishes %}
+                            <div class="col text-center">
+                                <span>{{ dish.name }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="d-flex flex-column justify-content-center align-items-center pt-5 pb-5 pr-4 pl-4">
+                {{ wine.domain.description|raw }}
+            </div>
         </div>
         <div class="tab-pane fade" id="opinions" role="tabpanel" aria-labelledby="profile-tab-just">
             <div class="d-flex justify-content-around align-items-center m-0">
@@ -109,7 +133,7 @@
                 cutoutPercentage: 95
             }
         }
-    );
+    )
     new Chart(
         document.getElementById('chartRobustness'),
         {
@@ -150,5 +174,5 @@
                 cutoutPercentage: 95
             }
         }
-    );
+    )
 </script>

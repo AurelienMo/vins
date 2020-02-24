@@ -78,6 +78,7 @@ easy_admin:
               icon: 'newspaper'
         form_theme:
             - 'bundles/EasyAdminBundle/layout.html.twig'
+            - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
     site_name: 'Mon Premier Sommelier'
     formats:
         number: '%0.2f'

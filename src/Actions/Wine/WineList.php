@@ -25,7 +25,7 @@ class WineList
 
     public function __invoke(Request $request, ViewResponder $responder)
     {
-        $wines = $this->wineRepository->findAll();
+        $wines = $this->wineRepository->findOnlyActive();
 
         return $responder(
             'wines/list.html.twig',
