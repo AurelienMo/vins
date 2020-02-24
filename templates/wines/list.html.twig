@@ -2,16 +2,6 @@
 
 {% block stylesheets %}
     {{ encore_entry_link_tags('list_wine') }}
-    <style>
-        #chartFruity {
-            background: transparent url('img/fruit.png') no-repeat center 70px;
-            background-size: 30%;
-        }
-        #chartRobustness {
-            background: transparent url('img/robustness.png') no-repeat center 70px;
-            background-size: 30%;
-        }
-    </style>
 {% endblock %}
 {% block body %}
 <div class="container mt-5 mb-3">
@@ -107,6 +97,5 @@
 </div>
 {% endblock %}
 {% block javascripts %}
-{#    <script src="https://cdnjs.com/libraries/Chart.js"></script>#}
     {{ encore_entry_script_tags('list_wine') }}
 {% endblock %}
