@@ -1,16 +1,46 @@
-.modal-bottom {
-  min-width: 100%;
-  margin-left: 0;
-  margin-right: 0;
-  margin-bottom: 0;
-  position: fixed;
-  top: auto;
-  left: auto;
-  right: auto;
-  bottom: 0;
-
+#bottom-modal {
+  .modal-bottom {
+    min-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    position: fixed;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: 0;
+  }
+  .modal-body, .modal-content, .modal-bottom {
+    max-height: 90vh;
+    height: auto;
+  }
 }
-.modal-body, .modal-content, .modal-bottom {
-  max-height: 90vh;
-  height: auto;
+#bottom-center-modal {
+  .modal-bottom-center {
+    min-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    position: fixed;
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: 0;
+  }
+  .modal-content {
+    width: 33%;
+    background-color: transparent;
+    position: fixed;
+    right: 0;
+    .modal-body {
+      overflow-y: scroll;
+      -ms-overflow-style: none;
+    }
+  }
+  .modal-content::-webkit-scrollbar {
+    display: none;
+  }
+  .modal-body, .modal-content, .modal-bottom-center {
+    min-height: 100vh;
+  }
 }
