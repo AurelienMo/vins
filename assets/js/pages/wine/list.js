@@ -12,9 +12,9 @@ $(function() {
             method: 'GET',
             dataType: 'json',
             success: function (response) {
-                modal.html('bottom-modal', response.html);
+                modal.html('bottom-center-modal', response.html);
                 hideLoader();
-                modal.toggle('bottom-modal')
+                modal.toggle('bottom-center-modal');
             }
         })
     });

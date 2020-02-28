@@ -93,13 +93,16 @@
 }
 .detail-wine {
   #chartFruity, #chartRobustness {
-    width: 210px;
-    height: 210px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto;
   }
+  .picto {
+    max-height: 55px;
+  }
   canvas {
-    min-height: 200px;
-    max-width: 200px;
+    min-height: 150px;
+    max-width: 150px;
   }
   #imgTaste {
     background-size: 30%;

@@ -4,6 +4,7 @@ export const BOTTOM_MODAL = 'bottom-modal';
 
 export default class Modal {
     bottomModal;
+    centerBottomModal;
 
     constructor() {
         this.onLoad();
@@ -11,6 +12,7 @@ export default class Modal {
 
     onLoad() {
         this.bottomModal = document.getElementById('bottom-modal');
+        this.centerBottomModal = document.getElementById('bottom-center-modal');
     }
 
     toggle = (id) => {
@@ -18,6 +20,8 @@ export default class Modal {
             case 'bottom-modal':
                 $(this.bottomModal).modal('show');
                 break;
+            case 'bottom-center-modal':
+                $(this.centerBottomModal).modal('show');
         }
     };
 
@@ -25,7 +29,10 @@ export default class Modal {
         switch (id) {
             case 'bottom-modal':
                 $(this.bottomModal).find('.modal-body').html(html);
-                break
+                break;
+            case 'bottom-center-modal':
+                $(this.centerBottomModal).find('.modal-body').html(html);
+                break;
         }
     }
 }

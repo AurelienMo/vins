@@ -675,4 +675,30 @@ class Product extends AbstractEntity implements UpdatableInterface
             $this->dishes->removeElement($dish);
         }
     }
+
+    public function countElementOpinion(string $type, bool $average = false)
+    {
+        $opinions = $this->opinions->toArray();
+        $cpt = 0;
+        $total = 0;
+
+        /** @var Opinion $opinion */
+        foreach ($opinions as $opinion) {
+            switch ($type) {
+                case 'rate':
+                    if ($opinion->getRate()) {
+                        $cpt += $opinion->getRate();
+                        $total++;
+                    }
+                    break;
+                case 'comment':
+                    if ($opinion->getContent()) {
+                        $total++;
+                    }
+                    break;
+            }
+        }
+
+        return $type === 'comment' ? $total : $average ? $total === 0 ? 0 : round($cpt / $total, 2) : $total;
+    }
 }
