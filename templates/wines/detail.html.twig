@@ -51,7 +51,7 @@
                         <img class="picto" src="{{ asset('build/images/restaurant.png') }}" alt="repas" />
                     </div>
                     <div class="col text-center">
-                        <i class="fas fa-exclamation-triangle"></i>
+                        <i class="fas fa-exclamation-triangle fa-3x"></i>
                     </div>
                     <div class="col text-center">
                         <img class="picto" src="{{ asset('build/images/grapes.png') }}" alt="cepage" />
@@ -79,14 +79,14 @@
                 <div class="container-fluid dishes p-0">
                     <div class="row pt-3 pb-3">
                         {% for dish in wine.dishes %}
-                            <div class="col text-center">
+                            <div class="col-4 text-center">
                                 <img src="{{ vich_uploader_asset(dish, 'imageFile') }}" />
                             </div>
                         {% endfor %}
                     </div>
                     <div class="row pt-1 pb-3 font-weight-bold">
                         {% for dish in wine.dishes %}
-                            <div class="col text-center">
+                            <div class="col-4 text-center">
                                 <span>{{ dish.name }}</span>
                             </div>
                         {% endfor %}
