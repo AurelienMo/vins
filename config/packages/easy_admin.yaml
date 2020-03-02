@@ -20,6 +20,8 @@ easy_admin:
         assets:
         menu:
             - label: 'Configuration'
+            - label: 'Configuration globale'
+              entity: 'GlobalConfiguration'
             - label: 'Slider Accueil'
               entity: 'SliderHome'
             - label: 'Slider MPMD'

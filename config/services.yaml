@@ -12,6 +12,7 @@ parameters:
     app.path.slider_mpmd_images: /upload/images/mpmd
     app.path.slider_mpmd_file: /upload/files/mpmd
     app.path.dish_images: /upload/files/dish
+    app.path.global_images: /upload/files/global
 
 services:
     # default configuration for services in *this* file

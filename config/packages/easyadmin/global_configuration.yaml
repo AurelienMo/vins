@@ -1,0 +1,16 @@
+easy_admin:
+    entities:
+        GlobalConfiguration:
+            class: App\Entity\GlobalConfiguration
+            list:
+                title: 'Configuration générale'
+                fields:
+                    - property: imageHomepage
+                      type: 'image'
+                      base_path: '%app.path.global_images%'
+            form:
+                fields:
+                    - property: 'imageHomepageFile'
+                      type: 'vich_image'
+                      label: 'Image'
+                      required: true

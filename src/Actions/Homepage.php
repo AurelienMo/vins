@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Actions;
 
 use App\Domain\Search\Resolver;
+use App\Repository\GlobalConfigurationRepository;
 use App\Repository\SliderHomeRepository;
 use App\Responders\ViewResponder;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,21 +37,28 @@ class Homepage
     /** @var SliderHomeRepository */
     protected $sliderHomeRepository;
 
-    public function __construct(SliderHomeRepository $sliderHomeRepository)
-    {
+    /** @var GlobalConfigurationRepository */
+    protected $globalRepository;
+
+    public function __construct(
+        SliderHomeRepository $sliderHomeRepository,
+        GlobalConfigurationRepository $globalRepository
+    ) {
         $this->sliderHomeRepository = $sliderHomeRepository;
+        $this->globalRepository = $globalRepository;
     }
 
 
     public function __invoke(Request $request, ViewResponder $responder)
     {
-//        $formSearch = $this->searchResolver->getSearchType();
         $sliders = $this->sliderHomeRepository->findAllOrderedByOrder();
+        $globalConfig = $this->globalRepository->findLatest();
 
         return $responder(
             'home/index.html.twig',
             [
                 'sliders' => $sliders,
+                'globalConf' => $globalConfig,
             ]
         );
     }
