@@ -4,6 +4,9 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./components/loader";
 @import './components/_modal';
+.h-0 {
+  height: 0;
+}
 html, body {
   height: 100%;
 }
