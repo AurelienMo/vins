@@ -33,6 +33,7 @@
   }
 }
 #image-home {
-  height: 450px; -webkit-background-size: cover;
-  background-size: cover;
+  height: 500px;
+  background-size: cover !important;
+  -webkit-background-size: cover !important;
 }
