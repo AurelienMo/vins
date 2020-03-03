@@ -68,12 +68,12 @@ label.required::after {
       z-index: 999;
       .header_logo_circle {
         &-first {
-          width: 180px;
-          height: 180px;
-          border-radius: 90px;
+          width: 150px;
+          height: 150px;
+          border-radius: 75px;
           border: 8px white solid;
-          margin-top: -122px;
-          margin-left: -100px;
+          //margin-top: -122px;
+          //margin-left: -100px;
         }
         &-second {
           width: 100%;
@@ -84,7 +84,7 @@ label.required::after {
         }
       }
       .logo {
-        height: 85px;
+        height: 70px;
       }
     }
 
@@ -104,7 +104,8 @@ label.required::after {
     background-color: #567683;
   }
   #main-container {
-    margin-top: 135px
+    margin-top: 120px;
+    padding-top: 60px;
   }
   .dropdown-mps .dropdown-item:hover {
     background-color: $primary-color!important;

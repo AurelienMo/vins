@@ -12,11 +12,17 @@
     <nav class="d-flex align-items-center">
         <div class="container">
             <div class="row">
-                <ul class="col navbar-nav d-flex justify-content-center h-0">
-                    <li class="nav-item d-flex flex-column justify-content-center">
-                        <div></div>
-                    </li>
-                </ul>
+                <a href="{{ path('homepage') }}">
+                <div class="container-logo">
+                    <div class="header_logo_circle-first">
+                        <div class="header_logo_circle-second d-flex align-items-center justify-content-center">
+
+                            <img class="logo" src="{{ asset('build/images/logo.png') }}" alt="logo"/>
+
+                        </div>
+                    </div>
+                </div>
+                </a>
                 <ul class="col navbar-nav d-flex justify-content-center">
                     <li class="nav-item d-flex flex-column justify-content-center">
                         <a class="nav-link text-center" href="#">Les boxs
@@ -61,15 +67,4 @@
             </div>
         </div>
     </nav>
-    <div class="container container-logo d-flex">
-        <a href="{{ path('homepage') }}">
-            <div class="header_logo_circle-first">
-                <div class="header_logo_circle-second d-flex align-items-center justify-content-center">
-
-                        <img class="logo" src="{{ asset('build/images/logo.png') }}" alt="logo"/>
-
-                </div>
-            </div>
-        </a>
-    </div>
 </header>
