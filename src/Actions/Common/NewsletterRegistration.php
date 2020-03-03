@@ -9,6 +9,8 @@ use App\Domain\Newsletter\Registration\Forms\NewsletterRegistrationType;
 use App\Entity\Newsletter;
 use App\Repository\NewsletterRepository;
 use App\Responders\JsonResponder;
+use App\Responders\RedirectResponder;
+use App\Responders\ViewResponder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -52,8 +54,11 @@ class NewsletterRegistration
     }
 
 
-    public function __invoke(Request $request, JsonResponder $responder): Response
-    {
+    public function __invoke(
+        Request $request,
+        ViewResponder $responder,
+        JsonResponder $jsonResponder
+    ): Response {
         $form = $this->formFactory->create(NewsletterRegistrationType::class)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,10 +68,14 @@ class NewsletterRegistration
                 $this->entityManager->persist($newsletter);
                 $this->entityManager->flush();
             }
-            $this->flashBag->add('success', FlashMessage::SUCCESS_REGISTRATION_NEWSLETTER);
 
-            return $responder(['code' => 201, 'url' => $request->server->get('HTTP_REFERER')]);
+            return $jsonResponder(['code' => 201, 'url' => $request->server->get('HTTP_REFERER')]);
         }
+
+        return $responder(
+            'newsletter/registration.html.twig',
+            ['form' => $form->createView()]
+        );
 
         return $responder(
             [

@@ -40,7 +40,7 @@ export default class Global {
                 }
             })
         });
-        $(document).on('submit', 'form', function(e) {
+        $(document).on('submit', '.ajaxForm', function(e) {
             e.preventDefault();
             showLoader();
             let modal = new Modal();
@@ -51,6 +51,7 @@ export default class Global {
                 data: target.serialize(),
                 cache: false,
                 success: function (response) {
+                    console.log(response);
                     if (response.url) {
                         window.location.replace(response.url);
                     }

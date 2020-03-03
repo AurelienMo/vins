@@ -6,7 +6,7 @@
                     <div class="card-body form">
                         <h3 class="font-weight-bold dark-grey-text mt-4"><i class="fa fa-envelope pr-2 mr-1"></i>Contactez-nous:</h3>
                         {% form_theme form 'forms/_contact.html.twig' %}
-                        {{ form_start(form, {'attr': {'action': path('contact_page'), 'method': 'POST'}}) }}
+                        {{ form_start(form, {'attr': {'action': path('contact_page', 'class': 'ajaxForm'), 'method': 'POST'}}) }}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="md-form mb-0">

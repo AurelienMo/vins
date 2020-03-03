@@ -20,7 +20,7 @@ class NewsletterRegistrationType extends AbstractType
                 [
                     'label' => 'Votre email *',
                     'attr' => [
-                        'class' => 'form-control',
+                        'class' => 'form-control text-white border-bottom border-danger',
                     ],
                 ]
             );
