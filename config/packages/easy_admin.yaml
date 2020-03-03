@@ -19,11 +19,13 @@ easy_admin:
     design:
         assets:
         menu:
-            - label: 'Configuration'
-            - label: 'Configuration globale'
-              entity: 'GlobalConfiguration'
-            - label: 'Slider Accueil'
-              entity: 'SliderHome'
+            - label: "Page d'accueil"
+              icon: 'home'
+              children:
+                    - label: 'Image accueil'
+                      entity: 'GlobalConfiguration'
+                    - label: 'Slider Accueil'
+                      entity: 'SliderHome'
             - label: 'Slider MPMD'
               entity: 'SliderMPMD'
             - label: 'Gestion des vins'
