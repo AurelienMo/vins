@@ -57,7 +57,8 @@ class NewsletterRegistration
     public function __invoke(
         Request $request,
         ViewResponder $responder,
-        JsonResponder $jsonResponder
+        JsonResponder $jsonResponder,
+        RedirectResponder $redirectResponder
     ): Response {
         $form = $this->formFactory->create(NewsletterRegistrationType::class)->handleRequest($request);
 
@@ -72,16 +73,13 @@ class NewsletterRegistration
             return $jsonResponder(['code' => 201, 'url' => $request->server->get('HTTP_REFERER')]);
         }
 
+        if ($request->isMethod('POST') && !$form->isValid()) {
+            return $redirectResponder('homepage');
+        }
+
         return $responder(
             'newsletter/registration.html.twig',
             ['form' => $form->createView()]
-        );
-
-        return $responder(
-            [
-                'code' => 200,
-                'html' => $this->templating->render('newsletter/registration.html.twig', ['form' => $form->createView()])
-            ]
         );
     }
 }
