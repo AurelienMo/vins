@@ -4,6 +4,10 @@
      {{ encore_entry_link_tags('wine_profile_list') }}
 {% endblock %}
 
+{% block breadcrumb %}
+{{ render(url('breadcrumb', {'type': 'Profil de vin'})) }}
+{% endblock %}
+
 {% block body %}
     {% set profilesName = [
         constant('App\\Entity\\VineProfile::WHITE_TYPE_PROFILE'),
@@ -11,7 +15,7 @@
         constant('App\\Entity\\VineProfile::PINK_TYPE_PROFILE')
     ]
     %}
-    <div class="container mb-3">
+    <div class="container mb-3 mt-2">
         {% for name in profilesName %}
             <div class="row">
                 <div class="col-12">

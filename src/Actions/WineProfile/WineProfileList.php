@@ -15,6 +15,7 @@ namespace App\Actions\WineProfile;
 
 use App\Domain\WineProfile\Resolver;
 use App\Entity\VineProfile;
+use App\Repository\BreadcrumbRepository;
 use App\Responders\ViewResponder;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -28,21 +29,33 @@ final class WineProfileList
     /** @var Resolver */
     protected $resolver;
 
+    /** @var BreadcrumbRepository */
+    protected $breadcrumbRepository;
+
     /**
      * WineProfileList constructor.
      *
      * @param Resolver $resolver
      */
     public function __construct(
-        Resolver $resolver
+        Resolver $resolver,
+        BreadcrumbRepository $breadcrumbRepository
     ) {
         $this->resolver = $resolver;
+        $this->breadcrumbRepository = $breadcrumbRepository;
     }
 
     public function __invoke(ViewResponder $responder)
     {
         $profiles = $this->resolver->getListWineProfiles();
+        $breadcrumb = $this->breadcrumbRepository->findByPage('Profil de vin');
 
-        return $responder('wine_profile/list.html.twig', ['profiles' => $profiles]);
+        return $responder(
+            'wine_profile/list.html.twig',
+            [
+                'profiles' => $profiles,
+                'breadcrumb' => $breadcrumb,
+            ]
+        );
     }
 }

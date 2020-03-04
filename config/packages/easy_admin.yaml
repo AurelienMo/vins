@@ -19,6 +19,10 @@ easy_admin:
     design:
         assets:
         menu:
+            - label: 'Configuration'
+            - label: 'Breadcrumb'
+              entity: 'Breadcrumb'
+              icon: 'cog fa-spin'
             - label: "Page d'accueil"
               icon: 'home'
               children:

@@ -52,6 +52,7 @@
                     </div>
                 {% endfor %}
             {% endfor %}
+                {% block breadcrumb %}{% endblock %}
                 {% block body %}{% endblock %}
         </div>
         {% include 'parts/_footers.html.twig' %}

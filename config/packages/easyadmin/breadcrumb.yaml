@@ -1,0 +1,23 @@
+easy_admin:
+    entities:
+        Breadcrumb:
+            class: App\Entity\Breadcrumb
+            list:
+                title: 'Liste des breadcrumb'
+                fields:
+                    - property: page
+                      label: 'Page'
+                    - property: imagePath
+                      type: 'image'
+                      base_path: '%app.path.breadcrumb_images%'
+                      label: 'Image'
+            form:
+                fields:
+                    - property: page
+                      type: choice
+                      type_options:
+                          choices: {'Profil de vin': 'Profil de vin', 'Tastuce': 'Tastuce'}
+                    - property: 'imageFile'
+                      type: 'vich_image'
+                      label: 'Image'
+                      required: true

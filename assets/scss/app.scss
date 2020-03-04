@@ -111,6 +111,11 @@ label.required::after {
     background-color: $primary-color!important;
   }
 }
+.breadcrumb-page {
+  min-height: 180px;
+  max-height: 180px;
+  background-size: cover;
+}
 @media all and (max-width: 991px){
   nav {
     height: 60px;
