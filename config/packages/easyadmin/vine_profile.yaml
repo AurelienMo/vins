@@ -6,7 +6,13 @@ easy_admin:
                 list: 'bundles/EasyAdminBundle/VineProfile/list.html.twig'
             list:
                 title: 'Liste des profils de vins'
+                sort: order
                 fields:
+                    - property: order
+                      label: "Ordre d'affichage"
+                      format: '%d'
+                    - property: type
+                      label: "Type de profil"
                     - property: name
                       label: 'Nom'
                     - property: description
@@ -27,6 +33,9 @@ easy_admin:
                       type: 'choice'
                       type_options:
                         choices: {'Les rouges': 'Les rouges', 'Les rosés': 'Les rosés', "Les blancs": "Les blancs"}
+                    - property: order
+                      type: integer
+                      label: "Ordre d'affichage dans le type"
                     - property: 'name'
                       type: 'text'
                       label: 'Nom'
@@ -49,6 +58,9 @@ easy_admin:
             edit:
                 fields:
                     - { property: 'imageFile', type: 'vich_image', label: 'Icône profil' }
+                    -   property: order
+                        type: integer
+                        label: "Ordre d'affichage dans le type"
                     - property: type
                       label: 'Type de profil'
                       type: 'choice'

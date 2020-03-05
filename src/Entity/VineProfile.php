@@ -92,6 +92,13 @@ class VineProfile extends AbstractEntity implements UpdatableInterface
      */
     protected $longDescription;
 
+    /**
+     * @var int|null
+     *
+     * @ORM\Column(type="integer", name="order_in_type")
+     */
+    protected $order;
+
     public function __construct()
     {
         $this->wines = new ArrayCollection();
@@ -202,5 +209,15 @@ class VineProfile extends AbstractEntity implements UpdatableInterface
     public function setLongDescription(?string $longDescription): void
     {
         $this->longDescription = $longDescription;
+    }
+
+    public function getOrder(): ?int
+    {
+        return $this->order;
+    }
+
+    public function setOrder(?int $order): void
+    {
+        $this->order = $order;
     }
 }

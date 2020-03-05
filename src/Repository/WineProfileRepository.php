@@ -18,16 +18,16 @@ use Doctrine\Common\Persistence\ManagerRegistry;
 
 final class WineProfileRepository extends AbstractServiceRepository
 {
+    public function findAllOrderedByOrder()
+    {
+        return $this->createQueryBuilder('wp')
+                    ->orderBy('wp.order')
+                    ->getQuery()
+                    ->getResult();
+    }
+
     protected function getClassEntityName(): string
     {
         return VineProfile::class;
-    }
-
-    public function getListProfileGroupedByType()
-    {
-        return $this->createQueryBuilder('wp')
-                    ->groupBy('wp.type')
-                    ->getQuery()
-                    ->getResult();
     }
 }

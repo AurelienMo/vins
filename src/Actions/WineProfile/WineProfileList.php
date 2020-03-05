@@ -13,9 +13,8 @@ declare(strict_types=1);
 
 namespace App\Actions\WineProfile;
 
-use App\Domain\WineProfile\Resolver;
-use App\Entity\VineProfile;
 use App\Repository\BreadcrumbRepository;
+use App\Repository\WineProfileRepository;
 use App\Responders\ViewResponder;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -26,28 +25,23 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 final class WineProfileList
 {
-    /** @var Resolver */
-    protected $resolver;
-
     /** @var BreadcrumbRepository */
     protected $breadcrumbRepository;
 
-    /**
-     * WineProfileList constructor.
-     *
-     * @param Resolver $resolver
-     */
+    /** @var WineProfileRepository */
+    protected $wineProfileRepository;
+
     public function __construct(
-        Resolver $resolver,
-        BreadcrumbRepository $breadcrumbRepository
+        BreadcrumbRepository $breadcrumbRepository,
+        WineProfileRepository $wineProfileRepository
     ) {
-        $this->resolver = $resolver;
         $this->breadcrumbRepository = $breadcrumbRepository;
+        $this->wineProfileRepository = $wineProfileRepository;
     }
 
     public function __invoke(ViewResponder $responder)
     {
-        $profiles = $this->resolver->getListWineProfiles();
+        $profiles = $this->wineProfileRepository->findAllOrderedByOrder();
         $breadcrumb = $this->breadcrumbRepository->findByPage('Profil de vin');
 
         return $responder(
