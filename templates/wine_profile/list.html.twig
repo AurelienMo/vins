@@ -17,7 +17,7 @@
     %}
     <div class="container mb-3 mt-2">
         {% for name in profilesName %}
-            <div class="row">
+            <div class="row mt-2 mb-2">
                 <div class="col-12">
                     <h2 class="h2 title-type p-2">
                         {{name}}
@@ -42,7 +42,7 @@
                                 <div class="card-profile_content d-flex">
                                     <div class="card-profile_content-text d-flex flex-column align-items-center justify-content-between pb-2 w-100">
                                         <h3 class="h6 font-weight-bold">{{ profile.description }}</h3>
-                                        <p class="pl-2 pr-2">
+                                        <p class="pl-2 pr-2 w-100 h-100">
                                             {{ profile.longDescription }}
                                         </p>
                                         <a href="#">
