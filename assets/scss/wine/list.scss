@@ -92,6 +92,9 @@
   height: 75vh;
 }
 .detail-wine {
+  .nav {
+    border-radius: 15px 15px 0 0;
+  }
   #chartFruity, #chartRobustness {
     width: 180px;
     height: 180px;
@@ -104,12 +107,24 @@
     min-height: 150px;
     max-width: 150px;
   }
-  #imgTaste {
+  .imgTaste {
     background-size: 30%;
     min-width: 180px;
     min-height: 180px;
   }
   .item-caract {
+    &_sign-minus {
+      position: absolute;
+      left: 15px;
+      bottom: 15px;
+      font-size: 25px;
+    }
+    &_sign-plus {
+      position: absolute;
+      right: 15px;
+      bottom: 15px;
+      font-size: 25px;
+    }
     background-color: #d7f1f1;
     min-height: 150px;
   }

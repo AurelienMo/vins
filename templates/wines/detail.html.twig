@@ -33,16 +33,26 @@
             </div>
         </div>
         <div class="tab-pane fade show active" id="wine-domain" role="tabpanel" aria-labelledby="home-tab-just">
-            <div class="item-caract d-flex justify-content-around align-items-center">
-                <canvas class="m-0" id="chartFruity" width="150" height="150"></canvas>
-                <div id="imgTaste" style="background: transparent url('img/essai.png') no-repeat center; background-size: 80%"></div>
-                <canvas class="m-0" id="chartRobustness" width="200" height="200"></canvas>
+            <div class="item-caract container-fluid">
+                <div class="row">
+                    <div class="col-sm-12 col-md-4">
+                        <canvas class="m-0" id="chartFruity" width="150" height="150"></canvas>
+                        <span class="item-caract_sign-minus font-weight-bold">-</span>
+                        <span class="item-caract_sign-plus font-weight-bold">+</span>
+                    </div>
+                    <div class="imgTaste col-sm-12 col-md-4" style="background: transparent url('img/essai.png') no-repeat center; background-size: 80%">
+                    </div>
+                    <div class="col-sm-12 col-md-4">
+                        <canvas class="m-0" id="chartRobustness" width="200" height="200"></canvas>
+                        <span class="item-caract_sign-minus font-weight-bold">-</span>
+                        <span class="item-caract_sign-plus font-weight-bold">+</span>
+                    </div>
+                </div>
             </div>
             <div class="container">
                 <div class="row pt-3 pb-3">
                     <div class="col text-center">
                         <img class="picto" src="{{ asset('build/images/thermometer.svg') }}" alt="thermometre" />
-{#                        <i class="fas fa-thermometer-quarter fa-3x"></i>#}
                     </div>
                     <div class="col text-center">
                         <img class="picto" src="{{ asset('build/images/carafage.png') }}" alt="carafage" />
@@ -57,7 +67,7 @@
                         <img class="picto" src="{{ asset('build/images/grapes.png') }}" alt="cepage" />
                     </div>
                 </div>
-                <div class="row pt-1 pb-3 font-weight-bold">
+                <div class="row pt-1 pb-3">
                     <div class="col text-center">
                         <span class="text-center">{{ wine.wineService.temp }} °C</span>
                     </div>
@@ -84,7 +94,7 @@
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="row pt-1 pb-3 font-weight-bold">
+                    <div class="row pt-1 pb-3">
                         {% for dish in wine.dishes %}
                             <div class="col-4 text-center">
                                 <span>{{ dish.name }}</span>
@@ -94,6 +104,13 @@
                 </div>
             {% endif %}
             <div class="d-flex flex-column justify-content-center align-items-center pt-5 pb-5 pr-4 pl-4">
+                <div class="container mb-5">
+                    <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                                <img class="rounded-circle w-50" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}" />
+                            </div>
+                    </div>
+                </div>
                 {{ wine.domain.description|raw }}
             </div>
         </div>
@@ -177,14 +194,14 @@
                     {
                         data: [{{wine.wineCaract.fruity}}, 100 - {{wine.wineCaract.fruity}}],
                         backgroundColor: [
-                            "#e7ad14",
-                            "#ffe6a5",
+                            "#ffc864",
+                            "rgba(255,200,100,0.4)",
                         ],
                         borderColor: [
-                            "#e7ad14",
-                            "#ffe6a5",
+                            "#ffc864",
+                            "rgba(255,200,100,0.4)",
                         ],
-                        borderWidth: 5
+                        borderWidth: 10
                     }
                 ]
             },
@@ -218,14 +235,14 @@
                     {
                         data: [{{wine.wineCaract.robustness}}, 100 - {{wine.wineCaract.robustness}}],
                         backgroundColor: [
-                            "#e73e2b",
-                            "#ff9d85",
+                            "#ff3c3c",
+                            "rgba(255,60,60,0.4)",
                         ],
                         borderColor: [
-                            "#e73e2b",
-                            "#ff9d85",
+                            "#ff3c3c",
+                            "rgba(255,60,60,0.4)",
                         ],
-                        borderWidth: 5
+                        borderWidth: 10
                     }
                 ]
             },
