@@ -33,9 +33,9 @@ class TastuceTheme extends AbstractEntity implements UpdatableInterface
     protected $name;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $image;
 
@@ -44,7 +44,6 @@ class TastuceTheme extends AbstractEntity implements UpdatableInterface
      *
      * @Vich\UploadableField(mapping="tastuce_theme_images", fileNameProperty="image")
      *
-     * @Assert\Image()
      */
     protected $imageFile;
 

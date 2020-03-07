@@ -14,26 +14,6 @@
     max-height: 480px;
   }
 }
-.page-homepage {
-  margin-top: -1rem;
-  z-index: 0;
-  .container {
-    border-radius: 15px;
-    background-color: #fff;
-    padding: 25px 40px;
-    box-shadow: 5px 5px 10px rgba(0,0,0,.1);
-  }
-  &--banner {
-    &__text {
-      line-height: 18px;
-      font-size: 13px;
-      strong {
-        display: block;
-        font-size: 14px;
-      }
-    }
-  }
-}
 #image-home {
   height: 450px; -webkit-background-size: cover;
   background-size: cover;

@@ -30,6 +30,7 @@ easy_admin:
                     - property: imageFile
                       type: vich_image
                       label: 'Image du thème'
+                      validation_groups: ["create_theme"]
                     - property: tastuces
                       type: collection
                       type_options:
