@@ -46,6 +46,9 @@ label.required::after {
       background-color: $white;
       z-index: 999;
     }
+    span {
+      font-size: 0.8rem;
+    }
     nav {
       height: 80px;
       background-color: $primary-color;
@@ -68,12 +71,10 @@ label.required::after {
       z-index: 999;
       .header_logo_circle {
         &-first {
-          width: 170px;
-          height: 170px;
-          border-radius: 85px;
+          width: 160px;
+          height: 160px;
+          border-radius: 80px;
           border: 8px white solid;
-          //margin-top: -122px;
-          //margin-left: -100px;
         }
         &-second {
           width: 100%;
@@ -84,7 +85,7 @@ label.required::after {
         }
       }
       .logo {
-        height: 80px;
+        height: 75px;
       }
     }
 

@@ -23,7 +23,7 @@
                     <a href="{{ slider.link }}">
                 {% endif %}
                 <div class="carousel-item{% if index == 0 %} active{% endif %}">
-                    <img class="d-block w-100" src="{{vich_uploader_asset(slider, 'imageFile')}}">
+                    <img class="d-block img-fluid" src="{{vich_uploader_asset(slider, 'imageFile')}}">
                 </div>
                 {% if slider.link %}
                     </a>
@@ -46,7 +46,8 @@
             </div>
         </div>
     </div>
+    <div class="mt-4 mb-4 p-0">
+        <img class="img-fluid" src="{{ vich_uploader_asset(globalConf, 'imageHomepageFile') }}"/>
+    </div>
 </div>
-<section id="image-home" class="container-fluid mt-4 mb-4" style="background: url({{ vich_uploader_asset(globalConf, 'imageHomepageFile') }}) no-repeat center center fixed;")>
-</section>
 {% endblock %}
