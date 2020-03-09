@@ -705,4 +705,16 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
 
         return $total === 0 ? 0 : round($cpt / $total, 2);
     }
+
+    public function listTypeCapacities()
+    {
+        $type = [];
+        foreach ($this->capacities as $capacity) {
+            if (!in_array($capacity, $type)) {
+                $type[] = $capacity;
+            }
+        }
+
+        return implode(', ', $type);
+    }
 }
