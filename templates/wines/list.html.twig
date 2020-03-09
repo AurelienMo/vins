@@ -51,6 +51,14 @@
                             <div class="col d-flex justify-content-center align-items-center">
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                     <h3 class="h5 font-weight-bold m-0">{{ wine.getLowerCapacityPrice }} €</h3>
+                                    {% if wine.capacities|length > 0 %}
+                                    <span class="small text-center">
+                                        Disponible en
+                                        {% for capacity in wine.capacities %}
+                                            {{ capacity.type }}{% if not loop.last %}, {% endif %}
+                                        {% endfor %}
+                                    </span>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col d-flex justify-content-center align-items-center">
