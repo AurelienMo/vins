@@ -175,7 +175,7 @@ fixtures-load:
 
 xdebug-enable: ## Enable Xdebug
 xdebug-enable:
-	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "sed -i 's#;zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so#zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so#g' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+	$(DOCKER) exec -it $(CONTAINER_NAME)_php-fpm sh -c "sed -i 's#;*zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so#zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20180731/xdebug.so#g' /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
 	$(DOCKER) restart $(CONTAINER_NAME)_php-fpm
 	$(DOCKER) restart $(CONTAINER_NAME)_apache
 

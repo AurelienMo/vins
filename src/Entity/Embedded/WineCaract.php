@@ -23,6 +23,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class WineCaract
 {
+    public const LIST_TASTE = ['Tannique', 'Corse', 'Onctueux', 'Frais'];
+
     /**
      * @var int|null
      *

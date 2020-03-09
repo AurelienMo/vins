@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Domain\Opinion\Forms\NewOpinionDTO;
+use App\Entity\Interfaces\OpinionElementInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -68,17 +70,23 @@ class Opinion extends AbstractEntity
      * @param string|null $content
      */
     public function __construct(
-        Product $wine,
         string $name,
         int $rate,
         ?string $content
     ) {
-        $this->wine = $wine;
         $this->name = $name;
         $this->rate = $rate;
         $this->content = $content;
         $this->isValid = false;
         parent::__construct();
+    }
+
+    public static function createFromDTO(NewOpinionDTO $dto, $productElement)
+    {
+        $opinion = new self($dto->getName(), $dto->getRate(), $dto->getContent());
+        $opinion->affectElement($productElement);
+
+        return $opinion;
     }
 
     /**
@@ -127,5 +135,14 @@ class Opinion extends AbstractEntity
     public function setIsValid(bool $isValid): void
     {
         $this->isValid = $isValid;
+    }
+
+    private function affectElement(OpinionElementInterface $productElement)
+    {
+        switch (get_class($productElement)) {
+            case Product::class:
+                $this->wine = $productElement;
+                break;
+        }
     }
 }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\Interfaces\OpinionElementInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -23,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="amo_box_wine")
  * @ORM\Entity(repositoryClass="App\Repository\BoxWineRepository")
  */
-class BoxWine extends AbstractEntity
+class BoxWine extends AbstractEntity implements OpinionElementInterface
 {
     /**
      * @var bool|null

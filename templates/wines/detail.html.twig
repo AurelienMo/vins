@@ -11,7 +11,7 @@
 
 <div class="container detail-wine">
     <div class="row">
-        <div class="col-12">
+        <div class="col-sm-12 offset-md-2 col-md-8">
 
 
     <ul class="nav nav-tabs nav-justified md-tabs primary-bkg" id="myTabJust" role="tablist">
@@ -29,20 +29,28 @@
             <div class="row">
                 <div class="col-12 text-center">
                     <button type="button" class="btn primary-bkg text-white"><i class="fa fa-cart-plus pr-2" aria-hidden="true"></i>Ajouter au panier</button>
+                    <button type="button" class="close mt-1" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times fa-lg"></i>
+                    </button>
                 </div>
             </div>
         </div>
         <div class="tab-pane fade show active" id="wine-domain" role="tabpanel" aria-labelledby="home-tab-just">
             <div class="item-caract container-fluid">
                 <div class="row">
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-sm-12 col-md-4 d-flex justify-content-center">
                         <canvas class="m-0" id="chartFruity" width="150" height="150"></canvas>
                         <span class="item-caract_sign-minus font-weight-bold">-</span>
                         <span class="item-caract_sign-plus font-weight-bold">+</span>
                     </div>
-                    <div class="imgTaste col-sm-12 col-md-4" style="background: transparent url('img/essai.png') no-repeat center; background-size: 80%">
+                    <div class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center">
+                        <div class="container-taste d-flex flex-column justify-content-center align-items-center">
+                            {% for taste in constant('App\\Entity\\Embedded\\WineCaract::LIST_TASTE') %}
+                                <span {% if wine.wineCaract.taste == taste %}class="font-weight-bold"{% endif %}>{{taste}}</span>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="col-sm-12 col-md-4">
+                    <div class="col-sm-12 col-md-4  d-flex justify-content-center">
                         <canvas class="m-0" id="chartRobustness" width="200" height="200"></canvas>
                         <span class="item-caract_sign-minus font-weight-bold">-</span>
                         <span class="item-caract_sign-plus font-weight-bold">+</span>
@@ -115,69 +123,104 @@
             </div>
         </div>
         <div class="tab-pane fade" id="opinions" role="tabpanel" aria-labelledby="profile-tab-just">
-            <section class="opinions-container  pt-4 pb-4 pl-2 pr-2"  style="background-color: #ff9e9e; min-height: 430px">
-                <div class="container">
+                <div class="container pt-1 pb-4 pl-2 pr-2">
+                    <div class="row pt-2 pb-2" style="background-color: #ff00002b">
+                        <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-around align-items-center pt-2 pb-2">
+                            <h3 class="h3 mt-2 mb-2">Les avis...</h3>
+                            <div class="mt-2 mb-2">
+                                {% set lengthRate = wine.averageRate %}
+                                {% set lengthEmptyRate = 5 - lengthRate %}
+                                {% for i in 1..lengthRate %}
+                                    {% if lengthRate > 0 %}
+                                        <i class="fa fa-star" style="color: {{ wine.profile.color }}"></i>
+                                    {% endif %}
+                                {% endfor %}
+                                {% for i in 1..lengthEmptyRate %}
+                                    {% if lengthEmptyRate > 0 %}
+                                        <i class="far fa-star" style="color: {{ wine.profile.color }}"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="d-flex justify-content-center align-items-center mt-2 mb-2 w-100">
+                                <div class="d-flex justify-content-center w-100">
+                                    <i class="fas fa-star mr-2"></i>
+                                    <span class="small">{{ wine.countElementOpinion('rate') }}</span>
+                                </div>
+                                <div class="d-flex justify-content-center w-100">
+                                    <i class="fas fa-comment mr-2"></i>
+                                    <span class="small">{{ wine.countElementOpinion('comment') }} commentaires</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="new-opinion" class="col-sm-12 col-md-6">
+                            {{ form_start(form, {'attr': {'action': path('detail_wine', {'id': wine.id}), 'class': 'ajaxForm'}}) }}
+                            <div class="md-form">
+                                {{ form_errors(form.name) }}
+                                {{ form_row(form.name) }}
+                            </div>
+                            <div class="md-form">
+                                {{ form_row(form.rate) }}
+                            </div>
+                            <div class="md-form mb-4 pink-textarea active-pink-textarea">
+                                {{ form_row(form.content) }}
+                            </div>
+                            <div class="col-md-12 text-right">
+                                <button type="submit" class="btn primary-bkg text-white btn-rounded">
+                                    <i class="fa fa-paper-plane"></i>
+                                </button>
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
                     <div class="row">
-                        <div class="col-sm-12 col-md-4">
-                            <div class="d-flex flex-column">
-                                <div class="d-flex flex-column">
-                                    <div class="d-flex justify-content-center align-items-center">
-                                        <h3 class="h3">{{ wine.countElementOpinion('rate', true) }}</h3>
-                                        <span> / 5</span>
-                                    </div>
-                                    <div class="d-flex flex-column">
-                                        <form>
-                                            <textarea rows="5" cols="5"></textarea>
-                                        </form>
+                        {% if wine.opinions|length > 0 %}
+                            {% for opinion in wine.opinions %}
+                            <div class="col-sm-12">
+                                <div class="media d-block d-md-flex mt-4">
+                                    <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex justify-content-start">
+
+                                                <h5 class="font-weight-bold mt-0 primary-text">
+                                                    {{opinion.name}}
+                                                </h5>
+                                                <div class="pl-4">
+                                                    {% set lengthRate = opinion.rate %}
+                                                    {% set lengthEmptyRate = 5 - lengthRate %}
+                                                    {% for i in 1..lengthRate %}
+                                                        {% if lengthRate > 0 %}
+                                                            <i class="fa fa-star" style="color: {{ wine.profile.color }}"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    {% for i in 1..lengthEmptyRate %}
+                                                        {% if lengthEmptyRate > 0 %}
+                                                            <i class="far fa-star" style="color: {{ wine.profile.color }}"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                            <span class="text-small font-italic">Le {{ opinion.createdAt|date('d/m/Y') }}</span>
+                                        </div>
+                                        {{opinion.content}}
                                     </div>
                                 </div>
-                                <div class="d-flex justify-content-center align-items-center p-3" style="background-color: #ffebeb;">
-                                    <div class="d-flex justify-content-center w-100">
-                                        <i class="fas fa-star mr-2"></i>
-                                        <span class="small">{{ wine.countElementOpinion('rate') }} notes</span>
-                                    </div>
-                                    <div class="d-flex justify-content-center w-100">
-                                        <i class="fas fa-comment mr-2"></i>
-                                        <span class="small">{{ wine.countElementOpinion('comment') }} commentaires</span>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                        <div class="col-sm-12">
+                            <div class="media d-block d-md-flex mt-4">
+                                <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                    <div class="d-flex justify-content-center">
+                                        <h5 class="font-weight-bold mt-0 primary-text">
+                                            Soyez le premier à nous dire ce que vous pensez de ce vin.
+                                        </h5>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-8">
-                            {% for opinion in wine.opinions %}
-                                {% if not opinion.isValid %}
-                                <div class="row pl-4 pr-4 pt-1 pb-1">
-                                    <div class="col-3">
-                                        <div class="d-flex flex-column align-items-center justify-content-center">
-                                            <div>
-                                                {% set lengthRate = wine.averageRate %}
-                                                {% set lengthEmptyRate = 5 - lengthRate %}
-                                                {% for i in 1..lengthRate %}
-                                                    {% if lengthRate > 0 %}
-                                                        <i class="fa fa-star" style="color: {{ wine.profile.color }}"></i>
-                                                    {% endif %}
-                                                {% endfor %}
-                                                {% for i in 1..lengthEmptyRate %}
-                                                    {% if lengthEmptyRate > 0 %}
-                                                        <i class="far fa-star" style="color: {{ wine.profile.color }}"></i>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                            <div>
-                                                {{ opinion.name }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-9">
-
-                                    </div>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
-            </section>
         </div>
     </div>
 </div>

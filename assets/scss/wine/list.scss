@@ -107,22 +107,25 @@
     min-height: 150px;
     max-width: 150px;
   }
-  .imgTaste {
-    background-size: 30%;
-    min-width: 180px;
-    min-height: 180px;
-  }
   .item-caract {
+    .container-taste {
+      width: 120px;
+      height: 120px;
+      border-radius: 60px;
+      border: 8px solid #721192;
+      padding: 10px;
+      font-size: 0.8rem;
+    }
     &_sign-minus {
       position: absolute;
-      left: 15px;
-      bottom: 15px;
+      left: 65px;
+      bottom: 10px;
       font-size: 25px;
     }
     &_sign-plus {
       position: absolute;
-      right: 15px;
-      bottom: 15px;
+      right: 65px;
+      bottom: 10px;
       font-size: 25px;
     }
     background-color: #d7f1f1;
@@ -133,5 +136,10 @@
     img {
       max-width: 80px;
     }
+  }
+}
+#opinions {
+  .container {
+    min-height: 80vh;
   }
 }

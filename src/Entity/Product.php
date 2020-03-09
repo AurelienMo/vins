@@ -15,6 +15,7 @@ namespace App\Entity;
 
 use App\Entity\Embedded\WineCaract;
 use App\Entity\Embedded\WineService;
+use App\Entity\Interfaces\OpinionElementInterface;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -32,7 +33,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *
  * @Vich\Uploadable()
  */
-class Product extends AbstractEntity implements UpdatableInterface
+class Product extends AbstractEntity implements UpdatableInterface, OpinionElementInterface
 {
     use TimeStampableTrait;
 
@@ -698,7 +699,10 @@ class Product extends AbstractEntity implements UpdatableInterface
                     break;
             }
         }
+        if ($type === 'comment') {
+            return $total;
+        }
 
-        return $type === 'comment' ? $total : $average ? $total === 0 ? 0 : round($cpt / $total, 2) : $total;
+        return $total === 0 ? 0 : round($cpt / $total, 2);
     }
 }
