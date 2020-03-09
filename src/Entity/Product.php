@@ -709,9 +709,10 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
     public function listTypeCapacities()
     {
         $type = [];
+        /** @var Capacity $capacity */
         foreach ($this->capacities as $capacity) {
-            if (!in_array($capacity, $type)) {
-                $type[] = $capacity;
+            if (!in_array($capacity->getType(), $type)) {
+                $type[] = $capacity->getType();
             }
         }
 
