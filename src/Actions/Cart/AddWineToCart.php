@@ -58,7 +58,7 @@ class AddWineToCart
             return $responder(
                 [
                     'code' => Response::HTTP_CREATED,
-                    'html' => $totalQty > 0 ? '<div class="valid-add text-center"><span><i class="fa fa-check fa-sm"></i> Le produit a bien été ajouté à votre panier</span></div>' : '<div class="text-center"><span class="no-valid">Aucune quantité n\'est indiquée.</span></div>',
+                    'html' => '<div class="text-center">Panier mis à jour</span></div>',
                     'qtyadd' => $totalQty
                 ]
             );

@@ -22,8 +22,11 @@
                     </div>
 
                 {% endfor %}
-
-                <button type="submit" class="btn btn-default">Ajouter au panier</button>
+                <div class="col-12">
+                    <button type="submit" class="btn primary-bkg text-white btn-rounded">
+                        <img class="icon" src="{{ asset('build/images/cart.svg') }}" width="40"/>
+                    </button>
+                </div>
                 {{ form_end(form) }}
             </div>
         </div>
