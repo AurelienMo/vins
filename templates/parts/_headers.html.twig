@@ -4,11 +4,17 @@
             <div class="col">
                 <div class="container">
                     <div class="row">
-                        <div class="col text-center">
+                        <div class="col-5 text-right">
                             <span>Marseille uniquement</span>
                         </div>
-                        <div class="col text-center">
+                        <div class="col-5 text-center">
                             <span>La livraison est garantie sans casse pour 4€ seulement !</span>
+                        </div>
+                        <div class="col-2 text-center shopping-cart">
+                            <a href="#">
+                                <i class="fas fa-shopping-cart fa-lg primary-text"></i>
+                                    <span id="counter-items" class="count-items badge red z-depth-1 mr-1"> {{ app.session.has('cart') ? app.session.get('cart').countElementsInCart : 0 }} </span>
+                            </a>
                         </div>
                     </div>
                 </div>

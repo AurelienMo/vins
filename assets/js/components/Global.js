@@ -51,7 +51,6 @@ export default class Global {
                 data: target.serialize(),
                 cache: false,
                 success: function (response) {
-                    console.log(response);
                     if (response.url) {
                         window.location.replace(response.url);
                     }

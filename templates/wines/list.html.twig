@@ -63,7 +63,9 @@
                                     <a class="detail-wine" data-url="{{ path('detail_wine', {'id': wine.id}) }}" href="#">
                                         <img class="icon" src="{{ asset('build/images/eye.svg') }}" width="40"/>
                                     </a>
-                                    <img class="icon" src="{{ asset('build/images/cart.svg') }}" width="40"/>
+                                    <a class="add-to-cart" data-url="{{ path('add_wine_to_card', {'id': wine.id}) }}" href="#">
+                                        <img class="icon" src="{{ asset('build/images/cart.svg') }}" width="40"/>
+                                    </a>
                                 </div>
                             </div>
                         </div>
