@@ -58,7 +58,7 @@ class AddWineToCart
             return $responder(
                 [
                     'code' => Response::HTTP_CREATED,
-                    'html' => '<div class="text-center">Panier mis à jour</span></div>',
+                    'html' => '<div class="valid-add text-center">Panier mis à jour</span></div>',
                     'qtyadd' => $totalQty
                 ]
             );

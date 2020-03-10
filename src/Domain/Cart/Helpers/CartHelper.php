@@ -24,7 +24,6 @@ class CartHelper
     public function addProductsToCart(ItemDTO $dto): int
     {
         $cart = $this->getCartForCurrentUser();
-        $totalQtyActual = $cart->countElementsInCart();
         $totalQtyAdded = 0;
         /** @var ElementDTO $element */
         foreach ($dto->getElements() as $element) {
@@ -39,7 +38,7 @@ class CartHelper
         }
         $this->saveCartIntoSession($cart);
 
-        return $this->getCartForCurrentUser()->countElementsInCart();
+        return $cart->countElementsInCart();
     }
 
     public function getCartForCurrentUser(): CartVO
