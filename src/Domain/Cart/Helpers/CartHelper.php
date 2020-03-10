@@ -30,14 +30,11 @@ class CartHelper
         foreach ($dto->getElements() as $element) {
             if ($element->getQuantity() > 0) {
                 $productVO = new ProductVO($dto->getWine(), $element->getCapacity(), $element->getQuantity());
-                $productsVoExist = array_filter($cart->getProducts(), function (ProductVO $vo) use ($element) {
-                    return $vo->getCapacity()->getId() === $element->getCapacity()->getId();
-                });
-                if (count($productsVoExist) > 0) {
-                    $cart->removeProduct(current($productsVoExist));
-                }
+                $this->checkAndCleanExist($cart, $element);
                 $cart->addProduct($productVO);
                 $totalQtyAdded += $productVO->getQuantity();
+            } else {
+                $this->checkAndCleanExist($cart, $element);
             }
         }
         $this->saveCartIntoSession($cart);
@@ -53,5 +50,15 @@ class CartHelper
     private function saveCartIntoSession(CartVO $cartVo): void
     {
         $this->session->set('cart', $cartVo);
+    }
+
+    private function checkAndCleanExist(CartVO $cart, ElementDTO $element): void
+    {
+        $productsVoExist = array_filter($cart->getProducts(), function (ProductVO $vo) use ($element) {
+            return $vo->getCapacity()->getId() === $element->getCapacity()->getId();
+        });
+        if (count($productsVoExist) > 0) {
+            $cart->removeProduct(current($productsVoExist));
+        }
     }
 }
