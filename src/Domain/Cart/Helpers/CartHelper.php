@@ -42,7 +42,7 @@ class CartHelper
         }
         $this->saveCartIntoSession($cart);
 
-        return $totalQtyAdded - $totalQtyActual;
+        return $this->getCartForCurrentUser()->countElementsInCart();
     }
 
     public function getCartForCurrentUser(): CartVO
