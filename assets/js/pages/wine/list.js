@@ -48,7 +48,6 @@ $(function() {
             success: function (response) {
                 hideLoader();
                 let newValue = response.qtyadd;
-                console.log(newValue);
                 $(eltsCount).html(newValue);
                 let textValid = $(modal.addItemToCart).find('.valid-add');
                 if (textValid.length === 0) {
