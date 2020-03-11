@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Domain\Cart\ValueObject;
 
+use App\Domain\Cart\LiveUpdateCart\InputItemObject;
+use phpDocumentor\Reflection\Types\Array_;
+
 class CartVO
 {
     /** @var ProductVO[] */
@@ -41,5 +44,16 @@ class CartVO
     public function removeProduct(ProductVO $productVO)
     {
         unset($this->products[array_search($productVO, $this->products)]);
+    }
+
+    public function getTotalPriceInCart()
+    {
+        $total = 0;
+        /** @var ProductVO $product */
+        foreach ($this->products as $product) {
+            $total += $product->getQuantity() * $product->getCapacity()->getUnitPrice();
+        }
+
+        return $total;
     }
 }

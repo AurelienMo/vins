@@ -11,10 +11,10 @@
                             <span>La livraison est garantie sans casse pour 4€ seulement !</span>
                         </div>
                         <div class="col-2 text-center shopping-cart">
-                            <a href="#">
+                            <a href="{{ path('cart_checkout') }}">
                                 <i class="fas fa-shopping-cart fa-lg primary-text"></i>
-                                    <span id="counter-items" class="count-items badge red z-depth-1 mr-1"> {{ app.session.has('cart') ? app.session.get('cart').countElementsInCart : 0 }} </span>
                             </a>
+                                    <span id="counter-items" class="count-items badge red z-depth-1 mr-1"> {{ app.session.has('cart') ? app.session.get('cart').countElementsInCart : 0 }} </span>
                         </div>
                     </div>
                 </div>

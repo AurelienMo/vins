@@ -22,7 +22,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use File;
-use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -40,7 +39,7 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
     /**
      * @var WineDomain|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\WineDomain", inversedBy="wines")
+     * @ORM\ManyToOne(targetEntity="App\Entity\WineDomain", inversedBy="wines", fetch="EAGER")
      * @ORM\JoinColumn(name="amo_wine_domain_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $domain;

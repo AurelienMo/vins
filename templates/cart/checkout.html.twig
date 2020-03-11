@@ -1,0 +1,198 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('vendor/mdb/css/addons-pro/steppers.min.css') }}" rel="stylesheet">
+    {{ encore_entry_link_tags('checkout') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid" style="background-color: rgba(231,62,43,0.08); min-height: 90px; max-height: 90px;">
+        <div class="row">
+            <div class="col-12">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center p-3">
+                            <h2 class="h2">Je valide ma commande</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5">
+        {% if cart and cart.products|length > 0 %}
+        <div class="steps-form-2">
+            <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
+                <div class="steps-step-2">
+                    <a href="#step-1" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                </div>
+                <div class="steps-step-2">
+                    <a href="#step-2" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Personal Data"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                </div>
+                <div class="steps-step-2">
+                    <a href="#step-3" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect mr-0" data-toggle="tooltip" data-placement="top" title="Terms and Conditions"><i class="fab fa-cc-visa fa-lg" aria-hidden="true"></i></a>
+                </div>
+{#                <div class="steps-step-2">#}
+{#                    <a href="#step-4" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect mr-0" data-toggle="tooltip" data-placement="top" title="Finish"><i class="fa fa-check" aria-hidden="true"></i></a>#}
+{#                </div>#}
+            </div>
+        </div>
+        {% else %}
+            <div class="row">
+                <div class="col-1">
+                    <i class="far fa-sad-tear fa-4x primary-text"></i>
+                </div>
+                <div class="col-11">
+                    <h4 class="h4">Votre panier Mon Premier Sommelier est vide. </h4>
+                    <span>N'attendez plus, consulter nos <a href="{{ path('wine_list') }}">vins</a> sans plus attendre</span>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- First Step -->
+        {% if cart and cart.products|length > 0 %}
+            <div class="row setup-content-2" id="step-1">
+                <div class="col-md-12">
+                    <h3 class="font-weight-bold pl-0 my-4"><strong>Mon panier</strong></h3>
+                    <section class="dark-grey-text">
+                        <div class="table-responsive">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-column">
+                                    <span><strong>Je pense malin !</strong> J'ajoute quelques bouteilles dans mon panier pour les occasions futures.</span>
+                                    <span>Ca m'évitera de courir partout le moment venu !</span>
+                                </div>
+                                <button type="button" class="update-cart btn mb-3 primary-bkg text-white" data-url="{{ path('update_cart') }}"><i class="fas fa-sync"></i></button>
+                            </div>
+                            <table class="table product-table mb-0">
+                                <thead class="mdb-color lighten-5">
+                                <tr>
+                                    <th></th>
+                                    <th class="font-weight-bold">
+                                        <strong>Produit</strong>
+                                    </th>
+                                    <th class="font-weight-bold">
+                                        <strong>Prix</strong>
+                                    </th>
+                                    <th></th>
+                                    <th class="font-weight-bold">
+                                        <strong>Quantité</strong>
+                                    </th>
+                                    <th class="font-weight-bold">
+                                        <strong>Remise</strong>
+                                    </th>
+                                    <th class="font-weight-bold">
+                                        <strong>Sous-total</strong>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for productVo in cart.products %}
+                                    <tr class="product-item" data-capacity-id="{{ productVo.capacity.id }}" data-product-actual-quantity="{{ productVo.quantity }}">
+                                        <th scope="row">
+                                            <img src="{{ vich_uploader_asset(productVo.product, 'imageFile') }}" alt="" class="img-fluid z-depth-0" style="min-width: 0px;">
+                                        </th>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                <div>
+                                                    <div class="mt-3">
+                                                        <strong class="primary-text font-weight-bold">{{productVo.product.vintageName}}</strong> -
+                                                        <span>{{productVo.product.year}}</span>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <span>{{ productVo.domain.name }} - {{productVo.product.appellation}}</span>
+                                                </div>
+                                                <div>
+                                                    <span>{{productVo.capacity.type}} - {{productVo.capacity.quantity}}L</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>{{productVo.capacity.unitPrice}}€</td>
+                                        <td></td>
+                                        <td>
+                                            <input type="number" value="{{ productVo.quantity }}" aria-label="Search" class="form-control entry-quantity" style="width: 100px">
+                                        </td>
+                                        <td>
+                                            0%
+                                        </td>
+                                        <td class="font-weight-bold">
+                                            <strong>{{productVo.calculateSubTotalPrice}}€</strong>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top"
+                                                    title="Remove item">X
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td colspan="6"></td>
+                                    <td>
+                                        <h4 class="mt-2">
+                                            <strong>Total</strong>
+                                        </h4>
+                                    </td>
+                                    <td class="text-right">
+                                        <h4 class="mt-2">
+                                            <strong>{{ cart.getTotalPriceInCart }}€</strong>
+                                        </h4>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <button class="primary-bkg text-white btn-rounded nextBtn-2 float-right btn mb-3" type="button">Livraison</button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Second Step -->
+            <div class="row setup-content-2" id="step-2">
+                <div class="col-md-12">
+                    <h3 class="font-weight-bold pl-0 my-4"><strong>Ma livraison aux petits oignons</strong></h3>
+                    <div class="form-group md-form">
+                        <label for="yourName-2" data-error="wrong" data-success="right">First Name</label>
+                        <input id="yourName-2" type="text" required="required" class="form-control validate">
+                    </div>
+                    <div class="form-group md-form mt-3">
+                        <label for="secondName-2" data-error="wrong" data-success="right">Second Name</label>
+                        <input id="secondName-2" type="text" required="required" class="form-control validate">
+                    </div>
+                    <div class="form-group md-form">
+                        <label for="surname-2" data-error="wrong" data-success="right">Surname</label>
+                        <input id="surname-2" type="text" required="required" class="form-control validate">
+                    </div>
+                    <div class="form-group md-form mt-3">
+                        <label for="yourAddress-2" data-error="wrong" data-success="right">Address</label>
+                        <textarea id="yourAddress-2" type="text" required="required" rows="2" class="md-textarea validate form-control"></textarea>
+                    </div>
+                    <button class="primary-bkg btn btn-rounded prevBtn-2 float-left" type="button">Panier</button>
+                    <button class="btn btn-mdb-color btn-rounded nextBtn-2 float-right" type="button">Next</button>
+                </div>
+            </div>
+
+            <!-- Third Step -->
+            <div class="row setup-content-2" id="step-3">
+                <div class="col-md-12">
+                    <h3 class="font-weight-bold pl-0 my-4"><strong>Terms and conditions</strong></h3>
+                    <div class="form-check">
+                        <input type="checkbox" id="checkbox111" class="form-check-input">
+                        <label for="checkbox111" class="form-check-label">I agree to the terms and conditions</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" id="checkbox112" class="form-check-input">
+                        <label for="checkbox112" class="form-check-label">I want to receive newsletter</label>
+                    </div>
+                    <button class="btn btn-mdb-color btn-rounded prevBtn-2 float-left" type="button">Previous</button>
+                    <button class="btn btn-success btn-rounded float-right" type="submit">Submit</button>
+                </div>
+            </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{asset('vendor/mdb/js/addons-pro/steppers.min.js')}}"></script>
+    {{ encore_entry_script_tags('checkout') }}
+{% endblock %}

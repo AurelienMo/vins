@@ -73,7 +73,6 @@ final class Resolver
             $this->contactRepository->persist($contact);
             $this->contactRepository->flush();
         } catch (Exception $e) {
-            dump($e);
         }
 
         $this->eventDispatcher->dispatch(new FlashMessageEvent('success', FlashMessage::SUCCESS_CONTACT));

@@ -6,11 +6,15 @@ namespace App\Domain\Cart\ValueObject;
 
 use App\Entity\Capacity;
 use App\Entity\Product;
+use App\Entity\WineDomain;
 
 class ProductVO implements ItemCartInterface
 {
     /** @var Product */
     protected $product;
+
+    /** @var WineDomain */
+    protected $domain;
 
     /** @var Capacity */
     protected $capacity;
@@ -18,11 +22,12 @@ class ProductVO implements ItemCartInterface
     /** @var int */
     protected $quantity;
 
-    public function __construct(Product $product, Capacity $capacity, int $quantity)
+    public function __construct(Product $product, WineDomain $domain, Capacity $capacity, int $quantity)
     {
         $this->product = $product;
         $this->capacity = $capacity;
         $this->quantity = $quantity;
+        $this->domain = $domain;
     }
 
     public function getProduct(): Product
@@ -42,6 +47,21 @@ class ProductVO implements ItemCartInterface
 
     public function updateQuantity(int $qty): void
     {
-        $this->quantity += $qty;
+        $this->quantity = $qty;
+    }
+
+    public function calculateSubTotalPrice()
+    {
+        return $this->capacity->getUnitPrice() * $this->quantity;
+    }
+
+    public function getDomain(): WineDomain
+    {
+        return $this->domain;
+    }
+
+    public function setDomain(WineDomain $domain): void
+    {
+        $this->domain = $domain;
     }
 }
