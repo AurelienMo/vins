@@ -94,4 +94,15 @@ class CartHelper
             }
         }
     }
+
+    public function removeCapacityFromCart(string $id)
+    {
+        $cart = $this->getCartForCurrentUser();
+        $capacitiesProduct = $cart->getProducts();
+        $productVoToRemove = current(array_filter($capacitiesProduct, function (ProductVO $vo) use ($id) {
+            return $vo->getCapacity()->getId() === $id;
+        }));
+
+        $cart->removeProduct($productVoToRemove);
+    }
 }

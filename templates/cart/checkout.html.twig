@@ -57,11 +57,12 @@
                     <section class="dark-grey-text">
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between">
-                                <div class="d-flex flex-column">
+                                <div class="d-flex flex-column justify-content-center">
                                     <span><strong>Je pense malin !</strong> J'ajoute quelques bouteilles dans mon panier pour les occasions futures.</span>
                                     <span>Ca m'évitera de courir partout le moment venu !</span>
                                 </div>
-                                <button type="button" class="update-cart btn mb-3 primary-bkg text-white" data-url="{{ path('update_cart') }}"><i class="fas fa-sync"></i></button>
+                                <button type="button" class="btn-floating update-cart mb-3 primary-bkg text-white" data-url="{{ path('update_cart') }}" data-toggle="tooltip" data-placement="top"
+                                        title="Mettre à jour"><i class="fas fa-sync"></i></button>
                             </div>
                             <table class="table product-table mb-0">
                                 <thead class="mdb-color lighten-5">
@@ -120,8 +121,8 @@
                                             <strong>{{productVo.calculateSubTotalPrice}}€</strong>
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" data-placement="top"
-                                                    title="Remove item">X
+                                            <button type="button" class="remove-element btn btn-sm primary-bkg text-white" data-toggle="tooltip" data-placement="top"
+                                                    title="Supprimer" data-url="{{ path('remove_item_cart', {'id': productVo.capacity.id}) }}">X
                                             </button>
                                         </td>
                                     </tr>

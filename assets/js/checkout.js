@@ -91,4 +91,18 @@ $(document).ready(function () {
             });
         }
     });
+    $('.remove-element').on('click', function (e) {
+        e.preventDefault();
+        showLoader();
+        $.ajax({
+            url: $(this).data('url'),
+            method: 'DELETE',
+            success: function (response) {
+                window.location.replace(response.url);
+            },
+            error: function () {
+                hideLoader();
+            }
+        })
+    })
 });
