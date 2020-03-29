@@ -21,10 +21,6 @@ class ContactDTO
      * @var string|null
      *
      * @Assert\NotBlank()
-     * @Assert\File(
-     *     mimeTypes={"image/jpeg", "application/msword"},
-     *     
-     * )
      */
     protected $subject;
 

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Common\Subscribers\Subscribers;
 
+use App\Domain\Contact\Events\ContactMailEvent;
 use App\Domain\Order\Mails\Events\ConfirmMailEvent;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -34,6 +35,7 @@ class MailsSubscriber implements EventSubscriberInterface
     {
         return [
             ConfirmMailEvent::class => 'confirmOrder',
+            ContactMailEvent::class => 'onContact',
         ];
     }
 
@@ -43,7 +45,7 @@ class MailsSubscriber implements EventSubscriberInterface
         $order = $event->getOrder();
         $delivery = $event->getOrder()->getDelivery();
         $email = (new Email())
-            ->from(new Address('contact@monpremiersommelier.com', 'Mon Premier Sommelier'))
+            ->from(new Address('commande@monpremiersommelier.com', 'Mon Premier Sommelier'))
             ->to(
                 new Address(
                     $customer->getEmail(),
@@ -63,6 +65,43 @@ class MailsSubscriber implements EventSubscriberInterface
                     ]
                 )
             );
+
+        $this->getMailer()->send($email);
+        //TODO Envoi mail Mon Premier Sommelier pour informer de la commande.
+        $email = (new Email())
+            ->from(
+                new Address(
+                    $customer->getEmail(),
+                    sprintf('%s %s', $customer->getFirstname(), $customer->getLastname())
+                )
+            )
+            ->to(new Address('morvan.aurelien@gmail.com', 'Mon Premier Sommelier'))
+            ->subject('Mon Premier Sommelier - Nouvelle commande')
+            ->embedFromPath(__DIR__.'/../../../../../public/img/logo.png', 'logo')
+            ->embedFromPath(__DIR__.'/../../../../../public/img/package.png', 'package')
+            ->html(
+                $this->templating->render(
+                    'emails/new_order.html.twig',
+                    [
+                        'order' => $order,
+                        'delivery' => $delivery,
+                        'customer' => $customer
+                    ]
+                )
+            );
+
+        $this->getMailer()->send($email);
+    }
+
+    public function onContact(ContactMailEvent $event)
+    {
+        $contact = $event->getContact();
+        $email = (new Email())
+            ->from(new Address($contact->getEmail(), $contact->getName()))
+            ->to(new Address('contact@monpremiersommelier.com', 'Mon Premier Sommelier'))
+            ->subject('Mon Premier Sommelier - Demande d\'informations')
+            ->embedFromPath(__DIR__.'/../../../../../public/img/logo.png', 'logo')
+            ->html($this->templating->render('emails/contact.html.twig'));
 
         $this->getMailer()->send($email);
     }

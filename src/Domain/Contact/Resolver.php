@@ -15,6 +15,7 @@ namespace App\Domain\Contact;
 
 use App\Domain\Common\Constants\FlashMessage;
 use App\Domain\Common\Subscribers\Events\FlashMessageEvent;
+use App\Domain\Contact\Events\ContactMailEvent;
 use App\Domain\Contact\Forms\ContactDTO;
 use App\Domain\Contact\Forms\ContactType;
 use App\Entity\Contact;
@@ -76,6 +77,7 @@ final class Resolver
         }
 
         $this->eventDispatcher->dispatch(new FlashMessageEvent('success', FlashMessage::SUCCESS_CONTACT));
+        $this->eventDispatcher->dispatch(new ContactMailEvent($contact));
 
         return [
             'code' => 200,
