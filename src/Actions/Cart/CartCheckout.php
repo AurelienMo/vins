@@ -10,6 +10,7 @@ use App\Domain\Cart\Helpers\StripeHelper;
 use App\Domain\Cart\ValueObject\CartVO;
 use App\Domain\Cart\ValueObject\ProductVO;
 use App\Domain\Common\Constants\FlashMessage;
+use App\Domain\Common\Helpers\BillGenerator;
 use App\Domain\Common\Subscribers\Events\FlashMessageEvent;
 use App\Domain\Order\Mails\Events\ConfirmMailEvent;
 use App\Entity\Customer;
@@ -22,6 +23,7 @@ use App\Responders\JsonResponder;
 use App\Responders\RedirectResponder;
 use App\Responders\ViewResponder;
 use Doctrine\ORM\EntityManagerInterface;
+use Konekt\PdfInvoice\InvoicePrinter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,6 +58,9 @@ class CartCheckout
     /** @var EventDispatcherInterface */
     protected $eventDispatcher;
 
+    /** @var BillGenerator */
+    protected $billGenerator;
+
     public function __construct(
         SessionInterface $session,
         EntityManagerInterface $entityManager,
@@ -63,7 +68,8 @@ class CartCheckout
         StripeHelper $stripeHelper,
         OrderRepository $orderRepository,
         Environment $templating,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        BillGenerator $billGenerator
     ) {
         $this->session = $session;
         $this->entityManager = $entityManager;
@@ -72,6 +78,7 @@ class CartCheckout
         $this->orderRepository = $orderRepository;
         $this->templating = $templating;
         $this->eventDispatcher = $eventDispatcher;
+        $this->billGenerator = $billGenerator;
     }
 
     public function __invoke(
@@ -119,8 +126,8 @@ class CartCheckout
                 if ($this->session->has('cart')) {
                     $this->session->remove('cart');
                 }
-                //TODO Créer facture
-                $this->eventDispatcher->dispatch(new ConfirmMailEvent($order));
+                $filePath = $this->billGenerator->generateBill($order);
+                $this->eventDispatcher->dispatch(new ConfirmMailEvent($order, $filePath));
                 $this->eventDispatcher->dispatch(new FlashMessageEvent('success', FlashMessage::SUCCESS_ORDER));
 
                 return $redirectResponder('homepage');

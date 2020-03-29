@@ -55,6 +55,7 @@ class MailsSubscriber implements EventSubscriberInterface
             ->subject('Mon Premier Sommelier - Confirmation de commande')
             ->embedFromPath(__DIR__.'/../../../../../public/img/logo.png', 'logo')
             ->embedFromPath(__DIR__.'/../../../../../public/img/package.png', 'package')
+            ->attachFromPath($event->getBill())
             ->html(
                 $this->templating->render(
                     'emails/confirm_order.html.twig',
@@ -67,7 +68,6 @@ class MailsSubscriber implements EventSubscriberInterface
             );
 
         $this->getMailer()->send($email);
-        //TODO Envoi mail Mon Premier Sommelier pour informer de la commande.
         $email = (new Email())
             ->from(
                 new Address(

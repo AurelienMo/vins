@@ -12,13 +12,22 @@ class ConfirmMailEvent extends Event
     /** @var Order */
     protected $order;
 
-    public function __construct(Order $order)
+    /** @var string */
+    protected $bill;
+
+    public function __construct(Order $order, string $bill)
     {
         $this->order = $order;
+        $this->bill = $bill;
     }
 
     public function getOrder(): Order
     {
         return $this->order;
+    }
+
+    public function getBill(): string
+    {
+        return $this->bill;
     }
 }

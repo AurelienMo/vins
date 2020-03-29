@@ -14,7 +14,10 @@ declare(strict_types=1);
 namespace App\Domain\Common\Helpers;
 
 use App\Entity\Order;
+use App\Entity\OrderProductLine;
 use App\Repository\OrderRepository;
+use Konekt\PdfInvoice\InvoicePrinter;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Class BillGenerator
@@ -24,15 +27,17 @@ class BillGenerator
     /** @var OrderRepository */
     protected $orderRepo;
 
-    /**
-     * BillGenerator constructor.
-     *
-     * @param OrderRepository $orderRepo
-     */
-    public function __construct(
-        OrderRepository $orderRepo
-    ) {
+    /** @var string */
+    protected $publicPath;
+
+    /** @var string */
+    protected $tmpBillFolder;
+
+    public function __construct(OrderRepository $orderRepo, string $publicPath, string $tmpBillFolder)
+    {
         $this->orderRepo = $orderRepo;
+        $this->publicPath = $publicPath;
+        $this->tmpBillFolder = $tmpBillFolder;
     }
 
     public function generateBillNumber(Order $order): string
@@ -59,5 +64,87 @@ class BillGenerator
             $order->getOrderAt()->format('Y_m_d'),
             str_pad((string) $billNumber, 4, '0', STR_PAD_LEFT)
         );
+    }
+
+    public function generateBill(Order $order, string $mode = 'F')
+    {
+        $customer = $order->getCustomer();
+        $delivery = $order->getDelivery();
+        $lines = $order->getLines();
+        $invoice = new InvoicePrinter('A4', '€', 'fr');
+        $invoice->setLogo(sprintf('%s/%s', $this->publicPath, '/img/logo.png'));
+        $invoice->setColor('#ff5046');
+        $invoice->setType('Facture');
+        $invoice->setReference($order->getBillNumber());
+        $invoice->setDate($order->getOrderAt()->format('d/m/Y H:i'));
+        $invoice->setFrom(
+            [
+                'Mon Premier Sommelier',
+                '20 Rue de roux',
+                '13004 Marseille',
+                'France'
+            ]
+        );
+        $city = sprintf('%s, %s', $customer->getZipCode(), $customer->getCity());
+        $invoice->setTo([$customer->getFullName(),$customer->getAddressCustomer(),$city, 'France']);
+        /** @var OrderProductLine $line */
+        $subTotalHt = 0;
+        $total = 0;
+        foreach ($lines as $line) {
+            $invoice->addItem(
+                sprintf('%s - %s', $line->getVintageName(), $line->getYear()),
+                sprintf(
+                    "%s - %s<br/>%s %s",
+                    $line->getDomain(),
+                    $line->getAppellation(),
+                    $line->getCapacityName(),
+                    $line->getLitrage()
+                ),
+                $line->getQuantity(),
+                $line->getUnitPrice() - ($line->getUnitPrice() / 1.2),
+                $line->getUnitPrice() / 1.2,
+                0,
+                $line->getUnitPrice() * $line->getQuantity()
+            );
+            $total += $line->getUnitPrice() * $line->getQuantity();
+            $subTotalHt += ($line->getUnitPrice() * $line->getQuantity()) / 1.2;
+        }
+        $amountDelivery = $delivery->getTypeDelivery() === 'basic' ? 4 : 6;
+        $invoice->addTotal("Prix Total HT", $subTotalHt);
+        $invoice->addTotal("TVA 20%", $total - $subTotalHt);
+        $invoice->addTotal("Livraison", $delivery->getTypeDelivery() === 'basic' ? 4 : 6);
+        $invoice->addTotal("Prix total TTC", $total + $amountDelivery);
+
+        $invoice->addBadge(sprintf("Payée le %s", $order->getOrderAt()->format('d/m/Y')), '#269600');
+        $invoice->addTitle('Informations de livraison');
+        $invoice->addParagraph(sprintf('Vous avez choisi une livraison %s', $delivery->getContentText()));
+        if ($delivery->getCommentDelivery()) {
+            $invoice->addParagraph('Commentaire : '.$delivery->getCommentDelivery());
+        }
+        if ($delivery->getPersonIfAbsent()) {
+            $invoice->addParagraph("En cas d'absence : ".$delivery->getPersonIfAbsent());
+        }
+        $invoice->addTitle('Mentions légales');
+        $invoice->addParagraph(
+            "
+Vous disposez d'un délai de rétractation de 14 jours selon l'article L121-21 du Code de la Consommation.<br/>
+Mon Premier SASU, 20 rue de roux, 13004 Marseille.<br/>
+878 400 548 R.C.S Marseille / TVA N°FR37 878400548 / SASU au capital de 10000€ / Code NAF n°47918
+"
+        );
+        $out = sprintf('Commande_%s', $order->getOrderNumber());
+        if ($mode === 'F') {
+            $currentYear = (new \DateTime())->format('Y');
+            $filesystem = new Filesystem();
+            if(!$filesystem->exists($this->tmpBillFolder.$currentYear)) {
+                $filesystem->mkdir($this->tmpBillFolder.$currentYear);
+            }
+            $out = $this->tmpBillFolder.$currentYear.'/'.$order->getOrderNumber().'.pdf';
+        }
+        $invoice->render($out, $mode);
+
+        if ($mode === 'F') {
+            return $out;
+        }
     }
 }

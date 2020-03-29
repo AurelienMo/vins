@@ -179,6 +179,9 @@
     "justinrainbow/json-schema": {
         "version": "5.2.8"
     },
+    "konekt/pdf-invoice": {
+        "version": "1.5.0"
+    },
     "league/uri-components": {
         "version": "1.8.2"
     },
@@ -311,6 +314,9 @@
     },
     "sebastian/recursion-context": {
         "version": "3.0.0"
+    },
+    "setasign/fpdf": {
+        "version": "1.8.2"
     },
     "squizlabs/php_codesniffer": {
         "version": "3.0",

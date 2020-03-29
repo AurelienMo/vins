@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "757dca9b544cc38281302053a7b7caa0",
+    "content-hash": "475ed0b534612ae8d61df015839f8b34",
     "packages": [
         {
             "name": "alterphp/easyadmin-extension-bundle",
@@ -1692,6 +1692,59 @@
             "time": "2019-09-17T15:30:40+00:00"
         },
         {
+            "name": "konekt/pdf-invoice",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artkonekt/pdf-invoice.git",
+                "reference": "21bd1128d749d5d6d08d14585000b48ae48fe96c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artkonekt/pdf-invoice/zipball/21bd1128d749d5d6d08d14585000b48ae48fe96c",
+                "reference": "21bd1128d749d5d6d08d14585000b48ae48fe96c",
+                "shasum": ""
+            },
+            "require": {
+                "ext-iconv": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.6",
+                "setasign/fpdf": "~1.8.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.5-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Konekt\\PdfInvoice\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Attila Fulop",
+                    "homepage": "https://github.com/fulopattila122"
+                }
+            ],
+            "description": "Library to generate PDF invoices",
+            "keywords": [
+                "artkonekt",
+                "invoice",
+                "konekt",
+                "pdf"
+            ],
+            "time": "2019-12-18T23:11:01+00:00"
+        },
+        {
             "name": "league/uri-components",
             "version": "1.8.2",
             "source": {
@@ -2897,6 +2950,45 @@
                 "uuid"
             ],
             "time": "2018-08-11T21:01:22+00:00"
+        },
+        {
+            "name": "setasign/fpdf",
+            "version": "1.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Setasign/FPDF.git",
+                "reference": "d77904018090c17dc9f3ab6e944679a7a47e710a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Setasign/FPDF/zipball/d77904018090c17dc9f3ab6e944679a7a47e710a",
+                "reference": "d77904018090c17dc9f3ab6e944679a7a47e710a",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "fpdf.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Plathey",
+                    "email": "oliver@fpdf.org",
+                    "homepage": "http://fpdf.org/"
+                }
+            ],
+            "description": "FPDF is a PHP class which allows to generate PDF files with pure PHP. F from FPDF stands for Free: you may use it for any kind of usage and modify it to suit your needs.",
+            "homepage": "http://www.fpdf.org",
+            "keywords": [
+                "fpdf",
+                "pdf"
+            ],
+            "time": "2019-12-08T10:32:10+00:00"
         },
         {
             "name": "stripe/stripe-php",
