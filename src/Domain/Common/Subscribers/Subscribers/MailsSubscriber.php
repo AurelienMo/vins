@@ -75,7 +75,7 @@ class MailsSubscriber implements EventSubscriberInterface
                     sprintf('%s %s', $customer->getFirstname(), $customer->getLastname())
                 )
             )
-            ->to(new Address('morvan.aurelien@gmail.com', 'Mon Premier Sommelier'))
+            ->to(new Address('commande@monpremiersommelier.com', 'Mon Premier Sommelier'))
             ->subject('Mon Premier Sommelier - Nouvelle commande')
             ->embedFromPath(__DIR__.'/../../../../../public/img/logo.png', 'logo')
             ->embedFromPath(__DIR__.'/../../../../../public/img/package.png', 'package')
