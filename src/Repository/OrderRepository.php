@@ -21,6 +21,22 @@ use App\Entity\Promotion;
  */
 class OrderRepository extends AbstractServiceRepository
 {
+    public function findLastBillNumberForOrderYear(\DateTime $currentDate)
+    {
+        $currentYear = $currentDate->format('Y');
+        return $this->createQueryBuilder('o')
+             ->where('o.createdAt > :start AND o.createdAt < :endAt')
+            ->setParameters(
+                [
+                    'start' => (int) $currentYear - 1 . '-12-31',
+                    'endAt' => (int) $currentYear + 1 . '-01-01',
+                ]
+            )
+            ->orderBy('o.createdAt', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
     protected function getClassEntityName(): string
     {
         return Order::class;

@@ -2,7 +2,7 @@ easy_admin:
     entities:
         Delivery:
             class: App\Entity\Delivery
-            disabled_actions: ["new", "delete", 'edit']
+            disabled_actions: ["new", "delete"]
             list:
                 title: 'Liste des livraisons'
                 fields:
@@ -12,3 +12,4 @@ easy_admin:
                       label: 'Statut livraison'
                     - property: niche
                       label: "Date livraison à l'adresse"
+                actions: ["show"]

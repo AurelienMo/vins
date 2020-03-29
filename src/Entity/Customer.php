@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\Embedded\Address;
+use App\Domain\Cart\Delivery\Forms\DeliveryDTO;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -33,13 +33,6 @@ class Customer extends AbstractEntity implements UpdatableInterface
      *
      * @ORM\Column(type="string")
      */
-    protected $civility;
-
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string")
-     */
     protected $firstname;
 
     /**
@@ -50,18 +43,18 @@ class Customer extends AbstractEntity implements UpdatableInterface
     protected $lastname;
 
     /**
-     * @var Address
+     * @var string
      *
-     * @ORM\Embedded(class="App\Entity\Embedded\Address")
+     * @ORM\Column(type="string")
      */
-    protected $address;
+    protected $email;
 
     /**
-     * @var bool|null
+     * @var string
      *
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string")
      */
-    protected $rgpdOk;
+    protected $phoneNumber;
 
     /**
      * @var \DateTime|null
@@ -70,10 +63,58 @@ class Customer extends AbstractEntity implements UpdatableInterface
      */
     protected $rgpdAcceptedAt;
 
-    public function __construct()
-    {
-        $this->address = new Address();
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $addressCustomer;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $zipCode;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $city;
+
+    public function __construct(
+        ?string $firstname = null,
+        ?string $lastname = null,
+        ?string $email = null,
+        ?string $phoneNumber = null,
+        ?string $address = null,
+        ?string $zipCode = null,
+        ?string $city = null
+    ) {
+        $this->firstname = $firstname;
+        $this->lastname = $lastname;
+        $this->email = $email;
+        $this->phoneNumber = $phoneNumber;
+        $this->addressCustomer = $address;
+        $this->zipCode = $zipCode;
+        $this->city = $city;
+        $this->rgpdAcceptedAt = new \DateTime();
         parent::__construct();
+    }
+
+    public static function create(?DeliveryDTO $dto)
+    {
+        return new self(
+            $dto->getFirstname(),
+            $dto->getName(),
+            $dto->getEmail(),
+            $dto->getPhoneNumber(),
+            $dto->getAddress(),
+            $dto->getZipCode(),
+            $dto->getCity()
+        );
     }
 
     public function getFullName()
@@ -81,99 +122,43 @@ class Customer extends AbstractEntity implements UpdatableInterface
         return sprintf('%s %s', $this->firstname, $this->lastname);
     }
 
-    /**
-     * @return string|null
-     */
-    public function getCivility(): ?string
-    {
-        return $this->civility;
-    }
-
-    /**
-     * @param string|null $civility
-     */
-    public function setCivility(?string $civility): void
-    {
-        $this->civility = $civility;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
-    /**
-     * @param string|null $firstname
-     */
-    public function setFirstname(?string $firstname): void
-    {
-        $this->firstname = $firstname;
-    }
-
-    /**
-     * @return string|null
-     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
-    /**
-     * @param string|null $lastname
-     */
-    public function setLastname(?string $lastname): void
+    public function getEmail(): string
     {
-        $this->lastname = $lastname;
+        return $this->email;
     }
 
-    /**
-     * @return Address
-     */
-    public function getAddress(): Address
+    public function getPhoneNumber(): string
     {
-        return $this->address;
+        return $this->phoneNumber;
     }
 
-    /**
-     * @param Address $address
-     */
-    public function setAddress(Address $address): void
-    {
-        $this->address = $address;
-    }
-
-    /**
-     * @return \DateTime|null
-     */
     public function getRgpdAcceptedAt(): ?\DateTime
     {
         return $this->rgpdAcceptedAt;
     }
 
-    /**
-     * @param \DateTime|null $rgpdAcceptedAt
-     */
-    public function setRgpdAcceptedAt(?\DateTime $rgpdAcceptedAt): void
+    public function getAddressCustomer(): ?string
     {
-        $this->rgpdAcceptedAt = $rgpdAcceptedAt;
+        return $this->addressCustomer;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getRgpdOk(): ?bool
+    public function getZipCode(): ?string
     {
-        return $this->rgpdOk;
+        return $this->zipCode;
     }
 
-    /**
-     * @param bool|null $rgpdOk
-     */
-    public function setRgpdOk(?bool $rgpdOk): void
+    public function getCity(): ?string
     {
-        $this->rgpdOk = $rgpdOk;
+        return $this->city;
     }
 }

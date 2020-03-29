@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "863bd6a16b2d812dc280ab9b83e3014d",
+    "content-hash": "757dca9b544cc38281302053a7b7caa0",
     "packages": [
         {
             "name": "alterphp/easyadmin-extension-bundle",
@@ -1449,6 +1449,64 @@
             "time": "2019-11-08T09:47:25+00:00"
         },
         {
+            "name": "egulias/email-validator",
+            "version": "2.1.17",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/egulias/EmailValidator.git",
+                "reference": "ade6887fd9bd74177769645ab5c474824f8a418a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ade6887fd9bd74177769645ab5c474824f8a418a",
+                "reference": "ade6887fd9bd74177769645ab5c474824f8a418a",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/lexer": "^1.0.1",
+                "php": ">=5.5",
+                "symfony/polyfill-intl-idn": "^1.10"
+            },
+            "require-dev": {
+                "dominicsayers/isemail": "^3.0.7",
+                "phpunit/phpunit": "^4.8.36|^7.5.15",
+                "satooshi/php-coveralls": "^1.0.1"
+            },
+            "suggest": {
+                "ext-intl": "PHP Internationalization Libraries are required to use the SpoofChecking validation"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Egulias\\EmailValidator\\": "EmailValidator"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eduardo Gulias Davis"
+                }
+            ],
+            "description": "A library for validating emails against several RFCs",
+            "homepage": "https://github.com/egulias/EmailValidator",
+            "keywords": [
+                "email",
+                "emailvalidation",
+                "emailvalidator",
+                "validation",
+                "validator"
+            ],
+            "time": "2020-02-13T22:36:52+00:00"
+        },
+        {
             "name": "friendsofsymfony/ckeditor-bundle",
             "version": "2.2.0",
             "source": {
@@ -2839,6 +2897,63 @@
                 "uuid"
             ],
             "time": "2018-08-11T21:01:22+00:00"
+        },
+        {
+            "name": "stripe/stripe-php",
+            "version": "v7.27.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/stripe/stripe-php.git",
+                "reference": "e3f37892c709f9318aa0e619511b858a3668165b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/e3f37892c709f9318aa0e619511b858a3668165b",
+                "reference": "e3f37892c709f9318aa0e619511b858a3668165b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.15",
+                "php-coveralls/php-coveralls": "^2.1",
+                "phpunit/phpunit": "^5.7",
+                "squizlabs/php_codesniffer": "^3.3",
+                "symfony/process": "~3.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Stripe\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Stripe and contributors",
+                    "homepage": "https://github.com/stripe/stripe-php/contributors"
+                }
+            ],
+            "description": "Stripe PHP Library",
+            "homepage": "https://stripe.com/",
+            "keywords": [
+                "api",
+                "payment processing",
+                "stripe"
+            ],
+            "time": "2020-03-13T18:40:27+00:00"
         },
         {
             "name": "symfony/asset",
@@ -4328,6 +4443,73 @@
             "time": "2019-11-18T17:27:11+00:00"
         },
         {
+            "name": "symfony/mailer",
+            "version": "v5.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/mailer.git",
+                "reference": "cd70cc2c0778b2e86c5c32263ff89433f528e740"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/mailer/zipball/cd70cc2c0778b2e86c5c32263ff89433f528e740",
+                "reference": "cd70cc2c0778b2e86c5c32263ff89433f528e740",
+                "shasum": ""
+            },
+            "require": {
+                "egulias/email-validator": "^2.1.10",
+                "php": "^7.2.5",
+                "psr/log": "~1.0",
+                "symfony/event-dispatcher": "^4.4|^5.0",
+                "symfony/mime": "^4.4|^5.0",
+                "symfony/service-contracts": "^1.1|^2"
+            },
+            "conflict": {
+                "symfony/http-kernel": "<4.4"
+            },
+            "require-dev": {
+                "symfony/amazon-mailer": "^4.4|^5.0",
+                "symfony/google-mailer": "^4.4|^5.0",
+                "symfony/http-client-contracts": "^1.1|^2",
+                "symfony/mailchimp-mailer": "^4.4|^5.0",
+                "symfony/mailgun-mailer": "^4.4|^5.0",
+                "symfony/messenger": "^4.4|^5.0",
+                "symfony/postmark-mailer": "^4.4|^5.0",
+                "symfony/sendgrid-mailer": "^4.4|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Mailer\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Mailer Component",
+            "homepage": "https://symfony.com",
+            "time": "2020-03-16T12:10:54+00:00"
+        },
+        {
             "name": "symfony/mime",
             "version": "v5.0.0",
             "source": {
@@ -5495,6 +5677,59 @@
             "description": "Symfony Security Component - HTTP Integration",
             "homepage": "https://symfony.com",
             "time": "2019-11-20T10:44:55+00:00"
+        },
+        {
+            "name": "symfony/sendgrid-mailer",
+            "version": "v5.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/sendgrid-mailer.git",
+                "reference": "11369bdc6f5c666cb8d2293c59592588d5c4e7bc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/sendgrid-mailer/zipball/11369bdc6f5c666cb8d2293c59592588d5c4e7bc",
+                "reference": "11369bdc6f5c666cb8d2293c59592588d5c4e7bc",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2.5",
+                "symfony/mailer": "^4.4|^5.0"
+            },
+            "require-dev": {
+                "symfony/http-client": "^4.4|^5.0"
+            },
+            "type": "symfony-bridge",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Mailer\\Bridge\\Sendgrid\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Sendgrid Mailer Bridge",
+            "homepage": "https://symfony.com",
+            "time": "2020-03-23T12:42:46+00:00"
         },
         {
             "name": "symfony/serializer",

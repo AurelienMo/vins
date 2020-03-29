@@ -45,15 +45,21 @@ class NicheOfDelivery extends AbstractEntity implements UpdatableInterface
     protected $numberNiche;
 
     /**
-     * @var Delivery[]|Collection
+     * @var \DateTime|null
      *
-     * @ORM\OneToMany(targetEntity="App\Entity\Delivery", mappedBy="niche", cascade={"persist", "remove"})
+     * @ORM\Column(type="time")
      */
-    protected $deliveries;
+    protected $startAt;
+
+    /**
+     * @var \DateTime|null
+     *
+     * @ORM\Column(type="time")
+     */
+    protected $endAt;
 
     public function __construct()
     {
-        $this->deliveries = new ArrayCollection();
         parent::__construct();
     }
 
@@ -89,29 +95,33 @@ class NicheOfDelivery extends AbstractEntity implements UpdatableInterface
         $this->numberNiche = $numberNiche;
     }
 
-    /**
-     * @return Delivery[]|Collection
-     */
-    public function getDeliveries()
-    {
-        return $this->deliveries;
-    }
-
-    public function addDelivery(Delivery $delivery)
-    {
-        $this->deliveries->add($delivery);
-        $delivery->setNiche($this);
-
-        return $this;
-    }
-
     public function __toString()
     {
-        $cptRest = $this->numberNiche - $this->deliveries->count();
         return sprintf(
-            '%s (%s créneaux restants)',
+            '%s de %s à %s',
             $this->dateNiche->format('d/m/Y'),
-            $cptRest
+            $this->startAt->format('H:i'),
+            $this->endAt->format('H:i')
         );
+    }
+
+    public function getStartAt(): ?DateTime
+    {
+        return $this->startAt;
+    }
+
+    public function setStartAt(?DateTime $startAt): void
+    {
+        $this->startAt = $startAt;
+    }
+
+    public function getEndAt(): ?DateTime
+    {
+        return $this->endAt;
+    }
+
+    public function setEndAt(?DateTime $endAt): void
+    {
+        $this->endAt = $endAt;
     }
 }

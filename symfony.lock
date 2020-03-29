@@ -149,6 +149,9 @@
             "config/routes/easy_admin.yaml"
         ]
     },
+    "egulias/email-validator": {
+        "version": "2.1.17"
+    },
     "friendsofsymfony/ckeditor-bundle": {
         "version": "2.0",
         "recipe": {
@@ -321,6 +324,9 @@
             "phpcs.xml.dist"
         ]
     },
+    "stripe/stripe-php": {
+        "version": "v7.27.2"
+    },
     "symfony/asset": {
         "version": "v4.3.4"
     },
@@ -449,6 +455,18 @@
     "symfony/intl": {
         "version": "v4.3.4"
     },
+    "symfony/mailer": {
+        "version": "4.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "15658c2a0176cda2e7dba66276a2030b52bd81b2"
+        },
+        "files": [
+            "config/packages/mailer.yaml"
+        ]
+    },
     "symfony/mime": {
         "version": "v4.3.4"
     },
@@ -540,6 +558,15 @@
     },
     "symfony/security-http": {
         "version": "v4.3.4"
+    },
+    "symfony/sendgrid-mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.4",
+            "ref": "b46e4f8f1adb2864f0aa9c0ff57aea3324a07199"
+        }
     },
     "symfony/serializer": {
         "version": "v4.3.4"

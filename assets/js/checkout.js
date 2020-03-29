@@ -8,6 +8,12 @@ $(function () {
 
 // Steppers
 $(document).ready(function () {
+    function notDisplayStripBtn () {
+        let defaultBtn = document.getElementsByClassName("stripe-button-el");
+        if (defaultBtn.length > 0) {
+            defaultBtn[0].style.display = 'none';
+        }
+    }
     var navListItems = $('div.setup-panel-2 div a'),
         allWells = $('.setup-content-2'),
         allNextBtn = $('.nextBtn-2'),
@@ -105,4 +111,35 @@ $(document).ready(function () {
             }
         })
     })
+    $('.mdb-select').materialSelect();
+    $(document).on('submit', '.valid-delivery', function (e) {
+        e.preventDefault();
+        showLoader();
+        let target = $(e.target);
+        let validDelivery = $('.define-delivery');
+        let updateDelivery = $('.update-delivery');
+        $.ajax({
+            url: target.attr('action'),
+            type: 'POST',
+            data: target.serialize(),
+            cache: false,
+            success: function (response) {
+                let containerPayment = $('#container-button').find('#container-payment');
+                if (containerPayment.length === 0) {
+                    $('#container-button').append(response.html);
+                    notDisplayStripBtn();
+                }
+                if (updateDelivery.hasClass('d-none')) {
+                    updateDelivery.removeClass('d-none');
+                }
+                if (!validDelivery.hasClass('d-none')) {
+                    validDelivery.addClass('d-none');
+                }
+                hideLoader();
+            },
+            error: function (item, a, b) {
+            }
+        })
+    });
+    notDisplayStripBtn();
 });

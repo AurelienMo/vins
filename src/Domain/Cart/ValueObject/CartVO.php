@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Cart\ValueObject;
 
+use App\Domain\Cart\Delivery\Forms\DeliveryDTO;
 use App\Domain\Cart\LiveUpdateCart\InputItemObject;
 use phpDocumentor\Reflection\Types\Array_;
 
@@ -11,6 +12,9 @@ class CartVO
 {
     /** @var ProductVO[] */
     protected $products = [];
+
+    /** @var DeliveryDTO|null */
+    protected $deliveryInformation;
 
     public function addProduct(ProductVO $productVO)
     {
@@ -55,5 +59,26 @@ class CartVO
         }
 
         return $total;
+    }
+
+    public function affectDelivery(DeliveryDTO $dto)
+    {
+        $this->deliveryInformation = $dto;
+    }
+
+    public function getTotalPriceWithDelivery()
+    {
+        if (!$this->getDeliveryInformation() instanceof DeliveryDTO) {
+            return $this->getTotalPriceInCart();
+        }
+
+        $priceDelivery = $this->deliveryInformation->getTypeDelivery() === 'basic' ? 4 : 6;
+
+        return $this->getTotalPriceInCart() + $priceDelivery;
+    }
+
+    public function getDeliveryInformation(): ?DeliveryDTO
+    {
+        return $this->deliveryInformation;
     }
 }

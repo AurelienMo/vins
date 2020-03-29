@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Domain\Cart\ValueObject\ProductVO;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -28,186 +29,179 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
     use TimeStampableTrait;
 
     /**
-     * @var int|null
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $vintageName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $year;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $domain;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $appellation;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $capacityName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $litrage;
+
+    /**
+     * @var float
+     *
+     * @ORM\Column(type="float")
+     */
+    protected $unitPrice;
+
+    /**
+     * @var int
      *
      * @ORM\Column(type="integer")
      */
     protected $quantity;
 
     /**
-     * @var Order|null
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $typePromotion;
+
+    /**
+     * @var float|null
+     *
+     * @ORM\Column(type="float", nullable=true)
+     */
+    protected $valuePromotion;
+
+    /**
+     * @var Order
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Order", inversedBy="lines")
-     * @ORM\JoinColumn(name="amo_order_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
      */
     protected $order;
 
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(type="float")
-     */
-    protected $amount;
+    public function __construct(
+        string $vintageName,
+        string $year,
+        string $domain,
+        string $appellation,
+        string $capacityName,
+        string $litrage,
+        float $unitPrice,
+        int $quantity,
+        ?string $typePromotion = null,
+        ?float $valuePromotion = null
+    ) {
+        $this->vintageName = $vintageName;
+        $this->year = $year;
+        $this->domain = $domain;
+        $this->appellation = $appellation;
+        $this->capacityName = $capacityName;
+        $this->litrage = $litrage;
+        $this->unitPrice = $unitPrice;
+        $this->quantity = $quantity;
+        $this->typePromotion = $typePromotion;
+        $this->valuePromotion = $valuePromotion;
+        parent::__construct();
+    }
 
-    /**
-     * @var float|null
-     *
-     * @ORM\Column(type="float")
-     */
-    protected $tvaRate;
+    public function getVintageName(): string
+    {
+        return $this->vintageName;
+    }
 
-    /**
-     * @var Capacity|null
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Capacity")
-     * @ORM\JoinColumn(name="amo_capacity_wine_id", referencedColumnName="id", nullable=true)
-     */
-    protected $capacityWine;
+    public function getYear(): string
+    {
+        return $this->year;
+    }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string")
-     */
-    protected $wineName;
+    public function getDomain(): string
+    {
+        return $this->domain;
+    }
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string")
-     */
-    protected $typeCapacity;
+    public function getAppellation(): string
+    {
+        return $this->appellation;
+    }
 
-    /**
-     * @var string|null
-     */
-    protected $quantityCapacity;
+    public function getCapacityName(): string
+    {
+        return $this->capacityName;
+    }
 
-    /**
-     * @return int|null
-     */
-    public function getQuantity(): ?int
+    public function getLitrage(): string
+    {
+        return $this->litrage;
+    }
+
+    public function getUnitPrice(): float
+    {
+        return $this->unitPrice;
+    }
+
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
 
-    /**
-     * @param int|null $quantity
-     */
-    public function setQuantity(?int $quantity): void
+    public function getTypePromotion(): string
     {
-        $this->quantity = $quantity;
+        return $this->typePromotion;
     }
 
-    /**
-     * @return Order|null
-     */
-    public function getOrder(): ?Order
+    public function getValuePromotion(): float
+    {
+        return $this->valuePromotion;
+    }
+
+    public function getOrder(): Order
     {
         return $this->order;
     }
 
-    /**
-     * @param Order|null $order
-     */
-    public function setOrder(?Order $order): void
+    public function setOrder(Order $order): void
     {
         $this->order = $order;
     }
 
-    /**
-     * @return float|null
-     */
-    public function getAmount(): ?float
+    public static function create(ProductVO $vo)
     {
-        return $this->amount;
-    }
-
-    /**
-     * @param float|null $amount
-     */
-    public function setAmount(?float $amount): void
-    {
-        $this->amount = $amount;
-    }
-
-    /**
-     * @return float|null
-     */
-    public function getTvaRate(): ?float
-    {
-        return $this->tvaRate;
-    }
-
-    /**
-     * @param float|null $tvaRate
-     */
-    public function setTvaRate(?float $tvaRate): void
-    {
-        $this->tvaRate = $tvaRate;
-    }
-
-    /**
-     * @return Capacity|null
-     */
-    public function getCapacityWine(): ?Capacity
-    {
-        return $this->capacityWine;
-    }
-
-    /**
-     * @param Capacity|null $capacityWine
-     */
-    public function setCapacityWine(?Capacity $capacityWine): void
-    {
-        $this->capacityWine = $capacityWine;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getWineName(): ?string
-    {
-        return $this->wineName;
-    }
-
-    /**
-     * @param string|null $wineName
-     */
-    public function setWineName(?string $wineName): void
-    {
-        $this->wineName = $wineName;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getTypeCapacity(): ?string
-    {
-        return $this->typeCapacity;
-    }
-
-    /**
-     * @param string|null $typeCapacity
-     */
-    public function setTypeCapacity(?string $typeCapacity): void
-    {
-        $this->typeCapacity = $typeCapacity;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getQuantityCapacity(): ?string
-    {
-        return $this->quantityCapacity;
-    }
-
-    /**
-     * @param string|null $quantityCapacity
-     */
-    public function setQuantityCapacity(?string $quantityCapacity): void
-    {
-        $this->quantityCapacity = $quantityCapacity;
+        return new self(
+            $vo->getProduct()->getVintageName(),
+            $vo->getProduct()->getYear(),
+            $vo->getDomain()->getName(),
+            $vo->getProduct()->getAppellation(),
+            $vo->getCapacity()->getType(),
+            $vo->getCapacity()->getQuantity() . 'L',
+            $vo->getCapacity()->getUnitPrice(),
+            $vo->getQuantity()
+        );
     }
 }

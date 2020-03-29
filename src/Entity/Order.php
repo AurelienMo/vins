@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Domain\Cart\ValueObject\CartVO;
+use App\Domain\Cart\ValueObject\ProductVO;
+use App\Domain\Cart\ValueObject\StripeVO;
 use App\Domain\Common\Helpers\UuidGenerator;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
@@ -80,14 +83,39 @@ class Order extends AbstractEntity implements UpdatableInterface
      */
     protected $customer;
 
-    public function __construct()
-    {
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $customerStripeId;
+
+    public function __construct(
+        ?string $orderNumber = null,
+        ?string $customerStripeId = null,
+        ?Customer $customer = null,
+        ?Delivery $delivery = null
+    ) {
         $this->orderAt = new DateTime();
         $this->lines = new ArrayCollection();
-        $this->orderNumber = UuidGenerator::generate();
-        $this->delivery = new Delivery();
-        $this->customer = new Customer();
+        $this->orderNumber = $orderNumber;
+        $this->delivery = $delivery instanceof Delivery ? $delivery : new Delivery();
+        $this->customer = $customer instanceof Customer ? $customer : new Customer();
+        $this->customerStripeId = $customerStripeId;
         parent::__construct();
+    }
+
+    public static function createFromPayment(CartVO $cart, StripeVO $stripeVo, Customer $customer, Delivery $delivery)
+    {
+        $order = new self($stripeVo->getOrderNumber(), $stripeVo->getCustomerStripe(), $customer, $delivery);
+        /** @var ProductVO $product */
+        foreach ($cart->getProducts() as $product) {
+            $line = OrderProductLine::create($product);
+            $order->addLine($line);
+        }
+        //TODO Add box line
+
+        return $order;
     }
 
     public function __toString()
@@ -141,8 +169,10 @@ class Order extends AbstractEntity implements UpdatableInterface
 
     public function addLine(OrderProductLine $line): Order
     {
-        $this->lines->add($line);
-        $line->setOrder($this);
+        if (!$this->lines->contains($line)) {
+            $this->lines->add($line);
+            $line->setOrder($this);
+        }
 
         return $this;
     }
@@ -217,4 +247,6 @@ class Order extends AbstractEntity implements UpdatableInterface
     {
         $this->customer = $customer;
     }
+
+
 }

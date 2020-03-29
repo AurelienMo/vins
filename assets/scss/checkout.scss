@@ -31,7 +31,9 @@
   color: #e73e2b !important;
   border-radius: 50%;
   padding: 22px 18px 15px 18px;
-  margin-top: -22px; }
+  margin-top: -22px;
+  margin-right: 0;
+}
 .steps-form-2 .steps-row-2 .steps-step-2 .btn-circle-2:hover {
   border: 2px solid #ad3025i;
   color: #ad3025 !important;
@@ -40,4 +42,7 @@
   font-size: 1.7rem; }
 #main-container {
   padding-top: 0;
+}
+.stripe-button-el {
+  display: none !important;
 }

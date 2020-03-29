@@ -9,13 +9,17 @@ easy_admin:
                     - property: dateNiche
                       label: 'Date du créneau'
                       format: 'd/m/Y'
+                    - property: startAt
+                      label: 'Heure début'
+                      format: 'H:i'
+                    - property: endAt
+                      label: 'Heure fin'
+                      format: 'H:i'
                     - property: numberNiche
                       label: 'Nombre de créneaux'
                       format: '%d'
-                    - property: deliveries
-                      label: 'Nombre de livraisons prévues sur ce créneau'
 
-            new:
+            form:
                 title: 'Nouveau créneau'
                 fields:
                     - property: dateNiche
@@ -23,34 +27,21 @@ easy_admin:
                       type: 'date'
                       type_options:
                           widget: 'single_text'
-                          required: false
+                          required: true
+                    - property: startAt
+                      label: 'Heure début créneau'
+                      type: 'time'
+                      type_options:
+                          widget: 'single_text'
+                          required: true
+                    - property: endAt
+                      label: 'Heure fin créneau'
+                      type: 'time'
+                      type_options:
+                          widget: 'single_text'
+                          required: true
                     - property: numberNiche
                       label: 'Nombre de créneaux disponible'
                       type: 'integer'
                       type_options:
-                          required: false
-#                    - property: address.streetName
-#                      label: 'Nom de la rue'
-#                      type: 'text'
-#                      type_options:
-#                          required: false
-#                    - property: address.complement
-#                      label: "Complément d'adresse"
-#                      type: 'text'
-#                      type_options:
-#                          required: false
-#                    - property: address.zipCode
-#                      label: 'Code postal'
-#                      type: 'text'
-#                      type_options:
-#                          required: false
-#                    - property: address.city
-#                      label: 'Ville'
-#                      type: 'text'
-#                      type_options:
-#                          required: false
-#                    - property: address.country
-#                      label: 'Pays'
-#                      type: 'country'
-#                      type_options:
-#                          required: false
+                          required: true

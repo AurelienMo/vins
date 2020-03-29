@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Domain\Cart\Delivery\Forms\DeliveryDTO;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
 use DateTime;
@@ -29,7 +30,6 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     use TimeStampableTrait;
 
     public const DELIVERY_IN_PROGRESS = 'Livraison en cours';
-    public const DELIVERED_AT_RELAY_POINT = 'Livré en point relais';
     public const DELIVERED_AT_ADDRESS = 'Livré à l\'adresse';
 
     /**
@@ -49,7 +49,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     /**
      * @var NicheOfDelivery|null
      *
-     * @ORM\ManyToOne(targetEntity="App\Entity\NicheOfDelivery", inversedBy="deliveries")
+     * @ORM\ManyToOne(targetEntity="App\Entity\NicheOfDelivery")
      * @ORM\JoinColumn(name="amo_niche_of_delivery_id", referencedColumnName="id", nullable=true)
      */
     protected $niche;
@@ -62,74 +62,104 @@ class Delivery extends AbstractEntity implements UpdatableInterface
      */
     protected $order;
 
-    public function __construct()
-    {
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $commentDelivery;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $personIfAbsent;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $typeDelivery;
+
+    public function __construct(
+        ?NicheOfDelivery $niche = null,
+        ?string $comment = null,
+        ?string $typeDelivery = null,
+        ?string $personIfAbsent = null
+    ) {
+        $this->niche = $niche;
+        $this->commentDelivery = $comment;
+        $this->typeDelivery = $typeDelivery;
+        $this->personIfAbsent = $personIfAbsent;
         $this->status = self::DELIVERY_IN_PROGRESS;
         $this->statusDate = new DateTime();
         parent::__construct();
     }
 
-    /**
-     * @return string
-     */
+    public static function createFromPayment(?DeliveryDTO $dto, ?NicheOfDelivery $niche = null)
+    {
+        return new self(
+            $niche,
+            $dto->getComment(),
+            $dto->getTypeDelivery(),
+            $dto->getPersonIfAbsent()
+        );
+    }
+
     public function getStatus(): string
     {
         return $this->status;
     }
 
-    /**
-     * @param string $status
-     */
-    public function setStatus(string $status): void
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @return DateTime
-     */
     public function getStatusDate(): DateTime
     {
         return $this->statusDate;
     }
 
-    /**
-     * @param DateTime $statusDate
-     */
-    public function setStatusDate(DateTime $statusDate): void
-    {
-        $this->statusDate = $statusDate;
-    }
-
-    /**
-     * @return NicheOfDelivery|null
-     */
     public function getNiche(): ?NicheOfDelivery
     {
         return $this->niche;
     }
 
-    /**
-     * @param NicheOfDelivery|null $niche
-     */
-    public function setNiche(?NicheOfDelivery $niche): void
-    {
-        $this->niche = $niche;
-    }
-
-    /**
-     * @return Order
-     */
-    public function getOrder(): ?Order
+    public function getOrder(): Order
     {
         return $this->order;
     }
 
-    /**
-     * @param Order $order
-     */
-    public function setOrder(?Order $order): void
+    public function getCommentDelivery(): ?string
+    {
+        return $this->commentDelivery;
+    }
+
+    public function getPersonIfAbsent(): ?string
+    {
+        return $this->personIfAbsent;
+    }
+
+    public function getTypeDelivery(): ?string
+    {
+        return $this->typeDelivery;
+    }
+
+    public function setOrder(Order $order): void
     {
         $this->order = $order;
+    }
+
+    public function getContentText(): string
+    {
+        $text = null;
+        if ($this->getTypeDelivery() === 'basic') {
+            $text = "sous 3 jours";
+        } else {
+            $date = $this->getNiche()->getDateNiche()->format('d/m/Y');
+            $hour = ' entre '.$this->getNiche()->getStartAt()->format('H:i').' et '.$this->getNiche()->getEndAt()->format('H:i');
+            $text = "le ".$date.$hour;
+        }
+
+        return $text;
+
     }
 }

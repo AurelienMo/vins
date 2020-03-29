@@ -19,6 +19,9 @@ body {
   display: flex;
   flex-direction: column;
 }
+a:hover {
+  text-decoration: none;
+}
 #main-container {
   flex: 1 0 auto;
   background-color: #f8f9fb;

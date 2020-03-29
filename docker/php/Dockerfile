@@ -18,6 +18,7 @@ RUN echo "xdebug.remote_connect_back = 1" >> /usr/local/etc/php/php.ini
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php-cli.ini
 RUN echo "max_execution_time = 0" >> /usr/local/etc/php/php-cli.ini
 RUN echo "memory_limit = -1" >> /usr/local/etc/php/php-cli.ini
+RUN echo "memory_limit = -1" >> /usr/local/etc/php/php.ini
 
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
