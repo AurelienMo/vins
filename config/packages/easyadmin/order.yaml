@@ -13,6 +13,10 @@ easy_admin:
                     - name: show
                       icon: eye
                       label: ''
+                    - name: edit_invoice
+                      type: route
+                      icon: invoice
+                      label: 'Facture'
                 fields:
                     - property: customer
                       label: 'Acheteur'
