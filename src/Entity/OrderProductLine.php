@@ -204,4 +204,16 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
             $vo->getQuantity()
         );
     }
+
+    public function __toString()
+    {
+        return sprintf(
+            '%s - %s - %s - %s - %s',
+            $this->getVintageName(),
+            $this->getYear(),
+            $this->getDomain(),
+            $this->getAppellation(),
+            $this->getQuantity().' '.$this->getCapacityName().' '.$this->getLitrage()
+        );
+    }
 }

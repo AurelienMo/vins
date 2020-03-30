@@ -160,6 +160,10 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         }
 
         return $text;
+    }
 
+    public function __toString()
+    {
+        return sprintf('Livraison %s', $this->getContentText());
     }
 }

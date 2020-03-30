@@ -1,0 +1,30 @@
+easy_admin:
+    entities:
+        Customer:
+            disabled_actions: ['new', 'edit', 'delete']
+            class: App\Entity\Customer
+            list:
+                title: 'Liste des acheteurs'
+                actions:
+                    - name: show
+                      icon: eye
+                      label: ''
+                fields:
+                    - property: getFullName
+                      label: 'Nom'
+                    - property: email
+                      label: 'Adresse email'
+                    - property: phoneNumber
+                      label: 'N° Tél'
+                    - property: getFullAddress
+                      label: 'Adresse'
+            show:
+                fields:
+                    -   property: getFullName
+                        label: 'Nom'
+                    -   property: email
+                        label: 'Adresse email'
+                    -   property: phoneNumber
+                        label: 'N° Tél'
+                    -   property: getFullAddress
+                        label: 'Adresse'

@@ -161,4 +161,14 @@ class Customer extends AbstractEntity implements UpdatableInterface
     {
         return $this->city;
     }
+
+    public function getFullAddress(): string
+    {
+        return sprintf('%s %s %s', $this->addressCustomer, $this->zipCode, $this->city);
+    }
+
+    public function __toString()
+    {
+        return sprintf('%s - %s', $this->getFullName(), $this->getFullAddress());
+    }
 }

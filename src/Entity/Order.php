@@ -78,7 +78,7 @@ class Order extends AbstractEntity implements UpdatableInterface
     /**
      * @var Customer|null
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Customer", cascade={"persist", "remove"}, fetch="EAGER")
      * @ORM\JoinColumn(name="amo_customer_id", referencedColumnName="id")
      */
     protected $customer;
@@ -190,26 +190,6 @@ class Order extends AbstractEntity implements UpdatableInterface
         return $this->orderNumber;
     }
 
-    public function countProducts(): int
-    {
-        $cpt = 0;
-        foreach ($this->lines as $line) {
-            $cpt += $line->getQuantity();
-        }
-
-        return $cpt;
-    }
-
-    public function countAmountOrder()
-    {
-        $amount = 0;
-        foreach ($this->lines as $line) {
-            $amount += $line->getTvaRate() > 0 ? $line->getTvaRate() * $line->getAmount() : $line->getAmount();
-        }
-
-        return sprintf('%s €', $amount);
-    }
-
     /**
      * @return Delivery|null
      */
@@ -237,6 +217,7 @@ class Order extends AbstractEntity implements UpdatableInterface
      */
     public function getCustomer(): ?Customer
     {
+        dump($this->customer);
         return $this->customer;
     }
 
@@ -248,5 +229,49 @@ class Order extends AbstractEntity implements UpdatableInterface
         $this->customer = $customer;
     }
 
+    public function countBottle()
+    {
+        $bottles = $this->lines->filter(function (OrderProductLine $line) {
+            return $line->getCapacityName() === 'Bouteille';
+        });
 
+        $cpt = 0;
+        /** @var OrderProductLine $bottle */
+        foreach ($bottles as $bottle) {
+            $cpt += $bottle->getQuantity();
+        }
+
+        return $cpt;
+    }
+
+    public function countCubis()
+    {
+        $cubis = $this->lines->filter(function (OrderProductLine $line) {
+            return $line->getCapacityName() === 'Cubis';
+        });
+
+        $cpt = 0;
+        /** @var OrderProductLine $cubis */
+        foreach ($cubis as $cubis) {
+            $cpt += $cubis->getQuantity();
+        }
+
+        return $cpt;
+    }
+
+    public function getCustomerStripeId(): string
+    {
+        return $this->customerStripeId;
+    }
+
+    public function getTotalAmount()
+    {
+        $total = $this->delivery->getTypeDelivery() === 'basic' ? 4 : 6;
+        /** @var OrderProductLine $line */
+        foreach ($this->lines as $line) {
+            $total += $line->getUnitPrice() * $line->getQuantity();
+        }
+
+        return round($total, 2).' €';
+    }
 }

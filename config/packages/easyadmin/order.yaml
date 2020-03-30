@@ -1,7 +1,7 @@
 easy_admin:
     entities:
         Order:
-            disabled_actions: ['show']
+            disabled_actions: ['new', 'edit', 'delete']
             templates:
                 new: 'bundles/EasyAdminBundle/Order/new.html.twig'
                 edit: 'bundles/EasyAdminBundle/Order/new.html.twig'
@@ -9,192 +9,40 @@ easy_admin:
             list:
                 title: 'Liste des commandes'
                 sort: ['orderAt', 'DESC']
+                actions:
+                    - name: show
+                      icon: eye
+                      label: ''
                 fields:
+                    - property: customer
+                      label: 'Acheteur'
                     - property: orderNumber
                       label: 'N° commande'
                     - property: billNumber
                       label: 'N° Facture'
-                    - property: countAmountOrder
-                      label: 'Montant commande'
                     - property: status
                       label: 'Status'
-                    - property: lines
-                      label: 'Nbre de produits'
-                    - property: countProducts
+                    - property: countBottle
                       label: 'Nbre de bouteilles'
+                    - property: countCubis
+                      label: 'Nbre de cubis'
                     - property: orderAt
                       label: 'Date commande'
-            new:
+            show:
                 fields:
-                    - type: 'group'
-                      label: 'Produits'
-                      columns: 4
-                    - property: lines
-                      label: false
-                      type: 'collection'
-                      type_options:
-                          entry_type: App\Admin\Forms\AddOrderLineType
-                          allow_delete: true
-                          allow_add: true
-                          by_reference: false
-                      columns: 12
-                    - type: 'group'
+                    - property: customer
                       label: 'Acheteur'
-                      columns: 4
-                    - type: 'section'
-                      label: 'Civilité'
-                    - property: customer.civility
-                      type: choice
-                      label: null
-                      type_options:
-                          choices: {'Mr': 'Monsieur', 'Mme': 'Madame'}
-                          expanded: true
-                          multiple: false
-                          placeholder: false
-                          attr: { class: 'js-genus-scientists-field' }
-                    - property: customer.firstname
-                      type: text
-                      label: 'Prénom'
-                    - property: customer.lastname
-                      type: text
-                      label: 'Nom'
-                      columns: "6"
-                    - type: 'section'
-                      label: 'Adresse'
-                    - property: customer.address.streetNumber
-                      type: text
-                      label: 'N°'
-                    - property: customer.address.streetName
-                      type: text
-                      label: 'Nom de la rue'
-                    - property: customer.address.complement
-                      type: text
-                      label: "Complément"
-                    - property: customer.address.zipCode
-                      type: text
-                      label: 'CP'
-                    - property: customer.address.city
-                      type: text
-                      label: 'Ville'
-                    - property: customer.address.country
-                      type: country
-                      label: 'Pays'
-                    - property: customer.rgpdOK
-                      label: 'Politique de confidentialité'
-                      type: checkbox
-                      type_options:
-                          required: true
-                    - type: 'group'
+                    - property: billNumber
+                      label: 'N° facture'
+                    - property: orderNumber
+                      label: 'N° commande'
+                    - property: orderAt
+                      label: 'Date commande'
+                    - property: customerStripeId
+                      label: 'Identifiant acheteur Stripe'
+                    - property: lines
+                      label: 'Ligne de produit'
+                    - property: delivery
                       label: 'Livraison'
-                      columns: 4
-                    - property: delivery.status
-                      label: 'Status'
-                      type: choice
-                      columns: '12'
-                      type_options:
-                          choices: {'Livraison en cours': 'Livraison en cours', 'Livré en point relais': 'Livré en point relais', "Livré à l'adresse": "Livré à l'adresse"}
-                    - property: delivery.deliveryType
-                      columns: '12'
-                      label: 'Type de livraison'
-                      type: entity
-                      type_options:
-                          class: App\Entity\DeliveryType
-                    - property: delivery.deliveryPoint
-                      type: entity
-                      label: 'Point relais'
-                      columns: '12'
-                      attr:
-                          class: 'delivery-point hidden'
-                      type_options:
-                          class: App\Entity\DeliveryPoint
-                    - property: delivery.niche
-                      type: entity
-                      columns: '12'
-                      label: 'Créneau de livraison'
-                      css_class: 'niche-delivery hidden'
-                      type_options:
-                          class: App\Entity\NicheOfDelivery
-                          query_builder: 'App\Repository\NicheOfDeliveryRepository::listFreeNiche'
-            edit:
-                title: Modification %%entity_label%%
-                fields:
-                    -   type: 'group'
-                        label: 'Produits'
-                        columns: 4
-                    -   property: lines
-                        label: false
-                        type: 'collection'
-                        type_options:
-                            entry_type: App\Admin\Forms\AddOrderLineType
-                            allow_delete: true
-                            allow_add: true
-                            by_reference: false
-                        columns: 12
-                    -   type: 'group'
-                        label: 'Acheteur'
-                        columns: 4
-                    -   type: 'section'
-                        label: 'Civilité'
-                    -   property: customer.civility
-                        type: choice
-                        label: null
-                        type_options:
-                            choices: {'Mr': 'Monsieur', 'Mme': 'Madame'}
-                            expanded: true
-                            multiple: false
-                            placeholder: false
-                            attr: { class: 'js-genus-scientists-field' }
-                    -   property: customer.firstname
-                        type: text
-                        label: 'Prénom'
-                    -   property: customer.lastname
-                        type: text
-                        label: 'Nom'
-                        columns: "6"
-                    -   type: 'section'
-                        label: 'Adresse'
-                    -   property: customer.address.streetNumber
-                        type: text
-                        label: 'N°'
-                    -   property: customer.address.streetName
-                        type: text
-                        label: 'Nom de la rue'
-                    -   property: customer.address.complement
-                        type: text
-                        label: "Complément"
-                    -   property: customer.address.zipCode
-                        type: text
-                        label: 'CP'
-                    -   property: customer.address.city
-                        type: text
-                        label: 'Ville'
-                    -   property: customer.address.country
-                        type: country
-                        label: 'Pays'
-                    -   type: 'group'
-                        label: 'Livraison'
-                        columns: 4
-                    -   property: delivery.status
-                        label: 'Status'
-                        type: choice
-                        type_options:
-                            choices: {'Livraison en cours': 'Livraison en cours', 'Livré en point relais': 'Livré en point relais', "Livré à l'adresse": "Livré à l'adresse"}
-                    -   property: delivery.deliveryType
-                        label: 'Type de livraison'
-                        type: entity
-                        type_options:
-                            class: App\Entity\DeliveryType
-                    -   property: delivery.deliveryPoint
-                        type: entity
-                        label: 'Point relais'
-                        attr:
-                            class: 'delivery-point hidden'
-                        type_options:
-                            class: App\Entity\DeliveryPoint
-                    -   property: delivery.niche
-                        type: entity
-                        label: 'Créneau de livraison'
-                        css_class: 'niche-delivery hidden'
-                        type_options:
-                            class: App\Entity\NicheOfDelivery
-                            query_builder: 'App\Repository\NicheOfDeliveryRepository::listFreeNiche'
+                    - property: getTotalAmount
+                      label: 'Montant de la commande'
