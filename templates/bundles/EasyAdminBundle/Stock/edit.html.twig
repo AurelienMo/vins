@@ -3,7 +3,7 @@
 {% block content_title %}
     {% apply spaceless %}
         <div class="alert alert-{{entity.quantity > 0 ? 'success' : 'warning'}} text-center" role="alert">
-            Editer stock <span class="font-weight-bold font-weight-italic">{{ entity.capacity.wine }} - {{ entity.capacity.capacityFullname }}</span> : <span class="font-weight-bold">{{ entity.quantity }} bouteilles restantes.</span>
+            Editer stock <span class="font-weight-bold font-weight-italic">{{ entity.capacity.wine }} - {{ entity.capacity.capacityFullname }} litre(s)</span> : <span class="font-weight-bold">{{ entity.quantity }} bouteilles restantes.</span>
         </div>
     {% endapply %}
 {% endblock %}

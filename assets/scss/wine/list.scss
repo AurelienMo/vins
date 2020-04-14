@@ -143,3 +143,12 @@
     min-height: 80vh;
   }
 }
+.no-stock {
+  position:absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%); width: 92%;
+  img {
+    width: 250px;
+  }
+}

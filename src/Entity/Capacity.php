@@ -157,4 +157,15 @@ class Capacity extends AbstractEntity
     {
         return sprintf('%s - %s - %s', $this->wine, $this->getType(), $this->getQuantity());
     }
+
+    public function getTotalQuantity()
+    {
+        $total = 0;
+
+        foreach ($this->stock->getStockEntries() as $stockEntry) {
+            $total += $stockEntry->getQuantity();
+        }
+
+        return $total;
+    }
 }

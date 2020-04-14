@@ -37,6 +37,11 @@
                                     <img class="wine" src="{{ vich_uploader_asset(wine, 'imageFile') }}"/>
                                     <img class="vigneron float-right rounded-circle" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}"/>
                                 </figure>
+                                {% if not wine.hasStock %}
+                                    <div class="d-flex justify-content-center no-stock">
+                                        <img src="{{ asset('build/images/success.png') }}" alt="victime_success"/>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="card-wine_content-product_content d-flex flex-column justify-content-around align-items-center">
@@ -51,7 +56,7 @@
                             <div class="col d-flex justify-content-center align-items-center">
                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                     <h3 class="h5 font-weight-bold m-0">{{ wine.getLowerCapacityPrice }} €</h3>
-                                    {% if wine.capacities|length > 0 %}
+                                    {% if wine.capacities|length > 0 and wine.hasStock %}
                                         <span class="small text-center">
                                             Disponible en {{ wine.listTypeCapacities }}
                                         </span>
@@ -63,9 +68,11 @@
                                     <a class="detail-wine" data-url="{{ path('detail_wine', {'id': wine.id}) }}" href="#">
                                         <img class="icon" src="{{ asset('build/images/eye.svg') }}" width="40"/>
                                     </a>
-                                    <a class="add-to-cart" data-url="{{ path('add_wine_to_card', {'id': wine.id}) }}" href="#">
-                                        <img class="icon" src="{{ asset('build/images/cart.svg') }}" width="40"/>
-                                    </a>
+                                    {% if wine.hasStock %}
+                                        <a class="add-to-cart" data-url="{{ path('add_wine_to_card', {'id': wine.id}) }}" href="#">
+                                            <img class="icon" src="{{ asset('build/images/cart.svg') }}" width="40"/>
+                                        </a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

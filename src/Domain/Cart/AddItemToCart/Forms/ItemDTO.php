@@ -22,13 +22,15 @@ class ItemDTO
         $elements = [];
         /** @var Capacity $capacity */
         foreach ($wine->getCapacities() as $capacity) {
-            $productVoInCart = array_filter($vo->getProducts(), function (ProductVO $vo) use ($capacity) {
-                return $vo->getCapacity()->getId() === $capacity->getId();
-            });
-            $elements[] = ElementDTO::createFromCapacityEntity(
-                $capacity,
-                current($productVoInCart) instanceof ProductVO ? current($productVoInCart) : null
-            );
+            if ($capacity->getStock()->getQuantity() > 0) {
+                $productVoInCart = array_filter($vo->getProducts(), function (ProductVO $vo) use ($capacity) {
+                    return $vo->getCapacity()->getId() === $capacity->getId();
+                });
+                $elements[] = ElementDTO::createFromCapacityEntity(
+                    $capacity,
+                    current($productVoInCart) instanceof ProductVO ? current($productVoInCart) : null
+                );
+            }
         }
 
         $dto->setElements($elements);

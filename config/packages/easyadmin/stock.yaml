@@ -15,7 +15,7 @@ easy_admin:
                       label: 'Vin'
                     - property: capacity.getCapacityFullname
                       label: 'Contenance'
-                    - property: quantity
+                    - property: capacity.getTotalQuantity
                       label: 'Quantité restante'
                       format: '%d'
                     - property: updatedAt
