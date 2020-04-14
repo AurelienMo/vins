@@ -120,6 +120,9 @@ label.required::after {
   max-height: 180px;
   background-size: cover;
 }
+.add-product-modal {
+  border-radius: 20px!important;
+}
 @media all and (max-width: 991px){
   nav {
     height: 60px;
