@@ -24,6 +24,7 @@ use App\Responders\RedirectResponder;
 use App\Responders\ViewResponder;
 use Doctrine\ORM\EntityManagerInterface;
 use Konekt\PdfInvoice\InvoicePrinter;
+use Stripe\Exception\CardException;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -95,7 +96,19 @@ class CartCheckout
         )->handleRequest($request);
         if ($request->isMethod('POST')) {
             if ($request->request->has('stripeToken')) {
-                $stripeVo = $this->stripeHelper->createChargeAndPayment($request->request->all());
+                $error = null;
+                try {
+                    $stripeVo = $this->stripeHelper->createChargeAndPayment($request->request->all());
+                } catch (CardException $e) {
+                    switch ($e->getDeclineCode()) {
+                        case 'authentication_required':
+                            $error = 'Une authentification 3D Secure est requise avec cette carte.';
+                            break;
+                    }
+                    $this->eventDispatcher->dispatch(new FlashMessageEvent('error', $error));
+
+                    return $redirectResponder($request->attributes->get('_route'), $request->attributes->get('_route_params'));
+                }
                 /** @var Order $order */
                 $dateNow = new \DateTime();
                 $customer = Customer::create($cart->getDeliveryInformation());

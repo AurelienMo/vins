@@ -35,14 +35,13 @@ class StripeHelper
     public function createChargeAndPayment(array $requestAttributes)
     {
         $cart = $this->cartHelper->getCartForCurrentUser();
-        try {
-            Stripe::setApiKey($this->apiPrivateKeyStripe);
-            $customer = $this->getOrCreateCustomer($cart->getDeliveryInformation());
-            $charge = $this->createCharge($cart, $customer, $requestAttributes['stripeToken']);
-        } catch (ApiErrorException $e) {
-            //TODO Process exception
-            dump($e);
-        }
+        Stripe::setApiKey($this->apiPrivateKeyStripe);
+        $customer = $this->getOrCreateCustomer($cart->getDeliveryInformation());
+        $charge = $this->createCharge(
+            $cart,
+            $customer,
+            $requestAttributes['stripeToken']
+        );
 
         return new StripeVO($customer, $charge);
     }
@@ -74,9 +73,10 @@ class StripeHelper
 
     private function createCharge(CartVO $cart, string $customer, string $paymentToken)
     {
+        dump($paymentToken);
         $charge = Charge::create(
             [
-                'amount' => $cart->getTotalPriceWithDelivery() * 100,
+                'amount' => 50,
                 'currency' => 'eur',
                 'source' => $paymentToken,
             ]

@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -43,3 +42,9 @@ public/upload
 /docker/apache/logs/app_access.log
 /docker/apache/logs/app_error.log
 docker/mysql/mysql/*
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###

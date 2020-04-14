@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -109,6 +110,15 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         $providerKey
     ) {
         return new RedirectResponse($this->urlGenerator->generate('easyadmin'));
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+    {
+
+        return parent::onAuthenticationFailure(
+            $request,
+            $exception
+        );
     }
 
     protected function getLoginUrl()
