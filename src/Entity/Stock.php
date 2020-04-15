@@ -26,8 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="amo_stock")
  * @ORM\Entity(repositoryClass="App\Repository\StockRepository")
  */
-class Stock extends AbstractEntity implements
-    UpdatableInterface
+class Stock extends AbstractEntity implements UpdatableInterface
 {
     use TimeStampableTrait;
     use ValueListTrait;
@@ -56,10 +55,17 @@ class Stock extends AbstractEntity implements
      */
     protected $capacity;
 
+    protected $wine;
+
     public function __construct()
     {
         $this->stockEntries = new ArrayCollection();
         parent::__construct();
+    }
+
+    public function setQuantity(int $quantity): void
+    {
+        $this->quantity = $quantity;
     }
 
     /**
@@ -97,10 +103,6 @@ class Stock extends AbstractEntity implements
     {
         $this->stockEntries->add($entry);
         $entry->setStock($this);
-        $this->updateQuantity(
-            $entry,
-            'add'
-        );
 
         return $this;
     }
@@ -114,7 +116,11 @@ class Stock extends AbstractEntity implements
                 $this->quantity += $entry->getQuantity();
                 break;
             case 'remove':
-                $this->quantity -= $entry->getQuantity();
+                if ($entry->getTypeEntry() === StockEntry::TYPE_IN) {
+                    $this->quantity -= $entry->getQuantity();
+                } else {
+                    $this->quantity += $entry->getQuantity();
+                }
                 break;
         }
     }
@@ -147,5 +153,35 @@ class Stock extends AbstractEntity implements
     public function setCapacity(Capacity $capacity): void
     {
         $this->capacity = $capacity;
+    }
+
+    public function updateStockAfterUpdate(int $value, string $type)
+    {
+        switch ($type) {
+            case StockEntry::TYPE_IN:
+                $this->quantity += $value;
+                break;
+            case StockEntry::TYPE_OUT:
+                $this->quantity -= $value;
+                break;
+        }
+    }
+
+    public function countTotalBottlesSold()
+    {
+        $cpt = 0;
+
+        foreach ($this->stockEntries as $stockEntry) {
+            if ($stockEntry->getTypeEntry() === StockEntry::TYPE_OUT && $stockEntry->getOrder() instanceof Order) {
+                $cpt += $stockEntry->getQuantity();
+            }
+        }
+
+        return $cpt;
+    }
+
+    public function getWine()
+    {
+        return $this->capacity->getWine();
     }
 }

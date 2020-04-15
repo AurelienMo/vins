@@ -3,15 +3,26 @@ easy_admin:
         StockEntry:
             templates:
                 edit: 'bundles/EasyAdminBundle/Stock/edit.html.twig'
-            class: App\Entity\Stock
-            disabled_actions: ['edit']
+            class: App\Entity\StockEntry
+            disabled_actions: ['edit', 'new', 'delete']
             list:
-#                title: 'Liste des stocks produits'
+                form_filters:
+                    - { property: typeEntry, label: 'Type de mouvement', type_options: { choices: { Entrée: entree, Sortie: sortie } } }
+                title: 'Liste des mouvements de stock'
+                sort: ['createdAt', 'DESC']
                 fields:
-                    - property: wine
-                      label: 'Vin'
+                    - property: typeEntry
+                      label: 'Entrée / Sortie'
                     - property: quantity
                       label: 'Quantité sur le mouvement'
                       type: integer
                     - property: createdAt
                       label: 'Mouvement réalisé le'
+                    - property: getTypeWine
+                      label: 'Type de vin'
+                    - property: getWineName
+                      label: 'Nom du vin'
+                    - property: getCapacityName
+                      label: 'Contenance'
+                    - property: order
+                      label: 'Commande associée'

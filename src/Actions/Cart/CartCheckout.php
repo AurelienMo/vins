@@ -17,8 +17,11 @@ use App\Entity\Customer;
 use App\Entity\Delivery;
 use App\Entity\NicheOfDelivery;
 use App\Entity\Order;
+use App\Entity\StockEntry;
 use App\Entity\WineDomain;
 use App\Repository\OrderRepository;
+use App\Repository\ProductRepository;
+use App\Repository\StockRepository;
 use App\Responders\JsonResponder;
 use App\Responders\RedirectResponder;
 use App\Responders\ViewResponder;
@@ -62,6 +65,12 @@ class CartCheckout
     /** @var BillGenerator */
     protected $billGenerator;
 
+    /** @var ProductRepository */
+    protected $productRepository;
+
+    /** @var StockRepository */
+    protected $stockRepository;
+
     public function __construct(
         SessionInterface $session,
         EntityManagerInterface $entityManager,
@@ -70,7 +79,9 @@ class CartCheckout
         OrderRepository $orderRepository,
         Environment $templating,
         EventDispatcherInterface $eventDispatcher,
-        BillGenerator $billGenerator
+        BillGenerator $billGenerator,
+        ProductRepository $productRepository,
+        StockRepository $stockRepository
     ) {
         $this->session = $session;
         $this->entityManager = $entityManager;
@@ -80,6 +91,8 @@ class CartCheckout
         $this->templating = $templating;
         $this->eventDispatcher = $eventDispatcher;
         $this->billGenerator = $billGenerator;
+        $this->productRepository = $productRepository;
+        $this->stockRepository = $stockRepository;
     }
 
     public function __invoke(
@@ -135,6 +148,7 @@ class CartCheckout
 
                 $this->entityManager->persist($order);
                 $delivery->setOrder($order);
+                $this->createStockEntry($order);
                 $this->entityManager->flush();
                 if ($this->session->has('cart')) {
                     $this->session->remove('cart');
@@ -188,6 +202,23 @@ class CartCheckout
                 $data->setDeliveryNiche(null);
             }
             $cart->affectDelivery($data);
+        }
+    }
+
+    private function createStockEntry(Order $order)
+    {
+        foreach ($order->getLines() as $line) {
+            $stock = $this->stockRepository->findStockByParams(
+                $line->getYear(),
+                $line->getAppellation(),
+                $line->getVintageName(),
+                $line->getDomain(),
+                $line->getCapacityName(),
+                explode('L', $line->getLitrage())[0]
+            );
+            $stockEntry = StockEntry::create($stock, $line->getQuantity(), $order);
+            $this->entityManager->persist($stockEntry);
+            $stock->updateStockAfterUpdate($line->getQuantity(), StockEntry::TYPE_OUT);
         }
     }
 }

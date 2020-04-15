@@ -16,6 +16,7 @@ namespace App\Admin\Forms;
 use App\Entity\StockEntry;
 use EasyCorp\Bundle\EasyAdminBundle\Form\Type\EasyAdminFormType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -42,7 +43,17 @@ class AddStockEntryType extends AbstractType
                     'class' => 'col-6 mt-1',
                 ],
             ]
-        );
+        )
+            ->add(
+                'typeEntry',
+                ChoiceType::class,
+                [
+                    'label' => 'Type d\'entrée',
+                    'required' => true,
+                    'choices' => StockEntry::LIST_TYPE,
+                ]
+            )
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

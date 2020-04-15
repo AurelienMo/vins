@@ -23,9 +23,10 @@
         </button>
     </div>
     <div class="modal-body mx-3">
+        {{ form_start(form, {'attr': {'class': 'addWineCart'}, 'action': path('add_wine_to_card', {'id': dto.wine.id})}) }}
         <table class="table product-table mb-0">
             <tbody>
-        {{ form_start(form, {'attr': {'class': 'addWineCart'}, 'action': path('add_wine_to_card', {'id': dto.wine.id})}) }}
+
             {% for element in form.elements %}
             <tr class="product-item">
                 <td>

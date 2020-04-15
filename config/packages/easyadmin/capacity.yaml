@@ -4,8 +4,7 @@ easy_admin:
             class: App\Entity\Capacity
             list:
                 form_filters:
-                    - property: product
-                      label: 'Vins'
+                    - { property: wine, label: 'Vins'}
                 max_results: 20
                 title: 'Liste des contenances'
                 fields:
@@ -17,9 +16,6 @@ easy_admin:
                       label: 'Litrage'
                     - property: unitPrice
                       label: 'Prix unitaire'
-                    - property: stock.quantity
-                      label: 'Stock restant'
-
             form:
                 fields:
                     - property: wine

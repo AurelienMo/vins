@@ -148,12 +148,6 @@ easy_admin:
                           prototype: true
                           by_reference: false
                     - type: 'group'
-                      label: 'Contenance'
-                      columns: 12
-                    - property: capacities
-                      label: ''
-                      type: embedded_list
-                    - type: 'group'
                       label: 'Promotions'
                       columns: 12
                     - property: promotions

@@ -24,4 +24,36 @@ class StockRepository extends AbstractServiceRepository
     {
         return Stock::class;
     }
+
+    public function findStockByParams(
+        string $year,
+        string $appellation,
+        string $vintageName,
+        string $domainName,
+        string $capacityType,
+        string $capacityQuantity
+    ): Stock {
+        return $this->createQueryBuilder('s')
+                   ->join('s.capacity', 'c')
+                   ->join('c.wine', 'w')
+                   ->join('w.domain', 'd')
+                   ->where('w.year = :year')
+                   ->andWhere('w.appellation = :appellation')
+                   ->andWhere('w.vintageName = :vintageName')
+                   ->andWhere('d.name = :domainName')
+                   ->andWhere('c.type = :capacityType')
+                   ->andWhere('c.quantity = :capacityQuantity')
+                   ->setParameters(
+                       [
+                           'year' => $year,
+                           'appellation' => $appellation,
+                           'vintageName' => $vintageName,
+                           'domainName' => $domainName,
+                           'capacityType' => $capacityType,
+                           'capacityQuantity' => $capacityQuantity
+                       ]
+                   )
+                   ->getQuery()
+                   ->getSingleResult();
+    }
 }

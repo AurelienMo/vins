@@ -17,7 +17,6 @@ easy_admin:
     user:
         name_property_path: 'fullName'
     design:
-        assets:
         menu:
             - label: 'Configuration'
             - label: 'Breadcrumb'
@@ -39,6 +38,8 @@ easy_admin:
             - entity: 'Product'
               label: 'Vins'
               icon: 'wine-bottle'
+            - entity: 'Capacity'
+              label: 'Contenances'
             - entity: 'TypeProduct'
               label: 'Catégorie des vins'
               icon: 'tag'
@@ -65,9 +66,9 @@ easy_admin:
             - entity: 'Stock'
               label: 'Stock'
               icon: 'pallet'
-#            - entity: 'DeliveryType'
-#              label: 'Type de livraisons'
-#              icon: 'euro-sign'
+            - entity: 'StockEntry'
+              label: 'Mouvements de stock'
+              icon: 'pallet'
             - entity: 'NicheOfDelivery'
               label: 'Créneaux de livraison'
               icon: 'clock'

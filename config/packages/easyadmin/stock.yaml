@@ -10,20 +10,27 @@ easy_admin:
                 form_filters:
                     - { name: lowerThan, property: quantity, label: 'Stock <', operator: lt }
                     - { name: greaterOrEqualThan, property: quantity, label: 'Stock >=', operator: gte }
+                    - { name: like, property: capacity, label: 'Vin', operator: like}
+
                 fields:
                     - property: capacity.wine
                       label: 'Vin'
                     - property: capacity.getCapacityFullname
                       label: 'Contenance'
-                    - property: capacity.getTotalQuantity
+                    - property: quantity
                       label: 'Quantité restante'
                       format: '%d'
                     - property: updatedAt
                       label: 'Date de mise à jour'
+                    - property: countTotalBottlesSold
+                      label: "Nombres vendus"
             form:
                 fields:
+                    - property: quantity
+                      label: 'Quantité restante'
+                      help: 'Il vous ai possible de modifier le stock existant.'
                     - property: stockEntries
-                      label: false
+                      label: Liste des mouvements de stock pour cette contenance
                       type: 'collection'
                       css_class: 'col-12'
                       type_options:
