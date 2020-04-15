@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Admin\Traits\ValueListTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,6 +24,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Capacity extends AbstractEntity
 {
+    use ValueListTrait;
+
     public const LIST_CAPACITIES = [
         'Bouteille' => 'Bouteille',
         'Cubis' => 'Cubis',
