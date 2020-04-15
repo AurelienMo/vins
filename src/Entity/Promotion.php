@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Admin\Traits\ValueListTrait;
 use App\Entity\Traits\NameTrait;
 use DateTime;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
@@ -30,6 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Promotion extends AbstractEntity
 {
     use NameTrait;
+    use ValueListTrait;
 
     /**
      * @var Product|null
@@ -156,7 +158,6 @@ class Promotion extends AbstractEntity
     public function getStatus()
     {
         $dateNow = new DateTime();
-        $this->status = null;
         if ($dateNow >= $this->startAt && $dateNow <= $this->endAt) {
             return 'En cours';
         }

@@ -147,13 +147,4 @@ easy_admin:
                           allow_delete: true
                           prototype: true
                           by_reference: false
-                    - type: 'group'
-                      label: 'Promotions'
-                      columns: 12
-                    - property: promotions
-                      label: ''
-                      type: embedded_list
-                      type_options:
-                        entity: Promotion
-                        filters:
-                            'entity.promotions': 'form:parent.data.id'
+

@@ -6,6 +6,8 @@ easy_admin:
                 form_filters:
                     - property: product
                       label: 'Vins'
+                    - property: typePromotion
+                      label: 'Type de promotion'
                 sort: ['startAt', 'DESC']
                 max_results: 20
                 title: 'Liste des promotions'

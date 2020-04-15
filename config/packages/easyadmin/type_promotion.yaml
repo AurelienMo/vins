@@ -1,0 +1,9 @@
+easy_admin:
+    entities:
+        TypePromotion:
+            class: App\Entity\TypePromotion
+            list:
+                title: 'Liste des types de promotion'
+                fields:
+                    - property: name
+                      label: 'Type de promotion'
