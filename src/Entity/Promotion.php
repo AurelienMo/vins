@@ -33,6 +33,10 @@ class Promotion extends AbstractEntity
     use NameTrait;
     use ValueListTrait;
 
+    public const NOT_START = 'Non démarrée';
+    public const IN_PROGRESS = 'En cours';
+    public const FINISH = 'Terminée';
+
     /**
      * @var Product|null
      *
@@ -159,13 +163,13 @@ class Promotion extends AbstractEntity
     {
         $dateNow = new DateTime();
         if ($dateNow >= $this->startAt && $dateNow <= $this->endAt) {
-            return 'En cours';
+            return self::IN_PROGRESS;
         }
         if ($dateNow > $this->endAt) {
-            return 'Terminée';
+            return self::FINISH;
         }
         if ($dateNow < $this->startAt) {
-            return 'Non démarrée';
+            return self::NOT_START;
         }
     }
 }

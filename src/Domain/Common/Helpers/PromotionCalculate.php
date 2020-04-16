@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Common\Helpers;
 
+use App\Entity\Capacity;
 use App\Entity\OrderProductLine;
 use App\Entity\Product;
 use App\Entity\Promotion;
@@ -60,5 +61,21 @@ class PromotionCalculate
         }
 
         return $amount;
+    }
+
+    public static function calcultePromoForProduct(Capacity $capacityProduct, Promotion $promotion)
+    {
+        $unitPrice = $capacityProduct->getUnitPrice();
+        $price = 0;
+        switch ($promotion->getTypePromotion()->getName()) {
+            case TypePromotion::TYPE_PERCENT:
+                $price = $unitPrice - ($unitPrice * $promotion->getValue() / 100);
+                break;
+            case TypePromotion::TYPE_AMOUNT:
+                $price = $unitPrice - $promotion->getValue();
+                break;
+        }
+
+        return $price;
     }
 }

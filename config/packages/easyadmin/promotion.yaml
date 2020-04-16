@@ -33,8 +33,10 @@ easy_admin:
                       type: 'text'
                       label: 'Nom de la promotion'
                     - property: product
-                      type: 'easyadmin_autocomplete'
+                      type: 'entity'
                       label: 'Vin'
+                      type_options:
+                          class: 'App\Entity\Product'
                     - property: typePromotion
                       type: 'entity'
                       type_options:

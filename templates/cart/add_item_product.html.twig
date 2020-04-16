@@ -34,7 +34,7 @@
                         <span>{{ element.vars.data.capacity.type }} {{ element.vars.data.capacity.quantity }}L</span>
                     </div>
                 </td>
-                <td>{{ element.vars.data.capacity.unitPrice }} €</td>
+                <td>{{ element.vars.data.capacity|applyPromo }}€</td>
                 <td></td>
                 <td>
                     <div class="md-form mb-0 mt-0">

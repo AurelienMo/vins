@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Domain\Common\Helpers\PromotionCalculate;
 use App\Entity\Embedded\WineCaract;
 use App\Entity\Embedded\WineService;
 use App\Entity\Interfaces\OpinionElementInterface;
@@ -562,8 +563,15 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
     {
         $capacities = $this->capacities->toArray();
         usort($capacities, [$this, 'compareCapacityPrice']);
+        $promotion = $this->promotions->filter(function (Promotion $promotion) {
+            return $promotion->getStatus() === Promotion::IN_PROGRESS;
+        })->current();
 
-        return count($capacities) === 0 ? 'N/A' : current($capacities)->getUnitPrice();
+        return [
+            'priceInit' => current($capacities) instanceof Capacity ? current($capacities)->getUnitPrice() : 'N/A',
+            'pricePromo' => $promotion instanceof Promotion && current($capacities) instanceof Capacity ?
+                PromotionCalculate::calcultePromoForProduct(current($capacities), $promotion) : null,
+        ];
     }
 
     private function compareCapacityPrice(Capacity $a, Capacity $b)
