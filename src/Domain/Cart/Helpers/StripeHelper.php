@@ -73,10 +73,9 @@ class StripeHelper
 
     private function createCharge(CartVO $cart, string $customer, string $paymentToken)
     {
-        dump($paymentToken);
         $charge = Charge::create(
             [
-                'amount' => 50,
+                'amount' => number_format($cart->getTotalPriceWithDelivery(), 2) * 100,
                 'currency' => 'eur',
                 'source' => $paymentToken,
             ]

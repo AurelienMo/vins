@@ -55,7 +55,10 @@ class CartVO
         $total = 0;
         /** @var ProductVO $product */
         foreach ($this->products as $product) {
-            $total += $product->getQuantity() * $product->getCapacity()->getUnitPrice();
+            $price = !\is_null($product->getPricePromo()) ?
+                $product->getPricePromo() * $product->getQuantity() :
+                $product->getUnitPrice() * $product->getQuantity();
+            $total += $price;
         }
 
         return $total;
@@ -72,7 +75,7 @@ class CartVO
             return $this->getTotalPriceInCart();
         }
 
-        $priceDelivery = $this->deliveryInformation->getTypeDelivery() === 'basic' ? 0 : 6;
+        $priceDelivery = $this->deliveryInformation->getTypeDelivery() === 'basic' ? 4 : 6;
 
         return $this->getTotalPriceInCart() + $priceDelivery;
     }

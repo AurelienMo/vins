@@ -91,6 +91,8 @@ class BillGenerator
         $subTotalHt = 0;
         $total = 0;
         foreach ($lines as $line) {
+            $priceDisplay = !is_null($line->getPricePromo()) ?
+                $line->getPricePromo() * $line->getQuantity() : $line->getUnitPrice() * $line->getQuantity();
             $invoice->addItem(
                 sprintf('%s - %s', $line->getVintageName(), $line->getYear()),
                 sprintf(
@@ -103,11 +105,12 @@ class BillGenerator
                 $line->getQuantity(),
                 $line->getUnitPrice() - ($line->getUnitPrice() / 1.2),
                 $line->getUnitPrice() / 1.2,
-                0,
-                $line->getUnitPrice() * $line->getQuantity()
+                is_null($line->getPricePromo()) ?
+                    0 : ($line->getUnitPrice() - $line->getPricePromo()) * $line->getQuantity(),
+                $priceDisplay
             );
-            $total += $line->getUnitPrice() * $line->getQuantity();
-            $subTotalHt += ($line->getUnitPrice() * $line->getQuantity()) / 1.2;
+            $total += $priceDisplay;
+            $subTotalHt += ($priceDisplay * $line->getQuantity()) / 1.2;
         }
         $amountDelivery = $delivery->getTypeDelivery() === 'basic' ? 4 : 6;
         $invoice->addTotal("Prix Total HT", $subTotalHt);

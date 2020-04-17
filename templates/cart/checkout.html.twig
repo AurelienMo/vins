@@ -79,7 +79,6 @@
                                         <strong>Quantité</strong>
                                     </th>
                                     <th class="font-weight-bold">
-                                        <strong>Remise</strong>
                                     </th>
                                     <th class="font-weight-bold">
                                         <strong>Sous-total</strong>
@@ -109,14 +108,17 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td>{{productVo.capacity.unitPrice}}€</td>
+                                        <td>
+                                            <span class="text-cancel">{{productVo.unitPrice}}€</span>
+                                            {% if productVo.pricePromo is not null %}
+                                                <span class="primary-text">{{productVo.pricePromo}}€</span>
+                                            {% endif %}
+                                        </td>
                                         <td></td>
                                         <td>
                                             <input type="number" value="{{ productVo.quantity }}" aria-label="Search" class="form-control entry-quantity" style="width: 100px">
                                         </td>
-                                        <td>
-                                            0%
-                                        </td>
+                                        <td></td>
                                         <td class="font-weight-bold">
                                             <strong>{{productVo.calculateSubTotalPrice}}€</strong>
                                         </td>

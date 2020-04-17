@@ -563,14 +563,29 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
     {
         $capacities = $this->capacities->toArray();
         usort($capacities, [$this, 'compareCapacityPrice']);
+        /** @var Promotion $promotion */
         $promotion = $this->promotions->filter(function (Promotion $promotion) {
             return $promotion->getStatus() === Promotion::IN_PROGRESS;
         })->current();
 
+        $capacityFinal = null;
+        /** @var Capacity $capacity */
+        foreach ($capacities as $capacity) {
+            if ($capacity->getStock()->getQuantity() <= 0) {
+                continue;
+            }
+
+            $capacityFinal = $capacity;
+            break;
+        }
+        if (is_null($capacityFinal)) {
+            $capacityFinal = current($capacities);
+        }
+
         return [
-            'priceInit' => current($capacities) instanceof Capacity ? current($capacities)->getUnitPrice() : 'N/A',
-            'pricePromo' => $promotion instanceof Promotion && current($capacities) instanceof Capacity ?
-                PromotionCalculate::calcultePromoForProduct(current($capacities), $promotion) : null,
+            'priceInit' => $capacityFinal instanceof Capacity ? $capacityFinal->getUnitPrice() : 'N/A',
+            'pricePromo' => $promotion instanceof Promotion && $capacityFinal instanceof Capacity ?
+                PromotionCalculate::calcultePromoForProduct($capacityFinal, $promotion) : null,
         ];
     }
 

@@ -85,18 +85,11 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
     protected $quantity;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(type="string", nullable=true)
-     */
-    protected $typePromotion;
-
-    /**
      * @var float|null
      *
      * @ORM\Column(type="float", nullable=true)
      */
-    protected $valuePromotion;
+    protected $pricePromo;
 
     /**
      * @var Order
@@ -115,8 +108,7 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
         string $litrage,
         float $unitPrice,
         int $quantity,
-        ?string $typePromotion = null,
-        ?float $valuePromotion = null
+        ?float $pricePromo = null
     ) {
         $this->vintageName = $vintageName;
         $this->year = $year;
@@ -126,8 +118,7 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
         $this->litrage = $litrage;
         $this->unitPrice = $unitPrice;
         $this->quantity = $quantity;
-        $this->typePromotion = $typePromotion;
-        $this->valuePromotion = $valuePromotion;
+        $this->pricePromo = $pricePromo;
         parent::__construct();
     }
 
@@ -171,16 +162,6 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
         return $this->quantity;
     }
 
-    public function getTypePromotion(): string
-    {
-        return $this->typePromotion;
-    }
-
-    public function getValuePromotion(): float
-    {
-        return $this->valuePromotion;
-    }
-
     public function getOrder(): Order
     {
         return $this->order;
@@ -189,6 +170,11 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
     public function setOrder(Order $order): void
     {
         $this->order = $order;
+    }
+
+    public function getPricePromo(): ?float
+    {
+        return $this->pricePromo;
     }
 
     public static function create(ProductVO $vo)
@@ -200,8 +186,9 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
             $vo->getProduct()->getAppellation(),
             $vo->getCapacity()->getType(),
             $vo->getCapacity()->getQuantity() . 'L',
-            $vo->getCapacity()->getUnitPrice(),
-            $vo->getQuantity()
+            $vo->getUnitPrice(),
+            $vo->getQuantity(),
+            $vo->getPricePromo()
         );
     }
 

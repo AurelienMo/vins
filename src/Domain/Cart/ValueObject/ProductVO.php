@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Domain\Cart\ValueObject;
 
+use App\Domain\Common\Helpers\PromotionCalculate;
 use App\Entity\Capacity;
 use App\Entity\Product;
+use App\Entity\Promotion;
 use App\Entity\WineDomain;
 
 class ProductVO implements ItemCartInterface
@@ -22,12 +24,26 @@ class ProductVO implements ItemCartInterface
     /** @var int */
     protected $quantity;
 
-    public function __construct(Product $product, WineDomain $domain, Capacity $capacity, int $quantity)
-    {
+    /** @var float */
+    protected $unitPrice;
+
+    /** @var float|null */
+    protected $pricePromo;
+
+    public function __construct(
+        Product $product,
+        WineDomain $domain,
+        Capacity $capacity,
+        int $quantity,
+        float $unitPrice,
+        float $pricePromo = null
+    ) {
         $this->product = $product;
         $this->capacity = $capacity;
         $this->quantity = $quantity;
         $this->domain = $domain;
+        $this->unitPrice = $unitPrice;
+        $this->pricePromo = $pricePromo;
     }
 
     public function getProduct(): Product
@@ -52,7 +68,8 @@ class ProductVO implements ItemCartInterface
 
     public function calculateSubTotalPrice()
     {
-        return $this->capacity->getUnitPrice() * $this->quantity;
+        return !\is_null($this->pricePromo) ?
+            $this->getPricePromo() * $this->quantity : $this->getUnitPrice() * $this->quantity;
     }
 
     public function getDomain(): WineDomain
@@ -63,5 +80,15 @@ class ProductVO implements ItemCartInterface
     public function setDomain(WineDomain $domain): void
     {
         $this->domain = $domain;
+    }
+
+    public function getUnitPrice(): float
+    {
+        return $this->unitPrice;
+    }
+
+    public function getPricePromo(): ?float
+    {
+        return $this->pricePromo;
     }
 }

@@ -9,7 +9,10 @@ use App\Domain\Cart\AddItemToCart\Forms\ItemDTO;
 use App\Domain\Cart\LiveUpdateCart\InputItemObject;
 use App\Domain\Cart\ValueObject\CartVO;
 use App\Domain\Cart\ValueObject\ProductVO;
+use App\Domain\Common\Helpers\PromotionCalculate;
+use App\Entity\Promotion;
 use App\Entity\WineDomain;
+use App\Repository\PromotionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -21,12 +24,18 @@ class CartHelper
     /** @var EntityManagerInterface */
     protected $entityManager;
 
-    public function __construct(SessionInterface $session, EntityManagerInterface $entityManager)
-    {
+    /** @var PromotionRepository */
+    protected $promotionRepository;
+
+    public function __construct(
+        SessionInterface $session,
+        EntityManagerInterface $entityManager,
+        PromotionRepository $promotionRepository
+    ) {
         $this->session = $session;
         $this->entityManager = $entityManager;
+        $this->promotionRepository = $promotionRepository;
     }
-
 
     public function addProductsToCart(ItemDTO $dto): int
     {
@@ -36,7 +45,20 @@ class CartHelper
         /** @var ElementDTO $element */
         foreach ($dto->getElements() as $element) {
             if ($element->getQuantity() > 0) {
-                $productVO = new ProductVO($dto->getWine(), $domain, $element->getCapacity(), $element->getQuantity());
+                $promotion = $this->promotionRepository->findActivePromoByProduct($dto->getWine());
+                $pricePromo = null;
+                if ($promotion instanceof Promotion) {
+                    $pricePromo = PromotionCalculate::calcultePromoForProduct($element->getCapacity(), $promotion);
+                }
+
+                $productVO = new ProductVO(
+                    $dto->getWine(),
+                    $domain,
+                    $element->getCapacity(),
+                    $element->getQuantity(),
+                    $element->getCapacity()->getUnitPrice(),
+                    $pricePromo
+                );
                 $this->checkAndCleanExist($cart, $element);
                 $cart->addProduct($productVO);
                 $totalQtyAdded += $productVO->getQuantity();

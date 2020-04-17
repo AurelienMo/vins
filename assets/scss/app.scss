@@ -42,6 +42,9 @@ label.required::after {
     background-color: $grey-dark !important;
   }
 }
+.text-cancel {
+  text-decoration: line-through
+}
 
 @media all and (min-width: 992px){
   header {
