@@ -12,11 +12,32 @@ easy_admin:
                     - property: isActive
                       label: 'Box active ?'
                       css_class: 'is-active'
+                    - property: name
+                      label: 'Nom'
                     - property: wines
                       label: 'Nombre de vins dans la box'
+                    - property: price
+                      label: 'Prix'
+                    - property: 'imagePath'
+                      label: 'Image de la box'
+                      type: 'image'
+                      base_path: '%app.path.box_images%'
             form:
                 fields:
                     - property: isActive
                       label: 'Box active ?'
+                    - { property: 'imageFile', type: 'vich_image', label: 'Photo box' }
+                    - property: name
+                      label: 'Nom de la box'
+                      type: text
+                    - property: shortPhrase
+                      label: "Phrase d'accroche dans la box"
+                      type: text
+                    - property: description
+                      label: "Description"
+                      type: textarea
                     - property: wines
-                      label: 'Vins'
+                      label: 'Vins contenus dans la box'
+                    - property: price
+                      label: 'Prix'
+
