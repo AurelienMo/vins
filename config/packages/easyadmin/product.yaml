@@ -101,7 +101,14 @@ easy_admin:
                       label: 'Informations vin'
                       columns: 4
                     - property: wineCaract.fruity
-                      type: 'integer'
+                      type: 'choice'
+                      type_options:
+                          choices:
+                              20: 20
+                              40: 40
+                              60: 60
+                              80: 80
+                              100: 100
                       label: 'Fruité'
                     - property: wineCaract.taste
                       type: 'choice'
@@ -109,7 +116,14 @@ easy_admin:
                       type_options:
                           choices: {'Tannique': 'Tannique', 'Onctueux': 'Onctueux', "Frais": "Frais", "Corsé": "Corsé"}
                     - property: wineCaract.robustness
-                      type: 'integer'
+                      type: 'choice'
+                      type_options:
+                          choices:
+                              20: 20
+                              40: 40
+                              60: 60
+                              80: 80
+                              100: 100
                       label: 'Corps'
                     - type: 'group'
                       label: 'Service'

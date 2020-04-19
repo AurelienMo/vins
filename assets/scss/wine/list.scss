@@ -95,52 +95,37 @@
   .nav {
     border-radius: 15px 15px 0 0;
   }
-  #chartFruity, #chartRobustness {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto;
-  }
   .picto {
-    max-height: 55px;
+    max-width: 45px;
   }
   canvas {
     min-height: 150px;
     max-width: 150px;
   }
   .item-caract {
-    .container-taste {
-      width: 120px;
-      height: 120px;
-      border-radius: 60px;
-      border: 8px solid #721192;
-      padding: 10px;
-      font-size: 0.8rem;
+    &_background {
+      height: 100px;
+      background-color: #fdf3ea;
     }
-    &_sign-minus {
-      position: absolute;
-      left: 65px;
-      bottom: 10px;
-      font-size: 25px;
+    &_caract {
+      margin-top: -70px;
     }
-    &_sign-plus {
-      position: absolute;
-      right: 65px;
-      bottom: 10px;
-      font-size: 25px;
-    }
-    background-color: #d7f1f1;
+    background-color: #ffffff;
     min-height: 150px;
   }
   .dishes {
-    background-color: #fdf4eb;
+    background-color: #fdf3ea;
     img {
-      max-width: 80px;
+      max-width: 55px;
     }
   }
 }
 #opinions {
   .container {
     min-height: 80vh;
+  }
+  .header_opinion {
+    background-color: #fdf3ea;
   }
 }
 .no-stock {
@@ -151,4 +136,10 @@
   img {
     width: 250px;
   }
+}
+.text-caract {
+  font-size: 0.7rem;
+}
+.content-detail-description {
+  font-size: 0.9rem;
 }

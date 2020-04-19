@@ -1,99 +1,78 @@
-<style>
-    #chartFruity {
-        background: transparent url('img/fruits.png') no-repeat center;
-        background-size: 45%;
-    }
-    #chartRobustness {
-        background: transparent url('img/robustness.png') no-repeat center;
-        background-size: 40%;
-    }
-</style>
-
 <div class="container detail-wine">
-    <div class="row">
-        <div class="col-sm-12 offset-md-2 col-md-8">
-
-
-    <ul class="nav nav-tabs nav-justified md-tabs primary-bkg" id="myTabJust" role="tablist">
-        <li class="nav-item ml-2">
-            <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#wine-domain" role="tab" aria-controls="home-just"
-               aria-selected="true">Vin & Domaine</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#opinions" role="tab" aria-controls="profile-just"
-               aria-selected="false">Avis</a>
-        </li>
-    </ul>
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 col-md-5">
+            <ul class="nav nav-tabs nav-justified md-tabs primary-bkg" id="myTabJust" role="tablist">
+                <li class="nav-item ml-2">
+                    <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#wine-domain" role="tab" aria-controls="home-just"
+                       aria-selected="true">Vin & Domaine</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#opinions" role="tab" aria-controls="profile-just"
+                       aria-selected="false">Avis</a>
+                </li>
+                <li class="d-flex justify-content-center align-items-center">
+                    <div class="col-12 text-center">
+                        <button type="button" class="close mt-1 text-white" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times fa-lg"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
     <div class="tab-content card p-0 pl-0 pr-0" id="myTabContentJust">
-        <div class="container mt-1 mb-1">
-            <div class="row">
-                <div class="col-12 text-center">
-                    <button type="button" class="close mt-1" data-dismiss="modal" aria-label="Close">
-                        <i class="fa fa-times fa-lg"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
         <div class="tab-pane fade show active" id="wine-domain" role="tabpanel" aria-labelledby="home-tab-just">
             <div class="item-caract container-fluid">
-                <div class="row">
-                    <div class="col-sm-12 col-md-4 d-flex justify-content-center">
-                        <canvas class="m-0" id="chartFruity" width="150" height="150"></canvas>
-                        <span class="item-caract_sign-minus font-weight-bold">-</span>
-                        <span class="item-caract_sign-plus font-weight-bold">+</span>
+                <div class="row item-caract_background">
+                    <div class="col-12">
                     </div>
-                    <div class="col-sm-12 col-md-4 d-flex justify-content-center align-items-center">
-                        <div class="container-taste d-flex flex-column justify-content-center align-items-center">
-                            {% for taste in constant('App\\Entity\\Embedded\\WineCaract::LIST_TASTE') %}
-                                <span {% if wine.wineCaract.taste == taste %}class="font-weight-bold"{% endif %}>{{taste}}</span>
-                            {% endfor %}
-                        </div>
+                </div>
+                <div class="row d-flex justify-content-around align-content-center item-caract_caract" style="height: 160px;">
+                    <div class="d-flex flex-column justify-content-center">
+                        <img src="{{ asset('build/images/fruit_'~wine.wineCaract.fruity~'.png') }}" height="130px" width="130px"/>
                     </div>
-                    <div class="col-sm-12 col-md-4  d-flex justify-content-center">
-                        <canvas class="m-0" id="chartRobustness" width="200" height="200"></canvas>
-                        <span class="item-caract_sign-minus font-weight-bold">-</span>
-                        <span class="item-caract_sign-plus font-weight-bold">+</span>
+                    <div class="d-flex flex-column justify-content-center">
+                        <img src="{{ asset('build/images/'~wine.wineCaract.taste~'.png') }}" height="130px" width="130px"/>
+                    </div>
+                    <div class="d-flex flex-column justify-content-center">
+                        <img src="{{ asset('build/images/corps_'~wine.wineCaract.robustness~'.png') }}" height="130px" width="130px"/>
                     </div>
                 </div>
             </div>
             <div class="container">
-                <div class="row pt-3 pb-3">
-                    <div class="col text-center">
-                        <img class="picto" src="{{ asset('build/images/thermometer.svg') }}" alt="thermometre" />
+                <div class="row pt-3 pb-3" style="height: 150px">
+                    <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                        <div class="d-flex justify-content-center align-content-center">
+                            <img class="picto" src="{{ asset('build/images/thermometer.jpg') }}" alt="thermometre" />
+                        </div>
+                        <span>{{ wine.wineService.temp }} °C</span>
                     </div>
-                    <div class="col text-center">
-                        <img class="picto" src="{{ asset('build/images/carafage.png') }}" alt="carafage" />
+                    <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                        <div class="d-flex justify-content-center align-content-center">
+                            <img class="picto" src="{{ asset('build/images/carafage.jpg') }}" alt="carafage" />
+                        </div>
+                        <span class="text-center text-caract">{{ wine.wineService.decanting ? 'Oui' : 'Non' }}</span>
                     </div>
-                    <div class="col text-center">
-                        <img class="picto" src="{{ asset('build/images/restaurant.png') }}" alt="repas" />
+                    <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                        <div class="d-flex justify-content-center align-content-center">
+                            <img class="picto" src="{{ asset('build/images/restaurant.jpg') }}" alt="repas" />
+                        </div>
+                        <span class="text-center text-caract">{{ wine.wineService.opportunity }}</span>
                     </div>
-                    <div class="col text-center">
-                        <img class="picto" src="{{ asset('build/images/percent.png') }}" alt="percent" />
+                    <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                        <div class="d-flex justify-content-center align-content-center">
+                            <img class="picto" src="{{ asset('build/images/percent.png') }}" alt="percent" />
+                        </div>
+                        <span class="text-center text-caract">{{ wine.alcoholDegree }}%</span>
                     </div>
-                    <div class="col text-center">
-                        <img class="picto" src="{{ asset('build/images/grapes.png') }}" alt="cepage" />
-                    </div>
-                </div>
-                <div class="row pt-1 pb-3">
-                    <div class="col text-center">
-                        <span class="text-center">{{ wine.wineService.temp }} °C</span>
-                    </div>
-                    <div class="col text-center">
-                        <span class="text-center">{{ wine.wineService.decanting ? 'Oui' : 'Non' }}</span>
-                    </div>
-                    <div class="col text-center">
-                        <span class="text-center">{{ wine.wineService.opportunity }}</span>
-                    </div>
-                    <div class="col text-center">
-                        <span class="text-center">{{ wine.alcoholDegree }}°</span>
-                    </div>
-                    <div class="col text-center">
-                        <span class="text-center">{{ wine.wineService.getGrape(true) }}</span>
+                    <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                        <div class="d-flex justify-content-center align-content-center">
+                            <img class="picto" src="{{ asset('build/images/grapes.png') }}" alt="cepage" />
+                        </div>
+                        <span class="text-center text-caract">{{ wine.wineService.getGrape(true) }}</span>
                     </div>
                 </div>
             </div>
             {% if wine.dishes|length > 0 %}
-                <div class="container-fluid dishes p-0">
+                <div class="container-fluid dishes p-0 pl-2 pr-2">
                     <div class="row pt-3 pb-3">
                         {% for dish in wine.dishes %}
                             <div class="col-4 text-center">
@@ -110,11 +89,11 @@
                     </div>
                 </div>
             {% endif %}
-            <div class="d-flex flex-column justify-content-center align-items-center pt-5 pb-5 pr-4 pl-4">
-                <div class="container mb-5">
+            <div class="d-flex flex-column justify-content-center align-items-center mt-3 pt-2 pb-2 pr-4 pl-4 content-detail-description">
+                <div class="container mb-3">
                     <div class="row">
                             <div class="col-12 d-flex justify-content-center">
-                                <img class="rounded-circle w-50" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}" />
+                                <img class="rounded-circle" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}" width="160px" />
                             </div>
                     </div>
                 </div>
@@ -122,8 +101,8 @@
             </div>
         </div>
         <div class="tab-pane fade" id="opinions" role="tabpanel" aria-labelledby="profile-tab-just">
-                <div class="container pt-1 pb-4 pl-2 pr-2">
-                    <div class="row pt-2 pb-2" style="background-color: #ff00002b">
+                <div class="container pt-1 pb-4">
+                    <div class="row pt-2 pb-2 header_opinion">
                         <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-around align-items-center pt-2 pb-2">
                             <h3 class="h3 mt-2 mb-2">Les avis...</h3>
                             <div class="mt-2 mb-2">
@@ -147,7 +126,7 @@
                                 </div>
                                 <div class="d-flex justify-content-center w-100">
                                     <i class="fas fa-comment mr-2"></i>
-                                    <span class="small">{{ wine.countElementOpinion('comment') }} commentaires</span>
+                                    <span class="small">{{ wine.countElementOpinion('comment') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -224,87 +203,3 @@
     </div>
 </div>
     </div></div>
-<script>
-    new Chart(
-        document.getElementById('chartFruity'),
-        {
-            type: 'doughnut',
-            data: {
-                labels: false,
-                tooltip: false,
-                datasets: [
-                    {
-                        data: [{{wine.wineCaract.fruity}}, 100 - {{wine.wineCaract.fruity}}],
-                        backgroundColor: [
-                            "#ffc864",
-                            "rgba(255,200,100,0.4)",
-                        ],
-                        borderColor: [
-                            "#ffc864",
-                            "rgba(255,200,100,0.4)",
-                        ],
-                        borderWidth: 10
-                    }
-                ]
-            },
-            options: {
-                rotation: 0.85 * Math.PI,
-                circumference: 1.3 * Math.PI,
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    enabled: false
-                },
-                tooltips: {
-                    custom: function (tooltipmodel) {
-                        tooltipmodel.opacity = 0;
-                    }
-                },
-                hover: {mode: null},
-                cutoutPercentage: 95
-            }
-        }
-    )
-    new Chart(
-        document.getElementById('chartRobustness'),
-        {
-            type: 'doughnut',
-            data: {
-                labels: false,
-                tooltip: false,
-                datasets: [
-                    {
-                        data: [{{wine.wineCaract.robustness}}, 100 - {{wine.wineCaract.robustness}}],
-                        backgroundColor: [
-                            "#ff3c3c",
-                            "rgba(255,60,60,0.4)",
-                        ],
-                        borderColor: [
-                            "#ff3c3c",
-                            "rgba(255,60,60,0.4)",
-                        ],
-                        borderWidth: 10
-                    }
-                ]
-            },
-            options: {
-                rotation: 0.85 * Math.PI,
-                circumference: 1.3 * Math.PI,
-                legend: {
-                    display: false
-                },
-                tooltip: {
-                    enabled: false
-                },
-                tooltips: {
-                    custom: function (tooltipmodel) {
-                        tooltipmodel.opacity = 0;
-                    }
-                },
-                hover: {mode: null},
-                cutoutPercentage: 95
-            }
-        }
-    )
-</script>
