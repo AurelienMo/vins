@@ -49,12 +49,5 @@ class BoxWineSubscriber implements EventSubscriberInterface
         if (!$entity instanceof BoxWine) {
             return;
         }
-
-        if ($entity->getIsActive()) {
-            $boxWines = $this->boxWineRepo->listAllBoxWinesExceptOne($entity->getId());
-            foreach ($boxWines as $box) {
-                $box->setIsActive(false);
-            }
-        }
     }
 }

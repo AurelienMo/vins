@@ -26,6 +26,9 @@ easy_admin:
                 fields:
                     - property: isActive
                       label: 'Box active ?'
+                    - property: color
+                      label: 'Couleur'
+                      type: color
                     - { property: 'imageFile', type: 'vich_image', label: 'Photo box' }
                     - property: name
                       label: 'Nom de la box'

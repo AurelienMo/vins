@@ -40,6 +40,7 @@ Encore
     .addEntry('list_wine', './assets/js/pages/wine/list.js')
     .addEntry('mpmd', './assets/js/pages/mpmd.js')
     .addEntry('checkout', './assets/js/checkout.js')
+    .addEntry('list_box', './assets/js/pages/box/list.js')
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 

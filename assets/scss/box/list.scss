@@ -1,0 +1,35 @@
+.card-box {
+  height: 500px;
+  flex: 1;
+  border-radius: 20px 20px 10px 10px;
+  &_header {
+    border-radius: 20px 20px 0 0;
+    flex: 0.05
+  }
+  &_header_image {
+    img {
+      width: 250px;
+      height: 150px;
+    }
+  }
+  &_content {
+    flex: 0.6
+  }
+  &_price {
+    background-color: #cfe0e6;
+    flex: 0.2;
+    img {
+      width: 40px;
+    }
+    .quantity {
+      width: 40px;
+    }
+  }
+  &_footer {
+    flex: 0.195;
+  }
+  &_footer_color {
+    flex: 0.02;
+    border-radius: 0 0 10px 10px;
+  }
+}

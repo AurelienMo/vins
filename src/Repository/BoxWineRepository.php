@@ -17,6 +17,17 @@ use App\Entity\BoxWine;
 
 class BoxWineRepository extends AbstractServiceRepository
 {
+    public function listAllActiveWithStock()
+    {
+        return $this->createQueryBuilder('bw')
+            ->join('bw.wines', 'c')
+            ->join('c.stock', 's')
+            ->where('bw.isActive = true')
+            ->andWhere('s.quantity > 0')
+            ->getQuery()
+            ->getResult();
+    }
+
     protected function getClassEntityName(): string
     {
         return BoxWine::class;

@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+{{ encore_entry_link_tags('list_box') }}
+{% endblock %}
+
+{% block body %}
+    <div class="container mb-3">
+        <div class="row">
+            {% for box in boxs %}
+                <div class="col-sm-12 col-md-4 mb-5">
+                    <div class="card-box d-flex flex-column white">
+                        <div class="card-box_header d-flex justify-content-center align-items-center" style="background-color: {{ box.color }};">
+                        </div>
+                        <div class="card-box_header_image d-flex justify-content-center pt-3 pb-3">
+                            <img class="mb-3" src="{{ vich_uploader_asset(box, 'imageFile') }}"/>
+                        </div>
+                        <div class="card-box_content d-flex flex-column pl-4 pr-4 overflow-hidden">
+                            <h3 class="h3 text-center">{{ box.name }}</h3>
+                            <p class="h-100 overflow-auto">
+                                {{ box.description }}
+                            </p>
+                        </div>
+                        <div class="card-box_price d-flex justify-content-around align-content-center">
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <span class="h5 m-0 primary-text font-weight-bold">{{ box.price }}€</span>
+                                </div>
+                                <a href="#" class="d-flex justify-content-center align-items-center">
+                                    <img class="icon" src="{{ asset('build/images/eye.svg') }}"/>
+                                </a>
+                                <a href="#" class="d-flex justify-content-center align-items-center">
+                                    <img class="icon" src="{{ asset('build/images/cart.svg') }}"/>
+                                </a>
+                                <div class="d-flex quantity justify-content-center align-items-center">
+                                    <select id="quantity-box" class="mt-0 mb-0">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="3">4</option>
+                                        <option value="3">5</option>
+                                        <option value="3">6</option>
+                                        <option value="3">7</option>
+                                        <option value="3">8</option>
+                                        <option value="3">9</option>
+                                        <option value="3">10</option>
+                                    </select>
+                                </div>
+                        </div>
+                        <div class="card-box_footer d-flex flex-column justify-content-around" style="flex: 0.195;">
+                            <div class="card-box_footer_rating d-flex justify-content-around align-content-center">
+                                <div style="color: {{ box.color }}">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                                <div>
+                                    <span>10 Avis</span>
+                                </div>
+                            </div>
+                            <div class="card-box_footer_short text-center">
+                                <span>"{{ box.shortPhrase }}"</span>
+                            </div>
+                        </div>
+                        <div class="card-box_footer_color" style="background-color: {{ box.color }}">
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('list_box') }}
+{% endblock %}

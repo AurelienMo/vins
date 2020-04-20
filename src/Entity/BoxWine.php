@@ -83,6 +83,13 @@ class BoxWine extends AbstractEntity implements OpinionElementInterface, Updatab
      */
     protected $price;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $color;
+
     public function __construct()
     {
         $this->wines = new ArrayCollection();
@@ -185,5 +192,21 @@ class BoxWine extends AbstractEntity implements OpinionElementInterface, Updatab
     public function setPrice(?float $price): void
     {
         $this->price = $price;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    /**
+     * @param string|null $color
+     */
+    public function setColor(?string $color): void
+    {
+        $this->color = $color;
     }
 }
