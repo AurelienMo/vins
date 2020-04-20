@@ -223,7 +223,6 @@ class BoxWine extends AbstractEntity implements OpinionElementInterface, Updatab
      */
     public function getOpinions()
     {
-        dump($this->opinions->toArray());
         return $this->opinions;
     }
 

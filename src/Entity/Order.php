@@ -217,7 +217,6 @@ class Order extends AbstractEntity implements UpdatableInterface
      */
     public function getCustomer(): ?Customer
     {
-        dump($this->customer);
         return $this->customer;
     }
 
