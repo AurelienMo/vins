@@ -551,7 +551,7 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
     public function averageRate()
     {
         $total = 0;
-        $opinions = $this->opinions->toArray();
+        $this->opinions->toArray();
         foreach ($this->opinions as $opinion) {
             $total += $opinion->getRate();
         }

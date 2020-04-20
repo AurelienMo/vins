@@ -1,0 +1,215 @@
+<div class="container detail-box">
+    <div class="row d-flex justify-content-center">
+        <div class="col-sm-12 col-md-5">
+            <ul class="nav nav-tabs nav-justified md-tabs primary-bkg p-0 m-0" id="myTabJust" role="tablist">
+                {% for capacity in box.wines%}
+                    <li class="nav-item ml-2">
+                        <a class="nav-link p-0 m-0 {% if loop.first %}active{% endif %}" id="home-tab-just-{{ capacity.id }}" data-toggle="tab" href="#wine-domain-{{ capacity.id }}" role="tab" aria-controls="home-just"
+                           aria-selected="true"><i class="fas fa-wine-glass-alt"></i></a>
+                    </li>
+                {% endfor %}
+                <li class="nav-item">
+                    <a class="nav-link p-0 m-0" id="profile-tab-just" data-toggle="tab" href="#opinions" role="tab" aria-controls="profile-just"
+                       aria-selected="false">Avis</a>
+                </li>
+                <li class="d-flex justify-content-center align-items-center">
+                    <div class="col-12 text-center">
+                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times fa"></i>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+            <div class="tab-content card p-0 pl-0 pr-0" id="myTabContentJust">
+                {% for capacity in box.wines %}
+                {% set wine = capacity.wine %}
+                <div class="tab-pane fade show {% if loop.first %}active{% endif %}" id="wine-domain-{{ capacity.id }}" role="tabpanel" aria-labelledby="home-tab-just-{{ capacity.id }}">
+                    <div class="item-caract container-fluid">
+                        <div class="row item-caract_background pt-3">
+                            <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+                                <span class="primary-text">{{ wine.vintageName }}</span>
+                                <span>{{ wine.year }}</span>
+                                <span>{{ wine.domain.name }}</span>
+                                <span>{{wine.appellation}}</span>
+                            </div>
+                        </div>
+                        <div class="row d-flex justify-content-around align-content-center item-caract_caract" style="height: 160px;">
+                            <div class="d-flex flex-column justify-content-center">
+                                <img src="{{ asset('build/images/fruit_'~wine.wineCaract.fruity~'.png') }}" height="130px" width="130px"/>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <img src="{{ asset('build/images/'~wine.wineCaract.taste~'.png') }}" height="130px" width="130px"/>
+                            </div>
+                            <div class="d-flex flex-column justify-content-center">
+                                <img src="{{ asset('build/images/corps_'~wine.wineCaract.robustness~'.png') }}" height="130px" width="130px"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row pt-3 pb-3" style="height: 150px">
+                            <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                                <div class="d-flex justify-content-center align-content-center">
+                                    <img class="picto" src="{{ asset('build/images/thermometer.jpg') }}" alt="thermometre" />
+                                </div>
+                                <span>{{ wine.wineService.temp }} °C</span>
+                            </div>
+                            <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                                <div class="d-flex justify-content-center align-content-center">
+                                    <img class="picto" src="{{ asset('build/images/carafage.jpg') }}" alt="carafage" />
+                                </div>
+                                <span class="text-center text-caract">{{ wine.wineService.decanting ? 'Oui' : 'Non' }}</span>
+                            </div>
+                            <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                                <div class="d-flex justify-content-center align-content-center">
+                                    <img class="picto" src="{{ asset('build/images/restaurant.jpg') }}" alt="repas" />
+                                </div>
+                                <span class="text-center text-caract">{{ wine.wineService.opportunity }}</span>
+                            </div>
+                            <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                                <div class="d-flex justify-content-center align-content-center">
+                                    <img class="picto" src="{{ asset('build/images/percent.png') }}" alt="percent" />
+                                </div>
+                                <span class="text-center text-caract">{{ wine.alcoholDegree }}%</span>
+                            </div>
+                            <div class="col text-center d-flex flex-column justify-content-around align-items-between">
+                                <div class="d-flex justify-content-center align-content-center">
+                                    <img class="picto" src="{{ asset('build/images/grapes.png') }}" alt="cepage" />
+                                </div>
+                                <span class="text-center text-caract">{{ wine.wineService.getGrape(true) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% if wine.dishes|length > 0 %}
+                        <div class="container-fluid dishes p-0 pl-2 pr-2">
+                            <div class="row pt-3 pb-3">
+                                {% for dish in wine.dishes %}
+                                    <div class="col-4 text-center">
+                                        <img src="{{ vich_uploader_asset(dish, 'imageFile') }}" />
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row pt-1 pb-3">
+                                {% for dish in wine.dishes %}
+                                    <div class="col-4 text-center">
+                                        <span>{{ dish.name }}</span>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="d-flex flex-column justify-content-center align-items-center mt-3 pt-2 pb-2 pr-4 pl-4 content-detail-description">
+                        <div class="container mb-3">
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-center">
+                                    <img class="rounded-circle" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}" width="160px" />
+                                </div>
+                            </div>
+                        </div>
+                        {{ wine.domain.description|raw }}
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="tab-pane fade" id="opinions" role="tabpanel" aria-labelledby="profile-tab-just">
+                    <div class="container pt-1 pb-4">
+                        <div class="row pt-2 pb-2 header_opinion">
+                            <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-around align-items-center pt-2 pb-2">
+                                <h3 class="h3 mt-2 mb-2">Les avis...</h3>
+                                <div class="mt-2 mb-2">
+                                    {% set lengthRate = box.averageRate %}
+                                    {% set lengthEmptyRate = 5 - lengthRate %}
+                                    {% for i in 1..lengthRate %}
+                                        {% if lengthRate > 0 %}
+                                            <i class="fa fa-star" style="color: {{ box.color }}"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% for i in 1..lengthEmptyRate %}
+                                        {% if lengthEmptyRate > 0 %}
+                                            <i class="far fa-star" style="color: {{ box.color }}"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <div class="d-flex justify-content-center align-items-center mt-2 mb-2 w-100">
+                                    <div class="d-flex justify-content-center w-100">
+                                        <i class="fas fa-star mr-2"></i>
+                                        <span class="small">{{ box.countElementOpinion('rate') }}</span>
+                                    </div>
+                                    <div class="d-flex justify-content-center w-100">
+                                        <i class="fas fa-comment mr-2"></i>
+                                        <span class="small">{{ box.countElementOpinion('comment') }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="new-opinion" class="col-sm-12 col-md-6">
+                                {{ form_start(form, {'attr': {'action': path('detail_box', {'id': box.id}), 'class': 'ajaxForm'}}) }}
+                                <div class="md-form">
+                                    {{ form_errors(form.name) }}
+                                    {{ form_row(form.name) }}
+                                </div>
+                                <div class="md-form">
+                                    {{ form_row(form.rate) }}
+                                </div>
+                                <div class="md-form mb-4 pink-textarea active-pink-textarea">
+                                    {{ form_row(form.content) }}
+                                </div>
+                                <div class="col-md-12 text-right">
+                                    <button type="submit" class="btn primary-bkg text-white btn-rounded">
+                                        <i class="fa fa-paper-plane"></i>
+                                    </button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            {% set toto = false %}
+                                {% if box.opinions|length > 0 %}
+                                {% for opinion in box.opinions %}
+                                    <div class="col-sm-12">
+                                        <div class="media d-block d-md-flex mt-4">
+                                            <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex justify-content-start">
+
+                                                        <h5 class="font-weight-bold mt-0 primary-text">
+                                                            {{opinion.name}}
+                                                        </h5>
+                                                        <div class="pl-4">
+                                                            {% set lengthRate = opinion.rate %}
+                                                            {% set lengthEmptyRate = 5 - lengthRate %}
+                                                            {% for i in 1..lengthRate %}
+                                                                {% if lengthRate > 0 %}
+                                                                    <i class="fa fa-star" style="color: {{ box.color }}"></i>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            {% for i in 1..lengthEmptyRate %}
+                                                                {% if lengthEmptyRate > 0 %}
+                                                                    <i class="far fa-star" style="color: {{ box.color }}"></i>
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                    <span class="text-small font-italic">Le {{ opinion.createdAt|date('d/m/Y') }}</span>
+                                                </div>
+                                                {{opinion.content}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <div class="col-sm-12">
+                                    <div class="media d-block d-md-flex mt-4">
+                                        <div class="media-body text-center text-md-left ml-md-3 ml-0">
+                                            <div class="d-flex justify-content-center">
+                                                <h5 class="font-weight-bold mt-0 primary-text">
+                                                    Soyez le premier à nous dire ce que vous pensez de ce vin.
+                                                </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div></div>

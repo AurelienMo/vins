@@ -90,9 +90,17 @@ class BoxWine extends AbstractEntity implements OpinionElementInterface, Updatab
      */
     protected $color;
 
+    /**
+     * @var Opinion[]|Collection
+     *
+     * @ORM\OneToMany(targetEntity="App\Entity\Opinion", mappedBy="box", cascade={"persist", "remove"})
+     */
+    protected $opinions;
+
     public function __construct()
     {
         $this->wines = new ArrayCollection();
+        $this->opinions = new ArrayCollection();
         parent::__construct();
     }
 
@@ -208,5 +216,56 @@ class BoxWine extends AbstractEntity implements OpinionElementInterface, Updatab
     public function setColor(?string $color): void
     {
         $this->color = $color;
+    }
+
+    /**
+     * @return Opinion[]|Collection
+     */
+    public function getOpinions()
+    {
+        dump($this->opinions->toArray());
+        return $this->opinions;
+    }
+
+    public function averageRate()
+    {
+        $total = 0;
+        if (is_null($this->opinions)) {
+            return 0;
+        }
+        foreach ($this->opinions as $opinion) {
+            $total += $opinion->getRate();
+        }
+
+        return $this->opinions->count() > 0 ? round($total / $this->opinions->count()) : 0;
+    }
+
+    public function countElementOpinion(string $type, bool $average = false)
+    {
+        $opinions = is_null($this->opinions) ? [] : $this->opinions->toArray();
+        $cpt = 0;
+        $total = 0;
+
+        /** @var Opinion $opinion */
+        foreach ($opinions as $opinion) {
+            switch ($type) {
+                case 'rate':
+                    if ($opinion->getRate()) {
+                        $cpt += $opinion->getRate();
+                        $total++;
+                    }
+                    break;
+                case 'comment':
+                    if ($opinion->getContent()) {
+                        $total++;
+                    }
+                    break;
+            }
+        }
+        if ($type === 'comment') {
+            return $total;
+        }
+
+        return $total === 0 ? 0 : round($cpt / $total, 2);
     }
 }

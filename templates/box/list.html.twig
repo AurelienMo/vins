@@ -21,14 +21,14 @@
                                 {{ box.description }}
                             </p>
                         </div>
-                        <div class="card-box_price d-flex justify-content-around align-content-center">
+                        <div class="card-box_price d-flex justify-content-around align-content-center pt-2 pb-2">
                                 <div class="d-flex align-items-center justify-content-center">
                                     <span class="h5 m-0 primary-text font-weight-bold">{{ box.price }}€</span>
                                 </div>
-                                <a href="#" class="d-flex justify-content-center align-items-center">
+                                <a id="detail-box" href="{{ path('detail_box', {'id': box.id}) }}" class="d-flex justify-content-center align-items-center">
                                     <img class="icon" src="{{ asset('build/images/eye.svg') }}"/>
                                 </a>
-                                <a href="#" class="d-flex justify-content-center align-items-center">
+                                <a id="add-box-to-card" class="d-flex justify-content-center align-items-center">
                                     <img class="icon" src="{{ asset('build/images/cart.svg') }}"/>
                                 </a>
                                 <div class="d-flex quantity justify-content-center align-items-center">
@@ -36,27 +36,34 @@
                                         <option value="1">1</option>
                                         <option value="2">2</option>
                                         <option value="3">3</option>
-                                        <option value="3">4</option>
-                                        <option value="3">5</option>
-                                        <option value="3">6</option>
-                                        <option value="3">7</option>
-                                        <option value="3">8</option>
-                                        <option value="3">9</option>
-                                        <option value="3">10</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
                                     </select>
                                 </div>
                         </div>
-                        <div class="card-box_footer d-flex flex-column justify-content-around" style="flex: 0.195;">
+                        <div class="card-box_footer d-flex flex-column justify-content-around pt-2 pb-2">
                             <div class="card-box_footer_rating d-flex justify-content-around align-content-center">
                                 <div style="color: {{ box.color }}">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
+                                    {% set lengthRate = box.averageRate %}
+                                    {% set lengthEmptyRate = 5 - lengthRate %}
+                                    {% for i in 1..lengthRate %}
+                                        {% if lengthRate > 0 %}
+                                            <i class="fa fa-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% for i in 1..lengthEmptyRate %}
+                                        {% if lengthEmptyRate > 0 %}
+                                            <i class="far fa-star"></i>
+                                        {% endif %}
+                                    {% endfor %}
                                 </div>
                                 <div>
-                                    <span>10 Avis</span>
+                                    <span>{{ box.opinions|length }} Avis</span>
                                 </div>
                             </div>
                             <div class="card-box_footer_short text-center">

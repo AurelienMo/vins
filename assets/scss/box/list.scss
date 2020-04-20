@@ -33,3 +33,49 @@
     border-radius: 0 0 10px 10px;
   }
 }
+.modal-bottom {
+  height: 75vh;
+}
+.detail-box {
+  .nav {
+    border-radius: 15px 15px 0 0;
+  }
+  .picto {
+    max-width: 45px;
+  }
+  canvas {
+    min-height: 150px;
+    max-width: 150px;
+  }
+  .item-caract {
+    &_background {
+      padding-bottom: 4rem;
+      background-color: #fdf3ea;
+    }
+    &_caract {
+      margin-top: -70px;
+    }
+    background-color: #ffffff;
+    min-height: 150px;
+  }
+  .dishes {
+    background-color: #fdf3ea;
+    img {
+      max-width: 55px;
+    }
+  }
+}
+.text-caract {
+  font-size: 0.7rem;
+}
+.content-detail-description {
+  font-size: 0.9rem;
+}
+#opinions {
+  .container {
+    min-height: 80vh;
+  }
+  .header_opinion {
+    background-color: #fdf3ea;
+  }
+}

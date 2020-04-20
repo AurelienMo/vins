@@ -29,7 +29,7 @@ class Opinion extends AbstractEntity
      * @var Product
      *
      * @ORM\ManyToOne(targetEntity="App\Entity\Product", inversedBy="opinions")
-     * @ORM\JoinColumn(name="amo_wine_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="amo_wine_id", referencedColumnName="id", nullable=true)
      */
     protected $wine;
 
@@ -62,9 +62,16 @@ class Opinion extends AbstractEntity
     protected $isValid;
 
     /**
+     * @var BoxWine|null
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\BoxWine", inversedBy="opinions")
+     * @ORM\JoinColumn(name="amo_box_id", referencedColumnName="id", nullable=true)
+     */
+    protected $box;
+
+    /**
      * Opinion constructor.
      *
-     * @param Product     $wine
      * @param string      $name
      * @param int         $rate
      * @param string|null $content
@@ -90,9 +97,9 @@ class Opinion extends AbstractEntity
     }
 
     /**
-     * @return Product
+     * @return Product|null
      */
-    public function getWine(): Product
+    public function getWine(): ?Product
     {
         return $this->wine;
     }
@@ -143,6 +150,17 @@ class Opinion extends AbstractEntity
             case Product::class:
                 $this->wine = $productElement;
                 break;
+            case BoxWine::class:
+                $this->box = $productElement;
+                break;
         }
+    }
+
+    /**
+     * @return BoxWine|null
+     */
+    public function getBox(): ?BoxWine
+    {
+        return $this->box;
     }
 }
