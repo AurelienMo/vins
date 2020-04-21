@@ -113,7 +113,10 @@ class Order extends AbstractEntity implements UpdatableInterface
             $line = OrderProductLine::create($product);
             $order->addLine($line);
         }
-        //TODO Add box line
+        foreach ($cart->getBoxs() as $box) {
+            $line = OrderProductLine::create($box);
+            $order->addLine($line);
+        }
 
         return $order;
     }

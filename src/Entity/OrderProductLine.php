@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Domain\Cart\ValueObject\BoxVO;
 use App\Domain\Cart\ValueObject\ProductVO;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
@@ -29,44 +30,44 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
     use TimeStampableTrait;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $vintageName;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $year;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $domain;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $appellation;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $capacityName;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $litrage;
 
@@ -99,15 +100,23 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
      */
     protected $order;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $boxName;
+
     public function __construct(
-        string $vintageName,
-        string $year,
-        string $domain,
-        string $appellation,
-        string $capacityName,
-        string $litrage,
         float $unitPrice,
         int $quantity,
+        ?string $boxName = null,
+        ?string $vintageName = null,
+        ?string $year = null,
+        ?string $domain = null,
+        ?string $appellation = null,
+        ?string $capacityName = null,
+        ?string $litrage = null,
         ?float $pricePromo = null
     ) {
         $this->vintageName = $vintageName;
@@ -119,35 +128,36 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
         $this->unitPrice = $unitPrice;
         $this->quantity = $quantity;
         $this->pricePromo = $pricePromo;
+        $this->boxName = $boxName;
         parent::__construct();
     }
 
-    public function getVintageName(): string
+    public function getVintageName(): ?string
     {
         return $this->vintageName;
     }
 
-    public function getYear(): string
+    public function getYear(): ?string
     {
         return $this->year;
     }
 
-    public function getDomain(): string
+    public function getDomain(): ?string
     {
         return $this->domain;
     }
 
-    public function getAppellation(): string
+    public function getAppellation(): ?string
     {
         return $this->appellation;
     }
 
-    public function getCapacityName(): string
+    public function getCapacityName(): ?string
     {
         return $this->capacityName;
     }
 
-    public function getLitrage(): string
+    public function getLitrage(): ?string
     {
         return $this->litrage;
     }
@@ -177,23 +187,40 @@ class OrderProductLine extends AbstractEntity implements UpdatableInterface
         return $this->pricePromo;
     }
 
-    public static function create(ProductVO $vo)
+    /**
+     * @param ProductVO|BoxVO $vo
+     * @return OrderProductLine
+     */
+    public static function create($vo)
     {
         return new self(
-            $vo->getProduct()->getVintageName(),
-            $vo->getProduct()->getYear(),
-            $vo->getDomain()->getName(),
-            $vo->getProduct()->getAppellation(),
-            $vo->getCapacity()->getType(),
-            $vo->getCapacity()->getQuantity() . 'L',
             $vo->getUnitPrice(),
             $vo->getQuantity(),
-            $vo->getPricePromo()
+            $vo instanceof BoxVO ? $vo->getBox()->getName() : null,
+            $vo instanceof ProductVO ? $vo->getProduct()->getVintageName() : null,
+            $vo instanceof ProductVO ? $vo->getProduct()->getYear() : null,
+            $vo instanceof ProductVO ? $vo->getDomain()->getName() : null,
+            $vo instanceof ProductVO ? $vo->getProduct()->getAppellation() : null,
+            $vo instanceof ProductVO ? $vo->getCapacity()->getType() : null,
+            $vo instanceof ProductVO ? $vo->getCapacity()->getQuantity() . 'L' : null,
+            $vo instanceof ProductVO ? $vo->getPricePromo() : null
         );
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBoxName(): ?string
+    {
+        return $this->boxName;
     }
 
     public function __toString()
     {
+        if ($this->boxName) {
+            return $this->boxName;
+        }
+
         return sprintf(
             '%s - %s - %s - %s - %s',
             $this->getVintageName(),

@@ -3,6 +3,7 @@
 namespace App\Actions\Cart;
 
 use App\Domain\Cart\Helpers\CartHelper;
+use App\Domain\Cart\ValueObject\ProductVO;
 use App\Entity\BoxWine;
 use App\Entity\Capacity;
 use App\Repository\BoxWineRepository;
@@ -47,17 +48,21 @@ class AddBoxToCart
         $wines = $box->getWines()->toArray();
         usort($wines, [$this, 'cmpStock']);
 
-        if ($quantity > current($wines)->getStock()->getQuantity()) {
-            $message = sprintf('Le stock disponible de cette box est insuffisant. %s box disponible', current($wines)->getStock()->getQuantity());
-            return $responder(
-                [
-                    'code' => 400,
-                    'type' => 'out_of_stock',
-                    'message' => "<div class=\"out_of_stock alert alert-warning alert-dismissible fade show text-center\" role=\"alert\">
+        foreach ($wines as $wine) {
+            $totalStockAvailable = $this->getTotalStock($wine);
+
+            if ($quantity > $totalStockAvailable) {
+                $message = sprintf('Un des stocks produit est indisponible. %s box disponible', $totalStockAvailable);
+                return $responder(
+                    [
+                        'code' => 400,
+                        'type' => 'out_of_stock',
+                        'message' => "<div class=\"out_of_stock alert alert-warning alert-dismissible fade show text-center\" role=\"alert\">
                         $message
                     </div>",
-                ]
-            );
+                    ]
+                );
+            }
         }
 
         $totalQty = $this->cartHelper->addBoxToCart($box, $quantity);
@@ -73,5 +78,19 @@ class AddBoxToCart
     private function cmpStock(Capacity $a, Capacity $b)
     {
         return $a->getStock()->getQuantity() <=> $b->getStock()->getQuantity();
+    }
+
+    private function getTotalStock(Capacity $wine)
+    {
+        $productsVo = $this->cartHelper->getCartForCurrentUser()->getProducts();
+        $productVo = array_filter($productsVo, function (ProductVO $vo) use ($wine) {
+            return $vo->getCapacity()->getId() === $wine->getId();
+        });
+        $actualStock = $wine->getStock()->getQuantity();
+        if (count($productVo) > 0) {
+            $actualStock -= current($productVo)->getQuantity();
+        }
+
+        return $actualStock;
     }
 }

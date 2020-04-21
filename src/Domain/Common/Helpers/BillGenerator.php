@@ -94,14 +94,8 @@ class BillGenerator
             $priceDisplay = !is_null($line->getPricePromo()) ?
                 $line->getPricePromo() * $line->getQuantity() : $line->getUnitPrice() * $line->getQuantity();
             $invoice->addItem(
-                sprintf('%s - %s', $line->getVintageName(), $line->getYear()),
-                sprintf(
-                    "%s - %s<br/>%s %s",
-                    $line->getDomain(),
-                    $line->getAppellation(),
-                    $line->getCapacityName(),
-                    $line->getLitrage()
-                ),
+                $this->getLibelle($line),
+                $this->getProductDescription($line),
                 $line->getQuantity(),
                 $line->getUnitPrice() - ($line->getUnitPrice() / 1.2),
                 $line->getUnitPrice() / 1.2,
@@ -149,5 +143,23 @@ Mon Premier SASU, 20 rue de roux, 13004 Marseille.<br/>
         if ($mode === 'F') {
             return $out;
         }
+    }
+
+    private function getLibelle(OrderProductLine $line)
+    {
+        return !is_null($line->getBoxName()) ? $line->getBoxName() : sprintf('%s - %s', $line->getVintageName(), $line->getYear());
+    }
+
+    private function getProductDescription(OrderProductLine $line)
+    {
+        return is_null($line->getBoxName()) ?
+            null :
+            sprintf(
+                "%s - %s<br/>%s %s",
+                $line->getDomain(),
+                $line->getAppellation(),
+                $line->getCapacityName(),
+                $line->getLitrage()
+            );
     }
 }

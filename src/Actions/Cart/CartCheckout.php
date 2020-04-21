@@ -7,12 +7,15 @@ namespace App\Actions\Cart;
 use App\Domain\Cart\Delivery\Forms\DeliveryDTO;
 use App\Domain\Cart\Delivery\Forms\DeliveryType;
 use App\Domain\Cart\Helpers\StripeHelper;
+use App\Domain\Cart\ValueObject\BoxVO;
 use App\Domain\Cart\ValueObject\CartVO;
 use App\Domain\Cart\ValueObject\ProductVO;
 use App\Domain\Common\Constants\FlashMessage;
 use App\Domain\Common\Helpers\BillGenerator;
 use App\Domain\Common\Subscribers\Events\FlashMessageEvent;
 use App\Domain\Order\Mails\Events\ConfirmMailEvent;
+use App\Entity\BoxWine;
+use App\Entity\Capacity;
 use App\Entity\Customer;
 use App\Entity\Delivery;
 use App\Entity\NicheOfDelivery;
@@ -148,8 +151,8 @@ class CartCheckout
 
                 $this->entityManager->persist($order);
                 $delivery->setOrder($order);
-                $this->createStockEntry($order);
                 $this->entityManager->flush();
+                $this->createStockEntry($order, $cart->getBoxs());
                 if ($this->session->has('cart')) {
                     $this->session->remove('cart');
                 }
@@ -205,20 +208,40 @@ class CartCheckout
         }
     }
 
-    private function createStockEntry(Order $order)
+    private function createStockEntry(Order $order, array $boxVos)
     {
         foreach ($order->getLines() as $line) {
-            $stock = $this->stockRepository->findStockByParams(
-                $line->getYear(),
-                $line->getAppellation(),
-                $line->getVintageName(),
-                $line->getDomain(),
-                $line->getCapacityName(),
-                explode('L', $line->getLitrage())[0]
-            );
-            $stockEntry = StockEntry::create($stock, $line->getQuantity(), $order);
-            $this->entityManager->persist($stockEntry);
-            $stock->updateStockAfterUpdate($line->getQuantity(), StockEntry::TYPE_OUT);
+            if ($line->getBoxName()) {
+                /** @var BoxWine $box */
+                $box = current(array_filter($boxVos, function (BoxVO $boxVO) use ($line) {
+                    return $boxVO->getBox()->getName() === $line->getBoxName();
+                }))->getBox();
+                /** @var Capacity $wine */
+                foreach ($box->getWines() as $wine) {
+                    $stock = $this->stockRepository->findOneBy(
+                        [
+                            'capacity' => $wine
+                        ]
+                    );
+                    $stockEntry = StockEntry::create($stock, $line->getQuantity(), $order);
+                    $this->entityManager->persist($stockEntry);
+                    $stock->updateStockAfterUpdate($line->getQuantity(), StockEntry::TYPE_OUT);
+                    $this->entityManager->flush();
+                }
+            } else {
+                $stock = $this->stockRepository->findStockByParams(
+                    $line->getYear(),
+                    $line->getAppellation(),
+                    $line->getVintageName(),
+                    $line->getDomain(),
+                    $line->getCapacityName(),
+                    explode('L', $line->getLitrage())[0]
+                );
+                $stockEntry = StockEntry::create($stock, $line->getQuantity(), $order);
+                $this->entityManager->persist($stockEntry);
+                $stock->updateStockAfterUpdate($line->getQuantity(), StockEntry::TYPE_OUT);
+                $this->entityManager->flush();
+            }
         }
     }
 }
