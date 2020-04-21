@@ -2,8 +2,6 @@ easy_admin:
     entities:
         BoxWine:
             class: App\Entity\BoxWine
-            templates:
-                list: 'bundles/EasyAdminBundle/BoxWine/list.html.twig'
             list:
                 title: 'Liste des boxs du moment'
                 fields:
