@@ -19,6 +19,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class SliderMPMD extends AbstractEntity implements UpdatableInterface
 {
     use TimeStampableTrait;
+    public const MPMD = 'mpmd';
+    public const DAYGUST = 'daygust';
 
     /**
      * @var string
@@ -47,6 +49,13 @@ class SliderMPMD extends AbstractEntity implements UpdatableInterface
      * @Vich\UploadableField(mapping="slider_mpmd_file", fileNameProperty="pdf")
      */
     protected $pdfFile;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string")
+     */
+    protected $type;
 
     public function getImage()
     {
@@ -92,5 +101,21 @@ class SliderMPMD extends AbstractEntity implements UpdatableInterface
         if ($pdfFile) {
             $this->updatedAt = new \DateTime();
         }
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string|null $type
+     */
+    public function setType(?string $type): void
+    {
+        $this->type = $type;
     }
 }

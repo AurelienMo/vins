@@ -1,10 +1,12 @@
 easy_admin:
     entities:
-        SliderMPMD:
+        SliderMPMDDaygust:
             class: App\Entity\SliderMPMD
             list:
                 title: 'Liste des slides'
                 fields:
+                    - property: type
+                      label: 'MPMD / Daygust'
                     - property: image
                       type: 'image'
                       base_path: '%app.path.slider_mpmd_images%'
@@ -13,6 +15,10 @@ easy_admin:
                       base_path: '%app.path.slider_mpmd_file%'
             form:
                 fields:
+                    - property: type
+                      type: choice
+                      type_options:
+                          choices: {'Ma Première Méthode de Dégustation': 'mpmd', 'Daygust': 'daygust'}
                     - property: 'imageFile'
                       type: 'vich_image'
                       label: 'Image'
