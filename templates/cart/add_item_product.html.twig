@@ -23,6 +23,7 @@
         </button>
     </div>
     <div class="modal-body mx-3">
+        {% form_theme form 'forms/_layout.html.twig' %}
         {{ form_start(form, {'attr': {'class': 'addWineCart'}, 'action': path('add_wine_to_card', {'id': dto.wine.id})}) }}
         <table class="table product-table mb-0">
             <tbody>
@@ -42,6 +43,14 @@
                     </div>
                 </td>
             </tr>
+                {% if form_errors(element.quantity) %}
+                    <tr>
+                        <td colspan="4" class="text-center">{{ form_errors(element.quantity) }}</td>
+                    </tr>
+                {% endif %}
+{#            {% if form_error(element.quantity) %}#}
+
+{#            {% endif %}#}
         {% endfor %}
         </tbody>
         </table>

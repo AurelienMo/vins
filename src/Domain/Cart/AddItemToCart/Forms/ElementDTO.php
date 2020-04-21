@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Cart\AddItemToCart\Forms;
 
 use App\Domain\Cart\ValueObject\ProductVO;
+use App\Domain\Common\Constraints\NotEnoughtStock;
 use App\Entity\Capacity;
 use App\Entity\Product;
 
@@ -13,7 +14,11 @@ class ElementDTO
     /** @var Capacity */
     protected $capacity;
 
-    /** @var int|null */
+    /**
+     * @var int|null
+     *
+     * @NotEnoughtStock()
+     */
     protected $quantity;
 
     public static function createFromCapacityEntity(Capacity $capacity, ?ProductVO $vo)

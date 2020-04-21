@@ -8,9 +8,15 @@ use App\Domain\Cart\ValueObject\CartVO;
 use App\Domain\Cart\ValueObject\ProductVO;
 use App\Entity\Capacity;
 use App\Entity\Product;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ItemDTO
 {
+    /**
+     * @var ElementDTO
+     *
+     * @Assert\Valid()
+     */
     protected $elements;
 
     /** @var Product */

@@ -7,9 +7,14 @@ namespace App\Domain\Cart\Helpers;
 use App\Domain\Cart\AddItemToCart\Forms\ElementDTO;
 use App\Domain\Cart\AddItemToCart\Forms\ItemDTO;
 use App\Domain\Cart\LiveUpdateCart\InputItemObject;
+use App\Domain\Cart\ValueObject\BoxVO;
 use App\Domain\Cart\ValueObject\CartVO;
 use App\Domain\Cart\ValueObject\ProductVO;
 use App\Domain\Common\Helpers\PromotionCalculate;
+use App\Entity\BoxWine;
+use App\Entity\Capacity;
+use App\Entity\Interfaces\OpinionElementInterface;
+use App\Entity\Product;
 use App\Entity\Promotion;
 use App\Entity\WineDomain;
 use App\Repository\PromotionRepository;
@@ -117,14 +122,48 @@ class CartHelper
         }
     }
 
-    public function removeCapacityFromCart(string $id)
+    public function removeCapacityFromCart(string $id, string $type)
     {
         $cart = $this->getCartForCurrentUser();
         $capacitiesProduct = $cart->getProducts();
-        $productVoToRemove = current(array_filter($capacitiesProduct, function (ProductVO $vo) use ($id) {
-            return $vo->getCapacity()->getId() === $id;
-        }));
+        $boxs = $cart->getBoxs();
+        switch ($type) {
+            case 'box':
+                $boxtoRemove = current(array_filter($boxs, function (BoxVO $vo) use ($id) {
+                    return $vo->getBox()->getId() === $id;
+                }));
+                $cart->removeBox($boxtoRemove);
+                break;
+            case 'product':
+                $productVoToRemove = current(array_filter($capacitiesProduct, function (ProductVO $vo) use ($id) {
+                    return $vo->getCapacity()->getId() === $id;
+                }));
+                $cart->removeProduct($productVoToRemove);
+                break;
+        }
+    }
 
-        $cart->removeProduct($productVoToRemove);
+    public function addBoxToCart(BoxWine $box, int $quantity)
+    {
+        $cart = $this->getCartForCurrentUser();
+
+        $boxVo = new BoxVO($box, $quantity, $box->getPrice());
+        $this->checkAndCleanBoxExist($cart, $boxVo);
+        $cart->addBox($boxVo);
+
+        $this->saveCartIntoSession($cart);
+
+        return $cart->countElementsInCart();
+    }
+
+    private function checkAndCleanBoxExist(CartVO $cart, BoxVO $boxVo)
+    {
+        $boxvo = array_filter($cart->getBoxs(), function (BoxVO $vo) use ($boxVo) {
+            return $vo->getBox()->getId() === $boxVo->getBox()->getId();
+        });
+
+        if (count($boxvo) > 0) {
+            $cart->removeBox(current($boxvo));
+        }
     }
 }

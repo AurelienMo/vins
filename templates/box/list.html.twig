@@ -8,6 +8,7 @@
     <div class="container mb-3">
         <div class="row">
             {% for box in boxs %}
+                {% set qtyInCard = checkIsBoxInCart(box) %}
                 <div class="col-sm-12 col-md-4 mb-5">
                     <div class="card-box d-flex flex-column white">
                         <div class="card-box_header d-flex justify-content-center align-items-center" style="background-color: {{ box.color }};">
@@ -28,21 +29,15 @@
                                 <a id="detail-box" href="{{ path('detail_box', {'id': box.id}) }}" class="d-flex justify-content-center align-items-center">
                                     <img class="icon" src="{{ asset('build/images/eye.svg') }}"/>
                                 </a>
-                                <a id="add-box-to-card" class="d-flex justify-content-center align-items-center">
+                                <a id="add-box-to-card" href="{{ path('add_box_to_card', {'id': box.id}) }}" class="d-flex justify-content-center align-items-center">
                                     <img class="icon" src="{{ asset('build/images/cart.svg') }}"/>
                                 </a>
                                 <div class="d-flex quantity justify-content-center align-items-center">
                                     <select id="quantity-box" class="mt-0 mb-0">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
+                                        <option {% if qtyInCard == 0 %}selected{% endif%} disabled>Quantité</option>
+                                        {% for i in 1..10 %}
+                                            <option {% if qtyInCard == i%}selected{% endif%} value="{{ i }}">{{ i }}</option>
+                                        {% endfor %}
                                     </select>
                                 </div>
                         </div>

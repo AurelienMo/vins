@@ -1,0 +1,11 @@
+{% extends 'forms/_layout.html.twig' %}
+
+{%- block form_errors -%}
+    {%- if errors|length > 0 -%}
+        {%- for error in errors -%}
+            <div class="list-unstyled text-warning">
+                <i class="fa fa-warning"></i> {{ error.message }}
+            </div>
+        {%- endfor -%}
+    {%- endif -%}
+{%- endblock form_errors -%}

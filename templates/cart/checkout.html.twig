@@ -26,7 +26,7 @@
         </div>
     </div>
     <div class="container mt-5 mb-5">
-        {% if cart and cart.products|length > 0 %}
+        {% if cart and (cart.products|length > 0 or cart.boxs|length > 0) %}
         <div class="steps-form-2">
             <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
                 <div class="steps-step-2">
@@ -50,7 +50,7 @@
         {% endif %}
 
         <!-- First Step -->
-        {% if cart and cart.products|length > 0 %}
+        {% if cart and (cart.products|length > 0 or cart.boxs|length > 0) %}
             <div class="row setup-content-2" id="step-1">
                 <div class="col-md-12">
                     <h3 class="font-weight-bold pl-0 my-4"><strong>Mon panier</strong></h3>
@@ -116,7 +116,7 @@
                                         </td>
                                         <td></td>
                                         <td>
-                                            <input type="number" value="{{ productVo.quantity }}" aria-label="Search" class="form-control entry-quantity" style="width: 100px">
+                                            <input type="number" min="0" value="{{ productVo.quantity }}" aria-label="Search" class="form-control entry-quantity" style="width: 100px">
                                         </td>
                                         <td></td>
                                         <td class="font-weight-bold">
@@ -124,7 +124,39 @@
                                         </td>
                                         <td>
                                             <button type="button" class="remove-element btn btn-sm primary-bkg text-white" data-toggle="tooltip" data-placement="top"
-                                                    title="Supprimer" data-url="{{ path('remove_item_cart', {'id': productVo.capacity.id}) }}">X
+                                                    title="Supprimer" data-url="{{ path('remove_item_cart', {'id': productVo.capacity.id, 'type': 'product'}) }}">X
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                {% for boxVo in cart.boxs %}
+                                    <tr class="product-item" data-capacity-id="{{ boxVo.box.id }}" data-product-actual-quantity="{{ boxVo.quantity }}">
+                                        <th scope="row">
+                                            <img src="{{ vich_uploader_asset(boxVo.box, 'imageFile') }}" alt="" class="img-fluid z-depth-0" style="min-width: 0px;">
+                                        </th>
+                                        <td>
+                                            <div class="d-flex flex-column">
+                                                <div>
+                                                    <div class="mt-3">
+                                                        <strong class="primary-text font-weight-bold">Box "{{boxVo.box.name}}"</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span>{{boxVo.box.price}}€</span>
+                                        </td>
+                                        <td></td>
+                                        <td>
+                                            <input type="number" min="0" value="{{ boxVo.quantity }}" aria-label="Search" class="form-control entry-quantity" style="width: 100px">
+                                        </td>
+                                        <td></td>
+                                        <td class="font-weight-bold">
+                                            <strong>{{boxVo.calculateSubTotalPrice}}€</strong>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="remove-element btn btn-sm primary-bkg text-white" data-toggle="tooltip" data-placement="top"
+                                                    title="Supprimer" data-url="{{ path('remove_item_cart', {'id': boxVo.box.id, 'type': 'box'}) }}">X
                                             </button>
                                         </td>
                                     </tr>

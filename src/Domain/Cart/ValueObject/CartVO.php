@@ -13,6 +13,9 @@ class CartVO
     /** @var ProductVO[] */
     protected $products = [];
 
+    /** @var BoxVO[] */
+    protected $boxs = [];
+
     /** @var DeliveryDTO|null */
     protected $deliveryInformation;
 
@@ -42,6 +45,10 @@ class CartVO
             $totalQty += $product->getQuantity();
         }
 
+        foreach ($this->boxs as $box) {
+            $totalQty += $box->getQuantity();
+        }
+
         return $totalQty;
     }
 
@@ -59,6 +66,9 @@ class CartVO
                 $product->getPricePromo() * $product->getQuantity() :
                 $product->getUnitPrice() * $product->getQuantity();
             $total += $price;
+        }
+        foreach ($this->boxs as $box) {
+            $total += $box->getUnitPrice() * $box->getQuantity();
         }
 
         return $total;
@@ -83,5 +93,28 @@ class CartVO
     public function getDeliveryInformation(): ?DeliveryDTO
     {
         return $this->deliveryInformation;
+    }
+
+    public function getBoxs()
+    {
+        return $this->boxs;
+    }
+
+    public function removeBox(BoxVO $boxVo)
+    {
+        unset($this->boxs[array_search($boxVo, $this->boxs)]);
+    }
+
+    public function addBox(BoxVO $boxVo)
+    {
+        /** @var array $existCapacity */
+        $existBox = array_filter($this->boxs, function (BoxVO $vo) use ($boxVo) {
+            return $vo->getBox()->getId() === $boxVo->getBox()->getId();
+        });
+        if (count($existBox) > 0) {
+            current($existBox)->updateQuantity($boxVo->getQuantity());
+        } else {
+            $this->boxs[] = $boxVo;
+        }
     }
 }

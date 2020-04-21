@@ -51,7 +51,11 @@ $(function() {
                 $(eltsCount).html(newValue);
                 let textValid = $(modal.addItemToCart).find('.valid-add');
                 if (textValid.length === 0) {
-                    $(modal.addItemToCart).find('.modal-body').prepend(response.html);
+                    if (response.html === "<div class=\"valid-add text-center\">Panier mis à jour</span></div>") {
+                        $(modal.addItemToCart).find('.modal-body').prepend(response.html);
+                    } else {
+                        $(modal.addItemToCart).find('.modal-content').html(response.html);
+                    }
                 }
             }
         })

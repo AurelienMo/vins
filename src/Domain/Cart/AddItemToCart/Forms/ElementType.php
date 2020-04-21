@@ -16,7 +16,12 @@ class ElementType extends AbstractType
         $builder
             ->add(
                 'quantity',
-                IntegerType::class
+                IntegerType::class,
+                [
+                    'attr' => [
+                        'min' => 0,
+                    ]
+                ]
             );
     }
 

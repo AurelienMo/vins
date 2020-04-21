@@ -30,7 +30,8 @@ class RemoveItemInCart
     public function __invoke(Request $request, JsonResponder $responder)
     {
         $id = $request->attributes->get('id');
-        $this->cartHelper->removeCapacityFromCart($id);
+        $type = $request->query->get('type');
+        $this->cartHelper->removeCapacityFromCart($id, $type);
 
         return $responder(['url' => $this->urlGenerator->generate('cart_checkout')]);
     }

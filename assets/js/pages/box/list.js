@@ -19,7 +19,43 @@ $('#detail-box').on('click', function (e) {
         }
     })
 });
-
+$('#quantity-box').on('change', function (e) {
+    if (parseInt($(this).val()) > 0) {
+        $(this).css('border', 'inherit');
+    }
+})
 $('#add-box-to-card').on('click', function (e) {
-    let valueSelect = $('#quantity-box').val();
+    e.preventDefault();
+    let valueSelect = parseInt($('#quantity-box').val());
+    let url = $(this).attr('href');
+    if (valueSelect <= 0) {
+        $('#quantity-box').css('border', '2 px solid red');
+    } else {
+        showLoader();
+        let existWarnings = $('.out_of_stock');
+        existWarnings.remove();
+        $('#main-container').css('padding-top', '60px');
+        $.ajax({
+            method: 'POST',
+            url: url,
+            data: JSON.stringify({'quantity': valueSelect}),
+            success: function (response) {
+                hideLoader();
+                if (response.code === 400) {
+                    switch (response.type) {
+                        case 'bad_request':
+                            $('#quantity-box').css('border', '2px solid red')
+                            break;
+                        case 'out_of_stock':
+                            $('#main-container').css('padding-top', 0);
+                            $('#main-container').prepend(response.message);
+                            break;
+                    }
+                } else {
+                    let eltsCount = document.getElementById('counter-items');
+                    $(eltsCount).html(response.qtyadd)
+                }
+            }
+        })
+    }
 });
