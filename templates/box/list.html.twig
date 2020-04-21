@@ -16,14 +16,14 @@
                             <img class="mb-3" src="{{ vich_uploader_asset(box, 'imageFile') }}"/>
                         </div>
                         <div class="card-box_content d-flex flex-column pl-4 pr-4 overflow-hidden">
-                            <h3 class="h3 text-center">{{ box.name }}</h3>
+                            <h4 class="h5 text-center font-weight-bold" style="color:  {{ box.color }}">{{ box.name }}</h4>
                             <p class="h-100 overflow-auto">
                                 {{ box.description }}
                             </p>
                         </div>
                         <div class="card-box_price d-flex justify-content-around align-content-center pt-2 pb-2">
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <span class="h5 m-0 primary-text font-weight-bold">{{ box.price }}€</span>
+                                    <span class="h5 m-0 font-weight-bold">{{ box.price }}€</span>
                                 </div>
                                 <a id="detail-box" href="{{ path('detail_box', {'id': box.id}) }}" class="d-flex justify-content-center align-items-center">
                                     <img class="icon" src="{{ asset('build/images/eye.svg') }}"/>
