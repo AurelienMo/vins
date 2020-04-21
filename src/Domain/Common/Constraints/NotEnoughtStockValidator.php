@@ -35,6 +35,8 @@ class NotEnoughtStockValidator extends ConstraintValidator
         ) {
             $qtyToRest -= current($productInCart)->getQuantity();
             $hasStock = false;
+        } elseif ($value > $qtyToRest) {
+            $hasStock = false;
         }
 
         foreach ($cart->getBoxs() as $box) {
@@ -44,6 +46,9 @@ class NotEnoughtStockValidator extends ConstraintValidator
             if (count($productCartBox) > 0 &&
                 $value > ($this->calculateRestStock($qtyToRest, 1))
             ) {
+                $qtyToRest = $qtyToRest - 1 < 0 ? 0 : $qtyToRest - 1;
+                $hasStock = false;
+            } elseif($value > ($this->calculateRestStock($qtyToRest, 1))) {
                 $qtyToRest = $qtyToRest - 1 < 0 ? 0 : $qtyToRest - 1;
                 $hasStock = false;
             }
