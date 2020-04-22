@@ -96,6 +96,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         $this->personIfAbsent = $personIfAbsent;
         $this->status = self::DELIVERY_IN_PROGRESS;
         $this->statusDate = new DateTime();
+        $this->dateDelivery = $this->createdAt;
         parent::__construct();
     }
 
@@ -119,7 +120,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         return $this->statusDate;
     }
 
-    public function getNiche(): ?NicheOfDelivery
+    public function getNiche()
     {
         return $this->niche;
     }
@@ -173,9 +174,14 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         return $this->order->getCustomer()->getFullAddress();
     }
 
-    public function getDeliveryDateAccordingParamsNiche()
+    public function getDateDelivery()
     {
-        return is_null($this->niche) ?
-            'Sous 3 jours' : $this->niche;
+        if (!\is_null($this->niche)) {
+            return $this->niche;
+        }
+
+        $this->createdAt->modify('+36 hours');
+
+        return $this->createdAt->format('d/m/Y');
     }
 }

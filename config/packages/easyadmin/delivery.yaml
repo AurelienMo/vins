@@ -8,15 +8,19 @@ easy_admin:
             list:
                 title: 'Liste des livraisons'
                 fields:
+                    - property: createdAt
+                      label: 'Crée le'
                     - property: order
                       label: 'Commande'
                     - property: status
                       label: 'Statut livraison'
-                    - property: getDeliveryDateAccordingParamsNiche
+                    - property: typeDelivery
+                    - property: getDateDelivery
                       label: "Date livraison"
                     - property: getAddress
                       label: 'Adresse'
                 actions: ["show"]
+                sort: ['createdAt', 'DESC']
             edit:
                 fields:
                   - property: status
