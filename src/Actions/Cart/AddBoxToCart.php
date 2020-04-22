@@ -91,6 +91,6 @@ class AddBoxToCart
             $actualStock -= current($productVo)->getQuantity();
         }
 
-        return $actualStock;
+        return $actualStock <= 0 ? 0 : $actualStock;
     }
 }
