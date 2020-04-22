@@ -17,6 +17,9 @@ easy_admin:
     user:
         name_property_path: 'fullName'
     design:
+        assets:
+            js:
+              - 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js'
         menu:
             - label: 'Configuration'
             - label: 'Breadcrumb'

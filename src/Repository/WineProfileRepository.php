@@ -26,6 +26,14 @@ final class WineProfileRepository extends AbstractServiceRepository
                     ->getResult();
     }
 
+    public function findAllGroupByType()
+    {
+        return $this->createQueryBuilder('wp')
+            ->groupBy('wp.type')
+            ->getQuery()
+            ->getResult();
+    }
+
     protected function getClassEntityName(): string
     {
         return VineProfile::class;

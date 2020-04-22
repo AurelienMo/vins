@@ -3,6 +3,8 @@ easy_admin:
         Delivery:
             class: App\Entity\Delivery
             disabled_actions: ["new", "delete"]
+            templates:
+              list: bundles/EasyAdminBundle/Delivery/list.html.twig
             list:
                 title: 'Liste des livraisons'
                 fields:
@@ -10,6 +12,18 @@ easy_admin:
                       label: 'Commande'
                     - property: status
                       label: 'Statut livraison'
-                    - property: niche
-                      label: "Date livraison à l'adresse"
+                    - property: getDeliveryDateAccordingParamsNiche
+                      label: "Date livraison"
+                    - property: getAddress
+                      label: 'Adresse'
                 actions: ["show"]
+            edit:
+                fields:
+                  - property: status
+                    label: 'Statut livraison'
+                    type: choice
+                    type_options:
+                        choices:
+                            "Livraison en cours": 'Livraison en cours'
+                            "Livré à l'adresse": "Livré à l'adresse"
+                            "Déposé chez un voisin": "Déposé chez un voisin"

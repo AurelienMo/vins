@@ -5,6 +5,31 @@
 {% endblock %}
 {% block body %}
 <div class="container mb-3">
+    {% form_theme form 'forms/filters.html.twig' %}
+    {{ form_start(form) }}
+    <div id="filters" class="row mb-4">
+
+        <div class="col-sm-6 col-md-3">
+            {{ form_widget(form.profiles) }}
+        </div>
+        <div class="col-sm-6 col-md-3">
+            {{ form_widget(form.regions) }}
+        </div>
+        <div class="col-sm-6 col-md-3">
+            {{ form_widget(form.accords) }}
+        </div>
+        <div class="col-sm-6 col-md-3">
+            {{ form_widget(form.occasions) }}
+        </div>
+        <div class="col-sm-12 col-md-12 d-flex justify-content-center align-items-center">
+            <button class="btn primary-bkg"><i class="fas fa-search"></i></button>
+            <a href="{{ path(('wine_list')) }}" class="btn">
+                <i class="fas fa-close"></i>
+            </a>
+        </div>
+
+    </div>
+    {{ form_end(form) }}
     <div class="row">
         {% for wine in wines %}
         <div class="col-sm-12 col-md-4 mb-5">

@@ -30,12 +30,74 @@ class ProductRepository extends AbstractServiceRepository
                     ->getResult();
     }
 
-    public function findOnlyActive()
+    public function findOnlyActive(array $queryParams)
+    {
+        $qb = $this->createQueryBuilder('p')
+                    ->where('p.active = true');
+
+        if (count($queryParams) > 0) {
+            if (array_key_exists('p', $queryParams) && $queryParams['p'] !== '') {
+                $profileParams = explode(',', $queryParams['p']);
+                $qb->join('p.profile', 'pro');
+                if (in_array('Les blancs', $profileParams)) {
+                    $qb->join('p.typeProduct', 'type')
+                        ->andWhere('type.name = :param')
+                        ->setParameter('params', 'Les blancs');
+                    unset($profileParams[array_search('Les blancs', $profileParams)]);
+                }
+                if (in_array('Les rosés', $profileParams)) {
+                    $qb->join('p.typeProduct', 'type')
+                        ->andWhere('type.name = :param')
+                        ->setParameter('params', 'Les rosés');
+                    unset($profileParams[array_search('Les rosés', $profileParams)]);
+                }
+                if (in_array('Les rouges', $profileParams)) {
+                    $qb->join('p.typeProduct', 'type')
+                        ->andWhere('type.name = :param')
+                        ->setParameter('params', 'Les rouges');
+                    unset($profileParams[array_search('Les rouges', $profileParams)]);
+                }
+                if (count($profileParams) > 0) {
+                    $qb->andWhere('pro.name IN (:params)')
+                        ->setParameter('params', array_values($profileParams));
+                }
+            }
+            if (array_key_exists('r', $queryParams) && $queryParams['r'] !== '') {
+                $regionParams = explode(',', $queryParams['r']);
+                dump($regionParams);
+                if (count($regionParams) > 0) {
+                    $qb->andWhere('p.region IN (:params)')
+                        ->setParameter('params', array_values($regionParams));
+                }
+            }
+            if (array_key_exists('a', $queryParams) && $queryParams['a'] !== '') {
+                $accordParams = explode(',', $queryParams['a']);
+                if (count($accordParams) > 0) {
+                    $qb->join('p.agreements', 'a')
+                        ->andWhere('a.name IN (:params)')
+                        ->setParameter('params', array_values($accordParams));
+                }
+            }
+            if (array_key_exists('o', $queryParams) && $queryParams['o'] !== '') {
+                $occasionsParams = explode(',', $queryParams['o']);
+                if (count($occasionsParams) > 0) {
+                    $qb->andWhere('p.wineService.opportunity IN (:params)')
+                        ->setParameter('params', array_values($occasionsParams));
+                }
+            }
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function selectOccasions()
     {
         return $this->createQueryBuilder('p')
-                    ->where('p.active = true')
-                    ->getQuery()
-                    ->getResult();
+            ->select('p.wineService.opportunity')
+            ->distinct()
+            ->orderBy('p.wineService.opportunity')
+            ->getQuery()
+            ->getResult();
     }
 
     protected function getClassEntityName(): string

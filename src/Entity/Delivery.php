@@ -31,6 +31,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
 
     public const DELIVERY_IN_PROGRESS = 'Livraison en cours';
     public const DELIVERED_AT_ADDRESS = 'Livré à l\'adresse';
+    public const DELIVERY_AT_VOISIN = 'Déposé chez un voisin';
 
     /**
      * @var string
@@ -165,5 +166,16 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public function __toString()
     {
         return sprintf('Livraison %s', $this->getContentText());
+    }
+
+    public function getAddress(): string
+    {
+        return $this->order->getCustomer()->getFullAddress();
+    }
+
+    public function getDeliveryDateAccordingParamsNiche()
+    {
+        return is_null($this->niche) ?
+            'Sous 3 jours' : $this->niche;
     }
 }
