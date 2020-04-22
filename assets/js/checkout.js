@@ -114,10 +114,10 @@ $(document).ready(function () {
     $('.mdb-select').materialSelect();
     $(document).on('submit', '.valid-delivery', function (e) {
         e.preventDefault();
-        showLoader();
         let target = $(e.target);
         let validDelivery = $('.define-delivery');
         let updateDelivery = $('.update-delivery');
+        showLoader();
         $.ajax({
             url: target.attr('action'),
             type: 'POST',

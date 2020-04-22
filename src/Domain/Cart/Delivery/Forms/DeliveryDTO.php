@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Cart\Delivery\Forms;
 
 use App\Entity\NicheOfDelivery;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class DeliveryDTO
 {
@@ -25,6 +26,11 @@ class DeliveryDTO
 
     /**
      * @var string
+     *
+     * @Assert\Regex(
+     *     pattern="/^(([1][3][0])|(9[0]))[0-9]{2}$/",
+     *     message="Code postal sur Marseille attendu"
+     * )
      */
     protected $zipCode;
 

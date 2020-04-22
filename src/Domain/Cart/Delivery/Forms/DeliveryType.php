@@ -83,6 +83,8 @@ class DeliveryType extends AbstractType
                         'required' => true,
                         'attr' => [
                             'class' => 'form-control',
+                            'pattern' => '^(([1][3][0])|(9[0]))[0-9]{2}$',
+                            'title' => 'La livraison est assurée uniquement sur Marseille'
                         ],
                     ]
                 )
