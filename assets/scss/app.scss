@@ -56,7 +56,7 @@ label.required::after {
 }
 @media all and (max-width: 768px){
   .sidenav {
-    height: 100%;
+    height: 100vh;
     width: 0;
     position: fixed;
     z-index: 1;
@@ -66,6 +66,10 @@ label.required::after {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    img {
+      width: 160px;
+      height: 100px;
+    }
   }
 
   .sidenav a {
