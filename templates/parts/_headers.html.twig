@@ -1,4 +1,4 @@
-<header id="desktop" class="fixed-top pr-0">
+<header id="header_desktop" class="fixed-top pr-0">
     <div class="container-fluid pt-2 pb-2 white">
         <div class="row">
             <div class="col">
@@ -79,4 +79,109 @@
             </div>
         </div>
     </nav>
+</header>
+<header id="mobile" class="fixed-top pr-0">
+    <div class="container-fluid pt-3 pb-3 white">
+        <div class="row">
+            <div class="col">
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <i class="fas fa-bars fa-lg menu primary-text float-left"></i>
+                            <span>Marseille uniquement</span>
+                        </div>
+                        <div class="col-sm-12 text-center shopping-cart">
+                            <a href="{{ path('cart_checkout') }}">
+                                <i class="fas fa-shopping-cart fa-lg primary-text"></i>
+                            </a>
+                            <span id="counter-items" class="count-items badge red z-depth-1 mr-1"> {{ app.session.has('cart') ? app.session.get('cart').countElementsInCart : 0 }} </span>
+                        </div>
+                        <div class="col-sm-12 text-center">
+                            <span>La livraison est garantie sans casse pour 4€ seulement !</span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    <nav class="d-flex align-items-center">
+        <div class="container">
+            <div class="row d-flex justify-content-between">
+                <a href="{{ path('homepage') }}">
+                    <div class="container-logo">
+                        <div class="header_logo_circle-first">
+                            <div class="header_logo_circle-second d-flex align-items-center justify-content-center">
+                                <img class="logo" src="{{ asset('build/images/logo.png') }}" alt="logo"/>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div id="mySidenav" class="sidenav">
+        <a class="closebtn"><i class="fa fa-close primary-text"></i></a>
+        <div class="d-flex justify-content-center">
+            <img class="img-fluid" src="{{ asset('build/images/logo.png') }}" alt="logo" width="160"/>
+        </div>
+        <a href="{{ path('list_box') }}">Les boxs</a>
+        <a href="{{ path('wine_list') }}">Les vins</a>
+        <a href="{{ path('list_profiles') }}">Les profils de vins</a>
+        <div class="accordion md-accordion" id="learn_wine" role="tablist" aria-multiselectable="true">
+            <div class="card border-0">
+                <div class="card-header" role="tab" id="headingTwo1">
+                    <a class="collapsed pl-2" data-toggle="collapse" data-parent="#learn_wine" href="#collapseTwo1"
+                       aria-expanded="false" aria-controls="collapseTwo1">
+                        <h5 class="mb-0">
+                            J'apprends le vin <i class="fas fa-angle-down rotate-icon"></i>
+                        </h5>
+                    </a>
+                </div>
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                     data-parent="#accordionEx1">
+                    <a class="pl-5" href="{{ path('mpmd_list') }}">Ma Première méthode</a>
+                    <a class="pl-5" href="{{ path('tastuces_list') }}">Les Tastuces</a>
+                </div>
+
+                <div class="card-header" role="tab" id="headingTwo1">
+                    <a class="collapsed pl-2" data-toggle="collapse" data-parent="#learn_wine" href="#collapseTwo2"
+                       aria-expanded="false" aria-controls="collapseTwo1">
+                        <h5 class="mb-0">
+                            Et plus encore... <i class="fas fa-angle-down rotate-icon"></i>
+                        </h5>
+                    </a>
+                </div>
+                <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                     data-parent="#accordionEx1">
+                    <a class="pl-5" href="{{ path('daygust_list') }}">Les daygusts</a>
+                </div>
+
+                <div class="card-header" role="tab" id="headingTwo1">
+                    <a class="collapsed pl-2" data-toggle="collapse" data-parent="#learn_wine" href="#collapseTwo3"
+                       aria-expanded="false" aria-controls="collapseTwo1">
+                        <h5 class="mb-0">
+                            A propos <i class="fas fa-angle-down rotate-icon"></i>
+                        </h5>
+                    </a>
+                </div>
+                <div id="collapseTwo3" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                     data-parent="#accordionEx1">
+                    <a class="pl-5" href="{{ path('homepage') }}">Notre concept</a>
+                    <a class="pl-5" href="{{ path('delivery_information') }}">Livraison</a>
+                </div>
+
+                <div class="card-header" role="tab" id="headingTwo1">
+                    <a class="collapsed pl-2" data-toggle="collapse" data-parent="#learn_wine" href="#collapseTwo4"
+                       aria-expanded="false" aria-controls="collapseTwo1">
+                        <h5 class="mb-0">
+                            Besoin d'aide ? <i class="fas fa-angle-down rotate-icon"></i>
+                        </h5>
+                    </a>
+                </div>
+                <div id="collapseTwo4" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                     data-parent="#accordionEx1">
+                    <a class="pl-5 extra-small contact" data-url="{{ path('contact_page') }}" href="#">Notre concept</a>
+                    <a class="pl-5 extra-small static-call" data-url="{{ path('static_page', {'page': 'cgv'}) }}" href="#">Mentions légales & CGV</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>

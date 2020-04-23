@@ -1,7 +1,7 @@
-<footer id="desktop">
+<footer>
     <div class="container">
-        <div class="row mb-2">
-            <div class="col d-flex flex-column justify-content-center align-items-center">
+        <div class="row mb-2 pt-2">
+            <div class="col d-none d-md-flex flex-column justify-content-center align-items-center">
                 <h3>A propos</h3>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -13,14 +13,14 @@
                 </ul>
             </div>
             <div class="col d-flex flex-column justify-content-center">
-                <div class="text-left">
+                <div class="text-center">
                     <span class="font-weight-bold">M'inscrire à la newsletter</span>
                 </div>
                 <div class="text-left">
                     {{ render(url('registration_newsletter')) }}
                 </div>
             </div>
-            <div class="col d-flex flex-column justify-content-center align-items-center">
+            <div class="col d-none d-md-flex flex-column justify-content-center align-items-center">
                 <h3>Besoin d'aide ?</h3>
                 <ul class="nav flex-column">
                     <li class="nav-item">
@@ -33,14 +33,18 @@
             </div>
         </div>
         <div class="footer-information row d-flex justify-content-center align-items-center text-white">
-            <i class="fa fa-copyright"></i>
-            <span class="ml-1">Mon premier sommelier. Tous droits réservés.</span>
+            <div class="col-12 text-center">
+                <i class="fa fa-copyright"></i>
+                <span class="ml-1">Mon premier sommelier. Tous droits réservés.</span>
+            </div>
         </div>
-        <div class="small row d-flex justify-content-center justify-content-center text-white">
-            <span class="font-italic">L'abus d'alcool est dangereux pour la santé. A consommer avec modération.</span>
+        <div class="footer-prevent-alcoohol row d-flex justify-content-center justify-content-center text-white">
+            <div class="col-12 text-center">
+                <span class="font-italic">L'abus d'alcool est dangereux pour la santé. A consommer avec modération.</span>
+            </div>
         </div>
     </div>
+    <div class="container-fluid legal-minor d-flex justify-content-center pt-3 pb-3 mt-2">
+        <img class="img-fluid" src="{{ asset('build/images/bandeau_informatif_alcool_mineurs.png') }}" alt="information legal mineur"/>
+    </div>
 </footer>
-<div class="container-fluid legal-minor d-flex justify-content-center pt-3 pb-3">
-    <img src="{{ asset('build/images/bandeau_informatif_alcool_mineurs.png') }}" alt="information legal mineur"/>
-</div>

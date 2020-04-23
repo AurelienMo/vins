@@ -64,7 +64,6 @@ class ProductRepository extends AbstractServiceRepository
             }
             if (array_key_exists('r', $queryParams) && $queryParams['r'] !== '') {
                 $regionParams = explode(',', $queryParams['r']);
-                dump($regionParams);
                 if (count($regionParams) > 0) {
                     $qb->andWhere('p.region IN (:params)')
                         ->setParameter('params', array_values($regionParams));
