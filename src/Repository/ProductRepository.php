@@ -41,47 +41,47 @@ class ProductRepository extends AbstractServiceRepository
                 $qb->join('p.profile', 'pro');
                 if (in_array('Les blancs', $profileParams)) {
                     $qb->join('p.typeProduct', 'type')
-                        ->andWhere('type.name = :param')
-                        ->setParameter('params', 'Les blancs');
+                        ->andWhere('type.name = :whitetypename')
+                        ->setParameter('whitetypename', 'Les blancs');
                     unset($profileParams[array_search('Les blancs', $profileParams)]);
                 }
                 if (in_array('Les rosés', $profileParams)) {
                     $qb->join('p.typeProduct', 'type')
-                        ->andWhere('type.name = :param')
-                        ->setParameter('params', 'Les rosés');
+                        ->andWhere('type.name = :pinktypename')
+                        ->setParameter('pinktypename', 'Les rosés');
                     unset($profileParams[array_search('Les rosés', $profileParams)]);
                 }
                 if (in_array('Les rouges', $profileParams)) {
                     $qb->join('p.typeProduct', 'type')
-                        ->andWhere('type.name = :param')
-                        ->setParameter('params', 'Les rouges');
+                        ->andWhere('type.name = :redtypename')
+                        ->setParameter('redtypename', 'Les rouges');
                     unset($profileParams[array_search('Les rouges', $profileParams)]);
                 }
                 if (count($profileParams) > 0) {
-                    $qb->andWhere('pro.name IN (:params)')
-                        ->setParameter('params', array_values($profileParams));
+                    $qb->andWhere('pro.name IN (:profils)')
+                        ->setParameter('profils', array_values($profileParams));
                 }
             }
             if (array_key_exists('r', $queryParams) && $queryParams['r'] !== '') {
                 $regionParams = explode(',', $queryParams['r']);
                 if (count($regionParams) > 0) {
-                    $qb->andWhere('p.region IN (:params)')
-                        ->setParameter('params', array_values($regionParams));
+                    $qb->andWhere('p.region IN (:regions)')
+                        ->setParameter('regions', array_values($regionParams));
                 }
             }
             if (array_key_exists('a', $queryParams) && $queryParams['a'] !== '') {
                 $accordParams = explode(',', $queryParams['a']);
                 if (count($accordParams) > 0) {
                     $qb->join('p.agreements', 'a')
-                        ->andWhere('a.name IN (:params)')
-                        ->setParameter('params', array_values($accordParams));
+                        ->andWhere('a.name IN (:aggrements)')
+                        ->setParameter('aggrements', array_values($accordParams));
                 }
             }
             if (array_key_exists('o', $queryParams) && $queryParams['o'] !== '') {
                 $occasionsParams = explode(',', $queryParams['o']);
                 if (count($occasionsParams) > 0) {
-                    $qb->andWhere('p.wineService.opportunity IN (:params)')
-                        ->setParameter('params', array_values($occasionsParams));
+                    $qb->andWhere('p.wineService.opportunity IN (:occasions)')
+                        ->setParameter('occasions', array_values($occasionsParams));
                 }
             }
         }

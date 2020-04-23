@@ -4,17 +4,16 @@
             <div class="col">
                 <div class="container">
                     <div class="row">
-                        <div class="col-5 text-right">
-                            <span>Marseille uniquement</span>
+                        <div class="offset-2 col-8 d-flex justify-content-center align-items-center">
+                            <span>Livraison sur Marseille par notre équipe à partir de 4€</span>
                         </div>
-                        <div class="col-5 text-center">
-                            <span>La livraison est garantie sans casse pour 4€ seulement !</span>
-                        </div>
-                        <div class="col-2 text-center shopping-cart">
-                            <a href="{{ path('cart_checkout') }}">
-                                <i class="fas fa-shopping-cart fa-lg primary-text"></i>
-                            </a>
-                                    <span id="counter-items" class="count-items badge red z-depth-1 mr-1"> {{ app.session.has('cart') ? app.session.get('cart').countElementsInCart : 0 }} </span>
+                        <div class="col-2 text-center shopping-cart d-flex justify-content-center align-items-center">
+                            <div class="d-flex justify-content-center align-items-center content-card">
+                                <a href="{{ path('cart_checkout') }}">
+                                    <i class="fas fa-shopping-cart fa-2x primary-text"></i>
+                                </a>
+                            </div>
+                            <span id="counter-items" class="count-items badge red z-depth-1"> {{ app.session.has('cart') ? app.session.get('cart').countElementsInCart : 0 }} </span>
                         </div>
                     </div>
                 </div>
@@ -59,8 +58,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-mps dropdown-menu-lg-right"
                              aria-labelledby="learn_wine">
-                            <a class="dropdown-item" href="{{ path('mpmd_list') }}">Ma Première Méthode</a>
-                            <a class="dropdown-item" href="{{ path('tastuces_list') }}">Les Tastuces</a>
+                            <a class="dropdown-item text-black-50" href="{{ path('mpmd_list') }}">Ma Première Méthode</a>
+                            <a class="dropdown-item text-black-50" href="{{ path('tastuces_list') }}">Les Tastuces</a>
                         </div>
                     </li>
                 </ul>
@@ -85,18 +84,17 @@
         <div class="row">
             <div class="col">
                     <div class="row">
-                        <div class="col-sm-12 text-center">
+                        <div class="col-2">
                             <i class="fas fa-bars fa-lg menu primary-text float-left"></i>
-                            <span>Marseille uniquement</span>
                         </div>
-                        <div class="col-sm-12 text-center shopping-cart">
-                            <a href="{{ path('cart_checkout') }}">
-                                <i class="fas fa-shopping-cart fa-lg primary-text"></i>
-                            </a>
-                            <span id="counter-items" class="count-items badge red z-depth-1 mr-1"> {{ app.session.has('cart') ? app.session.get('cart').countElementsInCart : 0 }} </span>
+                        <div class="col-8 d-flex justify-content-center align-items-center">
+                            <span class="text-center">Livraison sur Marseille par notre équipe à partir de 4€</span>
                         </div>
-                        <div class="col-sm-12 text-center">
-                            <span>La livraison est garantie sans casse pour 4€ seulement !</span>
+                        <div class="col-2 text-center shopping-cart d-flex justify-content-center align-items-center">
+                                <a href="{{ path('cart_checkout') }}">
+                                    <i class="fas fa-shopping-cart fa-2x primary-text"></i>
+                                </a>
+                            <span id="counter-items" class="count-items badge red z-depth-1"> {{ app.session.has('cart') ? app.session.get('cart').countElementsInCart : 0 }} </span>
                         </div>
                     </div>
             </div>

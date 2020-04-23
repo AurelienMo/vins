@@ -201,7 +201,7 @@ phpcbf: vendor/bin/phpcbf
 npm-prod: ## Build npm for production environment
 npm-prod: package.json
 	sudo chown -R $(USER_DOCKER) public
-	$(DOCKER_NPM) "npm run prod"
+	$(DOCKER_NPM) "npm run build"
 
 npm-watch: ## Build npm for watch
 npm-watch: package.json
