@@ -48,17 +48,19 @@
                         <td colspan="4" class="text-center">{{ form_errors(element.quantity) }}</td>
                     </tr>
                 {% endif %}
-{#            {% if form_error(element.quantity) %}#}
-
-{#            {% endif %}#}
         {% endfor %}
         </tbody>
         </table>
-        <div class="col-12 d-flex justify-content-end">
-            <button type="submit" class="btn-floating btn-danger update-cart mb-3">
-                <img class="icon" src="{{ asset('build/images/cart.svg') }}" width="30"/>
+        <div class="d-flex justify-content-end">
+            <button class="button-custom btn-floating d-flex justify-content-center align-items-center">
+                <i class="fas fa-shopping-cart"></i>
             </button>
         </div>
+{#        <div class="col-12 d-flex justify-content-end">#}
+{#            <button type="submit" class="btn-floating btn-danger update-cart mb-3">#}
+{#                <img class="icon" src="{{ asset('build/images/cart.svg') }}" width="30"/>#}
+{#            </button>#}
+{#        </div>#}
         {{ form_end(form) }}
     </div>
 </div>
