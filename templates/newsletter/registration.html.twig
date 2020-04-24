@@ -1,29 +1,16 @@
-{#<div class="container my-5">#}
-{#    <section class="contact-section dark-grey-text">#}
-{#        <div class="card">#}
-{#            <div class="row">#}
-{#                <div class="col-lg-12">#}
-{#                    <div class="card-body form">#}
-{#                        <h3 class="font-weight-bold dark-grey-text mt-4"><i class="fa fa-envelope pr-2 mr-1"></i>S'inscrire à la newsletter</h3>#}
-                        {% form_theme form 'forms/_contact.html.twig' %}
-                        {{ form_start(form, {'attr': {'action': path('registration_newsletter'),'class': 'ajaxForm', 'method': 'POST'}}) }}
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="md-form mb-0 mt-0">
-                                    {{ form_widget(form.email) }}
-                                </div>
-                            </div>
-                            <div class="col-md-12 text-right">
-                                <button type="submit" class="btn primary-bkg text-white btn-rounded">
-                                    <i class="fa fa-paper-plane"></i>
-                                </button>
-                            </div>
-                        </div>
-                        {{ form_end(form) }}
-{#                    </div>#}
 
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </section>#}
-{#</div>#}
+{% form_theme form 'forms/_contact.html.twig' %}
+{{ form_start(form, {'attr': {'action': path('registration_newsletter'),'class': 'ajaxForm', 'method': 'POST'}}) }}
+<div class="row">
+    <div class="col-md-12">
+        <div class="md-form mb-0 mt-0">
+            {{ form_widget(form.email) }}
+        </div>
+    </div>
+    <div class="col-md-12 d-flex justify-content-end">
+        <button class="button-custom btn-floating d-flex justify-content-center align-items-center">
+            <i class="fa fa-paper-plane text-white"></i>
+        </button>
+    </div>
+</div>
+{{ form_end(form) }}

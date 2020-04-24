@@ -4,44 +4,56 @@
 @import "~bootstrap/scss/bootstrap";
 @import "./components/loader";
 @import './components/_modal';
+
 .h-0 {
   height: 0;
 }
+
 html, body {
-  height: 100%;
+  height: 100vh;
 }
+
 body {
   font-family: 'Comfortaa', cursive;
   font-size: 1rem;
+
   h1, h2, h3, h4 {
     font-weight: bold;
   }
+
   display: flex;
   flex-direction: column;
 }
+
 a:hover {
   text-decoration: none;
 }
+
 #main-container {
   //flex: 1 0 auto;
   background-color: #f8f9fb;
 }
+
 label.required::after {
   content: " *"
 }
+
 .primary- {
   &bkg {
     background-color: $primary-color !important;
   }
+
   &text {
     color: $primary-color !important;
   }
 }
+
 .secondary- {
   &bkg {
     background-color: $grey-dark !important;
   }
 }
+
 .text-cancel {
   text-decoration: line-through
 }
@@ -51,10 +63,12 @@ label.required::after {
   max-height: 180px;
   background-size: cover;
 }
+
 .add-product-modal {
-  border-radius: 20px!important;
+  border-radius: 20px !important;
 }
-@media all and (max-width: 768px){
+
+@media all and (max-width: 768px) {
   .sidenav {
     height: 100vh;
     width: 0;
@@ -66,6 +80,7 @@ label.required::after {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+
     img {
       width: 160px;
       height: 100px;
@@ -79,6 +94,7 @@ label.required::after {
     color: $primary-color;
     display: block;
     transition: 0.3s;
+
     &.extra-small {
       font-size: 80%;
     }
@@ -103,16 +119,20 @@ label.required::after {
       background-color: $white;
       z-index: 999;
     }
+
     span {
       font-size: 0.7rem;
     }
+
     nav {
       height: 30px;
       background-color: $primary-color;
     }
+
     .container-logo {
       z-index: 999;
       margin-left: 50px;
+
       .header_logo_circle {
         &-first {
           width: 60px;
@@ -120,14 +140,16 @@ label.required::after {
           border-radius: 30px;
           border: 2px white solid;
         }
+
         &-second {
           width: 100%;
-          height:100%;
+          height: 100%;
           border: 2px red solid;
           border-radius: 50%;
           background-color: white;
         }
       }
+
       .logo {
         height: 25px;
       }
@@ -139,46 +161,59 @@ label.required::after {
     padding-top: 60px;
   }
   .dropdown-mps .dropdown-item:hover {
-    background-color: $primary-color!important;
+    background-color: $primary-color !important;
   }
 }
-@media all and (min-width: 769px){
-  #mobile{
+
+@media all and (min-width: 769px) {
+  #mobile {
     display: none;
   }
-  #header_desktop{
+  #header_desktop {
     display: block;
+
     > .container-fluid {
       background-color: $white;
       z-index: 999;
     }
+
     .content-card {
       width: 60px;
       height: 60px;
       border: 2px solid $primary-color;
       border-radius: 30px;
     }
+
     span {
       font-size: 0.9rem;
     }
+
     nav {
       height: 80px;
       background-color: $primary-color;
+
       .nav-link {
         font-size: 1.1rem;
         color: $white;
         font-weight: bold;
       }
+
       li.nav-item {
         transition: transform 1s
       }
+
       li.nav-item:hover {
         transform: scale(1.1);
       }
-      li.nav-item:hover:after { transform: scaleX(1)}
+
+      li.nav-item:hover:after {
+        transform: scaleX(1)
+      }
     }
+
     .container-logo {
       z-index: 999;
+
       .header_logo_circle {
         &-first {
           width: 160px;
@@ -186,14 +221,16 @@ label.required::after {
           border-radius: 80px;
           border: 8px white solid;
         }
+
         &-second {
           width: 100%;
-          height:100%;
+          height: 100%;
           border: 5px red solid;
           border-radius: 50%;
           background-color: white;
         }
       }
+
       .logo {
         height: 75px;
       }
@@ -218,25 +255,69 @@ label.required::after {
     -webkit-transition: all 0.1s linear;
     transition: all 0.1s linear;
   }
+  footer {
+    a:hover {
+      color: $primary-color;
+    }
+    .social-butons {
+      a:hover {
+        cursor: pointer;
+        color: $primary-color;
+      }
+      i {
+        color: white;
+      }
+      i:hover {
+        color: $primary-color;
+      }
+    }
+  }
 }
+
 footer {
-flex-shrink: 0;
-background-color: $grey-dark;
-padding-top: 20px;
-color: $white;
+  flex-shrink: 0;
+  background-color: $grey-dark;
+  padding-top: 20px;
+  color: $white;
+}
+
 @include link($white);
 .footer-information, .footer-prevent-alcoohol {
-font-size: 0.6rem;
+  font-size: 0.6rem;
 }
-}
+
 .legal-minor {
-background-color: #567683;
+  background-color: #567683;
 }
+
 .extra-small {
-font-size: 60%;
+  font-size: 60%;
 }
+
 .shopping-cart {
   .badge {
     margin-top: -30px;
   }
+}
+
+
+.button-custom {
+  border: 1px solid #ffffff;
+  background-color: $primary-color;
+  //text-align: center;
+  text-decoration: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  i {
+    line-height: 1;
+  }
+}
+.button-custom:hover {
+  background-color: #fc271e
+}
+.button-custom:active {
+  background-color: #ba3a32;
+  box-shadow: 0 5px #531b17;
+  transform: translateY(4px);
 }

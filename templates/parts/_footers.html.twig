@@ -1,14 +1,25 @@
 <footer>
     <div class="container">
         <div class="row mb-2 pt-2">
-            <div class="col d-none d-md-flex flex-column justify-content-center align-items-center">
-                <h3>A propos</h3>
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a href="{{ path('homepage') }}">Notre concept</a>
+            <div class="col d-none d-md-flex flex-column justify-content-between align-items-center">
+                <div>
+                    <h3>A propos</h3>
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a href="{{ path('delivery_information') }}">Livraison</a>
+                        </li>
+                    </ul>
+                </div>
+                <ul class="list-inline text-center list-unstyled m-0 social-butons">
+                    <li class="list-inline-item">
+                        <a href="" class="p-2">
+                            <i class="fa fa-facebook fa-2x"> </i>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ path('delivery_information') }}">Livraison</a>
+                    <li class="list-inline-item">
+                        <a href="" class="p-2">
+                            <i class="fa fa-instagram fa-2x"> </i>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -20,7 +31,7 @@
                     {{ render(url('registration_newsletter')) }}
                 </div>
             </div>
-            <div class="col d-none d-md-flex flex-column justify-content-center align-items-center">
+            <div class="col d-none d-md-flex flex-column justify-content-start align-items-center">
                 <h3>Besoin d'aide ?</h3>
                 <ul class="nav flex-column">
                     <li class="nav-item">
