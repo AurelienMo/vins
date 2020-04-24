@@ -96,11 +96,11 @@
                             <div class="col d-flex justify-content-center align-items-center">
                                 <div class="d-flex justify-content-around align-items-center h-100 w-100">
                                     <a class="detail-wine" data-url="{{ path('detail_wine', {'id': wine.id}) }}" href="#">
-                                        <img class="icon" src="{{ asset('build/images/eye.svg') }}" width="40"/>
+                                        <img class="icon" src="{{ asset('build/images/eye.png') }}" width="40"/>
                                     </a>
                                     {% if wine.hasStock %}
                                         <a class="add-to-cart" data-url="{{ path('add_wine_to_card', {'id': wine.id}) }}" href="#">
-                                            <img class="icon" src="{{ asset('build/images/cart.svg') }}" width="40"/>
+                                            <img class="icon" src="{{ asset('build/images/cart.png') }}" width="40"/>
                                         </a>
                                     {% endif %}
                                 </div>
