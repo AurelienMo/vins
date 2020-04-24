@@ -41,6 +41,7 @@ $(document).ready(function () {
             prevStepSteps = $('div.setup-panel-2 div a[href="#' + curStepBtn + '"]').parent().prev().children("a");
 
         prevStepSteps.removeAttr('disabled').trigger('click');
+        $(window).scrollTop(0);
     });
 
     allNextBtn.click(function(){
@@ -60,6 +61,7 @@ $(document).ready(function () {
 
         if (isValid)
             nextStepSteps.removeAttr('disabled').trigger('click');
+            $(window).scrollTop(0);
     });
 
     $('div.setup-panel-2 div a.btn-amber').trigger('click');
