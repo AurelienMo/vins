@@ -14,8 +14,8 @@
                 </li>
                 <li class="d-flex justify-content-center align-items-center">
                     <div class="col-12 text-center">
-                        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                            <i class="fa fa-times fa"></i>
+                        <button type="button" class="close text-white d-flex align-items-center" data-dismiss="modal" aria-label="Close">
+                            <i class="fa fa-times fa-xs"></i>
                         </button>
                     </div>
                 </li>
@@ -33,25 +33,25 @@
                                 <span>{{wine.appellation}}</span>
                             </div>
                         </div>
-                        <div class="row d-flex justify-content-around align-content-center item-caract_caract" style="height: 160px;">
+                        <div class="row d-flex justify-content-around align-content-center item-caract_caract pt-3">
                             <div class="d-flex flex-column justify-content-center">
-                                <img src="{{ asset('build/images/fruit_'~wine.wineCaract.fruity~'.png') }}" height="130px" width="130px"/>
+                                <img src="{{ asset('build/images/fruit_'~wine.wineCaract.fruity~'.png') }}" height="140px" width="140px"/>
                             </div>
                             <div class="d-flex flex-column justify-content-center">
-                                <img src="{{ asset('build/images/'~wine.wineCaract.taste~'.png') }}" height="130px" width="130px"/>
+                                <img src="{{ asset('build/images/'~wine.wineCaract.taste~'.png') }}" height="140px" width="140px"/>
                             </div>
                             <div class="d-flex flex-column justify-content-center">
-                                <img src="{{ asset('build/images/corps_'~wine.wineCaract.robustness~'.png') }}" height="130px" width="130px"/>
+                                <img src="{{ asset('build/images/corps_'~wine.wineCaract.robustness~'.png') }}" height="140px" width="140px"/>
                             </div>
                         </div>
                     </div>
                     <div class="container">
-                        <div class="row pt-3 pb-3" style="height: 150px">
+                        <div class="row pt-3 pb-4">
                             <div class="col text-center d-flex flex-column justify-content-around align-items-between">
                                 <div class="d-flex justify-content-center align-content-center">
                                     <img class="picto" src="{{ asset('build/images/thermometer.jpg') }}" alt="thermometre" />
                                 </div>
-                                <span>{{ wine.wineService.temp }} °C</span>
+                                <span class="text-center text-caract">{{ wine.wineService.temp }} °C</span>
                             </div>
                             <div class="col text-center d-flex flex-column justify-content-around align-items-between">
                                 <div class="d-flex justify-content-center align-content-center">
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     {% if wine.dishes|length > 0 %}
-                        <div class="container-fluid dishes p-0 pl-2 pr-2">
+                        <div class="container dishes">
                             <div class="row pt-3 pb-3">
                                 {% for dish in wine.dishes %}
                                     <div class="col-4 text-center">
@@ -200,7 +200,7 @@
                                         <div class="media-body text-center text-md-left ml-md-3 ml-0">
                                             <div class="d-flex justify-content-center">
                                                 <h5 class="font-weight-bold mt-0 primary-text">
-                                                    Soyez le premier à nous dire ce que vous pensez de ce vin.
+                                                    Soyez le premier à nous dire ce que vous pensez de cette box.
                                                 </h5>
                                             </div>
                                         </div>
