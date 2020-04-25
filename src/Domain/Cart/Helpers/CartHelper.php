@@ -20,6 +20,7 @@ use App\Entity\WineDomain;
 use App\Repository\PromotionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CartHelper
 {
@@ -32,14 +33,19 @@ class CartHelper
     /** @var PromotionRepository */
     protected $promotionRepository;
 
+    /** @var UrlGeneratorInterface */
+    protected $urlGenerator;
+
     public function __construct(
         SessionInterface $session,
         EntityManagerInterface $entityManager,
-        PromotionRepository $promotionRepository
+        PromotionRepository $promotionRepository,
+        UrlGeneratorInterface $urlGenerator
     ) {
         $this->session = $session;
         $this->entityManager = $entityManager;
         $this->promotionRepository = $promotionRepository;
+        $this->urlGenerator = $urlGenerator;
     }
 
     public function addProductsToCart(ItemDTO $dto): int
@@ -97,29 +103,88 @@ class CartHelper
     }
 
     /**
-     * @param InputItemObject[] $itemsUpdate
+     * @param InputItemObject $input
      */
-    public function updateCurrentCart(array $itemsUpdate)
+    public function updateCurrentCart(InputItemObject $input)
     {
         /** @var CartVO $cart */
         $cart = $this->getCartForCurrentUser();
-        $capacitiesInCart = $cart->getProducts();
-        foreach ($itemsUpdate as $item) {
-            $productToUpdate = current(array_filter($capacitiesInCart, function (ProductVO $vo) use ($item) {
-                return $item->getId() === $vo->getCapacity()->getId();
-            }));
-            if ($item->getNew() === 0) {
-                $cart->removeProduct($productToUpdate);
+        $productsInCart = $cart->getProducts();
+        $boxInCart = $cart->getBoxs();
+        $urlRedirect = $this->urlGenerator->generate('cart_checkout');
 
-                return;
-            }
-            if ($item->getNew() < 0) {
-                return;
-            }
-            if ($productToUpdate->getQuantity() !== $item->getNew()) {
-                $productToUpdate->updateQuantity($item->getNew());
-            }
+        $response = [
+            'code' => null,
+            'url' => $urlRedirect,
+            'code_type' => null,
+            'available_stock' => null
+        ];
+
+        switch ($input->getType()) {
+            case 'product':
+                /** @var ProductVO $productToUpdate */
+                $productToUpdate = current(array_filter($productsInCart, function (ProductVO $vo) use ($input) {
+                    return $input->getId() === $vo->getCapacity()->getId();
+                }));
+                if ($input->getNew() === 0) {
+                    $cart->removeProduct($productToUpdate);
+                    $response['code'] = 200;
+                    break;
+                } else {
+                    $actualStock = $productToUpdate->getCapacity()->getStock()->getQuantity();
+                    $productInBox = array_filter($boxInCart, function (BoxVO $vo) use ($productToUpdate) {
+                        return $vo->getBox()->getWines()->contains($productToUpdate->getCapacity());
+                    });
+                    $totalInBox = count($productInBox) > 0 ? 1 : 0;
+                    if (($actualStock - $totalInBox - $input->getNew()) < 0) {
+                        $response['code'] = 400;
+                        $response['code_type'] = 'no_stock';
+                        $response['available_stock'] = $actualStock - $totalInBox;
+                    } else {
+                        $response['code'] = 200;
+                        $productToUpdate->updateQuantity($input->getNew());
+                    }
+                }
+                break;
+            case 'box':
+                /** @var BoxVO $boxToUpdate */
+                $boxToUpdate = current(array_filter($boxInCart, function (BoxVO $vo) use ($input) {
+                    return $input->getId() === $vo->getBox()->getId();
+                }));
+                if ($input->getNew() === 0) {
+                    $cart->removeBox($boxToUpdate);
+                    $response['code'] = 200;
+                } else {
+                    $response['available_stock'] = null;
+                    $response['code'] = 200;
+                    foreach ($boxToUpdate->getBox()->getWines() as $wine) {
+                        $actualStock = $wine->getStock()->getQuantity();
+                        $productInCart = array_filter($productsInCart, function (ProductVO $vo) use ($wine) {
+                            return $vo->getProduct()->getId() === $wine->getWine()->getId();
+                        });
+                        $stockAvailable = $actualStock;
+                        if (count($productInCart) > 0) {
+                            $stockAvailable -= current($productInCart)->getQuantity();
+                        }
+                        if (($stockAvailable - $input->getNew()) < 0) {
+                            $response['code'] = 400;
+                            $response['code_type'] = 'no_stock';
+                            if (is_null($response['available_stock'])) {
+                                $response['available_stock'] = $stockAvailable;
+                            }
+                            if ($response['available_stock'] > $stockAvailable) {
+                                $response['available_stock'] = $stockAvailable;
+                            }
+                        }
+                    }
+                    if ($response['code'] === 200) {
+                        $boxToUpdate->updateQuantity($input->getNew());
+                    }
+                }
+                break;
         }
+
+        return $response;
     }
 
     public function removeCapacityFromCart(string $id, string $type)

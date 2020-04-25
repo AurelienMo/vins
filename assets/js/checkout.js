@@ -65,38 +65,41 @@ $(document).ready(function () {
     });
 
     $('div.setup-panel-2 div a.btn-amber').trigger('click');
-    $('.update-cart').on('click', function (e) {
-        e.preventDefault();
-        showLoader();
-        let productLines = $('.product-item');
-        let productsToUpdate = [];
-        let valid = [];
-        productLines.each(function (i, elt) {
-            const input = $(elt).find('input');
-            if (parseInt(input) < 0) {
-                valid.push(elt);
-            }
-            let itemToSend = {
-                'id': $(elt).data('capacity-id'),
-                'actual': $(elt).data('product-actual-quantity'),
-                'new': parseInt(input.val())
-            };
-            productsToUpdate.push(itemToSend);
-        });
-
-        if (valid.length === 0) {
+    $('.entry-quantity').on('focusout', function (e) {
+        let initValue = $(this).data('init-value');
+        let itemId = $(this).data('item-id');
+        let errorElt = $('.error_item_'+itemId);
+        let url = $('table').data('url');
+        if (parseInt($(this).val()) !== parseInt(initValue)) {
+            showLoader();
             $.ajax({
-                url: $(this).data('url'),
+                url: url,
                 method: 'POST',
                 dataType: 'json',
-                data: JSON.stringify(productsToUpdate),
+                data: JSON.stringify({
+                    'id': $(this).data('item-id'),
+                    'actual': parseInt(initValue),
+                    'new': parseInt($(this).val()),
+                    'type': $(this).data('type')
+                }),
                 success: function (response) {
-                    window.location.replace(response.url);
-                },
-                error: function () {
-                    hideLoader();
+                    if (response.code == 200) {
+                        window.location.replace(response.url);
+                    }
+                    if (response.code == 400) {
+                        if (response.code_type == 'no_stock') {
+                            let textError = "Stock insuffisant. " + response.available_stock + " bouteille(s) disponible(s)"
+                            $(errorElt).html(textError);
+                            $(errorElt).removeClass('d-none');
+                        }
+                        hideLoader()
+                    }
                 }
-            });
+            })
+        } else {
+            if(!errorElt.hasClass('d-none')) {
+                errorElt.addClass('d-none');
+            }
         }
     });
     $('.remove-element').on('click', function (e) {

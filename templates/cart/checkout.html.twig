@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container-fluid" style="background-color: rgba(231,62,43,0.08); min-height: 90px; max-height: 90px;">
+    <div class="container-fluid bandeau">
         <div class="row">
             <div class="col-12">
                 <div class="container">
@@ -61,10 +61,8 @@
                                     <span><strong class="primary-text">Je pense malin !</strong> J'ajoute quelques bouteilles dans mon panier pour les occasions futures.</span>
                                     <span>Ca m'évitera de courir partout le moment venu !</span>
                                 </div>
-                                <button type="button" class="btn update-cart mb-3 primary-bkg text-white" data-url="{{ path('update_cart') }}" data-toggle="tooltip" data-placement="top"
-                                        title="Mettre à jour"><i class="fas fa-sync"></i></button>
                             </div>
-                            <table class="table product-table mb-0">
+                            <table data-url="{{ path('update_cart') }}" class="table product-table mb-0">
                                 <thead class="mdb-color lighten-5">
                                 <tr>
                                     <th></th>
@@ -90,7 +88,7 @@
                                 {% for productVo in cart.products %}
                                     <tr class="product-item" data-capacity-id="{{ productVo.capacity.id }}" data-product-actual-quantity="{{ productVo.quantity }}">
                                         <th scope="row">
-                                            <img src="{{ vich_uploader_asset(productVo.product, 'imageFile') }}" alt="" class="img-fluid z-depth-0" style="min-width: 0px;">
+                                            <img src="{{ vich_uploader_asset(productVo.product, 'imageFile') }}" alt="" class="img-fluid z-depth-0">
                                         </th>
                                         <td>
                                             <div class="d-flex flex-column">
@@ -115,8 +113,9 @@
                                             {% endif %}
                                         </td>
                                         <td></td>
-                                        <td>
-                                            <input type="number" min="0" value="{{ productVo.quantity }}" aria-label="Search" class="form-control entry-quantity" style="width: 100px">
+                                        <td class="d-flex flex-column align-items-end">
+                                            <input data-type="product" data-item-id="{{ productVo.capacity.id }}" data-init-value="{{ productVo.quantity }}" type="number" min="0" value="{{ productVo.quantity }}" aria-label="Search" class="form-control entry-quantity">
+                                            <span class="text-right small d-none primary-text error_item_{{ productVo.capacity.id }}"></span>
                                         </td>
                                         <td></td>
                                         <td class="font-weight-bold">
@@ -132,7 +131,7 @@
                                 {% for boxVo in cart.boxs %}
                                     <tr class="product-item" data-capacity-id="{{ boxVo.box.id }}" data-product-actual-quantity="{{ boxVo.quantity }}">
                                         <th scope="row">
-                                            <img src="{{ vich_uploader_asset(boxVo.box, 'imageFile') }}" alt="" class="img-fluid z-depth-0" style="min-width: 0px;">
+                                            <img src="{{ vich_uploader_asset(boxVo.box, 'imageFile') }}" alt="" class="img-fluid z-depth-0">
                                         </th>
                                         <td>
                                             <div class="d-flex flex-column">
@@ -147,8 +146,9 @@
                                             <span>{{boxVo.box.price}}€</span>
                                         </td>
                                         <td></td>
-                                        <td>
-                                            <input type="number" min="0" value="{{ boxVo.quantity }}" aria-label="Search" class="form-control entry-quantity" style="width: 100px">
+                                        <td class="d-flex flex-column align-items-end">
+                                            <input data-type="box" data-item-id="{{ boxVo.box.id }}" data-init-value="{{ boxVo.quantity }}" type="number" min="0" value="{{ boxVo.quantity }}" aria-label="Search" class="form-control entry-quantity">
+                                            <span class="text-right small d-none primary-text error_item_{{ boxVo.box.id }}"></span>
                                         </td>
                                         <td></td>
                                         <td class="font-weight-bold">

@@ -27,9 +27,7 @@ $('.quantity-box').on('change', function (e) {
 $('.detail-box-to-add').on('click', function (e) {
     e.preventDefault();
     let qtyContainer = $('.box_'+$(this).data('box-id')).find('select');
-    console.log(qtyContainer);
     let valueSelect = qtyContainer.val();
-    console.log(valueSelect);
     let url = $(this).attr('href');
     if (valueSelect > 0 || valueSelect != null) {
         showLoader();
