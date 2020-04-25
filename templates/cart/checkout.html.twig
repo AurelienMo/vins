@@ -30,10 +30,10 @@
         <div class="steps-form-2">
             <div class="steps-row-2 setup-panel-2 d-flex justify-content-between">
                 <div class="steps-step-2">
-                    <a href="#step-1" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Basic Information"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                    <a href="#step-1" type="button" class="btn btn-amber btn-circle-2 waves-effect ml-0" data-toggle="tooltip" data-placement="top" title="Contenu du panier"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
                 </div>
                 <div class="steps-step-2">
-                    <a href="#step-2" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Personal Data"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="#step-2" type="button" class="btn btn-blue-grey btn-circle-2 waves-effect" data-toggle="tooltip" data-placement="top" title="Informations livraison"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
@@ -122,10 +122,10 @@
                                             <strong>{{productVo.calculateSubTotalPrice}}€</strong>
                                         </td>
                                         <td>
-                                            <button type="button" class="remove-element btn btn-sm primary-bkg text-white" data-toggle="tooltip" data-placement="top"
-                                                    title="Supprimer" data-url="{{ path('remove_item_cart', {'id': productVo.capacity.id, 'type': 'product'}) }}">X
+                                            <button class="remove-element button-custom btn-floating d-flex justify-content-center align-items-center text-white" data-toggle="tooltip" data-placement="top"
+                                                    title="Supprimer" data-url="{{ path('remove_item_cart', {'id': productVo.capacity.id, 'type': 'product'}) }}">
+                                                X
                                             </button>
-                                        </td>
                                     </tr>
                                 {% endfor %}
                                 {% for boxVo in cart.boxs %}
@@ -155,8 +155,9 @@
                                             <strong>{{boxVo.calculateSubTotalPrice}}€</strong>
                                         </td>
                                         <td>
-                                            <button type="button" class="remove-element btn btn-sm primary-bkg text-white" data-toggle="tooltip" data-placement="top"
-                                                    title="Supprimer" data-url="{{ path('remove_item_cart', {'id': boxVo.box.id, 'type': 'box'}) }}">X
+                                            <button class="remove-element button-custom btn-floating d-flex justify-content-center align-items-center text-white" data-toggle="tooltip" data-placement="top"
+                                                    title="Supprimer" data-url="{{ path('remove_item_cart', {'id': boxVo.box.id, 'type': 'box'}) }}">
+                                                X
                                             </button>
                                         </td>
                                     </tr>
@@ -178,7 +179,7 @@
                             </table>
                         </div>
                     </section>
-                    <button class="primary-bkg text-white nextBtn-2 float-right btn btn-sm" type="button">Livraison</button>
+                    <button class="primary-bkg text-white nextBtn-2 float-right btn btn-sm font-weight-bold" type="button">Livraison</button>
                     {% endif %}
                 </div>
             </div>
@@ -189,7 +190,7 @@
                         <h3 class="font-weight-bold pl-0 my-4"><strong>Ma livraison aux petits oignons</strong></h3>
                         <div class="row">
                             <div class="col-sm-12 offset-md-3 col-md-6 text-center">
-                                <span>Toutes les informations ci-dessous sont indispensables pour la livraison et la facturation, merci vous relire.</span>
+                                <span>Toutes les informations ci-dessous sont indispensables à la livraison et la facturation.</span>
                             </div>
                         </div>
                         {% form_theme form 'forms/_contact.html.twig' %}
@@ -263,10 +264,10 @@
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <span class="font-weight-bold">Et si vous n'êtes pas là ?</span>
+                                <span class="font-weight-bold primary-text">Et si vous n'êtes pas là ?</span>
                             </div>
                             <div class="col-12">
-                                <span>Ne perdez pas votre livraison, indiquez nous le nom d'un voisin ou un lieu ou nous pourrons déposer votre colis avec votre accord.</span>
+                                <span>Ne perdez pas votre livraison, indiquez nous le nom d'un voisin ou un lieu où nous pourrons déposer votre colis avec votre accord.</span>
                             </div>
                             <div class="col-12">
                                 <span>En mon absence, vous pouvez déposer le colis chez: </span>
@@ -279,13 +280,13 @@
                         <div id="container-button" class="col-12">
                             <div class="row">
                                 <div class="col-6 text-left">
-                                    <button class="primary-bkg btn btn-sm prevBtn-2 text-white" type="button">Panier</button>
+                                    <button class="primary-bkg btn btn-sm prevBtn-2 text-white font-weight-bold" type="button">Panier</button>
                                 </div>
                                 <div id="valid-delivery" class="col-6 text-right">
                                     {% if cart %}
                                     <button class="primary-bkg btn btn-sm float-right text-white" type="submit">
-                                            <span class="update-delivery {% if cart.products|length > 0 and not cart.deliveryInformation is not null%}d-none{% endif %}">Je mets à jour mes informations</span>
-                                            <span class="define-delivery {% if cart.products|length == 0 or (cart.products|length > 0 and not cart.deliveryInformation is null ) %}d-none{% endif %}">Je valide mes informations</span>
+                                            <span class="update-delivery font-weight-bold {% if cart.products|length > 0 and not cart.deliveryInformation is not null%}d-none{% endif %}">Je mets à jour mes informations</span>
+                                            <span class="define-delivery font-weight-bold {% if cart.products|length == 0 or (cart.products|length > 0 and not cart.deliveryInformation is null ) %}d-none{% endif %}">Je valide mes informations</span>
                                     </button>
                                     {% endif %}
                                 </div>

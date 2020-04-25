@@ -1,4 +1,4 @@
-<footer>
+<footer {% if app.session.has('cart') and app.session.get('cart').countElementsInCart == 0 and app.request.get('_route') == 'cart_checkout'%}class="fixed-bottom" {% endif %}>
     <div class="container">
         <div class="row mb-2 pt-2">
             <div class="col d-none d-md-flex flex-column justify-content-between align-items-center">
