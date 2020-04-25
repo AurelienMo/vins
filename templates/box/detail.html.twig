@@ -49,31 +49,31 @@
                         <div class="row pt-3 pb-4">
                             <div class="col text-center d-flex flex-column justify-content-around align-items-between">
                                 <div class="d-flex justify-content-center align-content-center">
-                                    <img class="picto" src="{{ asset('build/images/thermometer.jpg') }}" alt="thermometre" />
+                                    <img class="picto" src="{{ asset('build/images/thermometer.jpg') }}" alt="thermometre" width="55" height="55"/>
                                 </div>
                                 <span class="text-center text-caract">{{ wine.wineService.temp }} °C</span>
                             </div>
                             <div class="col text-center d-flex flex-column justify-content-around align-items-between">
                                 <div class="d-flex justify-content-center align-content-center">
-                                    <img class="picto" src="{{ asset('build/images/carafage.jpg') }}" alt="carafage" />
+                                    <img class="picto" src="{{ asset('build/images/carafage.jpg') }}" alt="carafage" width="55" height="55" />
                                 </div>
                                 <span class="text-center text-caract">{{ wine.wineService.decanting ? 'Oui' : 'Non' }}</span>
                             </div>
                             <div class="col text-center d-flex flex-column justify-content-around align-items-between">
                                 <div class="d-flex justify-content-center align-content-center">
-                                    <img class="picto" src="{{ asset('build/images/restaurant.jpg') }}" alt="repas" />
+                                    <img class="picto" src="{{ asset('build/images/restaurant.jpg') }}" alt="repas" width="55" height="55" />
                                 </div>
                                 <span class="text-center text-caract">{{ wine.wineService.opportunity }}</span>
                             </div>
                             <div class="col text-center d-flex flex-column justify-content-around align-items-between">
                                 <div class="d-flex justify-content-center align-content-center">
-                                    <img class="picto" src="{{ asset('build/images/percent.png') }}" alt="percent" />
+                                    <img class="picto" src="{{ asset('build/images/percent.png') }}" alt="percent" width="55" height="55" />
                                 </div>
                                 <span class="text-center text-caract">{{ wine.alcoholDegree }}%</span>
                             </div>
                             <div class="col text-center d-flex flex-column justify-content-around align-items-between">
                                 <div class="d-flex justify-content-center align-content-center">
-                                    <img class="picto" src="{{ asset('build/images/grapes.png') }}" alt="cepage" />
+                                    <img class="picto" src="{{ asset('build/images/grapes.png') }}" alt="cepage" width="55" height="55" />
                                 </div>
                                 <span class="text-center text-caract">{{ wine.wineService.getGrape(true) }}</span>
                             </div>
@@ -151,8 +151,8 @@
                                 <div class="md-form mb-4 pink-textarea active-pink-textarea">
                                     {{ form_row(form.content) }}
                                 </div>
-                                <div class="col-md-12 text-right">
-                                    <button type="submit" class="btn primary-bkg text-white btn-rounded">
+                                <div class="col-md-12 d-flex justify-content-end">
+                                    <button class="button-custom btn-floating d-flex justify-content-center align-items-center">
                                         <i class="fa fa-paper-plane"></i>
                                     </button>
                                 </div>
