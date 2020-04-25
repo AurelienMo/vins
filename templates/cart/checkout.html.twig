@@ -58,7 +58,7 @@
                         <div class="table-responsive">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex flex-column justify-content-center">
-                                    <span><strong>Je pense malin !</strong> J'ajoute quelques bouteilles dans mon panier pour les occasions futures.</span>
+                                    <span><strong class="primary-text">Je pense malin !</strong> J'ajoute quelques bouteilles dans mon panier pour les occasions futures.</span>
                                     <span>Ca m'évitera de courir partout le moment venu !</span>
                                 </div>
                                 <button type="button" class="btn update-cart mb-3 primary-bkg text-white" data-url="{{ path('update_cart') }}" data-toggle="tooltip" data-placement="top"
@@ -96,7 +96,7 @@
                                             <div class="d-flex flex-column">
                                                 <div>
                                                     <div class="mt-3">
-                                                        <strong class="primary-text font-weight-bold">{{productVo.product.vintageName}}</strong> -
+                                                        <strong class="font-weight-bold"  style="color: {{ applyColor(productVo.product.profile.id, 'product') }}">{{productVo.product.vintageName}}</strong> -
                                                         <span>{{productVo.product.year}}</span>
                                                     </div>
                                                 </div>
@@ -109,7 +109,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span class="text-cancel">{{productVo.unitPrice}}€</span>
+                                            <span {% if productVo.pricePromo is not null %}class="text-cancel"{% endif %}>{{productVo.unitPrice}}€</span>
                                             {% if productVo.pricePromo is not null %}
                                                 <span class="primary-text">{{productVo.pricePromo}}€</span>
                                             {% endif %}
@@ -138,7 +138,7 @@
                                             <div class="d-flex flex-column">
                                                 <div>
                                                     <div class="mt-3">
-                                                        <strong class="primary-text font-weight-bold">Box "{{boxVo.box.name}}"</strong>
+                                                        <strong class="font-weight-bold" style="color: {{ applyColor(boxVo.box.id, 'box') }}">Box "{{boxVo.box.name}}"</strong>
                                                     </div>
                                                 </div>
                                             </div>

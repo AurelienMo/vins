@@ -22,18 +22,18 @@
                                 {{ box.description }}
                             </p>
                         </div>
-                        <div class="card-box_price d-flex justify-content-around align-content-center pt-2 pb-2">
+                        <div class="card-box_price d-flex justify-content-around align-content-center pt-2 pb-2 box_{{ box.id }}">
                                 <div class="d-flex align-items-center justify-content-center">
                                     <span class="h5 m-0 font-weight-bold">{{ box.price }}€</span>
                                 </div>
                                 <a href="{{ path('detail_box', {'id': box.id}) }}" class="detail-box-to-show d-flex justify-content-center align-items-center">
                                     <img class="icon" src="{{ asset('build/images/eye.png') }}"/>
                                 </a>
-                                <a href="{{ path('add_box_to_card', {'id': box.id}) }}" class="detail-box-to-add d-flex justify-content-center align-items-center">
+                                <a data-box-id={{ box.id}} href="{{ path('add_box_to_card', {'id': box.id}) }}" class="detail-box-to-add d-flex justify-content-center align-items-center">
                                     <img class="icon" src="{{ asset('build/images/cart.png') }}"/>
                                 </a>
                                 <div class="d-flex quantity justify-content-center align-items-center">
-                                    <select class="quantity-box mt-0 mb-0">
+                                    <select id="{{ box.id }}" class="mt-0 mb-0">
                                         <option {% if qtyInCard == 0 %}selected{% endif%} disabled>Quantité</option>
                                         {% for i in 1..10 %}
                                             <option {% if qtyInCard == i%}selected{% endif%} value="{{ i }}">{{ i }}</option>
