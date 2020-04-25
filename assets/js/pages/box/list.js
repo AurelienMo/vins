@@ -2,7 +2,7 @@ import '../../../scss/box/list.scss'
 import {hideLoader, showLoader} from "../../components/Loader";
 import Modal from "../../components/Modal";
 
-$('#detail-box').on('click', function (e) {
+$('.detail-box-to-show').on('click', function (e) {
     e.preventDefault();
     let modal = new Modal();
     showLoader();
@@ -19,17 +19,18 @@ $('#detail-box').on('click', function (e) {
         }
     })
 });
-$('#quantity-box').on('change', function (e) {
+$('.quantity-box').on('change', function (e) {
     if (parseInt($(this).val()) > 0) {
         $(this).css('border', 'inherit');
     }
 })
-$('#add-box-to-card').on('click', function (e) {
+$('.detail-box-to-add').on('click', function (e) {
     e.preventDefault();
-    let valueSelect = parseInt($('#quantity-box').val());
+    let qtyContainer = $(this).find('.quantity-box');
+    let valueSelect = parseInt(qtyContainer.val());
     let url = $(this).attr('href');
     if (valueSelect <= 0) {
-        $('#quantity-box').css('border', '2 px solid red');
+        $(qtyContainer).css('border', '2 px solid red');
     } else {
         showLoader();
         let existWarnings = $('.out_of_stock');
