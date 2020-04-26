@@ -10,21 +10,46 @@
 
 {% block body %}
 <div class="container-fluid pr-0 pl-0">
-    <div id="carousel-slider-homepage" class="carousel slide carousel-fade" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
-            {% for index, slider in sliders %}
-                {% if slider.link %}
-                    <a href="{{ slider.link }}">
-                {% endif %}
-                <div class="carousel-item{% if index == 0 %} active{% endif %}">
-                    <img class="d-block img-fluid" src="{{vich_uploader_asset(slider, 'imageFile')}}">
-                </div>
-                {% if slider.link %}
-                    </a>
-                {% endif %}
+    <div id="carousel-slider-homepage" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for slider in sliders %}
+                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                        {% if slider.link %}
+                            <a href="{{ slider.link }}">
+                        {% endif %}
+                            <img href="{{ slider.link }}" class="d-block w-100" src="{{ vich_uploader_asset(slider, 'imageFile') }}">
+                        {% if slider.link %}
+                            </a>
+                        {% endif %}
+                    </div>
             {% endfor %}
+
+{#            <div class="carousel-item active">#}
+{#                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(35).jpg">#}
+{#            </div>#}
+{#            <div class="carousel-item">#}
+{#                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(33).jpg">#}
+{#            </div>#}
+{#            <div class="carousel-item">#}
+{#                <img class="d-block w-100" src="https://mdbootstrap.com/img/Photos/Slides/img%20(31).jpg">#}
+{#            </div>#}
         </div>
     </div>
+{#    <div id="carousel-slider-homepage" class="carousel slide carousel-fade" data-ride="carousel">#}
+{#        <div class="carousel-inner" role="listbox">#}
+{#            {% for index, slider in sliders %}#}
+{#                {% if slider.link %}#}
+{#                    <a href="{{ slider.link }}">#}
+{#                {% endif %}#}
+{#                <div class="carousel-item{% if index == 0 %} active{% endif %}">#}
+{#                    <img class="d-block img-fluid" src="{{vich_uploader_asset(slider, 'imageFile')}}">#}
+{#                </div>#}
+{#                {% if slider.link %}#}
+{#                    </a>#}
+{#                {% endif %}#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}
     <div class="mt-4 mb-4 p-0">
         <img class="img-fluid" src="{{ vich_uploader_asset(globalConf, 'imageHomepageFile') }}"/>
     </div>
