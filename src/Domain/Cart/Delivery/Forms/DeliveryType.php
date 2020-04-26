@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -97,6 +98,24 @@ class DeliveryType extends AbstractType
                         'attr' => [
                             'class' => 'form-control',
                         ],
+                    ]
+                )
+                ->add(
+                    'major',
+                    ChoiceType::class,
+                    [
+                        'label' => false,
+                        'choices' => [
+                            'Je confirme avoir + de 18 ans pour commander *' => true,
+                        ],
+                        'label_attr' => [
+                            'class' => 'form-check-label',
+                        ],
+                        'choice_attr' => function ($val, $key, $index) {
+                            return ['class' => 'form-check-input'];
+                        },
+                        'expanded' => true,
+                        'multiple' => false,
                     ]
                 )
                 ->add(

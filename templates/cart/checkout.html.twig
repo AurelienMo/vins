@@ -228,6 +228,11 @@
                                     {{ form_row(form.city) }}
                                 </div>
                             </div>
+                            <div class="col-6 d-flex justify-content-center align-items-center">
+                                <div>
+                                    {{ form_row(form.major) }}
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12 col-md-6">
@@ -299,7 +304,7 @@
                                         <form action="" method="POST" class="texf-center">
                                             <script
                                                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                                                    data-key="{{ stripe.public_key }}"
+                                                    data-key="{{ stripe_public_key }}"
                                                     data-amount="{{ app.session.has('cart') ? app.session.get('cart').getTotalPriceWithDelivery() * 100 : 0 }}"
                                                     data-name="Mon Premier Sommelier"
                                                     data-currency="eur"

@@ -69,6 +69,11 @@ class DeliveryDTO
      */
     protected $personIfAbsent;
 
+    /**
+     * @var bool
+     */
+    protected $major;
+
     public function getName()
     {
         return $this->name;
@@ -177,5 +182,21 @@ class DeliveryDTO
     public function setPersonIfAbsent(?string $personIfAbsent): void
     {
         $this->personIfAbsent = $personIfAbsent;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isMajor(): ?bool
+    {
+        return $this->major;
+    }
+
+    /**
+     * @param bool $major
+     */
+    public function setMajor(?bool $major): void
+    {
+        $this->major = $major;
     }
 }
