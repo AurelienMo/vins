@@ -3,7 +3,7 @@
         <form action="" method="POST" class="texf-center">
             <script
                     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="pk_test_EGNkN8Ku2kyEjvFRhyQjzuDC"
+                    data-key="{{ stripe.public_key }}"
                     data-amount="{{ cart.getTotalPriceWithDelivery() * 100 }}"
                     data-name="Mon Premier Sommelier"
                     data-currency="eur"
