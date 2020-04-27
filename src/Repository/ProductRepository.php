@@ -84,6 +84,19 @@ class ProductRepository extends AbstractServiceRepository
                         ->setParameter('occasions', array_values($occasionsParams));
                 }
             }
+            if (array_key_exists('pr', $queryParams) && $queryParams['pr'] !== '') {
+                $qb->join('p.capacities', 'c');
+                if ($queryParams['pr'] === 'minor') {
+                    $qb->andWhere('c.unitPrice < 10 AND c.type != :cubis');
+                }
+                if ($queryParams['pr'] === 'medium') {
+                    $qb->andWhere('c.unitPrice >= 10 AND c.unitPrice < 13 AND c.type != :cubis');
+                }
+                if ($queryParams['pr'] === 'major') {
+                    $qb->andWhere('c.unitPrice >= 13 AND c.type != :cubis');
+                }
+                $qb->setParameter('cubis', 'Cubis');
+            }
         }
 
         return $qb->getQuery()->getResult();

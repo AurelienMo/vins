@@ -58,8 +58,8 @@ easy_admin:
                               Roussilon: Roussilon
                               Savoie: Savoie
                               Sud-ouest: Sud-ouest
-                              Val de loire: Val de loire
-                              Vallée du Rhône: Vallée du Rhône
+                              Loire: Loire
+                              Rhône: Rhône
                       columns: 4
                     - property: domain
                       label: 'Domaine'

@@ -50,6 +50,7 @@ class WineList
             $regionsFilter = implode(',', $form->getData()['regions']);
             $accordsFilter = implode(',', $form->getData()['accords']);
             $occasionsFilter = implode(',', $form->getData()['occasions']);
+            $priceFilter = $form->getData()['price'];
 
             return $redirectResponder(
                 'wine_list',
@@ -58,6 +59,7 @@ class WineList
                     'r' => $regionsFilter,
                     'a' => $accordsFilter,
                     'o' => $occasionsFilter,
+                    'pr' => $priceFilter,
                 ]
             );
         }

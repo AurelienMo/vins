@@ -736,7 +736,7 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
         /** @var Capacity $capacity */
         foreach ($this->capacities as $capacity) {
             if (!in_array($capacity->getType(), $type) && $capacity->getStock()->getQuantity() > 0) {
-                $type[] = $capacity->getType();
+                $type[] = $capacity->getType() === 'Cubis' ? 'BagInBox' : $capacity->getType();
             }
         }
 

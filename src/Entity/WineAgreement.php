@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="amo_wine_agreement")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\WineAgreementRepository")
  */
 class WineAgreement extends AbstractEntity
 {

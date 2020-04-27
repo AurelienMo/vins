@@ -1,3 +1,4 @@
+@import "../colors";
 .card-wine {
   height: 600px;
   border-radius: 20px 20px 10px 10px;
@@ -151,4 +152,10 @@
 }
 .content-detail-description {
   font-size: 0.9rem;
+}
+.dropdown-content li > span.filtrable {
+  color: $primary-color !important;
+}
+.dropdown-content {
+  max-height: 40rem !important;
 }

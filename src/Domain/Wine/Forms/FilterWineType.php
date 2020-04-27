@@ -5,9 +5,11 @@ namespace App\Domain\Wine\Forms;
 use App\Entity\Product;
 use App\Entity\VineProfile;
 use App\Entity\WineAgreement;
+use App\Repository\WineAgreementRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,10 +22,14 @@ class FilterWineType extends AbstractType
     /** @var RequestStack */
     protected $requestStack;
 
-    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack)
+    /** @var WineAgreementRepository */
+    protected $wineAgreementRepo;
+
+    public function __construct(EntityManagerInterface $entityManager, RequestStack $requestStack, WineAgreementRepository $wineAgreementRepo)
     {
         $this->entityManager = $entityManager;
         $this->requestStack = $requestStack;
+        $this->wineAgreementRepo = $wineAgreementRepo;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -35,7 +41,8 @@ class FilterWineType extends AbstractType
                 [
                     'label' => false,
                     'attr' => [
-                        'class' => 'mdb-select colorful-select dropdown-primary md-form',
+                        'class' => 'mdb-select colorful-select dropdown-danger md-form',
+                        'data-label-select-all' => 'Tous les profils',
                     ],
                     'choices' => $this->getProfileByType(),
                     'choice_attr' => function ($choice, $key, $value) {
@@ -60,7 +67,8 @@ class FilterWineType extends AbstractType
                 ChoiceType::class,
                 [
                     'attr' => [
-                        'class' => 'mdb-select colorful-select dropdown-primary md-form',
+                        'class' => 'mdb-select colorful-select dropdown-danger md-form',
+                        'data-label-select-all' => 'Toutes les régions',
                     ],
                     'choice_attr' => function ($choice, $key, $value) {
                         if ($key === 'Régions') {
@@ -85,7 +93,8 @@ class FilterWineType extends AbstractType
                 ChoiceType::class,
                 [
                     'attr' => [
-                        'class' => 'mdb-select colorful-select dropdown-primary md-form',
+                        'class' => 'mdb-select colorful-select dropdown-danger md-form',
+                        'data-label-select-all' => 'Tous les accords',
                     ],
                     'choice_attr' => function ($choice, $key, $value) {
                         if ($key === 'Accords') {
@@ -111,7 +120,8 @@ class FilterWineType extends AbstractType
                 ChoiceType::class,
                 [
                     'attr' => [
-                        'class' => 'mdb-select colorful-select dropdown-primary md-form',
+                        'class' => 'mdb-select colorful-select dropdown-danger md-form',
+                        'data-label-select-all' => 'Toutes les occasions',
                     ],
                     'choice_attr' => function ($choice, $key, $value) {
                         if ($key === 'Occasions') {
@@ -132,25 +142,36 @@ class FilterWineType extends AbstractType
                     'required' => false,
                 ]
             )
+            ->add(
+                'price',
+                ChoiceType::class,
+                [
+                    'attr' => [
+                        'class' => 'mdb-select colorful-select dropdown-danger md-form',
+                        'data-label-select-all' => 'Tous les prix',
+                    ],
+                    'choice_attr' => function ($choice, $key, $value) {
+                        if ($key === 'Prix') {
+                            return ['disabled' => true];
+                        }
+
+                        if (!$this->requestStack->getCurrentRequest()->query->has('pr')) {
+                            return [];
+                        }
+
+                        return $this->getPrices()[$key] === $this->requestStack->getCurrentRequest()->query->get('pr') ? ['selected' => true] : [];
+                    },
+                    'choices' => $this->getPrices(),
+                    'multiple' => false,
+                    'required' => false,
+                ]
+            )
             ;
     }
 
     private function getProfileByType()
     {
         $profiles = $this->entityManager->getRepository(VineProfile::class)->findAll();
-
-        $base = [
-            'Profils' => 'Profils',
-        ];
-        $whiteList = [
-            'Les blancs' => 'Les blancs',
-        ];
-        $pinkList = [
-            'Les rosés' => 'Les rosés',
-        ];
-        $redList = [
-            'Les rouges' => 'Les rouges',
-        ];
 
         $profilesList = [
             'Profils' => 'Profils',
@@ -164,30 +185,23 @@ class FilterWineType extends AbstractType
         }
 
         return $profilesList;
-
-
-
-        /** @var VineProfile $profile */
-        foreach ($profiles as $profile) {
-            switch ($profile->getType()) {
-                case VineProfile::WHITE_TYPE_PROFILE:
-                    $whiteList[$profile->getName()] = $profile->getName();
-                    break;
-                case VineProfile::PINK_TYPE_PROFILE:
-                    $pinkList[$profile->getName()] = $profile->getName();
-                    break;
-                case VineProfile::RED_TYPE_PROFILE:
-                    $redList[$profile->getName()] = $profile->getName();
-                    break;
-            }
-        }
-
-        return array_merge($base, $whiteList, $pinkList, $redList);
     }
 
     private function getRegions()
     {
-        return [
+        $regions = $this->entityManager->createQueryBuilder()
+                            ->from(Product::class, 'p')
+                            ->select('p.region')
+                            ->where('p.region IS NOT NULL')
+                            ->distinct()
+                            ->groupBy('p.region')
+                            ->getQuery()
+                            ->getResult();
+        $regionOnProduct = [];
+        foreach ($regions as $region) {
+            $regionOnProduct[] = $region['region'];
+        }
+        $allRegions = [
             'Régions' => 'Régions',
             'Alsace' => 'Alsace',
             'Beaujolais' => 'Beaujolais',
@@ -199,14 +213,21 @@ class FilterWineType extends AbstractType
             'Roussilon' => 'Roussilon',
             'Savoie' => 'Savoie',
             'Sud-ouest' => 'Sud-ouest',
-            'Val de loire' => 'Val de loire',
-            'Vallée du Rhône' => 'Vallée du Rhône',
+            'Loire' => 'Loire',
+            'Rhône' => 'Rhône',
         ];
+        foreach ($allRegions as $region) {
+            if (!in_array($region, $regionOnProduct) && $region !== 'Régions') {
+                unset($allRegions[$region]);
+            }
+        }
+
+        return $allRegions;
     }
 
     private function getAccords()
     {
-        $accords = $this->entityManager->getRepository(WineAgreement::class)->findAll();
+        $accords = $this->wineAgreementRepo->getAgreementOrderedByOrder();
         array_unshift($accords, 'Accords');
 
         $accordsOrdered = [];
@@ -233,5 +254,15 @@ class FilterWineType extends AbstractType
         }
 
         return $occasions;
+    }
+
+    private function getPrices()
+    {
+        return [
+            'Prix' => 'Prix',
+            '7-10€' => 'minor',
+            '10-13€' => 'medium',
+            '>13€' => 'major',
+        ];
     }
 }
