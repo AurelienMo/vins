@@ -34,14 +34,21 @@ class AddStockEntryType extends AbstractType
         FormBuilderInterface $builder,
         array $options
     ) {
-        $builder->add(
+        $builder
+            ->add(
+                'createdAt',
+                DateTimeType::class,
+                [
+                    'label' => 'Crée le',
+                    'disabled' => true,
+                    'widget' => 'single_text'
+                ]
+            )
+            ->add(
             'quantity',
             IntegerType::class,
             [
                 'label' => 'Quantité',
-                'attr' => [
-                    'class' => 'col-6 mt-1',
-                ],
             ]
         )
             ->add(

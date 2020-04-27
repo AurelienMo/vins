@@ -36,6 +36,7 @@ class MailsSubscriber implements EventSubscriberInterface
         return [
             ConfirmMailEvent::class => 'confirmOrder',
             ContactMailEvent::class => 'onContact',
+            ConfirmDeliveryEvent::class => 'onDelivery',
         ];
     }
 
@@ -104,6 +105,12 @@ class MailsSubscriber implements EventSubscriberInterface
             ->html($this->templating->render('emails/contact.html.twig'));
 
         $this->getMailer()->send($email);
+    }
+
+    public function onDelivery(ConfirmDeliveryEvent $event)
+    {
+        $type = $event->getType();
+
     }
 
     private function getMailer(): Mailer

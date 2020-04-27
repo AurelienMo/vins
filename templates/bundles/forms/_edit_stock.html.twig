@@ -64,7 +64,6 @@
 
 {% block form_row -%}
     {% set _field_type = easyadmin.field.fieldType|default('default') %}
-{#    {{ dump(block_prefixes) }}#}
     {% set flexDirection = null %}
     {% if block_prefixes[2] == '_stock_stockEntries' %}
         {% set flexDirection = 'flex-column' %}

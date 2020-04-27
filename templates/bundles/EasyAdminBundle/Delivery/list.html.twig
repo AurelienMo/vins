@@ -1,6 +1,7 @@
 {% extends 'bundles/EasyAdminBundle/list.html.twig' %}
 
 {% block table_body %}
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
     {% for item in paginator.currentPageResults %}
         {% if not easyadmin_is_granted(_entity_config.list.item_permission, item) %}
             {% set _number_of_hidden_results = _number_of_hidden_results + 1 %}
@@ -19,6 +20,9 @@
                     <td class="{{ isSortingField ? 'sorted' }} {{ metadata.dataType|lower }} {{ metadata.css_class }}" {{ easyadmin_config('design.rtl') ? 'dir="rtl"' }}>
                         {% if metadata.label == 'Adresse' %}
                             <span>{{ item.getAddress }}</span>
+                            <button class="copy-address" data-clipboard-text="{{ item.getAddress }}">
+                                <i class="fa fa-copy"></i>
+                            </button>
                         {% else %}
                             {{ easyadmin_render_field_for_list_view(_entity_config.name, item, metadata) }}
                         {% endif %}
@@ -62,4 +66,11 @@
             </td>
         </tr>
     {% endif %}
+    <script>
+        var clipboard = new ClipboardJS('.copy-address');
+
+        clipboard.on('success', function(e) {
+            e.clearSelection();
+        });
+    </script>
 {% endblock table_body %}

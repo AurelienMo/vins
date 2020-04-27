@@ -14,6 +14,7 @@ easy_admin:
                 fields:
                     - property: product
                       label: 'Produit'
+                      template: 'admin/fields/promotions/_product.html.twig'
                     - property: typePromotion
                       label: 'Type promotion'
                     - property: value

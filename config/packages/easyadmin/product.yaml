@@ -4,6 +4,12 @@ easy_admin:
             class: App\Entity\Product
             templates:
                 edit: 'bundles/EasyAdminBundle/Product/edit.html.twig'
+            search:
+                fields:
+                  - property: domain
+                    search_label: 'Chercher par nom de domaine'
+                  - property: profile
+                    search_label: 'Chercher par profil'
             list:
                 form_filters:
                     - property: active
@@ -18,8 +24,8 @@ easy_admin:
                 fields:
                     - property: active
                       label: 'Actif ?'
-                    - property: isPromote
-                      label: 'Mis en avant'
+#                    - property: isPromote
+#                      label: 'Mis en avant'
                     - property: profile
                       label: 'Profil'
                     - property: domain

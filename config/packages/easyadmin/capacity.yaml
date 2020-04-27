@@ -10,6 +10,7 @@ easy_admin:
                 fields:
                     - property: wine
                       label: 'Vin'
+                      template: 'admin/fields/capacity/_wine.html.twig'
                     - property: type
                       label: 'Type Contenance'
                     - property: quantity

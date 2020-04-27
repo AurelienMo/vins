@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center">
+    {{ value }}
+    {% if value > 0 %}
+        <i class="ml-2 fa fa-info-circle fa-2x" data-toggle="tooltip" data-html="true" title="
+<ul class='list-unstyled'>
+{% for line in item.lines %}
+        {% if line.capacityName == 'Bouteille' %}
+            <li>{{ line.domain }} - {{ line.vintageName }} - {{ line.year }} - {{ line.quantity }} bouteille(s)</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+"></i>
+    {% endif %}
+</div>
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
+<style>
+    .tooltip-inner {
+        max-width: 600px !important;
+        background-color: #ffaaaa !important;
+        border: 1px solid black;
+        color: black;
+        font-size: 1rem;
+        z-index: 1;
+    }
+</style>

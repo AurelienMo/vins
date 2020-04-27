@@ -15,6 +15,7 @@ easy_admin:
                     - property: status
                       label: 'Statut livraison'
                     - property: typeDelivery
+                      label: 'Type'
                     - property: getDateDelivery
                       label: "Date livraison"
                     - property: getAddress

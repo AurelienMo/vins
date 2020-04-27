@@ -15,6 +15,7 @@ easy_admin:
                 fields:
                     - property: capacity.wine
                       label: 'Vin'
+                      template: 'admin/fields/capacity/_wine.html.twig'
                     - property: capacity.getCapacityFullname
                       label: 'Contenance'
                     - property: quantity

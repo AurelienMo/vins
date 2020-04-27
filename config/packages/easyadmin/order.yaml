@@ -6,6 +6,9 @@ easy_admin:
                 new: 'bundles/EasyAdminBundle/Order/new.html.twig'
                 edit: 'bundles/EasyAdminBundle/Order/new.html.twig'
             class: App\Entity\Order
+            search:
+                - property: customer
+
             list:
                 title: 'Liste des commandes'
                 sort: ['orderAt', 'DESC']
@@ -20,6 +23,7 @@ easy_admin:
                 fields:
                     - property: customer
                       label: 'Acheteur'
+                      template: 'admin/fields/order/_customer.html.twig'
                     - property: orderNumber
                       label: 'N° commande'
                     - property: billNumber
@@ -28,8 +32,10 @@ easy_admin:
                       label: 'Status'
                     - property: countBottle
                       label: 'Nbre de bouteilles'
+                      template: 'admin/fields/order/_list_bottles.html.twig'
                     - property: countCubis
                       label: 'Nbre de cubis'
+                      template: 'admin/fields/order/_list_cubis.html.twig'
                     - property: orderAt
                       label: 'Date commande'
             show:

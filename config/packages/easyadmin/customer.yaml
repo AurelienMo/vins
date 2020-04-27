@@ -18,6 +18,7 @@ easy_admin:
                       label: 'N° Tél'
                     - property: getFullAddress
                       label: 'Adresse'
+                      template: 'admin/fields/customer/_get_full_address.html.twig'
             show:
                 fields:
                     -   property: getFullName

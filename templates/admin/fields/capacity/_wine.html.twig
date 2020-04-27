@@ -1,0 +1,8 @@
+
+{% if link_parameters is defined %}
+<a href="{{ path('easyadmin', {'action': 'edit', 'entity': link_parameters.entity, 'id': link_parameters.id} ) }}">
+{% endif %}
+    {{ value }}
+{% if link_parameters is defined %}
+</a>
+{% endif %}
