@@ -32,6 +32,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public const DELIVERY_IN_PROGRESS = 'Livraison en cours';
     public const DELIVERED_AT_ADDRESS = 'Livré à l\'adresse';
     public const DELIVERY_AT_VOISIN = 'Déposé chez un voisin';
+    public const DELIVERY_MISS = 'Absent';
 
     /**
      * @var string
@@ -115,6 +116,14 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         return $this->status;
     }
 
+    /**
+     * @param string $status
+     */
+    public function setStatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
     public function getStatusDate(): DateTime
     {
         return $this->statusDate;
@@ -183,5 +192,13 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         $this->createdAt->modify('+36 hours');
 
         return $this->createdAt->format('d/m/Y');
+    }
+
+    /**
+     * @param DateTime $statusDate
+     */
+    public function setStatusDate(DateTime $statusDate): void
+    {
+        $this->statusDate = $statusDate;
     }
 }

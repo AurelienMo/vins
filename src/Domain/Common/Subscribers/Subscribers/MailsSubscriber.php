@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Common\Subscribers\Subscribers;
 
+use App\Admin\Delivery\Events\ConfirmDeliveryEvent;
 use App\Domain\Contact\Events\ContactMailEvent;
 use App\Domain\Order\Mails\Events\ConfirmMailEvent;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -109,8 +110,38 @@ class MailsSubscriber implements EventSubscriberInterface
 
     public function onDelivery(ConfirmDeliveryEvent $event)
     {
-        $type = $event->getType();
+        $delivery = $event->getDelivery();
+        $customer = $delivery->getOrder()->getCustomer();
+        $order = $delivery->getOrder();
+        $email = (new Email())
+            ->from(new Address('commande@monpremiersommelier.com', 'Mon Premier Sommelier'))
+            ->to(
+                new Address(
+                    $customer->getEmail(),
+                    sprintf(
+                        '%s %s',
+                        $customer->getFirstname(),
+                        $customer->getLastname()
+                    )
+                )
+            )
+            ->subject($event->getSubject())
+            ->embedFromPath(__DIR__.'/../../../../../public/img/logo.png', 'logo')
+            ->embedFromPath(__DIR__.'/../../../../../public/img/package.png', 'package')
+            ->embedFromPath(__DIR__.'/../../../../../public/img/add.png', 'add')
+            ->html(
+                $this->templating->render(
+                    'emails/delivery_information.html.twig',
+                    [
+                        'order' => $order,
+                        'delivery' => $delivery,
+                        'customer' => $customer,
+                        'main_text' => $event->getMainText()
+                    ]
+                )
+            );
 
+        $this->getMailer()->send($email);
     }
 
     private function getMailer(): Mailer
