@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\NicheOfDelivery;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Class NicheOfDeliveryRepository
@@ -30,5 +31,14 @@ class NicheOfDeliveryRepository extends AbstractServiceRepository
         return $r->createQueryBuilder('nod')
                  ->where('nod.numberNiche > 0')
                  ->orderBy('nod.dateNiche', 'ASC');
+    }
+
+    public static function listAvailableNiche(EntityRepository $repo)
+    {
+        return $repo->createQueryBuilder('nod')
+            ->where('nod.numberNiche > 0 AND nod.dateNiche >= :date')
+            ->setParameter('date', new \DateTime('-12 hours'))
+            ->orderBy('nod.dateNiche', 'ASC');
+//            ->addOrderBy('nod.startAt', 'ASC');
     }
 }

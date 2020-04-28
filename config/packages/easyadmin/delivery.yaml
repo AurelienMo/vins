@@ -2,7 +2,7 @@ easy_admin:
     entities:
         Delivery:
             class: App\Entity\Delivery
-            disabled_actions: ["new", "delete"]
+            disabled_actions: ["delete"]
             templates:
               list: bundles/EasyAdminBundle/Delivery/list.html.twig
             list:
@@ -22,14 +22,34 @@ easy_admin:
                       label: 'Adresse'
                 actions: ["show"]
                 sort: ['createdAt', 'DESC']
-            edit:
+            form:
                 fields:
+                  - property: order
+                    label: 'Commande'
                   - property: status
                     label: 'Statut livraison'
                     type: choice
                     type_options:
-                        choices:
-                            "Livraison en cours": 'Livraison en cours'
-                            "Livré à l'adresse": "Livré à l'adresse"
-                            "Déposé chez un voisin": "Déposé chez un voisin"
-                            "Absent": "Absent"
+                      choices:
+                        "Livraison en cours": 'Livraison en cours'
+                        "Livré à l'adresse": "Livré à l'adresse"
+                        "Déposé chez un voisin": "Déposé chez un voisin"
+                        "Absent": "Absent"
+                  - property: typeDelivery
+                    label: 'Type de livraison'
+                    type: choice
+                    type_options:
+                      choices:
+                        "Sous 3 jours, entre 15h et 19h, pour 4€": 'basic'
+                        "Sur un créneau horaire choisi pour 6€": 'express'
+                  - property: niche
+                    label: 'Créneau horaire'
+                    type: entity
+                    type_options:
+                      class: App\Entity\NicheOfDelivery
+                      query_builder: 'App\Repository\NicheOfDeliveryRepository::listAvailableNiche'
+                  - property: commentDelivery
+                    label: 'Commentaire de livraison'
+                    type: textarea
+                  - property: personIfAbsent
+                    label: 'Si personne absente'

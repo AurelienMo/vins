@@ -59,7 +59,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     /**
      * @var Order
      *
-     * @ORM\OneToOne(targetEntity="App\Entity\Order", cascade={"remove"}, inversedBy="delivery")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Order", cascade={"remove"}, inversedBy="delivery")
      * @ORM\JoinColumn(name="amo_order_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
      */
     protected $order;
@@ -97,7 +97,6 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         $this->personIfAbsent = $personIfAbsent;
         $this->status = self::DELIVERY_IN_PROGRESS;
         $this->statusDate = new DateTime();
-        $this->dateDelivery = $this->createdAt;
         parent::__construct();
     }
 
@@ -200,5 +199,37 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public function setStatusDate(DateTime $statusDate): void
     {
         $this->statusDate = $statusDate;
+    }
+
+    /**
+     * @param NicheOfDelivery|null $niche
+     */
+    public function setNiche(?NicheOfDelivery $niche): void
+    {
+        $this->niche = $niche;
+    }
+
+    /**
+     * @param string|null $commentDelivery
+     */
+    public function setCommentDelivery(?string $commentDelivery): void
+    {
+        $this->commentDelivery = $commentDelivery;
+    }
+
+    /**
+     * @param string|null $personIfAbsent
+     */
+    public function setPersonIfAbsent(?string $personIfAbsent): void
+    {
+        $this->personIfAbsent = $personIfAbsent;
+    }
+
+    /**
+     * @param string|null $typeDelivery
+     */
+    public function setTypeDelivery(?string $typeDelivery): void
+    {
+        $this->typeDelivery = $typeDelivery;
     }
 }
