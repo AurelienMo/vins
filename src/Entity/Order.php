@@ -124,9 +124,10 @@ class Order extends AbstractEntity implements UpdatableInterface
     public function __toString()
     {
         return sprintf(
-            '%s - %s',
+            '%s - %s - %s',
             $this->customer->getFullName(),
-            $this->orderAt->format('d/m/Y')
+            $this->orderAt->format('d/m/Y'),
+            $this->getOrderNumber()
         );
     }
 

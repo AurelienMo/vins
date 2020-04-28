@@ -125,7 +125,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         return $this->niche;
     }
 
-    public function getOrder(): Order
+    public function getOrder(): ?Order
     {
         return $this->order;
     }
