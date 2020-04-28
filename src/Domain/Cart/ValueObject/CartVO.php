@@ -85,7 +85,18 @@ class CartVO
             return $this->getTotalPriceInCart();
         }
 
-        $priceDelivery = $this->deliveryInformation->getTypeDelivery() === 'basic' ? 4 : 6;
+        $priceDelivery = null;
+        switch ($this->deliveryInformation->getTypeDelivery()) {
+            case 'free':
+                $priceDelivery = 0;
+                break;
+            case 'basic':
+                $priceDelivery = 4;
+                break;
+            case 'express':
+                $priceDelivery = 6;
+                break;
+        }
 
         return $this->getTotalPriceInCart() + $priceDelivery;
     }

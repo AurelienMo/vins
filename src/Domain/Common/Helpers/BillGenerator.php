@@ -106,10 +106,10 @@ class BillGenerator
             $total += $priceDisplay;
             $subTotalHt += ($priceDisplay * $line->getQuantity()) / 1.2;
         }
-        $amountDelivery = $delivery->getTypeDelivery() === 'basic' ? 4 : 6;
-        $invoice->addTotal("Prix Total HT", $subTotalHt);
-        $invoice->addTotal("TVA 20%", $total - $subTotalHt);
-        $invoice->addTotal("Livraison", $delivery->getTypeDelivery() === 'basic' ? 4 : 6);
+        $amountDelivery = $delivery->getPrice();
+        $invoice->addTotal("Prix Total HT", $total / 1.2);
+        $invoice->addTotal("TVA 20%", $total - ($total / 1.2));
+        $invoice->addTotal("Livraison", $delivery->getPrice());
         $invoice->addTotal("Prix total TTC", $total + $amountDelivery);
 
         $invoice->addBadge(sprintf("Payée le %s", $order->getOrderAt()->format('d/m/Y')), '#269600');

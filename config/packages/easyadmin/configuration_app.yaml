@@ -1,0 +1,14 @@
+easy_admin:
+    entities:
+        ConfigurationApp:
+            class: App\Entity\ConfigurationApp
+            disabled_actions: ["new", "delete", "show"]
+            list:
+                title: 'Configuration globale'
+                fields:
+                    - property: deliveryOffer
+                      label: 'Livraison offerte ?'
+            form:
+                fields:
+                    - property: deliveryOffer
+                      label: 'Livraison offerte'

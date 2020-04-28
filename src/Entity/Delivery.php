@@ -168,7 +168,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public function getContentText(): string
     {
         $text = null;
-        if ($this->getTypeDelivery() === 'basic') {
+        if ($this->getTypeDelivery() === 'basic' || $this->getTypeDelivery() === 'free') {
             $text = "sous 3 jours";
         } else {
             $date = $this->getNiche()->getDateNiche()->format('d/m/Y');
@@ -255,5 +255,20 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public function setDescriptionOptionnal(?string $descriptionOptionnal): void
     {
         $this->descriptionOptionnal = $descriptionOptionnal;
+    }
+
+    public function getPrice()
+    {
+        $price = 0;
+        switch ($this->typeDelivery) {
+            case 'basic':
+                $price = 4;
+                break;
+            case 'express':
+                $price = 6;
+                break;
+        }
+
+        return $price;
     }
 }

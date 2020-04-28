@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Cart\Delivery\Forms;
 
+use App\Entity\ConfigurationApp;
 use App\Entity\NicheOfDelivery;
 use App\Repository\NicheOfDeliveryRepository;
 use Doctrine\DBAL\Types\Type;
@@ -27,10 +28,15 @@ class DeliveryType extends AbstractType
     /** @var NicheOfDeliveryRepository */
     protected $nicheRepository;
 
+    /** @var EntityManagerInterface */
+    protected $entityManager;
+
     public function __construct(
-        NicheOfDeliveryRepository $nicheRepository
+        NicheOfDeliveryRepository $nicheRepository,
+        EntityManagerInterface $entityManager
     ) {
         $this->nicheRepository = $nicheRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -158,8 +164,7 @@ class DeliveryType extends AbstractType
                     [
                         'label' => 'Je choisis de me faire livrer',
                         'choices' => [
-                            'Sous 3 jours, entre 15h et 19h, pour 4€' => 'basic',
-                            'Sur un créneau horaire choisi pour 6€' => 'express',
+                            $this->getDeliveriesChoices(),
                         ],
                         'label_attr' => [
                             'class' => 'form-check-label',
@@ -212,5 +217,23 @@ class DeliveryType extends AbstractType
                 'data_class' => DeliveryDTO::class,
             ]
         );
+    }
+
+    private function getDeliveriesChoices()
+    {
+        /** @var ConfigurationApp $configurationApp */
+        $configurationApp = current($this->entityManager->getRepository(ConfigurationApp::class)->findAll());
+
+        if ($configurationApp->isDeliveryOffer()) {
+            return [
+                'Livraison offerte sous 3 jours, entre 15h et 19h' => 'free',
+                'Sur un créneau horaire choisi pour 6€' => 'express',
+            ];
+        }
+
+        return [
+            'Sous 3 jours, entre 15h et 19h, pour 4€' => 'basic',
+            'Sur un créneau horaire choisi pour 6€' => 'express',
+        ];
     }
 }

@@ -22,6 +22,8 @@ easy_admin:
               - 'https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js'
         menu:
             - label: 'Configuration'
+            - label: 'Configuration Global'
+              entity: 'ConfigurationApp'
             - label: 'Breadcrumb'
               entity: 'Breadcrumb'
               icon: 'cog fa-spin'

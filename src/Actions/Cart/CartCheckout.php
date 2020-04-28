@@ -201,7 +201,7 @@ class CartCheckout
             $cart = $this->session->get('cart');
             /** @var DeliveryDTO $data */
             $data = $form->getData();
-            if ($data->getTypeDelivery() === 'basic') {
+            if ($data->getTypeDelivery() === 'basic' || $data->getTypeDelivery() === 'free') {
                 $data->setDeliveryNiche(null);
             }
             $cart->affectDelivery($data);
