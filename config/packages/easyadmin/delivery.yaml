@@ -53,3 +53,6 @@ easy_admin:
                     type: textarea
                   - property: personIfAbsent
                     label: 'Si personne absente'
+                  - property: descriptionOptionnal
+                    type: textarea
+                    label: 'Intitulé'

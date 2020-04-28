@@ -85,6 +85,13 @@ class Delivery extends AbstractEntity implements UpdatableInterface
      */
     protected $typeDelivery;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    protected $descriptionOptionnal;
+
     public function __construct(
         ?NicheOfDelivery $niche = null,
         ?string $comment = null,
@@ -177,9 +184,10 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         return sprintf('Livraison %s', $this->getContentText());
     }
 
-    public function getAddress(): string
+    public function getAddress(): ?string
     {
-        return $this->order->getCustomer()->getFullAddress();
+        return $this->order instanceof Order ?
+         $this->order->getCustomer()->getFullAddress() : $this->getDescriptionOptionnal();
     }
 
     public function getDateDelivery()
@@ -231,5 +239,21 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     public function setTypeDelivery(?string $typeDelivery): void
     {
         $this->typeDelivery = $typeDelivery;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescriptionOptionnal(): ?string
+    {
+        return $this->descriptionOptionnal;
+    }
+
+    /**
+     * @param string|null $descriptionOptionnal
+     */
+    public function setDescriptionOptionnal(?string $descriptionOptionnal): void
+    {
+        $this->descriptionOptionnal = $descriptionOptionnal;
     }
 }
