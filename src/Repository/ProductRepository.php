@@ -93,7 +93,10 @@ class ProductRepository extends AbstractServiceRepository
                     $qb->andWhere('c.unitPrice >= 10 AND c.unitPrice < 13 AND c.type != :cubis');
                 }
                 if ($queryParams['pr'] === 'major') {
-                    $qb->andWhere('c.unitPrice >= 13 AND c.type != :cubis');
+                    $qb->andWhere('c.unitPrice >= 13 AND c.unitPrice < 15 c.type != :cubis');
+                }
+                if ($queryParams['pr'] === 'max') {
+                    $qb->andWhere('c.unitPrice >= 15 AND c.type != :cubis');
                 }
                 $qb->setParameter('cubis', 'Cubis');
             }

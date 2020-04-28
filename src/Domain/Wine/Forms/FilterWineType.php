@@ -150,14 +150,8 @@ class FilterWineType extends AbstractType
                         'class' => 'mdb-select colorful-select dropdown-danger md-form',
                         'data-label-select-all' => 'Tous les prix',
                     ],
+                    'placeholder' => 'Prix',
                     'choice_attr' => function ($choice, $key, $value) {
-                        if ($key === 'Prix') {
-                            return ['disabled' => true];
-                        }
-
-                        if (!$this->requestStack->getCurrentRequest()->query->has('pr')) {
-                            return [];
-                        }
 
                         return $this->getPrices()[$key] === $this->requestStack->getCurrentRequest()->query->get('pr') ? ['selected' => true] : [];
                     },
@@ -259,10 +253,10 @@ class FilterWineType extends AbstractType
     private function getPrices()
     {
         return [
-            'Prix' => 'Prix',
             '7-10€' => 'minor',
             '10-13€' => 'medium',
-            '>13€' => 'major',
+            '13-15€' => 'major',
+            '>15€' => 'max',
         ];
     }
 }
