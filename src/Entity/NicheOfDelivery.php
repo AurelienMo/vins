@@ -95,6 +95,11 @@ class NicheOfDelivery extends AbstractEntity implements UpdatableInterface
         $this->numberNiche = $numberNiche;
     }
 
+    public function updateNumberNiche()
+    {
+        $this->numberNiche--;
+    }
+
     public function __toString()
     {
         return sprintf(

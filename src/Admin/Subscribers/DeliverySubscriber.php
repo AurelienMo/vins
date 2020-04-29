@@ -16,6 +16,7 @@ namespace App\Admin\Subscribers;
 use App\Admin\Delivery\Events\ConfirmDeliveryEvent;
 use App\Entity\BoxWine;
 use App\Entity\Delivery;
+use App\Entity\NicheOfDelivery;
 use App\Repository\BoxWineRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
@@ -41,7 +42,22 @@ class DeliverySubscriber implements EventSubscriberInterface
     {
         return [
             EasyAdminEvents::PRE_UPDATE => 'onUpdate',
+            EasyAdminEvents::PRE_PERSIST => 'onPrePersist'
         ];
+    }
+
+    public function onPrePersist(GenericEvent $event)
+    {
+        $object = $event->getSubject();
+
+        if (!$object instanceof Delivery) {
+            return;
+        }
+
+        $object->setDeliveryDate();
+        if ($object->getNiche() instanceof NicheOfDelivery) {
+            $object->getNiche()->updateNumberNiche();
+        }
     }
 
     public function onUpdate(GenericEvent $event)

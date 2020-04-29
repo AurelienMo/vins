@@ -7,6 +7,15 @@ easy_admin:
               list: bundles/EasyAdminBundle/Delivery/list.html.twig
             list:
                 title: 'Liste des livraisons'
+                form_filters:
+                  - property: status
+                    label: 'Statut de livraison'
+                    type_options:
+                        choices:
+                          "Livraison en cours": 'Livraison en cours'
+                          "Livré à l'adresse": "Livré à l'adresse"
+                          "Déposé chez un voisin": "Déposé chez un voisin"
+                          "Absent": "Absent"
                 fields:
                     - property: createdAt
                       label: 'Crée le'
@@ -16,7 +25,8 @@ easy_admin:
                       label: 'Statut livraison'
                     - property: typeDelivery
                       label: 'Type'
-                    - property: getDateDelivery
+                      template: 'admin/fields/delivery/_type.html.twig'
+                    - property: deliveryDate
                       label: "Date livraison"
                     - property: getAddress
                       label: 'Adresse'

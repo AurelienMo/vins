@@ -44,7 +44,7 @@
     <div id="main-container">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="alert alert-{{label}} alert-dismissible fade show text-center" role="alert">
+                    <div class="alert alert-{{label}} alert-dismissible fade show text-center m-0" role="alert">
                         {{message}}
                     </div>
                 {% endfor %}

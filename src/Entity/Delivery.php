@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Admin\Traits\ValueListTrait;
 use App\Domain\Cart\Delivery\Forms\DeliveryDTO;
 use App\Entity\Interfaces\UpdatableInterface;
 use App\Entity\Traits\TimeStampableTrait;
@@ -28,6 +29,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Delivery extends AbstractEntity implements UpdatableInterface
 {
     use TimeStampableTrait;
+    use ValueListTrait;
 
     public const DELIVERY_IN_PROGRESS = 'Livraison en cours';
     public const DELIVERED_AT_ADDRESS = 'Livré à l\'adresse';
@@ -92,6 +94,13 @@ class Delivery extends AbstractEntity implements UpdatableInterface
      */
     protected $descriptionOptionnal;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(type="datetime")
+     */
+    protected $deliveryDate;
+
     public function __construct(
         ?NicheOfDelivery $niche = null,
         ?string $comment = null,
@@ -109,12 +118,18 @@ class Delivery extends AbstractEntity implements UpdatableInterface
 
     public static function createFromPayment(?DeliveryDTO $dto, ?NicheOfDelivery $niche = null)
     {
-        return new self(
+        if ($niche instanceof NicheOfDelivery) {
+            $niche->updateNumberNiche();
+        }
+        $delivery = new self(
             $niche,
             $dto->getComment(),
             $dto->getTypeDelivery(),
             $dto->getPersonIfAbsent()
         );
+        $delivery->setDeliveryDate();
+
+        return $delivery;
     }
 
     public function getStatus(): string
@@ -189,17 +204,17 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         return $this->order instanceof Order ?
          $this->order->getCustomer()->getFullAddress() : $this->getDescriptionOptionnal();
     }
-
-    public function getDateDelivery()
-    {
-        if (!\is_null($this->niche)) {
-            return $this->niche;
-        }
-
-        $this->createdAt->modify('+36 hours');
-
-        return $this->createdAt->format('d/m/Y');
-    }
+//
+//    public function getDateDelivery()
+//    {
+//        if (!\is_null($this->niche)) {
+//            return $this->niche;
+//        }
+//
+//        $this->createdAt->modify('+36 hours');
+//
+//        return $this->createdAt->format('d/m/Y');
+//    }
 
     /**
      * @param DateTime $statusDate
@@ -270,5 +285,40 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         }
 
         return $price;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDeliveryDate(): DateTime
+    {
+        return $this->deliveryDate;
+    }
+
+    public function setDeliveryDate(): void
+    {
+        $date = null;
+        switch ($this->typeDelivery) {
+            case 'basic':
+            case 'free':
+                $date = DateTime::createFromFormat('Y/m/d H:i:s', $this->createdAt->format('Y/m/d').' 00:00:00')->modify('+3 days');
+                switch ($date->format('D')) {
+                    case 'Sat':
+                        $date->modify('+2 days');
+                        break;
+                    case 'Sun':
+                        $date->modify('+1 days');
+                }
+                break;
+            case 'express':
+                $niche = $this->getNiche();
+                $date = DateTime::createFromFormat(
+                    'Y/m/d H:i:s',
+                    $niche->getDateNiche()->format('Y/m/d').' '.$niche->getStartAt()->format('H:i:s')
+                );
+                break;
+        }
+
+        $this->deliveryDate = $date;
     }
 }
