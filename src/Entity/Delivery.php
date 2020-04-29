@@ -169,7 +169,7 @@ class Delivery extends AbstractEntity implements UpdatableInterface
     {
         $text = null;
         if ($this->getTypeDelivery() === 'basic' || $this->getTypeDelivery() === 'free') {
-            $text = "sous 3 jours";
+            $text = "sous 3 jours ouvrés";
         } else {
             $date = $this->getNiche()->getDateNiche()->format('d/m/Y');
             $hour = ' entre '.$this->getNiche()->getStartAt()->format('H:i').' et '.$this->getNiche()->getEndAt()->format('H:i');
