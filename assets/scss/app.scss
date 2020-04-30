@@ -69,6 +69,9 @@ label.required::after {
 }
 
 @media all and (max-width: 768px) {
+  .cgv {
+    padding: 0;
+  }
   .sidenav {
     height: 100vh;
     width: 0;
