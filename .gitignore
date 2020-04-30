@@ -23,10 +23,6 @@ yarn-error.log
 /.phpcs-cache
 /phpcs.xml
 ###< squizlabs/php_codesniffer ###
-
-###> behat/symfony2-extension ###
-behat.yml.dist
-###< behat/symfony2-extension ###
 ubuntu-xenial-16.04-cloudimg-console.log
 .idea/
 /docker/nginx/logs/access.log
@@ -48,3 +44,7 @@ docker/mysql/mysql/*
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> friends-of-behat/symfony-extension ###
+/behat.yml
+###< friends-of-behat/symfony-extension ###

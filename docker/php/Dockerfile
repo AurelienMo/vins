@@ -5,12 +5,14 @@ ENV WORKPATH "/var/www/app"
 RUN apk update; \
     apk upgrade;
 RUN apk add --no-cache $PHPIZE_DEPS \
-    libzip-dev icu-dev libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf \
+    libzip-dev icu-dev libxml2-dev freetype-dev libpng-dev libjpeg-turbo-dev g++ make autoconf chromium chromium-chromedriver \
 	&& pecl install apcu mongodb xdebug \
     && docker-php-ext-install pdo_mysql opcache json mysqli intl zip gd \
 	&& docker-php-ext-enable apcu mysqli mongodb.so xdebug
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+ENV PANTHER_NO_SANDBOX 1
+ENV PANTHER_CHROME_DRIVER_BINARY /usr/lib/chromium/chromedriver
 
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 RUN echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/php.ini

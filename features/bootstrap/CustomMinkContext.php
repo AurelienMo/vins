@@ -13,7 +13,6 @@ declare(strict_types=1);
 
 use Behat\MinkExtension\Context\MinkContext;
 
-
 /**
  * Class CustomMinkContext
  */

@@ -2,30 +2,15 @@ default:
     suites:
         default:
             contexts:
-                - DoctrineContext:
-                    doctrine: '@doctrine'
-                    kernel: '@kernel'
-                    encoderFactory: '@security.encoder_factory'
-                - CustomMinkContext
-                - CommandContext:
-                    encoderFactory: '@security.encoder_factory'
-                    entityManager: '@doctrine.orm.entity_manager'
-                - CustomRestContext
-                - behatch:context:json
-                - behatch:context:browser
-                #- MailContext:
-                #    kernel: '@kernel'
-                #- RemoteWebserviceContext:
-                #    httpClient: '@httplug.client.mock'
-
+                - App\Tests\Behat\DemoContext:
+                - PantherExtension\Context\PantherContext:
 
     extensions:
-        Behat\Symfony2Extension:
-            kernel:
-                bootstrap: features/bootstrap/bootstrap.php
-                class: App\Kernel
+        FriendsOfBehat\SymfonyExtension: null
+        PantherExtension\Extension\PantherExtension: ~
         Behat\MinkExtension:
-                sessions:
-                    default:
-                        symfony2: ~
-        Behatch\Extension: ~
+          browser_name: chrome
+          sessions:
+            default:
+              panther:
+                driver: 'chrome' # Or 'firefox', 'selenium', 'chrome' is the default value
