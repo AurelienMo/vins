@@ -12,8 +12,32 @@
     </div>
 </div>
 
-<div id="bottom-center-modal" class="modal fade full-bottom-center-modal p-0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-bottom-center fixed-bottom m-0 p-0">
+<div class="modal fade detail-modal-multi" id="centralModalSm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+
+    <!-- Change class .modal-sm to change the size of the modal -->
+    <div class="modal-dialog" role="document">
+
+
+        <div class="modal-content">
+{#            <div class="modal-header">#}
+{#                <h4 class="modal-title w-100" id="myModalLabel">Modal title</h4>#}
+{#                <button type="button" class="close" data-dismiss="modal" aria-label="Close">#}
+{#                    <span aria-hidden="true">&times;</span>#}
+{#                </button>#}
+{#            </div>#}
+            <div class="modal-body p-0">
+            </div>
+{#            <div class="modal-footer">#}
+{#                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>#}
+{#                <button type="button" class="btn btn-primary btn-sm">Save changes</button>#}
+{#            </div>#}
+        </div>
+    </div>
+</div>
+
+<div id="bottom-center-modal" class="modal fade full-bottom-center-modal p-0" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" data-backdrop="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-bottom-center fixed-bottom m-0 p-0" data-backdrop="true">
         <div class="modal-content">
             <div class="modal-body">
             </div>

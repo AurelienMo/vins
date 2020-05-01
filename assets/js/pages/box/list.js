@@ -1,6 +1,7 @@
 import '../../../scss/box/list.scss'
 import {hideLoader, showLoader} from "../../components/Loader";
 import Modal from "../../components/Modal";
+import $ from "jquery";
 
 $('.detail-box-to-show').on('click', function (e) {
     e.preventDefault();
@@ -10,9 +11,10 @@ $('.detail-box-to-show').on('click', function (e) {
         method: 'GET',
         url: $(this).attr('href'),
         success: function (response) {
-            modal.html('bottom-center-modal', response.html);
+            $('.detail-modal-multi').find('.modal-body').html(response.html);
             hideLoader();
-            modal.toggle('bottom-center-modal');
+            $('.detail-modal-multi').modal('toggle');
+
         },
         error: function (response) {
             hideLoader();
