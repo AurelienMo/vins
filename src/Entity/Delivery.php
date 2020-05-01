@@ -204,17 +204,6 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         return $this->order instanceof Order ?
          $this->order->getCustomer()->getFullAddress() : $this->getDescriptionOptionnal();
     }
-//
-//    public function getDateDelivery()
-//    {
-//        if (!\is_null($this->niche)) {
-//            return $this->niche;
-//        }
-//
-//        $this->createdAt->modify('+36 hours');
-//
-//        return $this->createdAt->format('d/m/Y');
-//    }
 
     /**
      * @param DateTime $statusDate
@@ -301,13 +290,21 @@ class Delivery extends AbstractEntity implements UpdatableInterface
         switch ($this->typeDelivery) {
             case 'basic':
             case 'free':
-                $date = DateTime::createFromFormat('Y/m/d H:i:s', $this->createdAt->format('Y/m/d').' 00:00:00')->modify('+3 days');
-                switch ($date->format('D')) {
-                    case 'Sat':
-                        $date->modify('+2 days');
+                $date = DateTime::createFromFormat('Y/m/d H:i:s', $this->createdAt->format('Y/m/d').' 00:00:00');
+                switch ($date->format('N')) {
+                    case 1:
+                    case 2:
+                    case 7:
+                        $date->modify('+3 days');
                         break;
-                    case 'Sun':
-                        $date->modify('+1 days');
+                    case 3:
+                    case 4:
+                    case 5:
+                        $date->modify('+5 days');
+                        break;
+                    case 6:
+                        $date->modify('+4 days');
+                        break;
                 }
                 break;
             case 'express':
