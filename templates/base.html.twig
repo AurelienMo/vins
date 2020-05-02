@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <script type="text/javascript" src="/tarteaucitronjs/tarteaucitron.js"></script>
-
     <script type="text/javascript">
         tarteaucitron.init({
             "privacyUrl": "http://www.google.fr", /* Privacy policy url */
@@ -26,16 +25,13 @@
         });
         window.tarteaucitronForceLanguage = 'fr';
     </script>
-    <script type="text/javascript">
-        tarteaucitron.user.gtagUa = 'UA-134510108-3';
-        tarteaucitron.user.gtagMore = function () { /* add here your optionnal gtag() */ };
-        (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Découvrez les vins de manière accompagnée. Un vin pour chaque occasion.">
+    <meta name="keywords" content="vins, regions, occasions, découverte, apprendre">
     <link href="https://fonts.googleapis.com/css?family=Audiowide|Raleway|Dekko|Comfortaa&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+    <title>{% block title %}Mon Premier Sommelier{% endblock %}</title>
     <link rel="stylesheet" href="{{ asset('vendor/mdb/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{asset('vendor/mdb/css/mdb.min.css')}}">
     <link rel="stylesheet" href="{{asset('vendor/mdb/css/style.css')}}">
@@ -64,6 +60,11 @@
         <script type="text/javascript" src="{{ asset('vendor/mdb/js/popper.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/mdb/js/bootstrap.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('vendor/mdb/js/mdb.min.js') }}"></script>
+    <script type="text/javascript">
+        tarteaucitron.user.gtagUa = '{{ ga_tag }}';
+        tarteaucitron.user.gtagMore = function () { /* add here your optionnal gtag() */ };
+        (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
+    </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

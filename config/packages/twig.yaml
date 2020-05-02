@@ -6,3 +6,4 @@ twig:
         '%kernel.project_dir%/public/build/images': images
     globals:
         stripe_public_key: '%env(resolve:API_PUBLIC_STRIPE)%'
+        ga_tag: '%env(resolve:GTAG)%'
