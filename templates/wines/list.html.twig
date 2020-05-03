@@ -21,16 +21,20 @@
         <div class="col-sm-6 col-md-3">
             {{ form_widget(form.occasions) }}
         </div>
-        <div class="col-sm-12 col-md-12 d-flex align-items-center">
-                <div class="col-sm-6 col-md-3">
+        <div class="col-sm-12 col-md-12">
+            <div class="row">
+                <div class="col-sm-12 col-md-3">
                     {{ form_widget(form.price) }}
                 </div>
-                <button class="button-custom btn-floating d-flex justify-content-center align-items-center">
-                    <i class="fas fa-search"></i>
-                </button>
-                <a href="{{ path('wine_list') }}" class="button-custom btn-floating d-flex justify-content-center align-items-center white black-text">
-                    <i class="fas fa-close black-text"></i>
-                </a>
+                <div class="col-sm-6 col-md-3 d-flex">
+                    <button class="button-custom btn-floating d-flex justify-content-center align-items-center">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <a href="{{ path('wine_list') }}" class="button-custom btn-floating d-flex justify-content-center align-items-center white black-text">
+                        <i class="fas fa-close black-text"></i>
+                    </a>
+                </div>
+            </div>
         </div>
 
     </div>

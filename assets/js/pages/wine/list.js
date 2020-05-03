@@ -34,12 +34,12 @@ $(function() {
         })
     });
     $(document).on('submit', '.addWineCart', function (e) {
+        console.log('toto');
         e.preventDefault();
         showLoader();
         let modal = new Modal();
         let target = $(e.target);
-        let eltsCount = document.getElementById('counter-items');
-
+        let counter = $('.count-items');
         $.ajax({
             type: 'POST',
             url: target.attr('action'),
@@ -48,7 +48,9 @@ $(function() {
             success: function (response) {
                 hideLoader();
                 let newValue = response.qtyadd;
-                $(eltsCount).html(newValue);
+                $(counter).each(function (i, val) {
+                    $(val).html(newValue);
+                })
                 let textValid = $(modal.addItemToCart).find('.valid-add');
                 if (textValid.length === 0) {
                     if (response.html === "<div class=\"valid-add text-center\">Panier mis à jour</span></div>") {
