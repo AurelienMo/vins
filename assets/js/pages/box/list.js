@@ -36,6 +36,7 @@ $('.detail-box-to-add').on('click', function (e) {
         let existWarnings = $('.out_of_stock');
         existWarnings.remove();
         $('#main-container').css('padding-top', '60px');
+        let counter = $('.count-items');
         $.ajax({
             method: 'POST',
             url: url,
@@ -53,8 +54,9 @@ $('.detail-box-to-add').on('click', function (e) {
                             break;
                     }
                 } else {
-                    let eltsCount = document.getElementById('counter-items');
-                    $(eltsCount).html(response.qtyadd)
+                    $(counter).each(function (i, val) {
+                        $(val).html(response.qtyadd);
+                    })
                 }
             }
         })
