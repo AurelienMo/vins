@@ -62,10 +62,10 @@
                                 <figure class="col-12 d-flex justify-content-center align-items-center m-0">
                                     <div class="badges d-flex flex-column justify-content-end">
                                         {% if wine.firstBadge %}
-                                            <img class="rounded-circle {% if wine.secondBadge is not null %}mb-2{% endif %}" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="50" width="50"/>
+                                            <img class="rounded-circle {% if wine.secondBadge is not null %}mb-2{% endif %}" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="45" width="45"/>
                                         {% endif %}
                                         {% if wine.secondBadge %}
-                                            <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'secondBadgeFile') }}" height="50" width="50"/>
+                                            <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'secondBadgeFile') }}" height="45" width="45"/>
                                         {% endif %}
                                     </div>
                                     <img class="wine" src="{{ vich_uploader_asset(wine, 'imageFile') }}"/>
