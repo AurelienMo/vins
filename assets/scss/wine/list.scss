@@ -1,89 +1,88 @@
 @import "../colors";
-.card-wine {
-  height: 600px;
-  border-radius: 20px 20px 10px 10px;
-  box-shadow: 5px 5px 10px rgba(0,0,0,.1);
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  flex: 1;
-  &_header {
-    flex: 0.05;
-    border-radius: 20px 20px 0 0;
-  }
-  &_content {
-    box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.01);
+@media all and (min-width: 769px) {
+  .card-wine {
+    border-radius: 20px 20px 10px 10px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .1);
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
     flex: 1;
-    margin-top: -10px;
-    &-product {
-      background-color: #ffffff;
-      flex: 1;
-      .wine {
-        height: 300px;
-      }
-      .vigneron {
-        position: absolute;
-        right: 20px;
-        top: 0;
-        height: 100px;
-        width: 100px;
-      }
-      .badges {
-        position: absolute;
-        left: 30px;
-        height: 100%;
-        top: 0;
-        img {
+    font-size: 14px;
+
+    &_header {
+      border-radius: 20px 20px 0 0;
+    }
+
+    &_content {
+      box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.01);
+      margin-top: -10px;
+      &-product {
+        background-color: #ffffff;
+        .wine {
+          max-height: 250px;
+        }
+        .vigneron {
+          position: absolute;
+          right: 20px;
+          top: 0;
           height: 70px;
           width: 70px;
         }
+
+        .badges {
+          position: absolute;
+          left: 20px;
+          height: 100%;
+          top: 0;
+
+          img {
+            height: 70px;
+            width: 70px;
+          }
+        }
       }
-      &_general {
-        flex: 0.9;
+
+      &-price {
+        background-color: #fdf3ea;
       }
-      &_content {
-        flex: 0.025;
-      }
-    }
-    &-price {
-      background-color: #fdf3ea;
-      flex: 0.05;
-      & col {
-        flex: 0.025;
-      }
-    }
-    &-footer {
-      background-color: white;
-      flex: 0.18;
-    }
-  }
-  &_header {
-    &-image {
-      z-index: 999;
-      img {
-        height: 30px;
-        width: 30px;
-      }
-      &_circle-first {
-        width: 60px;
-        height: 60px;
-        border-radius: 30px;
-        border: 5px white solid;
-        margin-top: -45px;
-        margin-left: 30px;
-        z-index: 999;
-      }
-      &_circle-second {
-        width: 100%;
-        height:100%;
-        border-radius: 50%;
+
+      &-footer {
         background-color: white;
       }
     }
-  }
-  &_footer {
-    flex: 0.02;
-    border-radius: 0 0 10px 10px;
+
+    &_header {
+      &-image {
+        z-index: 999;
+
+        img {
+          height: 30px;
+          width: 30px;
+        }
+
+        &_circle-first {
+          width: 60px;
+          height: 60px;
+          border-radius: 30px;
+          border: 5px white solid;
+          margin-top: -40px;
+          margin-left: 15px;
+          z-index: 999;
+        }
+
+        &_circle-second {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          background-color: white;
+        }
+      }
+    }
+
+    &_footer {
+      border-radius: 0 0 10px 10px;
+      min-height: 5px;
+    }
   }
 }
 .tab-content {
@@ -139,12 +138,10 @@
   }
 }
 .no-stock {
-  position:absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -40%); width: 92%;
-  img {
-    width: 250px;
+  opacity: 0.5;
+  .add-to-cart {
+    cursor: not-allowed;
+    text-decoration: none;
   }
 }
 .text-caract {
@@ -158,4 +155,76 @@
 }
 .dropdown-content {
   max-height: 40rem !important;
+}
+@media all and (max-width: 768px) {
+  .card-wine {
+    border-radius: 20px 20px 10px 10px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,.1);
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    font-size: 14px;
+    &_header {
+      border-radius: 20px 20px 0 0;
+    }
+    &_content {
+      box-shadow: 0px 0px 0px 1px rgba(0,0,0,0.01);
+      &-product {
+        background-color: #ffffff;
+        .wine {
+          max-height: 250px;
+        }
+        .vigneron {
+          position: absolute;
+          right: 20px;
+          top: 0;
+          height: 100px;
+          width: 100px;
+        }
+        .badges {
+          position: absolute;
+          left: 30px;
+          height: 100%;
+          top: 0;
+          img {
+            height: 70px;
+            width: 70px;
+          }
+        }
+      }
+      &-price {
+        background-color: #fdf3ea;
+      }
+      &-footer {
+        background-color: white;
+      }
+    }
+    &_header {
+      &-image {
+        z-index: 999;
+        img {
+          height: 30px;
+          width: 30px;
+        }
+        &_circle-first {
+          width: 60px;
+          height: 60px;
+          border-radius: 30px;
+          border: 5px white solid;
+          margin-top: -45px;
+          margin-left: 30px;
+          z-index: 999;
+        }
+        &_circle-second {
+          width: 100%;
+          height:100%;
+          border-radius: 50%;
+          background-color: white;
+        }
+      }
+    }
+    &_footer {
+      border-radius: 0 0 10px 10px;
+    }
+  }
 }

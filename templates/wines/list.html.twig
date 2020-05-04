@@ -41,8 +41,8 @@
     {{ form_end(form) }}
     <div class="row">
         {% for wine in wines %}
-        <div class="col-sm-12 col-md-4 mb-5">
-            <div class="card-wine">
+        <div class="col-sm-12 col-md-3 mb-5">
+            <div class="card-wine {% if not wine.hasStock %}no-stock{% endif %}">
                 <div class="card-wine_header d-flex justify-content-center align-items-center" style="background-color: {{ wine.profile.color }};">
                     <div class="card-wine_header-text">
                         <span style="color: {{ wine.profile.colorText }};">{{ wine.profile }}</span>
@@ -51,18 +51,18 @@
                 <div class="card-wine_header-image">
                     <div class="card-wine_header-image_circle-first">
                         <div class="card-wine_header-image_circle-second d-flex align-items-center justify-content-center" style="border: 3px solid {{ wine.profile.color }}">
-                            <img src="{{ vich_uploader_asset(wine.profile, 'imageFile') }}"/>
+                            <img src="{{ vich_uploader_asset(wine.profile, 'imageFile') }}" height="250"/>
                         </div>
                     </div>
                 </div>
                 <div class="card-wine_content d-flex flex-column">
-                    <div class="card-wine_content-product d-flex flex-column justify-content-around">
-                        <div class="card-wine_content-product_general container-fluid">
+                    <div class="card-wine_content-product d-flex flex-column justify-content-around pt-2 pb-2">
+                        <div class="card-wine_content-product_general container-fluid mb-2">
                             <div class="card-wine_content-product_image row h-100">
                                 <figure class="col-12 d-flex justify-content-center align-items-center m-0">
                                     <div class="badges d-flex flex-column justify-content-end">
                                         {% if wine.firstBadge %}
-                                            <img class="rounded-circle mb-3" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="50" width="50"/>
+                                            <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="50" width="50"/>
                                         {% endif %}
                                         {% if wine.secondBadge %}
                                             <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'secondBadgeFile') }}" height="50" width="50"/>
@@ -71,11 +71,11 @@
                                     <img class="wine" src="{{ vich_uploader_asset(wine, 'imageFile') }}"/>
                                     <img class="vigneron float-right rounded-circle" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}"/>
                                 </figure>
-                                {% if not wine.hasStock %}
-                                    <div class="d-flex justify-content-center no-stock">
-                                        <img src="{{ asset('build/images/success.png') }}" alt="victime_success"/>
-                                    </div>
-                                {% endif %}
+{#                                {% if not wine.hasStock %}#}
+{#                                    <div class="d-flex justify-content-center no-stock">#}
+{#                                        <img src="{{ asset('build/images/success.png') }}" alt="victime_success"/>#}
+{#                                    </div>#}
+{#                                {% endif %}#}
                             </div>
                         </div>
                         <div class="card-wine_content-product_content d-flex flex-column justify-content-around align-items-center">
@@ -95,11 +95,11 @@
                                         <span class="font-weight-bold primary-text">{{ wine.getLowerCapacityPrice.pricePromo }} €</span>
                                         {% endif %}
                                     </div>
-                                    {% if wine.capacities|length > 0 and wine.hasStock %}
-                                        <span class="small text-center">
-                                            Disponible en {{ wine.listTypeCapacities }}
-                                        </span>
-                                    {% endif %}
+{#                                    {% if wine.capacities|length > 0 and wine.hasStock %}#}
+{#                                        <span class="small text-center">#}
+{#                                            Disponible en {{ wine.listTypeCapacities }}#}
+{#                                        </span>#}
+{#                                    {% endif %}#}
                                 </div>
                             </div>
                             <div class="col d-flex justify-content-center align-items-center">
@@ -116,7 +116,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-wine_content-footer d-flex flex-column justify-content-center align-items-center">
+                    <div class="card-wine_content-footer d-flex flex-column justify-content-center align-items-center pt-2 pb-2">
                         <div class="card-wine_content-footer_rating d-flex justify-content-around align-items-center">
                             <div class="mr-3">
                                 {% set lengthRate = wine.averageRate %}
