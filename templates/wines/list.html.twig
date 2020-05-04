@@ -62,7 +62,7 @@
                                 <figure class="col-12 d-flex justify-content-center align-items-center m-0">
                                     <div class="badges d-flex flex-column justify-content-end">
                                         {% if wine.firstBadge %}
-                                            <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="50" width="50"/>
+                                            <img class="rounded-circle {% if wine.secondBadge is not null %}mb-2{% endif %}" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="50" width="50"/>
                                         {% endif %}
                                         {% if wine.secondBadge %}
                                             <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'secondBadgeFile') }}" height="50" width="50"/>
@@ -71,11 +71,6 @@
                                     <img class="wine" src="{{ vich_uploader_asset(wine, 'imageFile') }}"/>
                                     <img class="vigneron float-right rounded-circle" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}"/>
                                 </figure>
-{#                                {% if not wine.hasStock %}#}
-{#                                    <div class="d-flex justify-content-center no-stock">#}
-{#                                        <img src="{{ asset('build/images/success.png') }}" alt="victime_success"/>#}
-{#                                    </div>#}
-{#                                {% endif %}#}
                             </div>
                         </div>
                         <div class="card-wine_content-product_content d-flex flex-column justify-content-around align-items-center">
