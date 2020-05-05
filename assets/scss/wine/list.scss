@@ -223,3 +223,25 @@
     }
   }
 }
+@media all and (max-width: 768px) {
+  .caract-first {
+    order: 1;
+  }
+  .caract-second {
+    order: 2;
+  }
+  .caract-third {
+    order: 3;
+  }
+}
+@media all and (max-width: 768px) {
+  .caract-first {
+    order: 1;
+  }
+  .caract-second {
+    order: 3;
+  }
+  .caract-third {
+    order: 2;
+  }
+}
