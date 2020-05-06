@@ -83,10 +83,16 @@ label.required::after {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
-
+    .fa {
+      font-size: 25px;
+      font-weight: 600;
+    }
     img {
-      width: 160px;
-      height: 100px;
+      width: 200px;
+      height: 200px;
+    }
+    h5 {
+      font-size: 18px;
     }
   }
 
