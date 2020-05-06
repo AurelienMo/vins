@@ -14,7 +14,7 @@
                         <div class="card-box_header d-flex justify-content-center align-items-center" style="background-color: {{ box.color }};">
                         </div>
                         <div class="card-box_header_image d-flex justify-content-center pt-3 pb-3">
-                            <img class="mb-3 w-100" src="{{ vich_uploader_asset(box, 'imageFile') }}" width="349" height="288"/>
+                            <img class="mb-3 w-100" src="{{ vich_uploader_asset(box, 'imageFile') }}" width="349" height="288" alt="{{ box.name }}"/>
                         </div>
                         <div class="card-box_content d-flex flex-column pl-4 pr-4 overflow-hidden">
                             <h4 class="h5 text-center font-weight-bold" style="color:  {{ box.color }}">{{ box.name }}</h4>
@@ -27,10 +27,10 @@
                                     <span class="h5 m-0 font-weight-bold">{{ box.price }}€</span>
                                 </div>
                                 <a href="{{ path('detail_box', {'id': box.id}) }}" class="detail-box-to-show d-flex justify-content-center align-items-center">
-                                    <img class="icon" src="{{ asset('build/images/eye.png') }}"/>
+                                    <img class="icon" src="{{ asset('build/images/eye.png') }}" alt="Voir plus"/>
                                 </a>
                                 <a data-box-id={{ box.id}} href="{{ path('add_box_to_card', {'id': box.id}) }}" class="detail-box-to-add d-flex justify-content-center align-items-center">
-                                    <img class="icon" src="{{ asset('build/images/cart.png') }}"/>
+                                    <img class="icon" src="{{ asset('build/images/cart.png') }}" alt="Ajouter au panier"/>
                                 </a>
                                 <div class="d-flex quantity justify-content-center align-items-center">
                                     <select id="{{ box.id }}" class="mt-0 mb-0">

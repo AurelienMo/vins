@@ -51,7 +51,7 @@
                 <div class="card-wine_header-image">
                     <div class="card-wine_header-image_circle-first">
                         <div class="card-wine_header-image_circle-second d-flex align-items-center justify-content-center" style="border: 3px solid {{ wine.profile.color }}">
-                            <img src="{{ vich_uploader_asset(wine.profile, 'imageFile') }}" height="250"/>
+                            <img src="{{ vich_uploader_asset(wine.profile, 'imageFile') }}" height="250" alt="{{ wine.profile.name }}"/>
                         </div>
                     </div>
                 </div>
@@ -62,14 +62,14 @@
                                 <figure class="col-12 d-flex justify-content-center align-items-center m-0">
                                     <div class="badges d-flex flex-column justify-content-end">
                                         {% if wine.firstBadge %}
-                                            <img class="rounded-circle {% if wine.secondBadge is not null %}mb-2{% endif %}" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="45" width="45"/>
+                                            <img class="rounded-circle {% if wine.secondBadge is not null %}mb-2{% endif %}" src="{{ vich_uploader_asset(wine, 'firstBadgeFile') }}" height="45" width="45" alt="Badge 1"/>
                                         {% endif %}
                                         {% if wine.secondBadge %}
-                                            <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'secondBadgeFile') }}" height="45" width="45"/>
+                                            <img class="rounded-circle" src="{{ vich_uploader_asset(wine, 'secondBadgeFile') }}" height="45" width="45" alt="Badge 2"/>
                                         {% endif %}
                                     </div>
-                                    <img class="wine" src="{{ vich_uploader_asset(wine, 'imageFile') }}"/>
-                                    <img class="vigneron float-right rounded-circle" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}"/>
+                                    <img class="wine" src="{{ vich_uploader_asset(wine, 'imageFile') }}" alt="{{ wine.vintageName }}"/>
+                                    <img class="vigneron float-right rounded-circle" src="{{ vich_uploader_asset(wine.domain, 'winegrowerPictureFile') }}" alt="Vigneron"/>
                                 </figure>
                             </div>
                         </div>
@@ -100,11 +100,11 @@
                             <div class="col d-flex justify-content-center align-items-center">
                                 <div class="d-flex justify-content-around align-items-center h-100 w-100">
                                     <a class="detail-wine" data-url="{{ path('detail_wine', {'id': wine.id}) }}" href="#">
-                                        <img class="icon" src="{{ asset('build/images/eye.png') }}" width="40"/>
+                                        <img class="icon" src="{{ asset('build/images/eye.png') }}" width="40" alt="Voir plus"/>
                                     </a>
                                     {% if wine.hasStock %}
                                         <a class="add-to-cart" data-url="{{ path('add_wine_to_card', {'id': wine.id}) }}" href="#">
-                                            <img class="icon" src="{{ asset('build/images/cart.png') }}" width="40"/>
+                                            <img class="icon" src="{{ asset('build/images/cart.png') }}" width="40" alt="Ajouter au panier"/>
                                         </a>
                                     {% endif %}
                                 </div>
