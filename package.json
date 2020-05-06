@@ -24,7 +24,7 @@
         "eslint-loader": "^2.1.2",
         "export-loader": "^1.0.52",
         "font-awesome": "^4.7.0",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "mdbootstrap": "4.8.7",
         "motion-ui": "^2.0.3",
         "node-sass": "^4.11.0",
