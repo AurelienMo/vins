@@ -235,6 +235,12 @@
   }
 }
 @media all and (max-width: 768px) {
+  #filters {
+    .md-form {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
   .caract-first {
     order: 1;
   }
