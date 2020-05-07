@@ -33,7 +33,8 @@ class ProductRepository extends AbstractServiceRepository
     public function findOnlyActive(array $queryParams)
     {
         $qb = $this->createQueryBuilder('p')
-                    ->where('p.active = true');
+                    ->where('p.active = true')
+                    ->join('p.capacities', 'c');
 
         if (count($queryParams) > 0) {
             if (array_key_exists('p', $queryParams) && $queryParams['p'] !== '') {
@@ -85,7 +86,6 @@ class ProductRepository extends AbstractServiceRepository
                 }
             }
             if (array_key_exists('pr', $queryParams) && $queryParams['pr'] !== '') {
-                $qb->join('p.capacities', 'c');
                 if ($queryParams['pr'] === 'minor') {
                     $qb->andWhere('c.unitPrice < 10 AND c.type != :cubis');
                 }
@@ -101,6 +101,7 @@ class ProductRepository extends AbstractServiceRepository
                 $qb->setParameter('cubis', 'Cubis');
             }
         }
+        $qb->orderBy('c.unitPrice', 'ASC');
 
         return $qb->getQuery()->getResult();
     }

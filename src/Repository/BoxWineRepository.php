@@ -24,6 +24,7 @@ class BoxWineRepository extends AbstractServiceRepository
             ->join('c.stock', 's')
             ->where('bw.isActive = true')
             ->andWhere('s.quantity > 0')
+            ->orderBy('bw.price', 'ASC')
             ->getQuery()
             ->getResult();
     }
