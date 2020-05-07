@@ -83,9 +83,9 @@ label.required::after {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
-    .fa {
-      font-size: 25px;
-      font-weight: 600;
+    .close-icon {
+      font-size: 28px !important;
+      font-weight: 900;
     }
     img {
       width: 200px;

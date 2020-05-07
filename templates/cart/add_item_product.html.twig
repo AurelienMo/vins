@@ -22,14 +22,14 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body mx-3">
+    <div class="modal-body">
         {% form_theme form 'forms/_layout.html.twig' %}
         {{ form_start(form, {'attr': {'class': 'addWineCart'}, 'action': path('add_wine_to_card', {'id': dto.wine.id})}) }}
         <table class="table table-responsive product-table mb-0">
             <tbody>
 
             {% for element in form.elements %}
-            <tr class="product-item">
+            <tr>
                 <td>
                     <div>
                         <span>{{ element.vars.data.capacity.type }} {{ element.vars.data.capacity.quantity }}L</span>
@@ -45,7 +45,9 @@
             </tr>
                 {% if form_errors(element.quantity) %}
                     <tr>
-                        <td colspan="4" class="text-center">{{ form_errors(element.quantity) }}</td>
+                        <td colspan="4" class="text-left">
+                            {{ form_errors(element.quantity) }}
+                        </td>
                     </tr>
                 {% endif %}
         {% endfor %}

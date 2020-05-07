@@ -1,5 +1,8 @@
 @import "../colors";
 @media all and (min-width: 769px) {
+  .alert-add-item {
+    width: 100% !important;
+  }
   .card-wine {
     border-radius: 20px 20px 10px 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, .1);
@@ -223,7 +226,7 @@
     }
   }
 }
-@media all and (max-width: 768px) {
+@media all and (min-width: 768px) {
   .caract-first {
     order: 1;
   }
@@ -235,6 +238,9 @@
   }
 }
 @media all and (max-width: 768px) {
+  .alert-add-item {
+    width: 75% !important;
+  }
   #filters {
     .md-form {
       margin-top: 0;
