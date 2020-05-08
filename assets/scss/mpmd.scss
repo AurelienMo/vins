@@ -30,7 +30,11 @@
     a:hover {
       color: #ffffff;
     }
-
+    img {
+      width: auto !important;
+      max-width: none;
+      max-height: 600px;
+    }
     .caption-accueil {
       position: absolute;
       top: 50%;
@@ -41,12 +45,6 @@
       text-align: center;
       h1, h2, h3, h4, h5, h6 {
         font-size: 1rem;
-      }
-      img {
-        width: auto !important;
-        height: 520px;
-        max-width: none;
-        max-height: 520px;
       }
       p, li {
         font-size: 0.8rem;
