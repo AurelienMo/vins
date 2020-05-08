@@ -298,7 +298,7 @@
                                 {{ form_end(form) }}
                             </div>
 
-                            {% if app.session.get('cart') and app.session.get('cart').deliveryInformation is not null %}
+                            {% if app.session.get('cart') and app.session.get('cart').deliveryInformation is not null and payment_possible%}
                                 <div id="container-payment" class="row">
                                     <div class="col-12">
                                         <form action="" method="POST" class="texf-center">

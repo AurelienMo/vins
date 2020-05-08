@@ -7,3 +7,4 @@ twig:
     globals:
         stripe_public_key: '%env(resolve:API_PUBLIC_STRIPE)%'
         ga_tag: '%env(resolve:GTAG)%'
+        payment_possible: '%env(resolve:PAYMENT_OK)%'
