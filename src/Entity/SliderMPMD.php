@@ -32,7 +32,7 @@ class SliderMPMD extends AbstractEntity implements UpdatableInterface
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $pdf;
 
@@ -56,6 +56,13 @@ class SliderMPMD extends AbstractEntity implements UpdatableInterface
      * @ORM\Column(type="string")
      */
     protected $type;
+
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="text")
+     */
+    protected $textContent;
 
     public function getImage()
     {
@@ -117,5 +124,21 @@ class SliderMPMD extends AbstractEntity implements UpdatableInterface
     public function setType(?string $type): void
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTextContent(): ?string
+    {
+        return $this->textContent;
+    }
+
+    /**
+     * @param string|null $textContent
+     */
+    public function setTextContent(?string $textContent): void
+    {
+        $this->textContent = $textContent;
     }
 }

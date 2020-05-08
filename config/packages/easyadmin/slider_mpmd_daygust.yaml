@@ -27,3 +27,6 @@ easy_admin:
                       type: 'vich_file'
                       label: 'Fichier PDF'
                       required: true
+                    - property: textContent
+                      type: 'fos_ckeditor'
+                      label: 'Contenu textuel du slider'

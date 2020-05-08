@@ -20,7 +20,12 @@
                         {% if slider.pdf %}
                             <a href="{{ vich_uploader_asset(slider, 'pdfFile') }}" target="_blank">
                         {% endif %}
-                                <img class="carousel-img d-block w-100" src="{{vich_uploader_asset(slider, 'imageFile')}}"/>
+                                <img class="carousel-img d-block" src="{{vich_uploader_asset(slider, 'imageFile')}}"/>
+                                <div class="container caption-accueil">
+                                    <div class="link-slider">
+                                        {{ slider.textContent|raw }}
+                                    </div>
+                                </div>
                         {% if slider.pdf %}
                             </a>
                         {% endif %}
