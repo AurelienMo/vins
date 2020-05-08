@@ -28,37 +28,24 @@ use App\Domain\Wine\Resolver as WineResolver;
  */
 class Homepage
 {
-    /** @var Resolver */
-    protected $searchResolver;
-
-    /** @var WineResolver */
-    protected $wineResolver;
-
     /** @var SliderHomeRepository */
     protected $sliderHomeRepository;
 
-    /** @var GlobalConfigurationRepository */
-    protected $globalRepository;
-
     public function __construct(
-        SliderHomeRepository $sliderHomeRepository,
-        GlobalConfigurationRepository $globalRepository
+        SliderHomeRepository $sliderHomeRepository
     ) {
         $this->sliderHomeRepository = $sliderHomeRepository;
-        $this->globalRepository = $globalRepository;
     }
 
 
     public function __invoke(Request $request, ViewResponder $responder)
     {
         $sliders = $this->sliderHomeRepository->findAllOrderedByOrder();
-        $globalConfig = $this->globalRepository->findLatest();
 
         return $responder(
             'home/index.html.twig',
             [
                 'sliders' => $sliders,
-                'globalConf' => $globalConfig,
             ]
         );
     }

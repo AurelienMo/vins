@@ -24,6 +24,9 @@ easy_admin:
                       label: 'Lien externe'
                       type: 'text'
                       requied: false
+                    - property: 'textSlider'
+                      type: 'fos_ckeditor'
+                      label: 'Texte slider'
             edit:
                 fields:
                     - property: order
@@ -37,3 +40,6 @@ easy_admin:
                         label: 'Lien externe'
                         type: 'text'
                         requied: false
+                    - property: 'textSlider'
+                      type: 'fos_ckeditor'
+                      label: 'Texte slider'

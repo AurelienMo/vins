@@ -30,8 +30,6 @@ easy_admin:
             - label: "Page d'accueil"
               icon: 'home'
               children:
-                    - label: 'Image accueil'
-                      entity: 'GlobalConfiguration'
                     - label: 'Slider Accueil'
                       entity: 'SliderHome'
             - label: 'Slider MPMD Daygust'

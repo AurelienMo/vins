@@ -17,7 +17,12 @@
                         {% if slider.link %}
                             <a href="{{ slider.link }}">
                         {% endif %}
-                            <img href="{{ slider.link }}" class="d-block w-100" src="{{ vich_uploader_asset(slider, 'imageFile') }}" alt="slider-{{ loop.index }}">
+                            <img href="{{ slider.link }}" class="d-block" src="{{ vich_uploader_asset(slider, 'imageFile') }}" alt="slider-{{ loop.index }}">
+                            <div class="container caption-accueil">
+                                <div class="link-slider">
+                                    {{ slider.textSlider|raw }}
+                                </div>
+                            </div>
                         {% if slider.link %}
                             </a>
                         {% endif %}
@@ -25,8 +30,84 @@
             {% endfor %}
         </div>
     </div>
-    <div class="mt-4 mb-4 p-0">
-        <img class="img-fluid" src="{{ vich_uploader_asset(globalConf, 'imageHomepageFile') }}" alt="main-image"/>
+{#    <div class="mt-4 mb-4 p-0">#}
+{#        <img class="img-fluid" src="{{ vich_uploader_asset(globalConf, 'imageHomepageFile') }}" alt="main-image"/>#}
+{#    </div>#}
+</div>
+<div class="container mt-4 mb-4">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <span class="h5">Mon Premier Sommelier vous aide à <span class="font-weight-bold font-italic">Choisir, Déguster et Apprendre.</span></span>
+        </div>
+        <div class="col-12 text-center">
+            <span class="h5 font-weight-bold primary-text font-italic">Vous n'êtes plus seul !</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-4">
+            <div class="row">
+                <div class="col-12 pb-1 text-center">
+                    <img src="{{ asset('build/images/choice.png') }}" alt="Choisir son vin" width="120" height="120" />
+                </div>
+                <h4 class="col-12 h4 primary-text font-weight-bold font-italic text-center">Choisir rapidement</h4>
+                <p class="font-italic text-center col-12">
+                    Est-ce que le vin est bon ?<br/>
+                    Est-ce qu'il me plaira ?<br/>
+                    Avec quel plat l'accorder ?
+                </p>
+                <p class="font-italic text-center col-12">
+                    Les vins sont classés par <span class="font-weight-bold">Profil,</span> trouvez<br/>
+                    celui qui correspond à vos goûts.<br/>
+                    <span class="font-weight-bold">Simple !</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="row">
+                <div class="col-12 pb-1 text-center">
+                    <img src="{{ asset('build/images/degust.png') }}" alt="Déguster" width="120" height="120"/>
+                </div>
+                <h4 class="col-12 h4 primary-text font-weight-bold font-italic text-center">Déguster en s'amusant</h4>
+                <p class="font-italic text-center col-12">
+                    Comment déguster<br/>
+                    Quelles questions me poser ?<br/>
+                    Avec quels mots simples décrire le vin ?
+                </p>
+                <p class="font-italic text-center col-12">
+                    Une <span class="font-weight-bold">Fiche&Quiz</span> accompagne chaque vin.<br/>
+                    Dégustez les vins sous forme de <span class="font-weight-bold">Quiz.</span><br/>
+                    <span class="font-weight-bold">Ludique !</span>
+                </p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="row">
+                <div class="col-12 pb-1 text-center">
+                    <img src="{{ asset('build/images/learn.png') }}" alt="Apprendre facilement" width="120" height="120"/>
+                </div>
+                <h4 class="col-12 h4 primary-text font-weight-bold font-italic text-center">Apprendre facilement</h4>
+                <p class="font-italic text-center col-12">
+                    Où chercher l'info ?<br/>
+                    Où apprendre facilement<br/>
+                    Est-ce que je vais comprendre ?
+                </p>
+                <p class="font-italic text-center col-12">
+                    Avec les <span class="font-weight-bold">Tastuces</span>, on simplfiie le langage,<br/>
+                    afin que le vin soit compris <span class="font-weight-bold">par tous.</span><br/>
+                    <span class="font-weight-bold">Facile !</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <span class="h5">Soyez curieux, goutez à tout ! Bonne dégustation !</span>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <img class="w-100 d-none d-md-block" src="{{ asset('build/images/home_bottom_desktop.png') }}" alt="main-image"/>
     </div>
 </div>
 {% endblock %}

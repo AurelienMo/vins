@@ -49,6 +49,13 @@ class SliderHome extends AbstractEntity implements UpdatableInterface
      */
     protected $order;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text")
+     */
+    protected $textSlider;
+
     public function getLink()
     {
         return $this->link;
@@ -90,5 +97,21 @@ class SliderHome extends AbstractEntity implements UpdatableInterface
         if ($imageFile) {
             $this->updatedAt = new \DateTime();
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextSlider(): string
+    {
+        return $this->textSlider;
+    }
+
+    /**
+     * @param string $textSlider
+     */
+    public function setTextSlider(string $textSlider): void
+    {
+        $this->textSlider = $textSlider;
     }
 }
