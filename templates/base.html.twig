@@ -1,30 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <script type="text/javascript" src="/tarteaucitronjs/tarteaucitron.js"></script>
-    <script type="text/javascript">
-        tarteaucitron.init({
-            "privacyUrl": "http://www.google.fr", /* Privacy policy url */
-
-            "hashtag": "#vins", /* Open the panel with this hashtag */
-            "cookieName": "monpremiersommelier_js", /* Cookie name */
-
-            "orientation": "bottom", /* Banner position (top - bottom) */
-            "showAlertSmall": false, /* Show the small banner on bottom right */
-            "cookieslist": true, /* Show the cookie list */
-
-            "adblocker": false, /* Show a Warning if an adblocker is detected */
-            "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
-            "highPrivacy": true, /* Disable auto consent */
-            "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
-            "removeCredit": false, /* Remove credit link */
-            "moreInfoLink": true, /* Show more info link */
-            "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
-            //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
-            "readmoreLink": "/cookiespolicy" /* Change the default readmore link */
-        });
-        window.tarteaucitronForceLanguage = 'fr';
-    </script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/AmauriC/tarteaucitron.js@V1.2/tarteaucitron.min.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Avec Mon Premier Sommelier, choisissez, dégustez et apprenez facilement ! Oubliez les contraintes, tout devient plus simple. Livraison sur Marseille !">
@@ -39,32 +16,55 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-    {% include 'parts/_headers.html.twig' %}
-    <div id="main-container">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{label}} alert-dismissible fade show text-center m-0" role="alert">
-                        {{message}}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-                {% block breadcrumb %}{% endblock %}
-                {% block body %}{% endblock %}
-        </div>
-        {% include 'parts/_footers.html.twig' %}
-        <div id="loading-overlay">
-            <div class="loader"></div>
-        </div>
-        {% include 'parts/_modals.html.twig' %}
-        {{ encore_entry_script_tags('app') }}
-        <script type="text/javascript" src="{{ asset('vendor/mdb/js/popper.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('vendor/mdb/js/bootstrap.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('vendor/mdb/js/mdb.min.js') }}"></script>
-    <script type="text/javascript">
-        tarteaucitron.user.gtagUa = '{{ ga_tag }}';
-        tarteaucitron.user.gtagMore = function () { /* add here your optionnal gtag() */ };
-        (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
-    </script>
-        {% block javascripts %}{% endblock %}
-    </body>
+{% include 'parts/_headers.html.twig' %}
+<div id="main-container">
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{label}} alert-dismissible fade show text-center m-0" role="alert">
+                {{message}}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% block breadcrumb %}{% endblock %}
+    {% block body %}{% endblock %}
+</div>
+{% include 'parts/_footers.html.twig' %}
+<div id="loading-overlay">
+    <div class="loader"></div>
+</div>
+{% include 'parts/_modals.html.twig' %}
+{{ encore_entry_script_tags('app') }}
+<script type="text/javascript" src="{{ asset('vendor/mdb/js/popper.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/mdb/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/mdb/js/mdb.min.js') }}"></script>
+<script type="text/javascript">
+    tarteaucitron.user.gtagUa = '{{ ga_tag }}';
+    tarteaucitron.user.gtagMore = function () { /* add here your optionnal gtag() */ };
+    (tarteaucitron.job = tarteaucitron.job || []).push('gtag');
+</script>
+<script type="text/javascript">
+    tarteaucitron.init({
+        "privacyUrl": "http://www.google.fr", /* Privacy policy url */
+
+        "hashtag": "#vins", /* Open the panel with this hashtag */
+        "cookieName": "monpremiersommelier_js", /* Cookie name */
+
+        "orientation": "bottom", /* Banner position (top - bottom) */
+        "showAlertSmall": false, /* Show the small banner on bottom right */
+        "cookieslist": true, /* Show the cookie list */
+
+        "adblocker": false, /* Show a Warning if an adblocker is detected */
+        "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
+        "highPrivacy": true, /* Disable auto consent */
+        "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+        "removeCredit": false, /* Remove credit link */
+        "moreInfoLink": true, /* Show more info link */
+        "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+        //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+        "readmoreLink": "/cookiespolicy" /* Change the default readmore link */
+    });
+    window.tarteaucitronForceLanguage = 'fr';
+</script>
+{% block javascripts %}{% endblock %}
+</body>
 </html>
