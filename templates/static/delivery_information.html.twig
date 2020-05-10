@@ -5,50 +5,89 @@
         #main-container {
             padding: 0;
         }
-        #storage {
-            border-top: 1px solid #cfd8dc;
-        }
-        #storage .description {
-            background-color: #f7f7f7;
-            height: 100px;
-        }
     </style
 {% endblock %}
 {% block body %}
-    <div id="storage" class="container-fluid">
-        <section class="row">
-            <div class="col-12 description d-flex justify-content-center align-items-center">
-                <h3 class="h3 text-center">Informations de livraison</h3>
-            </div>
-        </section>
-    </div>
-    <div class="container mt-5">
-        <div class="row information">
-            <div class="col-12">
-                <h4 class="h4 text-center font-weight-bold">
-                    Mon Premier Sommelier a choisi de livrer les vins lui-même !
-                </h4>
-            </div>
-            <div class="col-12">
-                <p class="text-center primary-text font-weight-bold">
-                    Pourquoi ?
-                </p>
-            </div>
-            <div class="col-12">
-                <p class="text-center">
-                    Parce que le vin est un produit fragile qui ne mérite pas d'être considéré comme un colis classique.
-                </p>
-            </div>
-            <div class="col-12">
-                <p class="text-center">
-                    Pour être plus proche de vous et vous offrir un service aux petits oignons selon vos envies.
-                </p>
-            </div>
-            <div class="col-12">
-                <p class="text-center primary-text">
-                    A bientôt !
-                </p>
+<div id="storage" class="container mt-5">
+    <section class="row">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+            <h4 class="h4 text-center primary-text font-weight-bold font-italic">La livraison aux petits oignons...</h4>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <div class="text-center">
+                    <i class="fas fa-check primary-text"></i> <span>C'est être livré par notre équipe sur Marseille, et non un transporteur, car le vin mérite d'être bichonné et non bouchonné.</span>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-check primary-text"></i> <span>C’est être livré où vous voulez, quand vous voulez, selon vos envies : chez vous, à la plage, chez vos amis…</span>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+    <section class="row mt-3">
+        <div class="col-12">
+            <div class="row">
+                <h5 class="h5 col-12 text-center primary-text font-weight-bold font-italic">Comment ça marche ?</h5>
+                <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-start align-items-center">
+                    <img src="{{ asset('build/images/calendar.png') }}" alt="Calendrier" width="80" height="80" />
+                    <p class="d-flex flex-column text-center">
+                        <span class="font-italic font-weight-bold text-center">"Je commande"</span>
+                        <span class="text-center">Je choisis un lieu et une des livraisons ci-dessous.</span>
+                    </p>
+                    <p class="d-flex flex-column text-center">
+                        <span class="primary-text">Standard</span>
+                        <span>Livré pour 4€, sous 3 jours ouvrés, de 15h à 19h30.</span>
+                    </p>
+                    <p class="d-flex flex-column text-center">
+                        <span class="primary-text">Horaire</span>
+                        <span>Livré pour 6€, sur un créneau horaire de 2h, entre 15h et 19h30.</span>
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-start align-items-center">
+                    <img src="{{ asset('build/images/oenophile.png') }}" alt="Livraison" width="80" height="80" />
+                    <p class="d-flex flex-column text-center">
+                        <span class="font-italic font-weight-bold text-center">"Je suis livré"</span>
+                        <span class="text-center">Je reçois mes vins en temps voulu, avec le sourire, et soigneusement emballés.</span>
+                    </p>
+                    <p class="d-flex flex-column text-center">
+                        <span>Vous êtes heureux et nous aussi !</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row mt-3">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+            <h5 class="h5 text-center primary-text font-weight-bold font-italic">La livraison, un vrai service de proximité...</h5>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <div class="text-center">
+                    <span>Nous adaptons les horaires à vos envies. Le concept étant nouveau, les horaires actuellement disponibles évolueront, pour mieux vous servir. Rapidement, Nous prévoyons de vous livrer jusqu’à 21h, ainsi que le samedi. Et aussi augmenter le nombre de créneau horaire disponible.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row mt-3">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+            <h5 class="h5 text-center primary-text font-weight-bold font-italic">Le coût de la livraison...</h5>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <div class="text-center">
+                    <span>On se dit la vérité ? La livraison est un coût important que nous essayons de réduire au maximum en optimisons nos tournées. En tant que service, nous nous efforçons de baisser son coût pour qu’il soit le plus bas possible pour vous.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row mt-3">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+            <h5 class="h5 text-center primary-text font-weight-bold font-italic">La livraison réussie...</h5>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+                <div class="text-center">
+                    <span>Ce sont des vins livrés quand vous êtes chez vous ! Pour cela, nous avons choisi de vous livrer en fin d’après-midi et en début de soirée. Ça évite de voir le colis repartir pour mieux revenir.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="row mt-3">
+        <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+            <h5 class="h5 text-center primary-text ">A bientôt !</h5>
+        </div>
+    </section>
+</div>
 {% endblock %}
