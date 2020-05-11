@@ -17,7 +17,9 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
+{% block headers %}
 {% include 'parts/_headers.html.twig' %}
+{% endblock %}
 <div id="main-container">
     {% for label, messages in app.flashes %}
         {% for message in messages %}
@@ -29,7 +31,9 @@
     {% block breadcrumb %}{% endblock %}
     {% block body %}{% endblock %}
 </div>
+{% block footer %}
 {% include 'parts/_footers.html.twig' %}
+{% endblock %}
 <div id="loading-overlay">
     <div class="loader"></div>
 </div>
