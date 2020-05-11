@@ -1,0 +1,4 @@
+{#<a href="{{ asset(value, 'tasting_sheet_pdf') }}">View contract (PDF)</a>#}
+{% if value %}
+<a target="_blank" href="{{ value }}"><i class="fa fa-download"></i></a>
+{% endif %}

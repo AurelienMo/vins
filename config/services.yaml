@@ -15,6 +15,7 @@ parameters:
     app.path.global_images: /upload/files/global
     app.path.breadcrumb_images: /upload/files/breadcrumb
     app.path.box_images: /upload/files/box
+    app.path.tasting_sheet_file: /upload/files/tasting_sheet
 
 services:
     # default configuration for services in *this* file

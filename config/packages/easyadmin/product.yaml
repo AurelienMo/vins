@@ -41,14 +41,21 @@ easy_admin:
                     -   property: 'imagePath'
                         type: 'image'
                         base_path: '%app.path.product_images%'
+                        label: 'Image produit'
+                    - property: 'tastingSheetPath'
+                      type: 'file'
+                      base_path: '%app.path.tasting_sheet_file%'
+                      label: 'Fiche de dégustation'
+                      template: 'admin/fields/product/tasting_sheet.html.twig'
             form:
                 fields:
                     - type: 'group'
                       label: 'Informations générales'
                       columns: 12
-                    - { property: 'imageFile', type: 'vich_image', label: 'Photo produit', columns: 4 }
-                    - { property: 'firstBadgeFile', type: 'vich_image', label: '1er Badge', columns: 4 }
-                    - { property: 'secondBadgeFile', type: 'vich_image', label: '2ème badge', columns: 4 }
+                    - { property: 'imageFile', type: 'vich_image', label: 'Photo produit', columns: 3 }
+                    - { property: 'tastingSheetFile', type: 'vich_file', label: 'Fiche de dégustation', columns: 3 }
+                    - { property: 'firstBadgeFile', type: 'vich_image', label: '1er Badge', columns: 3 }
+                    - { property: 'secondBadgeFile', type: 'vich_image', label: '2ème badge', columns: 3 }
                     - property: region
                       label: 'Région'
                       type: 'choice'

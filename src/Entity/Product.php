@@ -219,6 +219,20 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
      */
     protected $dishes;
 
+    /**
+     * @var string|null
+     *
+     * @ORM\Column(type="string", nullable=true)
+     */
+    protected $tastingSheetPath;
+
+    /**
+     * @var File
+     *
+     * @Vich\UploadableField(mapping="tasting_sheet_pdf", fileNameProperty="tastingSheetPath")
+     */
+    protected $tastingSheetFile;
+
     public function __construct()
     {
         $this->promotions = new ArrayCollection();
@@ -752,5 +766,40 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
         }
 
         return false;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTastingSheetPath(): ?string
+    {
+        return $this->tastingSheetPath;
+    }
+
+    /**
+     * @param string|null $tastingSheetPath
+     */
+    public function setTastingSheetPath(?string $tastingSheetPath): void
+    {
+        $this->tastingSheetPath = $tastingSheetPath;
+    }
+
+    /**
+     * @return File
+     */
+    public function getTastingSheetFile()
+    {
+        return $this->tastingSheetFile;
+    }
+
+    /**
+     * @param File $tastingSheetFile
+     */
+    public function setTastingSheetFile($tastingSheetFile = null): void
+    {
+        $this->tastingSheetFile = $tastingSheetFile;
+        if ($tastingSheetFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
     }
 }
