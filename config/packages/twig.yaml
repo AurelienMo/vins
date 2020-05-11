@@ -8,3 +8,4 @@ twig:
         stripe_public_key: '%env(resolve:API_PUBLIC_STRIPE)%'
         ga_tag: '%env(resolve:GTAG)%'
         payment_possible: '%env(resolve:PAYMENT_OK)%'
+        google_site_verification: '%env(resolve:GOOGLE_SITE_VERIFICATION)%'
