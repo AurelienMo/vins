@@ -43,7 +43,7 @@ easy_admin:
                       type: 'text'
                       label: 'Résumé'
                     - property: longDescription
-                      type: textarea
+                      type: 'fos_ckeditor'
                       label: 'Description'
                     - property: 'color'
                       type: 'color'
@@ -73,7 +73,7 @@ easy_admin:
                       type: 'text'
                       label: 'Résumé'
                     - property: longDescription
-                      type: textarea
+                      type: 'fos_ckeditor'
                       label: 'Description'
                     - property: 'color'
                       type: 'color'
