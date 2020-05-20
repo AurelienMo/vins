@@ -118,7 +118,9 @@
     <div id="mySidenav" class="sidenav">
         <a class="closebtn"><span class="close-icon primary-text">X</span></a>
         <div class="d-flex justify-content-center">
-            <img class="img-fluid" src="{{ asset('build/images/logo_mobile.png') }}" alt="logo"/>
+            <a href="{{ path('homepage') }}">
+                <img class="img-fluid" src="{{ asset('build/images/logo_mobile.png') }}" alt="logo"/>
+            </a>
         </div>
         <a href="{{ path('list_box') }}">Les boxs</a>
         <a href="{{ path('wine_list') }}">Les vins</a>
@@ -135,7 +137,7 @@
                 </div>
                 <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
                      data-parent="#accordionEx1">
-                    <a class="pl-5" href="{{ path('mpmd_list') }}">Ma Première méthode</a>
+                    <a class="pl-5" href="{{ path('mpmd_list') }}">Ma Première Méthode</a>
                     <a class="pl-5" href="{{ path('tastuces_list') }}">Les Tastuces</a>
                 </div>
 
