@@ -165,7 +165,7 @@ class FilterWineType extends AbstractType
 
     private function getProfileByType()
     {
-        $profiles = $this->entityManager->getRepository(VineProfile::class)->findAll();
+        $profiles = $this->entityManager->getRepository(VineProfile::class)->findAllOrderedByOrder();
 
         $profilesList = [
             'Profils' => 'Profils',
