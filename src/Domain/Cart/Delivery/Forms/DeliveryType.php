@@ -185,7 +185,7 @@ class DeliveryType extends AbstractType
                             return $er->createQueryBuilder('e')
                                 ->where('e.dateNiche >= :date')
                                 ->andWhere('e.numberNiche > 0')
-                                ->setParameter('date', new \DateTime('-12 hours'))
+                                ->setParameter('date', new \DateTime('+1 days'))
                                 ->orderBy('e.dateNiche', 'ASC')
                                 ->addOrderBy('e.startAt', 'ASC');
                         },
