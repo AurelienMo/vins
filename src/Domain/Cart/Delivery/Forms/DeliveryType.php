@@ -227,13 +227,13 @@ class DeliveryType extends AbstractType
 
         if ($configurationApp->isDeliveryOffer()) {
             return [
-                'Livraison offerte sous 3 jours ouvrés, entre 15h et 19h' => 'free',
+                'Livraison offerte sous 3 jours ouvrés, entre 15h et 19h30' => 'free',
                 'Sur un créneau horaire choisi pour 6€' => 'express',
             ];
         }
 
         return [
-            'Sous 3 jours, entre 15h et 19h, pour 4€' => 'basic',
+            'Sous 3 jours, entre 15h et 19h30, pour 4€' => 'basic',
             'Sur un créneau horaire choisi pour 6€' => 'express',
         ];
     }
