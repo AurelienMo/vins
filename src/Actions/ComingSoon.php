@@ -5,10 +5,12 @@ namespace App\Actions;
 use App\Domain\Newsletter\Registration\Forms\NewsletterRegistrationType;
 use App\Entity\Newsletter;
 use App\Repository\NewsletterRepository;
+use App\Responders\RedirectResponder;
 use App\Responders\ViewResponder;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -25,14 +27,18 @@ class ComingSoon
     /** @var NewsletterRepository */
     protected $newsletterRepository;
 
-    public function __construct(FormFactoryInterface $formFactory, EntityManagerInterface $entityManager, NewsletterRepository $newsletterRepository)
+    /** @var FlashBagInterface */
+    protected $flash;
+
+    public function __construct(FormFactoryInterface $formFactory, EntityManagerInterface $entityManager, NewsletterRepository $newsletterRepository, FlashBagInterface $flash)
     {
         $this->formFactory = $formFactory;
         $this->entityManager = $entityManager;
         $this->newsletterRepository = $newsletterRepository;
+        $this->flash = $flash;
     }
 
-    public function __invoke(Request $request, ViewResponder $responder)
+    public function __invoke(Request $request, ViewResponder $responder, RedirectResponder $redirectResponder)
     {
         $form = $this->formFactory->create(NewsletterRegistrationType::class)->handleRequest($request);
 
@@ -40,8 +46,11 @@ class ComingSoon
             $existRegistration = $this->newsletterRepository->findOneBy(['email' => $form->getData()->getEmail()]);
             if (!$existRegistration instanceof Newsletter) {
                 $newsletter = Newsletter::createFromDto($form->getData());
+                $this->flash->add('success', 'Votre inscription à la newsletter a bien été prise en compte.');
                 $this->entityManager->persist($newsletter);
                 $this->entityManager->flush();
+
+                return $redirectResponder('coming-soon');
             }
         }
 

@@ -9,16 +9,23 @@
             margin: 0;
             background: #ffffff url("img/coming_soon.jpg") no-repeat center bottom fixed;
         }
+        .container {
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%, -50%);
+        }
 
     </style>
-    <div class="container h-100">
-        <div class="d-flex flex-column justify-content-center align-items-center h-100">
+    <div class="container">
+        <div class="d-flex flex-column justify-content-center align-items-center">
             <div class="d-flex justify-content-center">
                 <img src="{{ asset('build/images/logo_mobile.png') }}" width="300" height="300" alt="logo"/>
             </div>
             <h1 class="h2 text-center text-white">Ouverture de votre boutique prochainement</h1>
             <div class="text-center text-white font-weight-bold">
                 <h4 class="h4">N'attendez plus inscrivez-vous à notre newsletter pour ne pas manquer l'ouverture.</h4>
+                {{ form_start(form) }}
                     <div class="col-sm-12 offset-md-4 col-md-4">
                         <div class="md-form mb-0 mt-0">
                             {{ form_widget(form.email) }}
@@ -29,6 +36,7 @@
                             <i class="fa fa-paper-plane text-white"></i>
                         </button>
                     </div>
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
