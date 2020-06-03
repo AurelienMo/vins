@@ -16,6 +16,7 @@ namespace App\Actions\WineProfile;
 use App\Repository\BreadcrumbRepository;
 use App\Repository\WineProfileRepository;
 use App\Responders\ViewResponder;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -39,17 +40,23 @@ final class WineProfileList
         $this->wineProfileRepository = $wineProfileRepository;
     }
 
-    public function __invoke(ViewResponder $responder)
+    public function __invoke(Request $request, ViewResponder $responder)
     {
         $profiles = $this->wineProfileRepository->findAllOrderedByOrder();
         $breadcrumb = $this->breadcrumbRepository->findByPage('Profil de vin');
 
-        return $responder(
+        $response = $responder(
             'wine_profile/list.html.twig',
             [
                 'profiles' => $profiles,
                 'breadcrumb' => $breadcrumb,
             ]
         );
+
+        $response->setEtag(md5($response->getContent()));
+        $response->setPublic();
+        $response->isNotModified($request);
+
+        return $response;
     }
 }

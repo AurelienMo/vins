@@ -116,7 +116,11 @@ $(document).ready(function () {
             }
         })
     })
-    $('.mdb-select').materialSelect();
+    $('.mdb-select').materialSelect(
+        {
+            visibleOptions: 5
+        }
+    );
     $(document).on('submit', '.valid-delivery', function (e) {
         e.preventDefault();
 

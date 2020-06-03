@@ -5,6 +5,7 @@ easy_admin:
             class: App\Entity\NicheOfDelivery
             list:
                 title: "Liste des créneaux de livraison à l'adresse"
+                sort: 'dateNiche'
                 fields:
                     - property: dateNiche
                       label: 'Date du créneau'

@@ -69,6 +69,7 @@ class TastuceTheme extends AbstractEntity implements UpdatableInterface
      * @var Tastuce[]|Collection
      *
      * @ORM\OneToMany(targetEntity="App\Entity\Tastuce", mappedBy="theme", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"order" = "ASC"})
      *
      * @Assert\Valid()
      */

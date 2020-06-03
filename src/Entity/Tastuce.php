@@ -56,6 +56,13 @@ class Tastuce extends AbstractEntity implements UpdatableInterface
      */
     protected $theme;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", name="order_number")
+     */
+    protected $order;
+
     public function __toString()
     {
         return $this->textLink;
@@ -102,5 +109,21 @@ class Tastuce extends AbstractEntity implements UpdatableInterface
     public function setTheme(?TastuceTheme $theme): void
     {
         $this->theme = $theme;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder(): ?int
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param int $order
+     */
+    public function setOrder(?int $order): void
+    {
+        $this->order = $order;
     }
 }

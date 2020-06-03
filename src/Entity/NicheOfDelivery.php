@@ -30,6 +30,16 @@ class NicheOfDelivery extends AbstractEntity implements UpdatableInterface
 {
     use TimeStampableTrait;
 
+    private const LIST_DAY = [
+        'Dimanche',
+        'Lundi',
+        'Mardi',
+        'Mercredi',
+        'Jeudi',
+        'Vendredi',
+        'Samedi',
+    ];
+
     /**
      * @var DateTime|null
      *
@@ -103,7 +113,8 @@ class NicheOfDelivery extends AbstractEntity implements UpdatableInterface
     public function __toString()
     {
         return sprintf(
-            '%s de %s à %s',
+            '%s %s de %s à %s',
+            self::LIST_DAY[$this->dateNiche->format('w')],
             $this->dateNiche->format('d/m/Y'),
             $this->startAt->format('H:i'),
             $this->endAt->format('H:i')
