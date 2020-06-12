@@ -86,7 +86,14 @@ class BillGenerator
             ]
         );
         $city = sprintf('%s, %s', $customer->getZipCode(), $customer->getCity());
-        $invoice->setTo([$customer->getFullName(),$customer->getAddressCustomer(),$city, 'France']);
+        $invoice->setTo(
+            [
+                $customer->getFullName(),
+                $customer->getAddressCustomer(),
+                $city,
+                'France'
+            ]
+        );
         /** @var OrderProductLine $line */
         $subTotalHt = 0;
         $total = 0;
@@ -115,6 +122,7 @@ class BillGenerator
         $invoice->addBadge(sprintf("Payée le %s", $order->getOrderAt()->format('d/m/Y')), '#269600');
         $invoice->addTitle('Informations de livraison');
         $invoice->addParagraph(sprintf('Vous avez choisi une livraison %s', $delivery->getContentText()));
+        $invoice->addParagraph('Téléphone : ' . $customer->getPhoneNumber());
         if ($delivery->getCommentDelivery()) {
             $invoice->addParagraph('Commentaire : '.$delivery->getCommentDelivery());
         }
