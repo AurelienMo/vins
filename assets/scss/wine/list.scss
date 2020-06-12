@@ -257,3 +257,11 @@
     order: 2;
   }
 }
+.optgroup>span {
+  color: black !important;
+  font-weight: bold !important;
+}
+.colorful-select .dropdown-content li.optgroup span:hover {
+  color: black !important;
+  font-weight: bold !important;
+}

@@ -50,6 +50,8 @@ class FilterWineType extends AbstractType
                             return ['disabled' => true];
                         }
 
+
+
                         if (!$this->requestStack->getCurrentRequest()->query->has('p')) {
                             return [];
                         }
@@ -152,7 +154,6 @@ class FilterWineType extends AbstractType
                     ],
                     'placeholder' => 'Prix',
                     'choice_attr' => function ($choice, $key, $value) {
-
                         return $this->getPrices()[$key] === $this->requestStack->getCurrentRequest()->query->get('pr') ? ['selected' => true] : [];
                     },
                     'choices' => $this->getPrices(),
@@ -253,8 +254,8 @@ class FilterWineType extends AbstractType
     private function getPrices()
     {
         return [
-            '7-10€' => 'minor',
-            '10-13€' => 'medium',
+            '7-9€' => 'minor',
+            '10-12€' => 'medium',
             '13-15€' => 'major',
             '>15€' => 'max',
         ];
