@@ -75,6 +75,13 @@ class TastuceTheme extends AbstractEntity implements UpdatableInterface
      */
     protected $tastuces;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer", name="order_number")
+     */
+    protected $order;
+
     public function __construct()
     {
         $this->tastuces = new ArrayCollection();
@@ -155,5 +162,21 @@ class TastuceTheme extends AbstractEntity implements UpdatableInterface
             $this->tastuces->removeElement($tastuce);
             $tastuce->setTheme(null);
         }
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder(): int
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param int $order
+     */
+    public function setOrder(int $order): void
+    {
+        $this->order = $order;
     }
 }

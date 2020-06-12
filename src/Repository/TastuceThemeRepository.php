@@ -17,4 +17,12 @@ class TastuceThemeRepository extends ServiceEntityRepository
             TastuceTheme::class
         );
     }
+
+    public function findAllOrderedByOrder()
+    {
+        return $this->createQueryBuilder('tt')
+            ->orderBy('tt.order')
+            ->getQuery()
+            ->getResult();
+    }
 }

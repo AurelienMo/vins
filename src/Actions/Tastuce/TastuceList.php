@@ -23,7 +23,7 @@ class TastuceList
 
     public function __invoke(ViewResponder $responder)
     {
-        $themes = $this->tastuceThemeRepository->findAll();
+        $themes = $this->tastuceThemeRepository->findAllOrderedByOrder();
 
         return $responder(
             'tastuces/list.html.twig',
