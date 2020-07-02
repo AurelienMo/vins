@@ -102,7 +102,7 @@ class SliderHome extends AbstractEntity implements UpdatableInterface
     /**
      * @return string
      */
-    public function getTextSlider(): string
+    public function getTextSlider(): ?string
     {
         return $this->textSlider;
     }
@@ -110,7 +110,7 @@ class SliderHome extends AbstractEntity implements UpdatableInterface
     /**
      * @param string $textSlider
      */
-    public function setTextSlider(string $textSlider): void
+    public function setTextSlider(?string $textSlider): void
     {
         $this->textSlider = $textSlider;
     }
