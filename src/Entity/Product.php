@@ -483,9 +483,9 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
 
     public function __toString()
     {
-        $text = '';
+        $domain = '';
         if ($this->domain) {
-            $text .= $this->domain . ' - ';
+            $domain .= $this->domain . ' - ';
         }
         $typeProduct = '';
         if ($this->typeProduct) {
@@ -493,10 +493,10 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
         }
         return sprintf(
             '%s%s - %s%s',
-            $text,
+            $domain,
             $this->appellation,
             $this->vintageName,
-            $this->typeProduct->getName()
+            $typeProduct
         );
     }
 
