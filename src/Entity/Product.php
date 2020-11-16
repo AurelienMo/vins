@@ -487,8 +487,12 @@ class Product extends AbstractEntity implements UpdatableInterface, OpinionEleme
         if ($this->domain) {
             $text .= $this->domain . ' - ';
         }
+        $typeProduct = '';
+        if ($this->typeProduct) {
+            $typeProduct .= ' - '.$this->typeProduct->getName();
+        }
         return sprintf(
-            '%s%s - %s - %s',
+            '%s%s - %s%s',
             $text,
             $this->appellation,
             $this->vintageName,
